@@ -38,7 +38,7 @@ public interface CourseMapper {
     @Select("SELECT * FROM course order by regdate desc LIMIT #{postStart}, #{postCount}")
     public List<Course> coursePageList(Page page);
     
-    @Select("SELECT * FROM course WHERE title LIKE CONCAT('%', #{searchKeyword}, '%') order by regdate desc LIMIT #{postStart}, #{postCount}")
+    @Select("SELECT * FROM course WHERE title LIKE CONCAT('%', #{searchKeyword}, '%') order by courseNo desc LIMIT #{postStart}, #{postCount}")
     public List<Course> courseTitleList(Page page);
     @Select("SELECT COUNT(*) FROM course WHERE title LIKE CONCAT('%', #{searchKeyword}, '%')")
     public int courseTitleCount(Page page);

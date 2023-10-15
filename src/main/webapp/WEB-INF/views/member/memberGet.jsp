@@ -68,7 +68,7 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <a class="btn btn-info" href="${rootPath}/member/update" style="float: right">Edit</a>
+                            <a class="btn btn-info" href="${rootPath}/member/memberUpdate" style="float: right">수정하기</a>
                         </div>
                     </div>
                 </div>

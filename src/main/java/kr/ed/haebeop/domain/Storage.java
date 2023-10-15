@@ -14,4 +14,5 @@ public class Storage {
     private String savePath;
     private String boardName;
     private int boardNo;
+    private String regdate;
 }

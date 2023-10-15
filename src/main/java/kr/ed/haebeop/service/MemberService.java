@@ -17,7 +17,7 @@ public interface MemberService {
 
 
     public int idCheck(String id);
-    public Member login(Member member);
+    public Member login(String id);
     public void memberUpdatePoint(Member member);
     public void memberVerify(String id);
     public List<Member> memberMembershipList(String membership);

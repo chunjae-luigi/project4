@@ -2,7 +2,6 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.Member;
 import kr.ed.haebeop.persistence.MemberMapper;
-import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,14 +43,15 @@ public class MemberServiceImpl implements MemberService{
         memberMapper.memberDelete(id);
     }
 
+
     @Override
     public int idCheck(String id) {
         return memberMapper.idCheck(id);
     }
 
     @Override
-    public Member login(Member member) {
-        return memberMapper.login(member);
+    public Member login(String id) {
+        return memberMapper.login(id);
     }
 
     @Override

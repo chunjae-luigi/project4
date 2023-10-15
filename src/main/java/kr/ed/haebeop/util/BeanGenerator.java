@@ -11,7 +11,7 @@ public class BeanGenerator {
         for(int i=0; i< mapper.length; i++){
             String m = mapper[i];
             System.out.println("@Bean");
-            System.out.println("public "+capitalize(m)+"Service "+m+"service() {return new "+capitalize(m)+"ServiceImpl();}");
+            System.out.println("public "+capitalize(m)+"Service "+m+"Service() {return new "+capitalize(m)+"ServiceImpl();}");
             System.out.println();
         }
     }

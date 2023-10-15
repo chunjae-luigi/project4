@@ -13,38 +13,41 @@ public class ApplicationConfig {
     public ObjectMapper mapper() { return new ObjectMapper();}
 
     @Bean
-    public CommentService commentservice() {return new CommentServiceImpl();}
+    public BookService bookService() {return new BookServiceImpl();}
 
     @Bean
-    public CourseAttendanceService courseAttendanceservice() {return new CourseAttendanceServiceImpl();}
+    public CommentService commentService() {return new CommentServiceImpl();}
 
     @Bean
-    public CourseService courseservice() {return new CourseServiceImpl();}
+    public CourseAttendanceService courseAttendanceService() {return new CourseAttendanceServiceImpl();}
 
     @Bean
-    public CourseMaterialsService courseMaterialsservice() {return new CourseMaterialsServiceImpl();}
+    public CourseService courseService() {return new CourseServiceImpl();}
 
     @Bean
-    public CourseNoticeService courseNoticeservice() {return new CourseNoticeServiceImpl();}
+    public CourseMaterialsService courseMaterialsService() {return new CourseMaterialsServiceImpl();}
 
     @Bean
-    public CourseQnaService courseQnaservice() {return new CourseQnaServiceImpl();}
+    public CourseNoticeService courseNoticeService() {return new CourseNoticeServiceImpl();}
 
     @Bean
-    public FreeService freeservice() {return new FreeServiceImpl();}
+    public CourseQnaService courseQnaService() {return new CourseQnaServiceImpl();}
 
     @Bean
-    public MemberService memberservice() {return new MemberServiceImpl();}
+    public FreeService freeService() {return new FreeServiceImpl();}
 
     @Bean
-    public NoticeService noticeservice() {return new NoticeServiceImpl();}
+    public MemberService memberService() {return new MemberServiceImpl();}
 
     @Bean
-    public RegisterService registerservice() {return new RegisterServiceImpl();}
+    public NoticeService noticeService() {return new NoticeServiceImpl();}
 
     @Bean
-    public StorageService storageservice() {return new StorageServiceImpl();}
+    public RegisterService registerService() {return new RegisterServiceImpl();}
 
     @Bean
-    public TeacherService teacherservice() {return new TeacherServiceImpl();}
+    public StorageService storageService() {return new StorageServiceImpl();}
+
+    @Bean
+    public TeacherService teacherService() {return new TeacherServiceImpl();}
 }

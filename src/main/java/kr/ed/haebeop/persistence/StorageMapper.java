@@ -27,6 +27,9 @@ public interface StorageMapper {
 
 
 
+    @Select("SELECT storageNo FROM storage ORDER BY regdate DESC LIMIT 1")
+    public int storageRecentNo();
+
     @Select("SELECT * FROM storage where boardName=#{boardName} boardNo=#{boardNo}")
     public List<Storage> storageBoardList(Storage storage);
 

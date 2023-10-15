@@ -26,7 +26,7 @@
 <br>
 <br>
 <div class="content container">
-    <form class="text-left clearfix form_row" action="${headPath }/member/insert.do" method="post" onsubmit="return inform(this)">
+    <form class="text-left clearfix form_row" action="${rootPath}/member/insert" method="post" onsubmit="return inform(this)">
         <div class="columns GRADE">
             <input type="hidden" class="input" id="grade" name="grade" value="${grade}" >
             <div class="column is-1">회원유형</div>
@@ -134,7 +134,7 @@
         }
         var params = {id:$("#id").val()}
         $.ajax({
-            url:"${headPath }/member/idcheck.do",
+            url:"${rootPath}/member/idcheck",
             type: "POST",
             dataType: "json",
             data: params,

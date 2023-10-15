@@ -113,12 +113,13 @@ CREATE TABLE event(
 
 -- storage 파일 저장소
 CREATE TABLE storage(
-    fileNo INT PRIMARY KEY AUTO_INCREMENT,  -- (파일 번호)
-    originName VARCHAR(300),                -- (파일 원본 이름) 업로드 시 이름
-    saveName VARCHAR(300),                  -- (저장된 이름)
-    savePath VARCHAR(1000),                 -- (저장 경로)
-    boardName VARCHAR(50),                  -- (관련 게시판)
-    boardNo INT                             -- (관련 게시판의 게시글) 자료실과 같이 여러 파일을 업로드하는 경우 지정
+    fileNo INT PRIMARY KEY AUTO_INCREMENT,                  -- (파일 번호)
+    originName VARCHAR(300),                                -- (파일 원본 이름) 업로드 시 이름
+    saveName VARCHAR(300),                                  -- (저장된 이름)
+    savePath VARCHAR(1000),                                 -- (저장 경로)
+    boardName VARCHAR(50),                                  -- (관련 게시판)
+    boardNo INT,                                            -- (관련 게시판의 게시글) 자료실과 같이 여러 파일을 업로드하는 경우 지정
+    regdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP    -- (파일 등록일)
 );
 
 

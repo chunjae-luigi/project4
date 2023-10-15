@@ -20,19 +20,18 @@ public interface MemberMapper {
     @Insert("INSERT INTO member(id, pw, name, email, tel, addr1, addr2, postcode, birth, membership) VALUES(#{id}, #{pw}, #{name},#{email},#{tel},#{addr1},#{addr2},#{postcode},#{birth}, #{membership})")
     public void memberInsert(Member member);
 
-    @Update("UPDATE member SET pw=#{pw}, name=#{name}, email=#{email}, tel=#{tel}, addr1=#{addr1},addr2=#{addr2}, postcode=#{postcode}, birth=#{birth}, imageFile=#{imageFile} WHERE id=#{id}")
+    @Update("UPDATE member SET pw=#{pw}, name=#{name}, email=#{email}, tel=#{tel}, addr1=#{addr1},addr2=#{addr2}, postcode=#{postcode}, birth=#{birth} WHERE id=#{id}")
     public void memberUpdate(Member member);
 
     @Delete("DELETE FROM member WHERE id=#{id}")
     public void memberDelete(String id);
 
 
-
     @Select("SELECT COUNT(*) FROM member WHERE id=#{id}")
     public int idCheck(String id);
 
     @Select("SELECT * FROM member WHERE id=#{id}")
-    public Member login(Member member);
+    public Member login(String id);
 
     @Update("UPDATE member SET point=#{point} WHERE id=#{id}")
     public void memberUpdatePoint(Member member);

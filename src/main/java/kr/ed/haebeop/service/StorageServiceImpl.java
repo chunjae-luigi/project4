@@ -43,11 +43,16 @@ public class StorageServiceImpl implements StorageService{
         storageMapper.storageUpdate(storage);
     }
 
+
+    @Override
+    public int storageRecentNo() {
+        return storageMapper.storageRecentNo();
+    }
+
     @Override
     public List<Storage> storageBoardList(Storage storage) {
         return storageMapper.storageBoardList(storage);
     }
-
     @Override
     public Storage storageBoardGet(Storage storage) {
         return storageMapper.storageBoardGet(storage);

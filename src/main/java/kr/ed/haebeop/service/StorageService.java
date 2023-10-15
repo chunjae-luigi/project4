@@ -15,6 +15,7 @@ public interface StorageService {
     public void storageDelete(int fileNo);
 
 
+    public int storageRecentNo();
     public List<Storage> storageBoardList(Storage storage);
     public Storage storageBoardGet(Storage storage);
 }

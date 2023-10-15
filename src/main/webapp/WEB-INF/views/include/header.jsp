@@ -3,6 +3,9 @@
 
 <c:set var="headerPath" value="<%=pageContext.getServletContext().getContextPath()%>"/>
 
+<c:set var="sid" value='<%=session.getAttribute("sid")%>' />
+<c:set var="smembership" value='<%=session.getAttribute("smembership")%>' />
+
 <header>
     <nav class="navbar-expand-lg navbar bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
@@ -13,50 +16,51 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="${headerPath}/">회사소개</a>
+                        <a class="nav-link" href="${headerPath}/">학원 소개</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${headerPath}/">강의</a>
+                        <a class="nav-link" href="${headerPath}/course/courseList">수강신청</a>
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            나의 학습
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="${headerPath}/">강의실</a></li>
+                            <li><a class="dropdown-item" href="${headerPath}/">수강 관리</a></li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             커뮤니티
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="${headerPath}/notice/noticeList">공지사항</a></li>
-                            <li><a class="dropdown-item" href="${headerPath}/courseQna/courseQnaList">Qna</a></li>
                             <li><a class="dropdown-item" href="${headerPath}/free/freeList">자유게시판</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="${headerPath}/courseMaterial/dataBoardList">자료실</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            이벤트
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="${headerPath}/">출석체크</a></li>
-                            <li><a class="dropdown-item" href="${headerPath}/">투표</a></li>
+                            <li><a class="dropdown-item" href="${headerPath}/">이벤트</a></li>
                         </ul>
                     </li>
                 </ul>
 
                 <div class="d-flex">
-                <c:choose>
-                    <c:when test="${sid eq 'admin'}">
-                        <a href="${headerPath}/member/logout" class="btn btn-outline-light" style="margin: 0px 5px;">Logout</a>
-                        <a href="${headerPath}/member/memberGet" class="btn btn-outline-light" style="margin: 0px 5px;">Mypage</a>
-                    </c:when>
-                    <c:when test="${not empty sid}">
-                        <a href="${headerPath}/member/logout" class="btn btn-outline-light" style="margin: 0px 5px;">Logout</a>
-                        <a href="${headerPath}/member/memberGet" class="btn btn-outline-light" style="margin: 0px 5px;">Mypage</a>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="${headerPath}/member/login" class="btn btn-outline-light" style="margin: 0px 5px;">Login</a>
-                        <a href="${headerPath}/member/join" class="btn btn-outline-light" style="margin: 0px 5px;">Join</a>
-                    </c:otherwise>
-                </c:choose>
-
+                    <c:choose>
+                        <c:when test="${not empty sid}">
+                            <a href="${headerPath}/member/logout" class="btn btn-outline-light" style="margin: 0px 5px;">로그아웃</a>
+                            <a href="${headerPath}/member/memberGet" class="btn btn-outline-light" style="margin: 0px 5px;">회원 정보</a>
+                            <c:if test="${smembership eq 'admin'}">
+                                <a href="${headerPath}/admin/" class="btn btn-outline-light" style="margin: 0px 5px;">관리자 페이지</a>
+                            </c:if>
+                            <c:if test="${smembership eq 'teacher'}">
+                                <a href="${headerPath}/teacher/" class="btn btn-outline-light" style="margin: 0px 5px;">선생님 페이지</a>
+                            </c:if>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="${headerPath}/member/login" class="btn btn-outline-light" style="margin: 0px 5px;">로그인</a>
+                            <a href="${headerPath}/member/join" class="btn btn-outline-light" style="margin: 0px 5px;">회원가입</a>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
