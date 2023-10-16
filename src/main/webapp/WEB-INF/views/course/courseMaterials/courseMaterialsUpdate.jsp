@@ -30,7 +30,7 @@
 
     <section class="section blog-wrap container">
 
-        <form action="${rootPath}/dataBoard/dataBoardUpdate" method="post" enctype="multipart/form-data">
+        <form action="${rootPath}/courseMaterials/courseMaterialsUpdate" method="post" enctype="multipart/form-data">
             <input type="hidden" name="bno" id="bno" value="${dto.bno}">
             <table class="table">
                 <tbody>
@@ -43,7 +43,7 @@
                     <td colspan="2">
                         <c:if test="${!empty dataFiles}">
                             <c:forEach var="file" items="${dataFiles}">
-                                <div class="dataBoardFile">
+                                <div class="courseMaterialsFile">
                                     <a href="${rootPath}/resources/upload/${file.saveFolder}/${file.saveName}" download="${file.fileName}"><i class="icofont-ui-file mr-2"></i>${file.fileName}</a>
                                     <a href="${rootPath}/dataFile/delete?fno=${file.fno}&bno=${dto.bno}" onclick=" return deleteFile()"><i class="icofont-ui-delete"></i></a>
                                 </div>
@@ -63,9 +63,9 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="buttons is-centered">
-                <input class="button is-mainColor" type="submit" value="수정 완료">
-                <a href="${rootPath}/dataBoard/dataBoardList" class="button is-success">글 목록</a>
+            <div class="btns is-centered">
+                <input class="btn is-mainColor" type="submit" value="수정 완료">
+                <a href="${rootPath}/courseMaterials/courseMaterialsList" class="btn is-success">글 목록</a>
             </div>
         </form>
 
@@ -77,7 +77,7 @@
 
 </div>
 
-<%@ include file="../include/footer.jsp" %>
+
 </body>
 </html>
 

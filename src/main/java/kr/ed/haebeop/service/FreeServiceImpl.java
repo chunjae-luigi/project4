@@ -20,6 +20,7 @@ public class FreeServiceImpl implements FreeService{
 
     @Override
     public Free freeGet(int freeNo) {
+        freeMapper.freeVisit(freeNo);
         return freeMapper.freeGet(freeNo);
     }
 

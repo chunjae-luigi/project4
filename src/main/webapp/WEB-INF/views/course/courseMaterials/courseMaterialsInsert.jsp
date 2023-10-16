@@ -8,28 +8,21 @@
 <html lang="en">
 <head>
     <title>해법</title>
-    <%@ include file="../include/head.jsp" %>
-    <script type="text/javascript" src="${rootPath}/resources/ckeditor/ckeditor.js"></script>
+    <%@ include file="../../include/head.jsp" %>
+    <script type="text/javascript" src="${rootPath}/resource/ckeditor/ckeditor.js"></script>
 </head>
 <body>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../../include/header.jsp" %>
 
-<div class="content">
+<div class="container mt-3">
+    <jsp:include page="../courseSidebar.jsp">
+        <jsp:param name="courseNo" value="${courseNo}"/>
+    </jsp:include>
 
-    <section class="page-title bg-04">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-12">
-                    <div class="block has-text-centered">
-                        <h1 class="is-capitalize text-lg font-happy">학습 자료실</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="section blog-wrap container">
-        <form action="${rootPath }/dataBoard/dataBoardInsert" method="post" enctype="multipart/form-data">
+    <div class="row gutters-sm" style="margin-top: 2rem; justify-content: space-around;">
+        <section class="section blog-wrap container">
+        <form action="${rootPath }/courseMaterials/courseMaterialsInsert" method="post" enctype="multipart/form-data">
             <input type="hidden" name="sid" id="sid" value="${sid}">
             <table class="table">
                 <tbody>
@@ -54,13 +47,15 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="buttons is-centered">
-                <input class="button is-mainColor" type="submit" value="작성하기">
-                <a href="${rootPath}/dataBoard/dataBoardList" class="button is-success">글 목록</a>
+            <div class="is-centered">
+                <input type="hidden" name="courseNo" value="${courseNo}">
+                <input class="btn is-mainColor" type="submit" value="작성하기">
+                <a href="${rootPath}/courseMaterials/courseMaterialsList?courseNo=${courseNo}" class="btn btn-success">글 목록</a>
             </div>
         </form>
 
     </section>
+    </div>
 </div>
 
 </body>

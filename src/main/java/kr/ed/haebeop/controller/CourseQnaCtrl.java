@@ -73,30 +73,42 @@ public class CourseQnaCtrl {
                 courseQnaList = courseQnaService.courseQnaPageList(page);
         }
 
+        model.addAttribute("courseNo", courseNo);
         model.addAttribute("courseQnaList", courseQnaList);
-        return "/courseQna/courseQnaList";
+        return "/course/courseQna/courseQnaList";
     }
 
     @GetMapping("courseQnaGet")
     public String courseQnaGet(HttpServletRequest request, Model model) throws Exception {
         int qno = Integer.parseInt(request.getParameter("qno"));
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
+
         CourseQna dto = courseQnaService.courseQnaGet(qno);
+
         model.addAttribute("courseQna", dto);
-        return "/courseQna/courseQnaGet";
+        model.addAttribute("courseNo", courseNo);
+        return "/course/courseQna/courseQnaGet";
     }
 
     @GetMapping("courseQnaInsert")
     public String courseQnaInsertForm(HttpServletRequest request, Model model) throws Exception {
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
         int lev = Integer.parseInt(request.getParameter("lev"));
         int par = Integer.parseInt(request.getParameter("par"));
+
         model.addAttribute("lev", lev);
         model.addAttribute("par", par);
-        return "/courseQna/courseQnaInsert";
+        model.addAttribute("courseNo", courseNo);
+
+        return "/course/courseQna/courseQnaInsert";
     }
 
     @PostMapping("courseQnaInsert")
     public String courseQnaInsert(HttpServletRequest request) throws Exception {
         CourseQna dto = new CourseQna();
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
+
+        dto.setCourseNo(courseNo);
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
         dto.setId(request.getParameter("author"));
@@ -104,15 +116,16 @@ public class CourseQnaCtrl {
         dto.setPar(Integer.parseInt(request.getParameter("par")));
 
         courseQnaService.courseQnaInsert(dto);
-        return "redirect:courseQnaList";
+        return "redirect:courseQnaList?courseNo="+courseNo;
     }
 
     @GetMapping("courseQnaDelete")
     public String courseQnaDelete(HttpServletRequest request) throws Exception {
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
         int qno = Integer.parseInt(request.getParameter("qno"));
         courseQnaService.courseQnaDelete(qno);
 
-        return "redirect:courseQnaList";
+        return "redirect:courseQnaList?courseNo="+courseNo;
     }
 
     @GetMapping("courseQnaUpdate")
@@ -120,17 +133,22 @@ public class CourseQnaCtrl {
         int qno = Integer.parseInt(request.getParameter("qno"));
         CourseQna dto = courseQnaService.courseQnaGet(qno);
         model.addAttribute("courseQna", dto);
-        return "/courseQna/courseQnaUpdate";
+
+        return "/course/courseQna/courseQnaUpdate";
     }
 
     @PostMapping("courseQnaUpdate")
     public String courseQnaUpdate(HttpServletRequest request) throws Exception {
-        CourseQna dto = new CourseQna();
-        dto.setQnaNo(Integer.parseInt(request.getParameter("qno")));
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
+        int qnaNo = Integer.parseInt(request.getParameter("qno"));
+
+        CourseQna dto = courseQnaService.courseQnaGet(qnaNo);
+
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
+
         courseQnaService.courseQnaUpdate(dto);
 
-        return "redirect:courseQnaList";
+        return "redirect:courseQnaList?courseNo="+courseNo;
     }
 }

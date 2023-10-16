@@ -9,27 +9,21 @@
 <html lang="en">
 <head>
     <title>해법::공지사항</title>
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
 </head>
 <body>
-<jsp:include page="../../include/header.jsp" />
+<%@include file="../../include/header.jsp"%>
 
-<div class="content">
-    <section class="page-title bg-02">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-12">
-                    <div class="block has-text-centered">
-                        <h1 class="is-capitalize text-lg font-happy">공지사항</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="container mt-3">
+    <jsp:include page="../courseSidebar.jsp">
+        <jsp:param name="courseNo" value="${courseNo}"/>
+    </jsp:include>
 
+    <div class="row gutters-sm" style="margin-top: 2rem; justify-content: space-around;">
     <div class="container boardTemplate">
-        <jsp:include page="../../include/searchBoard.jsp">
-            <jsp:param name="formLink" value="${rootPath }/notice/noticeList"/>
+        <jsp:include page="../searchCourseBoard.jsp">
+            <jsp:param name="courseNo" value="${courseNo}"/>
+            <jsp:param name="formLink" value="${rootPath }/courseNotice/courseNoticeList"/>
         </jsp:include>
 
         <table class="table">
@@ -62,26 +56,19 @@
         </table>
 
         <%--  페이지네이션 --%>
-        <jsp:include page="../../include/pagination.jsp">
-            <jsp:param name="pageLink" value="${rootPath }/notice/noticeList"/>
+        <jsp:include page="../coursePagination.jsp">
+            <jsp:param name="pageLink" value="${rootPath }/courseNotice/courseNoticeList?courseNo=${courseNo}"/>
         </jsp:include>
     </div>
 
     <section class="section blog-wrap container">
-
-
-
-
         <c:if test='${sid eq "admin"}'>
-        <div class="buttons is-centered">
-            <a href="${rootPath }/notice/noticeInsert" class="button is-mainColor">공지 등록</a>
+        <div class="btns is-centered">
+            <a href="${rootPath }/notice/noticeInsert" class="btn is-mainColor">공지 등록</a>
         </div>
         </c:if>
-
-
-
-
     </section>
+    </div>
 </div>
 
 

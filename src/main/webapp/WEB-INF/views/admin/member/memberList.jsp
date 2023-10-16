@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <title>회원 목록</title>
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
     <link rel="stylesheet" href="${headPath}/resources/css/admin.css">
     <style>
         table {width: 100%; text-align: center;}

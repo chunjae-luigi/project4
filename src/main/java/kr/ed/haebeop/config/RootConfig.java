@@ -77,7 +77,7 @@ public class RootConfig {
     }
     // 멀티파트 업로드 디렉토리
     @Bean
-    public String uploadPath() {return "D:\\sangmin0816\\spring\\springframwork2\\src\\main\\webapp\\resources\\upload";}
+    public String uploadPath() {return "D:\\sangmin0816\\spring\\springframwork2\\src\\main\\webapp\\resource\\upload";}
 
 
     // 로케일 설정

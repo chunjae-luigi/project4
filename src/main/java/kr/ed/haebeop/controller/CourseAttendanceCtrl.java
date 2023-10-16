@@ -64,7 +64,7 @@ public class CourseAttendanceCtrl {
         }
 
         model.addAttribute("courseAttendanceList", courseAttendanceList);
-        return "/community/courseAttendance/courseAttendanceList";
+        return "/course/courseAttendance/courseAttendanceList";
     }
 
     @GetMapping("courseAttendanceGet")
@@ -72,12 +72,12 @@ public class CourseAttendanceCtrl {
         int courseAttendanceNo = Integer.parseInt(request.getParameter("no"));
         CourseAttendance courseAttendance = courseAttendanceService.courseAttendanceGet(courseAttendanceNo);
         model.addAttribute("courseAttendance", courseAttendance);
-       return "/community/courseAttendance/courseAttendanceGet";
+       return "/course/courseAttendance/courseAttendanceGet";
 
     }
     @GetMapping("courseAttendanceInsert")
     public String courseAttendanceInsert(HttpServletRequest request, Model model) throws Exception{
-        return "/community/courseAttendance/courseAttendanceInsert";
+        return "/course/courseAttendance/courseAttendanceInsert";
     }
     @PostMapping("courseAttendanceInsert")
     public String courseAttendanceInsertpro(HttpServletRequest request, Model model) throws Exception{
@@ -100,7 +100,7 @@ public class CourseAttendanceCtrl {
         CourseAttendance courseAttendance = courseAttendanceService.courseAttendanceGet(courseAttendanceNo);
 
         model.addAttribute("courseAttendance", courseAttendance);
-        return "/community/courseAttendance/courseAttendanceUpdate";
+        return "/course/courseAttendance/courseAttendanceUpdate";
     }
 
     @PostMapping("courseAttendanceUpdate")

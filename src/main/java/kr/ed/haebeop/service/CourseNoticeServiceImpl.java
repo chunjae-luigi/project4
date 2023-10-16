@@ -20,6 +20,7 @@ public class CourseNoticeServiceImpl implements CourseNoticeService{
 
     @Override
     public CourseNotice courseNoticeGet(int courseNoticeNo) {
+        courseNoticeMapper.courseNoticeVisit(courseNoticeNo);
         return courseNoticeMapper.courseNoticeGet(courseNoticeNo);
     }
 

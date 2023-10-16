@@ -276,12 +276,12 @@
         </div>
     <div class="btn_fr">
         <input type="checkbox" id="ck_item2" name="ck_item"> <label for="ck_item2">개인정보 수집 및 이용약관 동의</label><br><br><br>
-        <button type="button" id="in_btn1" class="button">다음 단계</button>
+        <button type="button" id="in_btn1" class="btn">다음 단계</button>
     </div>
 </div>
 <br>
 
-<%@ include file="../include/footer.jsp" %>
+
 </body>
 </html>
 

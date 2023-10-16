@@ -13,7 +13,7 @@
     <script type="text/javascript" src="${rootPath}/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
-<jsp:include page="../../include/header.jsp" />
+<%@include file="../../include/header.jsp"%>
 
     <div class="content" id="contents">
     <section class="page-title bg-02">
@@ -50,9 +50,9 @@
                     </tbody>
                 </table>
 
-                <div class="buttons is-centered">
+                <div class="btns is-centered">
                     <input type="submit" class="is-mainColor button" value="글 등록" >
-                    <a class="button is-success" href="${rootPath}/notice/noticeList">글 목록</a>
+                    <a class="btn is-success" href="${rootPath}/notice/noticeList">글 목록</a>
                 </div>
             </form>
 

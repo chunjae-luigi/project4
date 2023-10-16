@@ -12,13 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>출석체크</title>
     <!-- 헤드 부분 인클루드 -->
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
 </head>
 <body>
 <div class="wrap">
     <!-- 헤더 부분 인클루드 -->
     <header class="hd" id="hd">
-        <jsp:include page="../../include/header.jsp" />
+        <%@include file="../../include/header.jsp"%>
     </header>
     <div class="content">
         <section class="page-title bg-05">
@@ -132,8 +132,8 @@
                 </div>
 
                 <c:if test="${!pass }">
-                    <div class="buttons is-centered">
-                        <a href="${path }/attend/add.do" class="button is-mainColor">출석 체크</a>
+                    <div class="btns is-centered">
+                        <a href="${path }/attend/add.do" class="btn is-mainColor">출석 체크</a>
                     </div>
                 </c:if>
             </div>

@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <title>공지사항 상세보기</title>
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
     <link rel="stylesheet" href="${headPath}/resources/css/admin.css">
     <script type="text/javascript" src="${headPath }/resources/ckeditor/ckeditor.js"></script>
 </head>
@@ -38,9 +38,9 @@
                 </tr>
                 </tbody>
             </table>
-                <div class="buttons is-right">
-                    <input type="submit" class="button is-mainColor" value="글 등록">
-                    <a class="button is-success" href="${headPath }/admin/List.do">글 목록</a>
+                <div class="btns is-right">
+                    <input type="submit" class="btn is-mainColor" value="글 등록">
+                    <a class="btn is-success" href="${headPath }/admin/List.do">글 목록</a>
                 </div>
             </form>
         </div>

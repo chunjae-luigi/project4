@@ -7,14 +7,14 @@
 <html lang="en">
 <head>
     <title>해법</title>
-    <%@ include file="../include/head.jsp" %>
+    <%@ include file="../../include/head.jsp" %>
     <style>
         a .answers {padding-left:30px;}
     </style>
 </head>
 
 <body>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../../include/header.jsp" %>
 
 <div class="content">
 
@@ -52,7 +52,7 @@
                         <td>답변</td>
                     </c:if>
                     <td><input type="text" class="input" name="title" id="title" value="${qna.title}"></td>
-                    <td>${qna.author}</td>
+                    <td>${qna.id}</td>
                     <td>
                         <fmt:parseDate value="${qna.regdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
                         <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
@@ -67,18 +67,18 @@
                 </tbody>
             </table>
 
-            <input type="hidden" name="qno" id="qno" value="${qna.qno}">
+            <input type="hidden" name="qno" id="qno" value="${qna.qnaNo}">
 
-            <div class="buttons is-centered">
-                <a href="${rootPath}/board/qnaList" class="button is-mainColor">목록</a>
-                <input type="submit" class="button is-success" value="수정 완료">
+            <div class="btns is-centered">
+                <a href="${rootPath}/board/qnaList" class="btn is-mainColor">목록</a>
+                <input type="submit" class="btn is-success" value="수정 완료">
             </div>
         </form>
     </section>
 
 </div>
 
-<%@ include file="../include/footer.jsp" %>
+
 </body>
 </html>
 

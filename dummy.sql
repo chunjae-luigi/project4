@@ -13,9 +13,9 @@ INSERT INTO member(id, pw, name, membership, isVerify) VALUES('kim3', '$2a$10$oS
 
 
 -- teacher 강사 데이터
-INSERT INTO teacher(id) VALUES('sam1');
-INSERT INTO teacher(id) VALUES('sam2');
-INSERT INTO teacher(id) VALUES('sam3');
+INSERT INTO teacher(id, name) VALUES('sam1', '쌤1');
+INSERT INTO teacher(id, name) VALUES('sam2', '쌤2');
+INSERT INTO teacher(id, name) VALUES('sam3', '쌤3');
 
 
 -- course 강좌 데이터

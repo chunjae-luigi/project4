@@ -97,9 +97,6 @@ public class FreeCtrl {
         model.addAttribute("commentList", commentList);
         model.addAttribute("dto", dto);
         model.addAttribute("fno", fno);
-        System.out.println("dto : " + dto);
-        System.out.println("commentList : " + commentList);
-        System.out.println("fno : " + fno);
         return "/community/free/freeDetail";
     }
 

@@ -16,7 +16,7 @@ public interface TeacherMapper {
     @Select("SELECT COUNT(*) FROM teacher")
     public int teacherCount();
 
-    @Insert("INSERT INTO teacher(id, email, tel, imageFile, career) VALUES(#{id},#{email}, #{tel}, #{imageFile}, #{career})")
+    @Insert("INSERT INTO teacher(id, name, email, tel, imageFile, career) VALUES(#{id},#{name}, #{email}, #{tel}, #{imageFile}, #{career})")
     public void teacherInsert(Teacher teacher);
 
     @Update("UPDATE teacher SET email=#{email}, tel=#{tel}, imageFile=#{imageFile}, career=#{career} WHERE teacherNo=#{teacherNo}")

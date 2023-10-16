@@ -19,7 +19,7 @@
                         <a class="nav-link" href="${headerPath}/">학원 소개</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${headerPath}/course/courseList">수강신청</a>
+                        <a class="nav-link" href="${headerPath}/register/courseList">수강신청</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -27,7 +27,7 @@
                             나의 학습
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="${headerPath}/">강의실</a></li>
+                            <li><a class="dropdown-item" href="${headerPath}/course/courseList">강의실</a></li>
                             <li><a class="dropdown-item" href="${headerPath}/">수강 관리</a></li>
                         </ul>
                     </li>

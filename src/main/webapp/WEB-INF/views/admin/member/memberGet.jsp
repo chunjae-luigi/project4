@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <title>회원 목록</title>
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
     <link rel="stylesheet" href="${headPath}/resources/css/admin.css">
 </head>
 
@@ -51,9 +51,9 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="buttons is-right">
-                <button type="button" onclick="remove()" class="button is-mainColor" >회원 탈퇴</button>
-                <a class="button is-success" href="${headPath }/admin/MemberListAdmin.do">회원 목록</a>
+            <div class="btns is-right">
+                <button type="button" onclick="remove()" class="btn is-mainColor" >회원 탈퇴</button>
+                <a class="btn is-success" href="${headPath }/admin/MemberListAdmin.do">회원 목록</a>
             </div>
         </div>
     </div>

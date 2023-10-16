@@ -2,17 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
-<c:set var="rootPath" value="${pageContext.request.contextPath }"/>
-<c:set var="sid" value="${pageContext.session.getAttribute('sid') }"/>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>해법::공지사항</title>
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
 </head>
 <body>
-<jsp:include page="../../include/header.jsp" />
+<%@include file="../../include/header.jsp"%>
 
 <div class="content">
     <section class="page-title bg-02">
@@ -29,7 +27,7 @@
 
     <div class="container boardTemplate">
         <jsp:include page="../../include/searchBoard.jsp">
-            <jsp:param name="formLink" value="${rootPath }/notice/noticeList"/>
+            <jsp:param name="formLink" value="${rootPath}/notice/noticeList"/>
         </jsp:include>
 
         <table class="table">
@@ -45,7 +43,7 @@
             <c:forEach items="${noticeList }" var="notice" varStatus="status">
                 <tr>
                     <td class="has-text-centered">${status.count }</td>
-                    <td class="has-text-centered"><a href="${rootPath }/notice/noticeGet?no=${notice.noticeNo }">${notice.title }</a></td>
+                    <td class="has-text-centered"><a href="${rootPath}/notice/noticeGet?no=${notice.noticeNo }">${notice.title }</a></td>
                     <td class="has-text-centered">
                         <fmt:parseDate value="${notice.regdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
                         <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
@@ -63,7 +61,7 @@
 
         <%--  페이지네이션 --%>
         <jsp:include page="../../include/pagination.jsp">
-            <jsp:param name="pageLink" value="${rootPath }/notice/noticeList"/>
+            <jsp:param name="pageLink" value="${rootPath}/notice/noticeList"/>
         </jsp:include>
     </div>
 
@@ -73,8 +71,8 @@
 
 
         <c:if test='${sid eq "admin"}'>
-        <div class="buttons is-centered">
-            <a href="${rootPath }/notice/noticeInsert" class="button is-mainColor">공지 등록</a>
+        <div class="btns is-centered">
+            <a href="${rootPath}/notice/noticeInsert" class="btn is-mainColor">공지 등록</a>
         </div>
         </c:if>
 

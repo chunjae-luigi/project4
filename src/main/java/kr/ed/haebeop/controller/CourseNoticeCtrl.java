@@ -69,8 +69,9 @@ public class CourseNoticeCtrl {
                 courseNoticeList = courseNoticeService.courseNoticePageList(page);
         }
 
+        model.addAttribute("courseNo", courseNo);
         model.addAttribute("courseNoticeList", courseNoticeList);
-        return "/community/courseNotice/courseNoticeList";
+        return "/course/courseNotice/courseNoticeList";
     }
 
     @GetMapping("courseNoticeGet")
@@ -78,46 +79,63 @@ public class CourseNoticeCtrl {
         int courseNoticeNo = Integer.parseInt(request.getParameter("no"));
         CourseNotice courseNotice = courseNoticeService.courseNoticeGet(courseNoticeNo);
         model.addAttribute("courseNotice", courseNotice);
-       return "/community/courseNotice/courseNoticeGet";
+       return "/course/courseNotice/courseNoticeGet";
     }
 
     @GetMapping("courseNoticeInsert")
     public String courseNoticeInsert(HttpServletRequest request, Model model) throws Exception{
-        return "/community/courseNotice/courseNoticeInsert";
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
+        model.addAttribute("courseNo", courseNo);
+
+        return "/course/courseNotice/courseNoticeInsert";
     }
 
     @PostMapping("courseNoticeInsert")
     public String courseNoticeInsertpro(HttpServletRequest request, Model model) throws Exception{
-        CourseNotice courseNotice = new CourseNotice();
-        courseNotice.setTitle(request.getParameter("title"));
-        courseNotice.setContent(request.getParameter("content"));
-        courseNoticeService.courseNoticeInsert(courseNotice);
-        return "redirect: courseNoticeList";
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
+
+        CourseNotice dto = new CourseNotice();
+        dto.setCourseNo(courseNo);
+        dto.setTitle(request.getParameter("title"));
+        dto.setContent(request.getParameter("content"));
+        courseNoticeService.courseNoticeInsert(dto);
+
+        return "redirect: courseNoticeList?courseNo="+courseNo;
     }
     @GetMapping("courseNoticeUpdate")
     public String courseNoticeUpdate(HttpServletRequest request, Model model) throws Exception{
         int courseNoticeNo = Integer.parseInt(request.getParameter("no"));
+
         CourseNotice courseNotice = courseNoticeService.courseNoticeGet(courseNoticeNo);
+
         model.addAttribute("courseNotice", courseNotice);
-        return "/community/courseNotice/courseNoticeUpdate";
+
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
+        model.addAttribute("courseNo", courseNo);
+        return "/course/courseNotice/courseNoticeUpdate";
     }
 
     @PostMapping("courseNoticeUpdate")
     public String courseNoticeUpdatepro(HttpServletRequest request, Model model) throws Exception{
-        int courseNoticeNo = Integer.parseInt(request.getParameter("no"));
-        CourseNotice courseNotice = new CourseNotice();
-        courseNotice.setNoticeNo(courseNoticeNo);
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
+
+        int no = Integer.parseInt(request.getParameter("no"));
+        CourseNotice courseNotice = courseNoticeService.courseNoticeGet(no);
+
         courseNotice.setTitle(request.getParameter("title"));
         courseNotice.setContent(request.getParameter("content"));
         courseNoticeService.courseNoticeUpdate(courseNotice);
-        return "redirect: courseNoticeList";
+
+        return "redirect: courseNoticeList?courseNo="+courseNo;
     }
 
     @GetMapping("courseNoticeDelete")
-    public String courseNoticeDelete(HttpServletRequest request, Model model) throws Exception{
+    public String courseNoticeDelete(HttpServletRequest request) throws Exception{
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
         int courseNoticeNo = Integer.parseInt(request.getParameter("no"));
+
         courseNoticeService.courseNoticeDelete(courseNoticeNo);
-        return "redirect: courseNoticeList";
+        return "redirect: courseNoticeList?courseNo="+courseNo;
     }
 
 }

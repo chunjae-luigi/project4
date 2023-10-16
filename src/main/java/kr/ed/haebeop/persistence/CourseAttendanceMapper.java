@@ -28,10 +28,10 @@ public interface CourseAttendanceMapper {
 
 
 
-    @Select("SELECT * FROM courseAttendance WHERE courseNo=#{courseNo} order by regdate desc LIMIT #{postStart}, #{postCount}")
+    @Select("SELECT * FROM courseAttendance WHERE courseNo=#{courseNo} order by attendanceNo desc LIMIT #{postStart}, #{postCount}")
     public List<CourseAttendance> courseAttendancePageList(Page page);
 
-    @Select("SELECT * FROM courseAttendance WHERE courseNo=#{courseNo} AND id LIKE CONCAT('%', #{searchKeyword}, '%') order by regdate desc LIMIT #{postStart}, #{postCount}")
+    @Select("SELECT * FROM courseAttendance WHERE courseNo=#{courseNo} AND id LIKE CONCAT('%', #{searchKeyword}, '%') order by attendanceNo desc LIMIT #{postStart}, #{postCount}")
     public List<CourseAttendance> courseAttendanceIdList(Page page);
 
     @Select("SELECT COUNT(*) FROM courseAttendance WHERE courseNo=#{courseNo} AND id LIKE CONCAT('%', #{searchKeyword}, '%')")

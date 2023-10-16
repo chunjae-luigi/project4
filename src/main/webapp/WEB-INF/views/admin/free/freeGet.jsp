@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <title>자유게시판 관리 - 상세보기</title>
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
     <link rel="stylesheet" href="${path}/resources/css/admin.css">
 </head>
 
@@ -59,7 +59,7 @@
                                     작성자 : ${comment.author}
                                 </p>
                                 <p class="dat_content">${comment.content}</p>
-                                <a class="button is-primary" href="${path }/comment/delete.do?dno=${comment.dno}&fno=${fno}">해당 댓글 삭제</a>
+                                <a class="btn is-primary" href="${path }/comment/delete.do?dno=${comment.dno}&fno=${fno}">해당 댓글 삭제</a>
                             </div>
                         </li>
                     </c:forEach>
@@ -70,9 +70,9 @@
                 </ul>
             </div>
 
-            <div class="buttons is-right">
-                <a class="button is-mainColor" href="${path }/admin/FreeListAdmin.do">글 목록</a>
-                <a class="button is-success" href="${path }/board/free/delete.do?fno=${dto.fno}&author=${dto.author}">글 삭제</a>
+            <div class="btns is-right">
+                <a class="btn is-mainColor" href="${path }/admin/FreeListAdmin.do">글 목록</a>
+                <a class="btn is-success" href="${path }/board/free/delete.do?fno=${dto.fno}&author=${dto.author}">글 삭제</a>
             </div>
         </div>
     </div>

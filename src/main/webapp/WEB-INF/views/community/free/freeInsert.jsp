@@ -12,14 +12,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>자유 게시판 글쓰기</title>
 	<!-- 헤드 부분 인클루드 -->
-    <jsp:include page="../include/head.jsp"/>
+    <%@include file="../../include/head.jsp"%>
 	<!-- <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script> -->
 	<script type="text/javascript" src="${rootPath}/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 <!-- 헤더 부분 인클루드 -->
 <header class="hd" id="hd">
-	<jsp:include page="../../include/header.jsp" />
+	<%@include file="../../include/header.jsp"%>
 </header>
 <div class="content">
 	<section class="page-title bg-02">
@@ -60,9 +60,9 @@
 			      	</tbody>
 			      </table>
 
-					<div class="buttons is-centered">
+					<div class="btns is-centered">
 						<input type="submit" class="submit button is-mainColor" value="글 등록" >
-						<a class="button is-success" href="${rootPath}/free/freeList">글 목록</a>
+						<a class="btn is-success" href="${rootPath}/free/freeList">글 목록</a>
 					</div>
 			   </form>
 	      </div>

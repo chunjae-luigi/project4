@@ -20,6 +20,7 @@ public class CourseQnaServiceImpl implements CourseQnaService{
 
     @Override
     public CourseQna courseQnaGet(int courseQnaNo) {
+        courseQnaMapper.courseQnaVisit(courseQnaNo);
         return courseQnaMapper.courseQnaGet(courseQnaNo);
     }
 

@@ -7,10 +7,10 @@
 <html lang="en">
 <head>
     <title>해법</title>
-    <%@ include file="../include/head.jsp" %>
+    <%@ include file="../../include/head.jsp" %>
 </head>
 <body>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../../include/header.jsp" %>
 
 <div class="content">
 
@@ -38,19 +38,19 @@
             </thead>
             <tbody>
             <tr>
-                <td class="item2 has-text-centered">${dto.title}</td>
+                <td class="item2 has-text-centered">${courseMaterials.title}</td>
                 <td class="item3 has-text-centered">
-                    <fmt:parseDate value="${dto.regdate }" var="regdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                    <fmt:parseDate value="${courseMaterials.regdate }" var="regdate" pattern="yyyy-MM-dd HH:mm:ss" />
                     <fmt:formatDate value="${regdate }" pattern="yyyy-MM-dd" />
                 </td>
-                <td class="item4 has-text-centered">${dto.visited}</td>
+                <td class="item4 has-text-centered">${courseMaterials.visited}</td>
             </tr>
-            <c:if test="${!empty dataFiles}">
+            <c:if test="${!empty storages}">
             <tr>
                 <td colspan="3">
-                    <c:forEach var="file" items="${dataFiles}">
-                        <div class="dataBoardFile">
-                            <a href="${rootPath}/resources/upload/${file.saveFolder}/${file.saveName}" download="${file.fileName}"><i class="icofont-ui-file mr-2"></i>${file.fileName}</a>
+                    <c:forEach var="file" items="${storages}">
+                        <div class="courseMaterialsFile">
+                            <a href="${rootPath}/resources/upload/${file.savePath}/${file.saveName}" download="${file.originName}"><i class="icofont-ui-file mr-2"></i>${file.originName}</a>
                         </div>
                     </c:forEach>
                 </td>
@@ -58,16 +58,16 @@
             </c:if>
             <tr>
                 <td colspan="3" id="content">
-                    ${dto.content}
+                    ${courseMaterials.content}
                 </td>
             </tr>
             </tbody>
         </table>
-        <div class="buttons is-centered">
-            <a href="${rootPath}/dataBoard/dataBoardList" class="button is-mainColor">글 목록</a>
-            <c:if test="${not empty sid && (sid eq 'admin' || dto.author eq sid)}">
-                <a href="${rootPath}/dataBoard/dataBoardUpdate?bno=${dto.bno}&author=${dto.author}" class="button is-success">글 수정</a>
-                <a href="${rootPath}/dataBoard/dataBoardDelete?bno=${dto.bno}&author=${dto.author}" class="button is-mainColor">글 삭제</a>
+        <div class="btns is-centered">
+            <a href="${rootPath}/courseMaterials/courseMaterialsList?courseNo=${courseNo}" class="btn btn-primary">글 목록</a>
+            <c:if test="${not empty sid && (sid eq 'admin' || courseMaterials.id eq sid)}">
+                <a href="${rootPath}/courseMaterials/courseMaterialsUpdate?bno=${courseMaterials.materialNo}&author=${courseMaterials.id}" class="btn is-success">글 수정</a>
+                <a href="${rootPath}/courseMaterials/courseMaterialsDelete?bno=${courseMaterials.materialNo}&author=${courseMaterials.id}" class="btn is-mainColor">글 삭제</a>
             </c:if>
         </div>
     </section>
@@ -75,6 +75,5 @@
 
 </div>
 
-<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

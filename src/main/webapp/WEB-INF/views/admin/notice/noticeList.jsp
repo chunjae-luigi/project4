@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <title>티스푼::공지사항</title>
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
     <link rel="stylesheet" href="${headPath}/resources/css/admin.css">
 </head>
 <body>
@@ -16,8 +16,8 @@
 <div class="admin_contents_area">
     <jsp:include page="../adminBoardList.jsp" />
     <div class="container contents_area2">
-        <div class="buttons is-right">
-            <a href="${headPath}/notice/List.do" class="button is-mainColor">사용자 홈페이지 이동</a>
+        <div class="btns is-right">
+            <a href="${headPath}/notice/List.do" class="btn is-mainColor">사용자 홈페이지 이동</a>
         </div>
         <h1 class="is-size-3 has-text-weight-semibold">공지사항</h1>
         <div class="container">
@@ -49,8 +49,8 @@
                 </c:if>
                 </tbody>
             </table>
-            <div class="buttons is-right">
-                <a href="${headPath }/admin/Insert.do" class="button is-mainColor">공지 등록</a>
+            <div class="btns is-right">
+                <a href="${headPath }/admin/Insert.do" class="btn is-mainColor">공지 등록</a>
             </div>
         </div>
     </div>

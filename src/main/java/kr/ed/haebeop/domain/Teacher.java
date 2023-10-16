@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 public class Teacher {
     private int teacherNo;
     private String id;
+    private String name;
     private String tel;
     private String email;
-    private int imageFile;
+    private int imageFile = 0;
     private String career;
 }

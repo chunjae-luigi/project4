@@ -20,6 +20,7 @@ public class CourseMaterialsServiceImpl implements CourseMaterialsService{
 
     @Override
     public CourseMaterials courseMaterialsGet(int courseMaterialsNo) {
+        courseMaterialsMapper.courseMaterialsVisit(courseMaterialsNo);
         return courseMaterialsMapper.courseMaterialsGet(courseMaterialsNo);
     }
 
@@ -36,6 +37,12 @@ public class CourseMaterialsServiceImpl implements CourseMaterialsService{
     @Override
     public void courseMaterialsUpdate(CourseMaterials courseMaterials) {
         courseMaterialsMapper.courseMaterialsUpdate(courseMaterials);
+    }
+
+
+    @Override
+    public CourseMaterials courseMaterialsGetLast() {
+        return courseMaterialsMapper.courseMaterialsGetLast();
     }
 
     @Override

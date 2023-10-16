@@ -20,6 +20,7 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Override
     public Notice noticeGet(int noticeNo) {
+        noticeMapper.noticeVisit(noticeNo);
         return noticeMapper.noticeGet(noticeNo);
     }
 

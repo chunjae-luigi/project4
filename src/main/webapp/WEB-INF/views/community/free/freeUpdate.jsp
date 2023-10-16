@@ -12,12 +12,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>글 수정하기</title>
     <!-- 헤드 부분 인클루드 -->
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
     <script type="text/javascript" src="${rootPath}/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 <header class="hd" id="hd">
-	<jsp:include page="../../include/header.jsp" />
+	<%@include file="../../include/header.jsp"%>
 </header>
 
 <div class="content">
@@ -58,9 +58,9 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="buttons is-centered">
-				<a class="button is-mainColor" href="${rootPath}/free/freeList">글 목록</a>
-				<input type="submit" class="button is-success" value="수정 완료" >
+			<div class="btns is-centered">
+				<a class="btn is-mainColor" href="${rootPath}/free/freeList">글 목록</a>
+				<input type="submit" class="btn is-success" value="수정 완료" >
 			</div>
 		</form>
 	</section>

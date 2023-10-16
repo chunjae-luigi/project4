@@ -7,12 +7,11 @@
 <html lang="en">
 <head>
     <title>해법</title>
-    <%@ include file="../include/head.jsp" %>
-    <link rel="stylesheet" href="${rootPath}/resources/css/boardget.css">
+    <%@ include file="../../include/head.jsp" %>
 </head>
 
 <body>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../../include/header.jsp" %>
 
 <div class="content">
 
@@ -41,7 +40,7 @@
                 <div class="viewbody">
                     <div class="hgroup">
                         <c:if test="${ sid eq 'admin'}">
-                        <div class="no">NO ${qna.qno }</div>
+                        <div class="no">NO ${qna.qnaNo }</div>
                         </c:if>
                         <div class="tit">
                             <c:if test="${qna.lev==0}">
@@ -53,7 +52,7 @@
                             ${qna.title}
                         </div>
                         <div class="util">
-                            <div class="name">${qna.author }</div>
+                            <div class="name">${qna.id }</div>
                             <div class="date">작성일
                                 <fmt:parseDate value="${qna.regdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
                                 <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
@@ -63,13 +62,13 @@
                     <div class="content">
                         ${qna.content }
                     </div>
-                    <div class="buttons is-centered">
-                        <a class="button is-mainColor" href="${rootPath}/board/qnaList">목록</a>
-                        <c:if test="${not empty sid && (sid eq 'admin' || qna.author eq sid)}">
-                            <a class="button is-success" href="${rootPath}/board/qnaUpdate.do?qno=${qna.qno}&author=${qna.author}">수정</a>
-                            <a class="button is-mainColor" href="${rootPath}/board/qnaDelete.do?qno=${qna.qno}&author=${qna.author}">삭제</a>
+                    <div class="btns is-centered">
+                        <a class="btn is-mainColor" href="${rootPath}/courseQna/courseQnaList?courseNo=${courseNo}">목록</a>
+                        <c:if test="${not empty sid && (sid eq 'admin' || qna.id eq sid)}">
+                            <a class="btn is-success" href="${rootPath}/board/qnaUpdate.do?qno=${qna.qnaNo}&author=${qna.id}">수정</a>
+                            <a class="btn is-mainColor" href="${rootPath}/board/qnaDelete.do?qno=${qna.qnaNo}&author=${qna.id}">삭제</a>
                             <c:if test="${qna.lev == 0}">
-                            <a class="button is-success"  href="${rootPath}/board/qnaInsert.do?lev=1&par=${qna.qno}" >답변하기</a>
+                            <a class="btn is-success"  href="${rootPath}/board/qnaInsert.do?lev=1&par=${qna.qnaNo}" >답변하기</a>
                         </c:if>
                         </c:if>
 
@@ -78,7 +77,7 @@
 
 </div>
 
-<%@ include file="../include/footer.jsp" %>
+
 </body>
 </html>
 

@@ -30,7 +30,7 @@
 </head>
 <body>
 <%@include file="../include/header.jsp"%>
-}
+
 <div class="container">
     <section class="vh-100">
         <div class="container-fluid h-custom">

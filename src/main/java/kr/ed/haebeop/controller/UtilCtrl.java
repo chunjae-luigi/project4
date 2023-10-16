@@ -58,7 +58,7 @@ public class UtilCtrl {
 
             String callback = request.getParameter("CKEditorFuncNum");
             printWriter = response.getWriter();
-            String fileUrl = request.getContextPath() + "/util/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // 작성화면
+            String fileUrl = request.getContextPath() + "/util/ckImgSubmit?uid=" + uid + "&fileName=" + fileName; // 작성화면
 
             // 업로드시 메시지 출력
             printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");

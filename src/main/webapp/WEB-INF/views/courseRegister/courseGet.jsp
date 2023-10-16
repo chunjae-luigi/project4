@@ -16,12 +16,7 @@
 <%@include file="../include/header.jsp"%>
 
 <div class="container">
-    <jsp:include page="courseSidebar.jsp">
-        <jsp:param name="courseNo" value="${course.course.courseNo}"/>
-    </jsp:include>
-
-    <div class="row gutters-sm" style="margin-top: 2rem; justify-content: space-around;">
-        <div class="card">
+    <div class="card">
             <div class="card-body">
                 <h5 class="card-title">
                     <c:choose>
@@ -37,13 +32,8 @@
                 <h6 class="card-subtitle mb-2 text-body-secondary">${course.teacher.name}</h6>
                 <p class="card-text">${course.course.content}</p>
             </div>
-        </div>
     </div>
 </div>
 
 </body>
 </html>
-
-<script>
-    console.log(${course.course.courseNo});
-</script>

@@ -28,6 +28,8 @@ public interface CourseMaterialsMapper {
 
 
 
+    @Select("SELECT * FROM courseMaterials ORDER BY materialNo DESC LIMIT 1")
+    public CourseMaterials courseMaterialsGetLast();
     @Update("UPDATE courseMaterials SET visited=visited+1 WHERE materialNo=#{materialNo}")
     public void courseMaterialsVisit(int materialNo);
 

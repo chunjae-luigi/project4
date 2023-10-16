@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <title>자유게시판 관리</title>
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
     <link rel="stylesheet" href="${path}/resources/css/admin.css">
 </head>
 
@@ -18,8 +18,8 @@
     <jsp:include page="../adminBoardList.jsp" />
     <div class="container contents_area2">
         <div class="column">
-            <div class="buttons is-right">
-                <a href="${path}/board/free/list.do" class="button is-mainColor">사용자 홈페이지 이동</a>
+            <div class="btns is-right">
+                <a href="${path}/board/free/list.do" class="btn is-mainColor">사용자 홈페이지 이동</a>
             </div>
             <h1 class="is-size-3 has-text-weight-semibold">자유게시판</h1>
             <form action="${path }/admin/FreeListAdmin.do" method="get" class="field has-addons has-addons-right">
@@ -36,7 +36,7 @@
                     <input class="input" type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요" value="${keyword }">
                 </p>
                 <p class="control">
-                    <input type="submit" class="button is-mainColor" value="검색" />
+                    <input type="submit" class="btn is-mainColor" value="검색" />
                 </p>
             </form>
             <table class="table is-fullwidth table is-striped mt-5">

@@ -14,7 +14,7 @@ CREATE TABLE member(
 	regdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,   -- (가입일)
 	birth DATE,                                             -- (생년월일)
 	point INT DEFAULT 0,                                    -- (포인트)
-	imageFile INT,                                          -- (프로필 이미지) storage 테이블 번호
+	imageFile INT DEFAULT 0,                                -- (프로필 이미지) storage 테이블 번호
 	membership varchar(30) default 'student',               -- (회원 유형) admin 관리자, teacher 선생님, student 학생
 	isVerify BOOLEAN DEFAULT FALSE                          -- (인증 여부)
 );
@@ -24,9 +24,10 @@ CREATE TABLE member(
 CREATE TABLE teacher(
     teacherNo INT PRIMARY KEY AUTO_INCREMENT,   -- (강사 번호)
     id VARCHAR(20) NOT NULL ,                   -- (회원 id)
+    name VARCHAR(100) NOT NULL,                 -- (강사 이름)
     tel VARCHAR(13),                            -- (강사 연락처)
     email VARCHAR(320),                         -- (강사 이메일)
-    imageFile INT,                              -- (강사 프로필 이미지, 강좌의 썸네일) storage 테이블 번호
+    imageFile INT DEFAULT 0,                    -- (강사 프로필 이미지, 강좌의 썸네일) storage 테이블 번호
     career VARCHAR(1000)                        -- (강사 약력)
 );
 
@@ -38,7 +39,7 @@ CREATE TABLE course(
     categoryNo INT,                             -- (강좌 분류) 생략 가능. 일단 만들어 둠.
     title VARCHAR(200) NOT NULL,                -- (강좌 이름)
     content VARCHAR(2000),                      -- (강좌 소개)
-    videoFile INT,                              -- (강좌 맛보기 영상) storage 테이블 번호
+    videoFile INT DEFAULT 0,                    -- (강좌 맛보기 영상) storage 테이블 번호
     isOngoing BOOLEAN DEFAULT TRUE,             -- (강좌 진행 여부)
     price INT DEFAULT 0,                        -- (강좌 가격)
     capcity INT DEFAULT 1                       -- (강좌 수용 인원)
@@ -61,7 +62,7 @@ CREATE TABLE book(
     publish VARCHAR(200),                   -- (출판사)
     publishDate DATE,                       -- (출판일)
     author VARCHAR(100),                    -- (저자)
-    imageFile INT,                          -- (교재 표지) storage 테이블 번호
+    imageFile INT DEFAULT 0,                -- (교재 표지) storage 테이블 번호
     price INT DEFAULT 0                     -- (가격)
 );
 

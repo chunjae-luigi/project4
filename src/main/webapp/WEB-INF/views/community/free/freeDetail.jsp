@@ -11,14 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>자유게시판 글 보기</title>
     <!-- 헤드 부분 인클루드 -->
-    <jsp:include page="../include/head.jsp"/>
-	<link rel="stylesheet" href="${rootPath}/resources/css/boardget.css">
+    <%@include file="../../include/head.jsp"%>
 </head>
 
 <body>
-<header class="hd" id="hd">
-	<jsp:include page="../../include/header.jsp" />
-</header>
+<%@include file="../../include/header.jsp"%>
 <div class="content">
 
 	<section class="page-title bg-02">
@@ -45,11 +42,11 @@
 				<div class="viewbody">
 					<div class="hgroup">
 						<c:if test="${ sid eq 'admin'}">
-						<div class="no">NO ${dto.fno }</div>
+						<div class="no">NO ${dto.freeNo }</div>
 						</c:if>
 						<div class="tit">${dto.title }</div>
 						<div class="util">
-							<div class="name">${dto.author }</div>
+							<div class="name">${dto.id }</div>
 							<div class="date">작성일
 								<fmt:parseDate value="${comment.regdate }" var="regdate" pattern="yyyy-MM-dd HH:mm:ss" />
 								<fmt:formatDate value="${regdate }" pattern="yyyy-MM-dd" /></div>
@@ -58,13 +55,13 @@
 					<div class="content">
 							${dto.content }
 					</div>
-					<div class="buttons is-centered">
-						<a class="button is-mainColor" href="${rootPath}/free/freeList">목록</a>
-						<c:if test="${not empty sid && (dto.author eq sid)}">
-							<a class="button is-success" href="${rootPath}/free/freeUpdate?fno=${dto.fno}&author=${dto.author}">수정</a>
+					<div class="btns is-centered">
+						<a class="btn is-mainColor" href="${rootPath}/free/freeList">목록</a>
+						<c:if test="${not empty sid && (dto.id eq sid)}">
+							<a class="btn is-success" href="${rootPath}/free/freeUpdate?fno=${dto.freeNo}&author=${dto.id}">수정</a>
 						</c:if>
-						<c:if test="${not empty sid && (sid eq 'admin' || dto.author eq sid)}">
-							<a class="button is-mainColor" href="${rootPath}/free/freeDelete?fno=${dto.fno}&author=${dto.author}">삭제</a>
+						<c:if test="${not empty sid && (sid eq 'admin' || dto.id eq sid)}">
+							<a class="btn is-mainColor" href="${rootPath}/free/freeDelete?fno=${dto.freeNo}&author=${dto.id}">삭제</a>
 						</c:if>
 					</div>
 				</div>
@@ -78,7 +75,7 @@
 
 				<form action="${rootPath}/comment/insert" method="post">
 					<input type="hidden" name="id" id="id"  value="${sid}">
-					<input type="hidden" name="par" id="par" value="${dto.fno}">
+					<input type="hidden" name="par" id="par" value="${dto.freeNo}">
 
 					<img src="${rootPath}/resource/image/sub/face.png" alt="" style="width: 70px; height: 70px; margin: 5px;">
 					<c:if test="${empty sid}">
@@ -87,7 +84,7 @@
 
 					<c:if test="${not empty sid}">
 					<textarea rows="5" cols="50" name="content" id="content" class="tet" maxlength="300" required placeholder="이곳에 댓글을 입력해주세요!"></textarea>
-					<input type="submit" class="button is-primary" value="등록">
+					<input type="submit" class="btn is-primary" value="등록">
 					</c:if>
 				</form>
 
@@ -99,7 +96,7 @@
 					<li style="list-style: none; width: 100%; position: relative;">
 						<div class="dat_box">
 							<div class="dat_img">
-								<p>${comment.author}</p>
+								<p>${comment.id}</p>
 							</div>
 							<div class="dat_con">
 							<div id="con">${comment.content}</div><br>
@@ -108,8 +105,8 @@
 								<fmt:formatDate value="${regdate }" pattern="yyyy-MM-dd" />
 							</p>
 							</div>
-							<c:if test="${sid eq comment.author || sid eq 'admin'}">
-								<a class="button is-primary" href="${rootPath}/comment/delete.do?dno=${comment.dno}&fno=${fno}">삭제</a>
+							<c:if test="${sid eq comment.id || sid eq 'admin'}">
+								<a class="btn is-primary" href="${rootPath}/comment/delete.do?dno=${comment.dno}&fno=${fno}">삭제</a>
 							</c:if>
 						</div>
 

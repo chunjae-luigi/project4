@@ -8,12 +8,12 @@
 <html lang="en">
 <head>
     <title>공지사항 상세보기</title>
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
     <script type="text/javascript" src="${rootPath}/resources/ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
-<jsp:include page="../../include/header.jsp" />
+<%@include file="../../include/header.jsp"%>
 
 <div class="content">
     <section class="page-title bg-02">
@@ -50,9 +50,9 @@
             </tr>
             </tbody>
         </table>
-            <div class="buttons">
+            <div class="btns">
                 <input type="submit" class="is-mainColor button" value="글 등록" >
-                <a class="button is-success" href="${rootPath}/notice/noticeList">글 목록</a>
+                <a class="btn is-success" href="${rootPath}/notice/noticeList">글 목록</a>
             </div>
         </form>
 

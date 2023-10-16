@@ -10,12 +10,12 @@
 <html lang="en">
 <head>
     <title>공지사항 상세보기</title>
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
     <link rel="stylesheet" href="${rootPath}/resources/css/boardget.css">
 </head>
 
 <body>
-<jsp:include page="../../include/header.jsp" />
+<%@include file="../../include/header.jsp"%>
 <div class="content">
 
     <section class="page-title bg-02">
@@ -52,11 +52,11 @@
         <div class="content">
             ${notice.content }
         </div>
-        <div class="buttons is-centered">
-            <a class="button is-mainColor" href="${rootPath}/notice/noticeList">글 목록</a>
+        <div class="btns is-centered">
+            <a class="btn is-mainColor" href="${rootPath}/notice/noticeList">글 목록</a>
             <c:if test='${sid eq "admin"}'>
-                <a class="button is-success" href="${rootPath}/notice/noticeUpdate?no=${notice.noticeNo}">글 수정</a>
-                <a class="button is-mainColor" href="${rootPath}/notice/noticeDelete?no=${notice.noticeNo}">글 삭제</a>
+                <a class="btn is-success" href="${rootPath}/notice/noticeUpdate?no=${notice.noticeNo}">글 수정</a>
+                <a class="btn is-mainColor" href="${rootPath}/notice/noticeDelete?no=${notice.noticeNo}">글 삭제</a>
             </c:if>
         </div>
     </div>

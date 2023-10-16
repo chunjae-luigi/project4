@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <title>공지사항 상세보기</title>
-    <jsp:include page="../../include/head.jsp" />
+    <%@include file="../../include/head.jsp"%>
     <link rel="stylesheet" href="${headPath}/resources/css/admin.css">
 </head>
 
@@ -46,10 +46,10 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="buttons is-right">
-                <a class="button is-mainColor" href="${headPath }/admin/List.do">글 목록</a>
-                <a class="button is-success" href="${headPath }/admin/Update.do?no=${notice.noticeNo}">글 수정</a>
-                <a class="button is-mainColor" href="${headPath }/admin/Delete.do?no=${notice.noticeNo}">글 삭제</a>
+            <div class="btns is-right">
+                <a class="btn is-mainColor" href="${headPath }/admin/List.do">글 목록</a>
+                <a class="btn is-success" href="${headPath }/admin/Update.do?no=${notice.noticeNo}">글 수정</a>
+                <a class="btn is-mainColor" href="${headPath }/admin/Delete.do?no=${notice.noticeNo}">글 삭제</a>
             </div>
         </div>
     </div>

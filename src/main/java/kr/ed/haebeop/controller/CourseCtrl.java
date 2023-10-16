@@ -1,10 +1,15 @@
 package kr.ed.haebeop.controller;
 
-import kr.ed.haebeop.domain.Course;
+import kr.ed.haebeop.domain.*;
 
 import kr.ed.haebeop.service.CourseService;
 
+import kr.ed.haebeop.service.RegisterService;
+import kr.ed.haebeop.service.StorageService;
+import kr.ed.haebeop.service.TeacherService;
 import kr.ed.haebeop.util.Page;
+
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,52 +17,47 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/course/*")
 public class CourseCtrl {
     @Autowired
+    private RegisterService registerService;
+
+    @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private TeacherService teacherService;
+
+    @Autowired
+    private StorageService storageService;
+
+    @Autowired
+    HttpSession session;
 
     @GetMapping("courseList")
     public String courseList(HttpServletRequest request, Model model){
-        String type = request.getParameter("type");
-        String keyword = request.getParameter("keyword");
-        
-        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+        String id = (String) session.getAttribute("sid");
 
-        Page page = new Page();
-        page.setSearchType(type);
-        page.setSearchKeyword(keyword);
+        List<Register> registerList = registerService.registerCourseList(id);
 
-        int total;
-        if(type==null){type="";}
-        switch (type){
-            case "title":
-                total = courseService.courseTitleCount(page);
-                break;
-            default:
-                total = courseService.courseCount();
-        }
+        List<CourseList> courseList = new ArrayList<>();
+        for(Register r: registerList){
+            CourseList cl = new CourseList();
+            Course c = courseService.courseGet(r.getCourseNo());
+            cl.setCourse(c);
 
-        page.makeBlock(curPage, total);
-        page.makeLastPageNum(total);
-        page.makePostStart(curPage, total);
+            Teacher t = teacherService.teacherGet(c.getTeacherNo());
+            cl.setTeacher(t);
 
+            Storage s = storageService.storageGet(t.getImageFile());
+            cl.setStorage(s);
 
-        model.addAttribute("type", type);
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("page", page);
-        model.addAttribute("curPage", curPage);
-
-        List<Course> courseList;
-        switch (type){
-            case "title":
-                courseList = courseService.courseTitleList(page);
-                break;
-            default:
-                courseList = courseService.coursePageList(page);
+            courseList.add(cl);
         }
 
         model.addAttribute("courseList", courseList);
@@ -66,8 +66,17 @@ public class CourseCtrl {
 
     @GetMapping("courseGet")
     public String courseGet(HttpServletRequest request, Model model) throws Exception{
-        int courseNo = Integer.parseInt(request.getParameter("no"));
-        Course course = courseService.courseGet(courseNo);
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
+
+        CourseList course = new CourseList();
+        Course c = courseService.courseGet(courseNo);
+        course.setCourse(c);
+        Teacher t = teacherService.teacherGet(c.getTeacherNo());
+        course.setTeacher(t);
+        Storage s = storageService.storageGet(t.getImageFile());
+        course.setStorage(s);
+
+
         model.addAttribute("course", course);
 
         return "/course/courseGet";

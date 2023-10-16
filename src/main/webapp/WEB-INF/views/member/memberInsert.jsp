@@ -43,7 +43,7 @@
             <input type="hidden" id="idck" value="no">
             <div class="column is-1"><label for="id">아이디</label></div>
             <div class="column is-6"><input type="text" class="input" id="id" name="id" aria-describedby="idStatus" pattern="^[A-Za-z0-9]{4,16}" maxlength="16" placeholder="아이디는 영문 또는 숫자 4글자 이상, 16글자 이하"></div>
-            <div class="column"><button type="button" class="button button-primary mb-3" onclick="idcheck()">중복검사</button></div>
+            <div class="column"><button type="button" class="btn button-primary mb-3" onclick="idcheck()">중복검사</button></div>
             <div class="column is-3" id="idStatus">아이디 중복 검사를 진행해주세요</div>
         </div>
 
@@ -73,7 +73,7 @@
             <div class="column is-1"><label for="addr1">주소</label></div>
             <div class="column"><input type="text" class="input" id="addr1" name="addr1" placeholder="주소를 입력하세요."></div>
             <div class="column"><input type="text" class="input mt-10" id="postcode" name="postcode" placeholder="우편번호"></div>
-            <div class="column"><button type="button" class="button button-primary  mt-10" onclick="findAddr()">우편번호 검색</button></div>
+            <div class="column"><button type="button" class="btn button-primary  mt-10" onclick="findAddr()">우편번호 검색</button></div>
         </div>
 
         <div class="columns ADDRESS2">
@@ -82,7 +82,7 @@
         </div>
 
 
-        <button type="submit" class="button text-center">회원가입</button>
+        <button type="submit" class="btn text-center">회원가입</button>
 
     </form>
 </div>

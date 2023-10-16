@@ -84,29 +84,43 @@ public class CourseMaterialsCtrl {
             default:
                 courseMaterialsList = courseMaterialsService.courseMaterialsPageList(page);
         }
-        
-        model.addAttribute("fileboardList", courseMaterialsList);
-        return "/courseMaterials/courseMaterialsList";
+
+        model.addAttribute("courseNo", courseNo);
+        model.addAttribute("courseMaterialsList", courseMaterialsList);
+        return "/course/courseMaterials/courseMaterialsList";
     }
 
     @GetMapping("courseMaterialsGet")
     public String courseMaterialsGet(HttpServletRequest request, Model model) throws Exception {
-        int bno = Integer.parseInt(request.getParameter("bno"));
+        int materialNo = Integer.parseInt(request.getParameter("materialNo"));
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
 
-        CourseMaterials dto = courseMaterialsService.courseMaterialsGet(bno);
-        Storage temp = new Storage();
-        temp.setBoardNo(bno);
-        temp.setBoardName("courseMaterials");
-        List<Storage> storages = storageService.storageBoardList(temp);
+        CourseMaterials dto = courseMaterialsService.courseMaterialsGet(materialNo);
 
-        model.addAttribute("dto", dto);
-        model.addAttribute("storages", storages);
-        return "/courseMaterials/courseMaterialsGet";
+        if(dto.isHasFile()){
+            Storage temp = new Storage();
+            temp.setBoardName("courseMaterials");
+            temp.setBoardNo(materialNo);
+
+            List<Storage> storages = storageService.storageBoardList(temp);
+
+            System.out.println(storages);
+
+            model.addAttribute("storages", storages);
+        }
+
+        model.addAttribute("courseNo", courseNo);
+        model.addAttribute("courseMaterials", dto);
+
+        return "/course/courseMaterials/courseMaterialsGet";
     }
 
     @GetMapping("courseMaterialsInsert")
-    public String courseMaterialsInsertForm() {
-        return "/courseMaterials/courseMaterialsInsert";
+    public String courseMaterialsInsertForm(HttpServletRequest request, Model model) {
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
+        model.addAttribute("courseNo", courseNo);
+
+        return "/course/courseMaterials/courseMaterialsInsert";
     }
 
 
@@ -114,7 +128,7 @@ public class CourseMaterialsCtrl {
 
     @PostMapping("courseMaterialsInsert")
     public String courseMaterialsInsert(MultipartHttpServletRequest files, HttpServletRequest req, Model model) throws Exception {
-        String realFolder = req.getRealPath("/resources/upload");
+        String realFolder = req.getRealPath("/resource/upload");
 
         CourseMaterials dto = new CourseMaterials();
 
@@ -126,9 +140,16 @@ public class CourseMaterialsCtrl {
             map.put(name, value);
         }
 
+        int courseNo = Integer.parseInt((String)map.get("courseNo"));
+
+        dto.setCourseNo(courseNo);
         dto.setTitle((String) map.get("title"));
         dto.setContent((String) map.get("contents"));
         dto.setId((String) map.get("sid"));
+
+        courseMaterialsService.courseMaterialsInsert(dto);
+        CourseMaterials last = courseMaterialsService.courseMaterialsGetLast();
+
 
         String today = new SimpleDateFormat("yyMMdd").format(new Date());
         String saveFolder = realFolder + File.separator + today;
@@ -140,13 +161,15 @@ public class CourseMaterialsCtrl {
 
         List<MultipartFile> fileList = files.getFiles("uploadFiles");
 
+        boolean hasFile = false;
         for(MultipartFile multipartFile : fileList){
             String originalName = multipartFile.getOriginalFilename();
             if(!originalName.isEmpty()){
+                hasFile = true;
                 String saveName = UUID.randomUUID().toString()+"_"+originalName;
 
                 Storage storage = new Storage();
-                storage.setBoardNo(0);
+                storage.setBoardNo(last.getMaterialNo());
                 storage.setOriginName(originalName);
                 storage.setSaveName(saveName);
                 storage.setSavePath(today);
@@ -165,9 +188,12 @@ public class CourseMaterialsCtrl {
         }
 
 
-        courseMaterialsService.courseMaterialsInsert(dto);
+        if(hasFile){
+            last.setHasFile(true);
+            courseMaterialsService.courseMaterialsUpdate(last);
+        }
 
-        return "redirect:courseMaterialsList";
+        return "redirect:courseMaterialsList?courseNo="+courseNo;
     }
 
     @GetMapping("courseMaterialsDelete")
@@ -175,7 +201,9 @@ public class CourseMaterialsCtrl {
         int bno = Integer.parseInt(request.getParameter("bno"));
         courseMaterialsService.courseMaterialsDelete(bno);
 
-        return "redirect:courseMaterialsList";
+        int courseNo = Integer.parseInt(request.getParameter("courseNo"));
+
+        return "redirect:courseMaterialsList?courseNo="+courseNo;
     }
 
     @GetMapping("courseMaterialsUpdate")
@@ -191,7 +219,7 @@ public class CourseMaterialsCtrl {
         model.addAttribute("dto", dto);
         model.addAttribute("storages", storages);
 
-        return "/courseMaterials/courseMaterialsUpdate";
+        return "/course/courseMaterials/courseMaterialsUpdate";
     }
 
     @PostMapping("courseMaterialsUpdate")

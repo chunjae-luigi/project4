@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
@@ -9,14 +8,12 @@
 <head>
 	<title>해법</title>
 	<%@ include file="../../include/head.jsp" %>
-	<style>
-		a .answers {padding-left:30px;}
-	</style>
+
 </head>
 
 <body>
 <header class="hd" id="hd">
-	<jsp:include page="../../include/header.jsp" />
+<%@include file="../../include/header.jsp"%>
 </header>
 
 <div class="content">
@@ -53,7 +50,7 @@
 				<c:forEach items="${freeList }" var="free" varStatus="status">
 					<tr>
 						<td class="has-text-centered">${status.count }</td>
-						<td class="has-text-centered"><a href="${path}/free/freeGet?fno=${free.freeNo }">${free.title }</a></td>
+						<td class="has-text-centered"><a href="${rootPath}/free/freeGet?fno=${free.freeNo }">${free.title }</a></td>
 						<td class="has-text-centered">${free.id}</td>
 						<td class="has-text-centered">
 							<fmt:parseDate value="${free.regdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
@@ -78,8 +75,8 @@
 	</div>
 
 		<c:if test="${not empty sid}">
-			<div class="buttons is-centered">
-				<a class="button is-mainColor" href="${rootPath}/free/freeInsert">글쓰기</a>
+			<div class="btns is-centered">
+				<a class="btn is-mainColor" href="${rootPath}/free/freeInsert">글쓰기</a>
 			</div>
 		</c:if>
 	</div>

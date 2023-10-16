@@ -14,6 +14,7 @@ public interface CourseMaterialsService {
 
 
 
+    public CourseMaterials courseMaterialsGetLast();
     public void courseMaterialsVisit(int materialNo);
     public List<CourseMaterials> courseMaterialsPageList(Page page);
     public List<CourseMaterials> courseMaterialsTitleList(Page page);

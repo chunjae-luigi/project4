@@ -8,13 +8,13 @@
 <html lang="en">
 <head>
     <title>해법</title>
-    <%@ include file="../include/head.jsp" %>
+    <%@ include file="../../include/head.jsp" %>
     <style>
         a .answers {padding-left:30px;}
     </style>
 </head>
 <body>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../../include/header.jsp" %>
 
 <div class="content">
 
@@ -42,8 +42,7 @@
                         <input type="text" name="title" id="title" class="input" required>
                         <input type="hidden" name="lev" id="lev" value="${lev}">
                         <input type="hidden" name="par" id="par" value="${par}">
-                        <c:set var="id" value='<%=(String)session.getAttribute("sid")%>' />
-                        <input type="hidden" name="author" id="author" value="${id}">
+                        <input type="hidden" name="author" id="author" value="${sid}">
                     </td>
                 </tr>
                 <tr>
@@ -54,15 +53,13 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="buttons is-centered">
-                <input type="submit" value="글 등록" class="button is-mainColor">
-                <a href="${rootPath}/board/qnaList" class="button is-success">글 목록</a>
+            <div class="btns is-centered">
+                <input type="submit" value="글 등록" class="btn is-mainColor">
+                <a href="${rootPath}/board/qnaList" class="btn is-success">글 목록</a>
             </div>
         </form>
     </section>
 
 </div>
-
-<%@ include file="../include/footer.jsp" %>
 </body>
 </html>
