@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>kr.ed.haebeop</groupId>
-  <artifactId>project04</artifactId>
+  <artifactId>team44</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>project04 Maven Webapp</name>
+  <name>team44 Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -364,7 +364,7 @@
   </dependencies>
 
   <build>
-    <finalName>project04</finalName>
+    <finalName>team44</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
