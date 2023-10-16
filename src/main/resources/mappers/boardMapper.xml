@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ed.haebeop.persistence.BoardMapper">
+    <select id="boardList" resultType="kr.ed.haebeop.domain.BoardVO">
+        <![CDATA[
+        select * from boardList
+        ]]>
+        <where>
+            bmNo = #{bmNo}
+            <if test="searchType != null">
+                <choose>
+                    <when test="searchType == 'title'.toString()">
+                        and title LIKE concat('%', #{searchKeyword}, '%')
+                    </when>
+                    <when test="searchType == 'author'.toString()">
+                        and nm LIKE concat('%', #{searchKeyword}, '%')
+                    </when>
+                </choose>
+            </if>
+        </where>
+        <![CDATA[
+        order by resDate desc LIMIT #{postStart}, #{postCount}
+        ]]>
+    </select>
+
+    <select id="boardCount" resultType="integer">
+        <![CDATA[
+        select count(*) from boardList
+        ]]>
+        <where>
+            bmNo = #{bmNo}
+            <if test="searchType != null">
+                <choose>
+                    <when test="searchType == 'title'.toString()">
+                        and title LIKE concat('%', #{searchKeyword}, '%')
+                    </when>
+                    <when test="searchType == 'author'.toString()">
+                        and author LIKE concat('%', #{searchKeyword}, '%')
+                    </when>
+                </choose>
+            </if>
+        </where>
+    </select>
+
+    <select id="boardListForAdmin" resultType="kr.ed.haebeop.domain.BoardVO">
+        select * from boardList where bmNo = #{bmNo}
+    </select>
+
+    <select id="boardGet" resultType="kr.ed.haebeop.domain.BoardVO">
+        select * from boardList where bno = #{bno}
+    </select>
+
+    <select id="boardGetLast" resultType="integer">
+        select * from boardList order by resDate desc limit 1
+    </select>
+
+    <insert id="boardInsert">
+        INSERT INTO board VALUES(DEFAULT, #{bmNo}, #{title}, #{content}, #{author}, DEFAULT, DEFAULT)
+    </insert>
+
+    <update id="boardUpdate">
+        UPDATE board SET title = #{title}, content = #{content} WHERE bno = #{bno}
+    </update>
+
+    <update id="boardVisitedUpdate">
+        UPDATE board SET visited = visited + 1 WHERE bno = #{bno}
+    </update>
+
+    <delete id="boardDelete">
+        DELETE FROM board WHERE bno = #{bno}
+    </delete>
+</mapper>
