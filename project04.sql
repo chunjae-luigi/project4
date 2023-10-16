@@ -1,6 +1,6 @@
-CREATE DATABASE haebeop_personal;
+CREATE DATABASE team44;
 
-USE haebeop_personal;
+USE team44;
 
 CREATE TABLE member(
 	mno INT AUTO_INCREMENT PRIMARY KEY,					-- 회원 번호 : 자동 발생
