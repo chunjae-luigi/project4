@@ -196,3 +196,19 @@ CREATE TABLE payment(
 );
 
 CREATE VIEW studyPayList AS (SELECT pay.payno AS payno, pay.author AS author, pay.sno AS sno, pay.amount AS amount, pay.pMethod AS pMethod, pay.pCom AS pCom, pay.pNum AS pNum, pay.payPrice AS payPrice, pay.payStatus AS payStatus, l.title AS lectureTitle, f.saveFolder AS thumbnailSaveFolder, f.originNm AS thumbnailOriginNm, f.saveNm AS thumbnailSaveNm, deli.dno AS dno, deli.cusNm AS cusNm, deli.cusTel AS cusTel, deli.cusAddr AS cusAddr, deli.dTel AS dTel, deli.dStatus AS dStatus, deli.resDate AS resDate, deli.DeliveryDate AS DeliveryDate, deli.dCode AS dCode FROM payment pay, delivery deli, lecture l, study s, files f WHERE pay.sno = s.sno AND l.lno = s.lno AND l.thumbnail = f.fno AND pay.dno = deli.dno);
+
+USE team44;
+
+CREATE TABLE reservation(
+    rno INT AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(20),
+    rdate DATE,
+    rtime TIME,
+    status VARCHAR(30) DEFAULT 'pending'
+);
+
+CREATE TABLE unavailable(
+    uno INT AUTO_INCREMENT PRIMARY KEY,
+    rdate DATE,
+    resaon VARCHAR(100)
+);

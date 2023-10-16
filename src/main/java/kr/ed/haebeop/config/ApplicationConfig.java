@@ -27,4 +27,10 @@ public class ApplicationConfig {
     @Bean
     public LectureService lectureService() {return new LectureServiceImpl();}
 
+    @Bean
+    public ReservationService reservationService() {return new ReservationServiceImpl();}
+
+    @Bean
+    public UnavailableService unavailableService() {return new UnavailableServiceImpl();}
+
 }
