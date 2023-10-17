@@ -201,10 +201,16 @@ USE team44;
 
 CREATE TABLE reservation(
     rno INT AUTO_INCREMENT PRIMARY KEY,
-    id VARCHAR(20),
-    rdate DATE,
-    rtime TIME,
-    status VARCHAR(30) DEFAULT 'pending'
+    id VARCHAR(20),							-- 회원 아이디
+    name VARCHAR(50) NOT NULL,				-- 예약자 이름
+    email VARCHAR(50) NOT NULL,				-- 예약자 이메일
+    tel VARCHAR(20) NOT NULL,				-- 예약자 전화번호
+    birth DATE,								-- 예약자 나이
+    school VARCHAR(100) NOT NULL,			-- 예약자 학교급
+    grade INT NOT NULL,						-- 예약자 학년
+    rdate DATE,								-- 예약 날짜
+    rtime VARCHAR(30),						-- 예약 시간
+    status VARCHAR(30) DEFAULT 'pending'	-- 예약 상태
 );
 
 CREATE TABLE unavailable(

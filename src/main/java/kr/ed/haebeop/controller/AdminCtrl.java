@@ -186,5 +186,4 @@ public class AdminCtrl {
 
         return "/admin/lectureList";
     }
-
 }

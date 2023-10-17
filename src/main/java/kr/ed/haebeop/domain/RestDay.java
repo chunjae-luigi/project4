@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RestDay {
-    private String dateKind;
     private String dateName;
     private String locdate;
     private String isHoliday;
-    private String seq;
-    private String kst;
 }

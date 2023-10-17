@@ -17,8 +17,11 @@ public interface ReservationMapper {
     @Select("SELECT * FROM reservation where rno=#{rno}")
     public Reservation reservationGet(int rno);
 
-    @Select("INSERT INTO reservation(id, rdate, rtime) VALUES(#{id}, #{rdate}, ${rtime})")
+    @Select("INSERT INTO reservation(id, name, email, tel, birth, school, grade, rdate, rtime) VALUES(#{id}, #{name}, #{email}, #{tel}, #{birth}, #{school}, #{grade}, #{rdate}, #{rtime})")
     public void reservationInsert(Reservation reservation);
+
+    @Select("SELECT COUNT(*) FROM reservation")
+    public int reservationCount();
 
     @Update("UPDATE reservation SET status=#{status}")
     public void reservationUpdateStatus(Reservation reservation);

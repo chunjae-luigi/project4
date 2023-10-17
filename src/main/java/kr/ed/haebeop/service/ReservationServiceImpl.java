@@ -4,10 +4,12 @@ import kr.ed.haebeop.domain.Reservation;
 import kr.ed.haebeop.persistence.ReservationMapper;
 
 import kr.ed.haebeop.util.Page;
+import kr.ed.haebeop.util.SettingConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -27,12 +29,13 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     @Transactional
-    public boolean reservationInsert(Reservation reservation) {
+    public boolean reservationInsert(Reservation reservation) throws IOException {
         List<Reservation> reserved = reservationMapper.reservationGetTimeList(reservation);
 
         boolean success = true;
+        int capacity = Integer.parseInt(SettingConfig.getProperty("reservation.capacity"));
 
-        if(!reserved.isEmpty() && reserved.size()>=2){success=false;}
+        if(!reserved.isEmpty() && reserved.size()>=capacity){success=false;}
         else{
             reservationMapper.reservationInsert(reservation);
         }
@@ -42,6 +45,11 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public void reservationUpdateStatus(Reservation reservation) {
         reservationMapper.reservationUpdateStatus(reservation);
+    }
+
+    @Override
+    public int reservationCount() {
+        return reservationMapper.reservationCount();
     }
 
     @Override
