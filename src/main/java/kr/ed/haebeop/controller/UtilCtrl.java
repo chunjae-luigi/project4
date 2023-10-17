@@ -1,7 +1,9 @@
 package kr.ed.haebeop.controller;
 
+import kr.ed.haebeop.domain.BoardMgn;
 import kr.ed.haebeop.domain.FileDTO;
 import kr.ed.haebeop.domain.Member;
+import kr.ed.haebeop.service.BoardMgnService;
 import kr.ed.haebeop.service.FilesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -27,6 +30,9 @@ public class UtilCtrl {
 
     @Autowired
     private FilesService filesService;
+
+    @Autowired
+    private BoardMgnService boardMgnService;
 
     @RequestMapping(value="imageUpload.do", method = RequestMethod.POST)
     public void imageUpload(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload) throws Exception{
@@ -47,7 +53,7 @@ public class UtilCtrl {
             byte[] bytes = upload.getBytes();
 
             //이미지 경로 생성
-            String path = "D:\\park\\project\\personal\\personal_pro04_2023\\team44\\src\\main\\webapp\\resources\\upload" + "CkImage/";	// 개발 서버
+            String path = "D:\\park\\project\\personal\\personal_pro04_2023\\project04\\src\\main\\webapp\\resources\\upload" + "CkImage/";	// 개발 서버
             //String path = request.getRealPath("/resource/uploadCkImage/");                                                                // 운영 서버
             String ckUploadPath = path + uid + "_" + fileName;
             File folder = new File(path);
@@ -92,7 +98,7 @@ public class UtilCtrl {
     public void ckSubmit(@RequestParam(value="uid") String uid, @RequestParam(value="fileName") String fileName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
         //서버에 저장된 이미지 경로
-        String path = "D:\\park\\project\\personal\\personal_pro04_2023\\team44\\src\\main\\webapp\\resources\\upload" + "CkImage/";	// 개발 서버
+        String path = "D:\\park\\project\\personal\\personal_pro04_2023\\project04\\src\\main\\webapp\\resources\\upload" + "CkImage/";	// 개발 서버
         //String path = request.getRealPath("/resource/uploadCkImage/");                                                        // 운영 서버
         String sDirPath = path + uid + "_" + fileName;
 
@@ -192,6 +198,12 @@ public class UtilCtrl {
             result = true;
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @RequestMapping(value="getBoardMgnList.do", method=RequestMethod.POST)
+    public ResponseEntity getBoardMgnList() throws Exception {
+        List<BoardMgn> boardMgnListForHeader = boardMgnService.listBoardMgnForHeader();
+        return new ResponseEntity<>(boardMgnListForHeader, HttpStatus.OK);
     }
 
 }
