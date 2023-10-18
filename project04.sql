@@ -20,7 +20,7 @@ CREATE TABLE member(
 	grade INT DEFAULT 2										-- 회원 등급 [ 0 : 관리자, 1 : 선생님, 2 : 일반사용자]
 );
 
-INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$HwmRQwO14K/q/8/PeqWrXepqcA9PGnOvhy2uINmX8xi418.JlAvMW', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
+INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
 
 CREATE TABLE memberMgn(
 	mmNo INT AUTO_INCREMENT PRIMARY KEY,				-- 회원 등급 요청 번호 : 자동 발생
@@ -48,6 +48,10 @@ CREATE TABLE board(
 	resDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,   	-- 등록일
 	visited INT DEFAULT 0   											-- 조회수
 );
+SELECT b.bno AS bno, b.bmNo AS bmNo, b.title AS title, b.content AS content, b.author AS author,
+       b.resDate AS resDate, b.visited as visited,bm.boardNm AS boardNm, m.nm AS nm,
+       bm.aboutAuth AS aboutAuth, bm.commentUse AS commentUse, bm.fileUse AS fileUse
+FROM board b, member m, boardMgn bm WHERE b.author = m.id AND bm.bmNo = b.bmNo order BY b.bno ASC
 
 CREATE VIEW boardList AS (SELECT b.bno AS bno, b.bmNo AS bmNo, b.title AS title, b.content AS content, b.author AS author, b.resDate AS resDate, b.visited as visited,bm.boardNm AS boardNm, m.nm AS nm, bm.aboutAuth AS aboutAuth, bm.commentUse AS commentUse, bm.fileUse AS fileUse FROM board b, member m, boardMgn bm WHERE b.author = m.id AND bm.bmNo = b.bmNo order BY b.bno ASC);
 
@@ -108,9 +112,11 @@ CREATE TABLE lecture(
 	daily VARCHAR(200),								-- 강의 하루 일정 - 오프라인 사용
 	prono INT,											-- 강의 서적
 	teacherId VARCHAR(20) NOT NULL,				-- 강의 담당 선생 아이디
-   thumbnail INT,                				-- 강의 섬네일 fno 입력
-   useYn BOOLEAN DEFAULT TRUE                -- 판매 여부
+    thumbnail INT,                				-- 강의 섬네일 fno 입력
+    useYn BOOLEAN DEFAULT TRUE,                -- 판매 여부
+    price INT
 );
+INSERT into lecture(title, subTitle, content, lectureType, studentCnt, teacherId) VALUES('제목1', '소제목1', '내용1', 0, 20, 'qeee' );
 
 CREATE VIEW lectureView AS (SELECT l.lno AS lno, l.title AS title, l.subTitle AS subTitle, l.content AS content, l.lectureType AS lectureType, l.studentCnt AS studentCnt,
 l.startDate AS startDate, l.endDate AS endDate, l.daily AS daily, l.prono AS prono, l.teacherId AS teacherId, l.thumbnail AS thumbnail, l.useYn AS useYn,
@@ -182,17 +188,20 @@ CREATE TABLE delivery(
 );
 
 CREATE TABLE payment(
-   payno INT AUTO_INCREMENT PRIMARY KEY,					-- 결제 번호 : 자동증가
-   author VARCHAR(20) NOT NULL,        					-- 회원 아이디
-   sno INT NOT NULL,												-- 수강 번호
-   amount INT DEFAULT 1,           							-- 결제 수량
-   pMethod VARCHAR(10),                					-- 결제 방법 - [1:신용카드 | 2:체크카드 | 3:계좌이체]
-   pCom VARCHAR(100),                  					-- 결제 대행사
-   pNum VARCHAR(100),                  					-- 결제카드(계좌)번호
-   payPrice INT DEFAULT 1000,      							-- 결제 금액
-   payStatus INT DEFAULT 0,           						-- 배송상태 - [0:결제완료 | 1:결제완료 | 2:결제취소]
-   dno INT,							               			-- 배송 번호
-   resDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()     	-- 결제 등록일
+    payno INT AUTO_INCREMENT PRIMARY KEY,					-- 결제 번호 : 자동증가
+    id VARCHAR(20) NOT NULL,        					-- 회원 아이디
+    plec VARCHAR(100) NOT NULL,                                -- 상품 이름
+    sno INT NOT NULL,												-- 수강 번호
+    amount INT DEFAULT 1,           							-- 결제 수량
+    pmethod VARCHAR(10),                					-- 결제 방법 - [1:신용카드 | 2:체크카드 | 3:계좌이체]
+    pcom VARCHAR(100),                  					-- 결제 대행사
+    pnum VARCHAR(100),                  					-- 결제카드(계좌)번호
+    price INT DEFAULT 1000,      							-- 결제 금액
+    status INT DEFAULT 0,           						-- 배송상태 - [0:결제완료 | 1:결제완료 | 2:결제취소]
+    dno INT DEFAULT 0,							               			-- 배송 번호
+    resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()     	-- 결제 등록일
 );
 
-CREATE VIEW studyPayList AS (SELECT pay.payno AS payno, pay.author AS author, pay.sno AS sno, pay.amount AS amount, pay.pMethod AS pMethod, pay.pCom AS pCom, pay.pNum AS pNum, pay.payPrice AS payPrice, pay.payStatus AS payStatus, l.title AS lectureTitle, f.saveFolder AS thumbnailSaveFolder, f.originNm AS thumbnailOriginNm, f.saveNm AS thumbnailSaveNm, deli.dno AS dno, deli.cusNm AS cusNm, deli.cusTel AS cusTel, deli.cusAddr AS cusAddr, deli.dTel AS dTel, deli.dStatus AS dStatus, deli.resDate AS resDate, deli.DeliveryDate AS DeliveryDate, deli.dCode AS dCode FROM payment pay, delivery deli, lecture l, study s, files f WHERE pay.sno = s.sno AND l.lno = s.lno AND l.thumbnail = f.fno AND pay.dno = deli.dno);
+CREATE VIEW studyPayList AS (SELECT pay.payno AS payno, pay.id AS id, pay.sno AS sno, pay.amount AS amount, pay.pMethod AS pMethod, pay.pCom AS pCom, pay.pNum AS pNum, pay.payPrice AS payPrice, pay.payStatus AS payStatus, l.title AS lectureTitle, f.saveFolder AS thumbnailSaveFolder, f.originNm AS thumbnailOriginNm, f.saveNm AS thumbnailSaveNm, deli.dno AS dno, deli.cusNm AS cusNm, deli.cusTel AS cusTel, deli.cusAddr AS cusAddr, deli.dTel AS dTel, deli.dStatus AS dStatus, deli.resDate AS resDate, deli.DeliveryDate AS DeliveryDate, deli.dCode AS dCode FROM payment pay, delivery deli, lecture l, study s, files f WHERE pay.sno = s.sno AND l.lno = s.lno AND l.thumbnail = f.fno AND pay.dno = deli.dno);
+INSERT INTO payment VALUES (DEFAULT, 'admin', '상품2번' , 2, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 2, DEFAULT)
+INSERT INTO payment VALUES (DEFAULT, 'qeee', '상품1번' , 1, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 1, DEFAULT)

@@ -27,4 +27,8 @@ public class ApplicationConfig {
     @Bean
     public LectureService lectureService() {return new LectureServiceImpl();}
 
+    @Bean
+    public PaymentService paymentService() {return new PaymentServiceImpl();}
+
+
 }

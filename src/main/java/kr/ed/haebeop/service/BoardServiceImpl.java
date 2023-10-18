@@ -35,7 +35,7 @@ public class BoardServiceImpl implements BoardService {
         BoardVO boardVO = boardMapper.boardGet(bno);
         if(!sid.equals(boardVO.getAuthor()) && !sid.equals("admin")) {
             boardMapper.boardVisitedUpdate(bno);
-            boardVO.setVisited(boardVO.getVisited() + 1);
+            boardVO.setVisited(boardVO.getVisited() + 1); //확인필요
         }
         return boardVO;
     }
