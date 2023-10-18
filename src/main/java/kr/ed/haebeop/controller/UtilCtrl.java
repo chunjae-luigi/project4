@@ -1,10 +1,7 @@
 package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.BoardMgn;
-import kr.ed.haebeop.domain.BoardMgn;
 import kr.ed.haebeop.domain.FileDTO;
-import kr.ed.haebeop.domain.Member;
-import kr.ed.haebeop.service.BoardMgnService;
 import kr.ed.haebeop.service.BoardMgnService;
 import kr.ed.haebeop.service.FilesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
 import java.util.List;
-import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/util/")
@@ -96,12 +86,6 @@ public class UtilCtrl {
             result = true;
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @RequestMapping(value="getBoardMgnList.do", method=RequestMethod.POST)
-    public ResponseEntity getBoardMgnList() throws Exception {
-        List<BoardMgn> boardMgnListForHeader = boardMgnService.listBoardMgnForHeader();
-        return new ResponseEntity<>(boardMgnListForHeader, HttpStatus.OK);
     }
 
     @RequestMapping(value="getBoardMgnList.do", method=RequestMethod.POST)
