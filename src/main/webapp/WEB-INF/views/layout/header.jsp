@@ -17,7 +17,7 @@
                 <a href="class.html" class="nav-item nav-link">Classes</a>
                 <a href="team.html" class="nav-item nav-link">Teachers</a>
                 <a href="${path }/lecture/list.do?no=4" class="nav-item nav-link">강의테스트</a>
-                <div class="nav-item dropdown">
+                <div class="nav-item dropdown board_drop_menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu rounded-0 m-0" id="boardMenuArea"></div>
                 </div>
@@ -46,6 +46,9 @@
             type:"post",
             contentType:"application/json",
             success : function(result) {
+                if(result == "") {
+                    $(".board_drop_menu").remove();
+                }
                 for(let i in result) {
                     $("#boardMenuArea").append("<a href='${path }/board/list.do?no=" + result[i].bmNo + "' class='dropdown-item'>" + result[i].boardNm + "</a>");
                 }
