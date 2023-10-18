@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
@@ -85,6 +86,19 @@ public class BoardCtrl {
             }
         }
 
+
+        for(BoardVO boardVO : boardList) {
+            String authorNm = boardVO.getNm();
+            if(!authorNm.equals("관리자")) {
+                String nm = authorNm.substring(0, 1);
+                for(int i = 0; i < authorNm.length()-2; i++){
+                    nm += "*";
+                }
+                nm += authorNm.substring(authorNm.length() - 1);
+                boardVO.setNm(nm);
+            }
+        }
+
         model.addAttribute("boardList", boardList);
 
         BoardMgn boardMgn = boardMgnService.getBoardMgn(bmNo);
@@ -92,6 +106,7 @@ public class BoardCtrl {
 
         // 권한 관련 - 등록
         boolean addCheck = false;
+        if(sid != null && (boardMgn.getAboutAuth() >= memberService.memberGet(sid).getGrade() || sid.equals("admin"))) {
         if(sid != null && (boardMgn.getAboutAuth() >= memberService.memberGet(sid).getGrade() || sid.equals("admin"))) {
             addCheck = true;
         }
@@ -123,8 +138,8 @@ public class BoardCtrl {
 
         if(uploadFiles != null) {
             ServletContext application = request.getSession().getServletContext();
-            //String realPath = application.getRealPath("/resources/upload");                                                             // 운영 서버
-            String realPath = "D:\\park\\project\\personal\\personal_pro04_2023\\project04\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
+            String realPath = application.getRealPath("/resources/upload");                                                     // 운영 서버
+            //String realPath = "D:\\project\\team\\projec4\\team44\\src\\main\\webapp\\resources\\upload";	                       // 개발 서버
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
             Date date = new Date();
@@ -140,9 +155,15 @@ public class BoardCtrl {
                 UUID uuid = UUID.randomUUID();
                 String uploadFilename = uuid.toString() + "_" + originalFilename;
 
+
                 FileDTO fileDTO = new FileDTO();
                 fileDTO.setPar(bno);
                 fileDTO.setSaveFolder(String.valueOf(uploadPath));
+
+                String fileType = multipartFile.getContentType();
+                String[] fileTypeArr = fileType.split("/");
+                fileDTO.setFileType(fileTypeArr[0]);
+
 
                 String fileType = multipartFile.getContentType();
                 String[] fileTypeArr = fileType.split("/");
@@ -177,10 +198,21 @@ public class BoardCtrl {
             nm += bNm.substring(bNm.length() - 1);
             board.setNm(nm);
         }
+        String bNm = board.getNm();
+
+        if(!bNm.equals("관리자")) {
+            String nm = bNm.substring(0, 1);
+            for(int i = 0; i < bNm.length()-2; i++){
+                nm += "*";
+            }
+            nm += bNm.substring(bNm.length() - 1);
+            board.setNm(nm);
+        }
         model.addAttribute("board", board);
 
         // 권한 관련 - 수정
         boolean addCheck = false;
+        if(!sid.equals("") && board.getAuthor().equals(sid)) {
         if(!sid.equals("") && board.getAuthor().equals(sid)) {
             addCheck = true;
         }
@@ -249,8 +281,8 @@ public class BoardCtrl {
 
         if(uploadFiles != null) {
             ServletContext application = request.getSession().getServletContext();
-            //String realPath = application.getRealPath("/resources/upload");                                                             // 운영 서버
-            String realPath = "D:\\park\\project\\personal\\personal_pro04_2023\\project04\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
+            String realPath = application.getRealPath("/resources/upload");                                                     // 운영 서버
+            //String realPath = "D:\\project\\team\\projec4\\team44\\src\\main\\webapp\\resources\\upload";	                       // 개발 서버
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
             Date date = new Date();
@@ -274,6 +306,11 @@ public class BoardCtrl {
                 String[] fileTypeArr = fileType.split("/");
                 fileDTO.setFileType(fileTypeArr[0]);
 
+
+                String fileType = multipartFile.getContentType();
+                String[] fileTypeArr = fileType.split("/");
+                fileDTO.setFileType(fileTypeArr[0]);
+
                 fileDTO.setOriginNm(originalFilename);
                 fileDTO.setSaveNm(uploadFilename);
                 fileDTO.setToUse("board");
@@ -288,10 +325,25 @@ public class BoardCtrl {
 
     @GetMapping("/delete.do")
     public String boardDeletePro(HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+    public String boardDeletePro(HttpServletRequest request, RedirectAttributes rttr) throws Exception {
         String sid = session.getAttribute("sid") != null ? (String) session.getAttribute("sid") : "";
         int bno = Integer.parseInt(request.getParameter("bno"));
 
         BoardVO boardVO = boardService.boardGet(bno, sid);
+
+        if(sid.equals(boardVO.getAuthor()) || sid.equals("admin")) {
+            int bmNo = boardVO.getBmNo();
+            FileDTO fileDTO = new FileDTO();
+            fileDTO.setPar(bno);
+            fileDTO.setToUse(toUseFileByBoard);
+            List<FileDTO> fileList = filesService.fileListByPar(fileDTO);
+            for(FileDTO files : fileList) {
+                File file = new File(files.getSaveFolder() + File.separator + files.getSaveNm());
+                if (file.exists()) {
+                    file.delete();
+                    filesService.filesDeleteAll(bno);
+                }
+            }
 
         if(sid.equals(boardVO.getAuthor()) || sid.equals("admin")) {
             int bmNo = boardVO.getBmNo();
@@ -314,14 +366,25 @@ public class BoardCtrl {
             rttr.addFlashAttribute("msg", "fail");
             return "redirect:/board/get.do?bno=" + bno;
         }
+            commentService.commentDeleteAll(bno);
+            boardService.boardDelete(bno);
+            return "redirect:/board/list.do?no=" + bmNo;
+        } else {
+            rttr.addFlashAttribute("msg", "fail");
+            return "redirect:/board/get.do?bno=" + bno;
+        }
     }
 
     @PostMapping("commentAdd.do")
     @ResponseBody
     public CommentVO commentInsert(@RequestParam("par") int par, @RequestParam("content") String content) throws Exception {
+    public CommentVO commentInsert(@RequestParam("par") int par, @RequestParam("content") String content) throws Exception {
         String sid = session.getAttribute("sid") != null ? (String) session.getAttribute("sid") : "";
         Comment comment = new Comment();
+        Comment comment = new Comment();
         comment.setAuthor(sid);
+        comment.setPar(par);
+        comment.setContent(content);
         comment.setPar(par);
         comment.setContent(content);
         CommentVO commentVO = commentService.commentInsert(comment);
@@ -340,14 +403,27 @@ public class BoardCtrl {
     @PostMapping("commentRemove.do")
     @ResponseBody
     public boolean commentDelete(@RequestParam("cno") int cno) throws Exception {
+    public boolean commentDelete(@RequestParam("cno") int cno) throws Exception {
         boolean result = false;
         String sid = session.getAttribute("sid") != null ? (String) session.getAttribute("sid") : "";
+        CommentVO commentVO = commentService.comment(cno);
         CommentVO commentVO = commentService.comment(cno);
         if(commentVO.getAuthor().equals(sid) || sid.equals("admin")) {
             commentService.commentDelete(commentVO.getCno());
             result = true;
+            result = true;
         }
         return result;
+    }
+
+    @PostMapping("answerAdd.do")
+    @ResponseBody
+    public String answerInsert(@RequestParam("bno") int bno, @RequestParam("answer") String answer) throws Exception {
+        Board board = new Board();
+        board.setBno(bno);
+        board.setAnswer(answer);
+        boardService.qnaUpdate(board);
+        return answer;
     }
 
     @PostMapping("answerAdd.do")
