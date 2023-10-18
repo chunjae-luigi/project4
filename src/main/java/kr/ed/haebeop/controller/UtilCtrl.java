@@ -1,8 +1,10 @@
 package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.BoardMgn;
+import kr.ed.haebeop.domain.BoardMgn;
 import kr.ed.haebeop.domain.FileDTO;
 import kr.ed.haebeop.domain.Member;
+import kr.ed.haebeop.service.BoardMgnService;
 import kr.ed.haebeop.service.BoardMgnService;
 import kr.ed.haebeop.service.FilesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.List;
 import java.util.UUID;
 
@@ -93,6 +96,12 @@ public class UtilCtrl {
             result = true;
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @RequestMapping(value="getBoardMgnList.do", method=RequestMethod.POST)
+    public ResponseEntity getBoardMgnList() throws Exception {
+        List<BoardMgn> boardMgnListForHeader = boardMgnService.listBoardMgnForHeader();
+        return new ResponseEntity<>(boardMgnListForHeader, HttpStatus.OK);
     }
 
     @RequestMapping(value="getBoardMgnList.do", method=RequestMethod.POST)
