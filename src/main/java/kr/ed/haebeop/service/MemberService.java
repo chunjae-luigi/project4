@@ -11,6 +11,10 @@ public interface MemberService {
 
     public int memberCount(Page page) throws Exception;
 
+    public List<Member> memberTeacherList(Page page) throws Exception;
+
+    public int memberTeacherCount(Page page) throws Exception;
+
     public boolean loginPro(String id, String pw) throws Exception;
 
     public boolean idCheck(String id) throws Exception;
