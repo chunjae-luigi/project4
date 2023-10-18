@@ -14,7 +14,7 @@ public class DatePicker {
 
         // 영업일 추가
         List<String> businessClosed = SettingConfig.businessClosed();
-        for(int w=0; w<5; w++){
+        for(int w=0; w<calendar.size(); w++){
             List<Day> week = calendar.get(w);
             for(int i=0; i<7; i++){
                 Day day = week.get(i);
@@ -44,7 +44,7 @@ public class DatePicker {
 
             // 공휴일 추가
             if(businessClosed.contains("holiday")){
-                for(int w=0; w<5; w++){
+                for(int w=0; w<calendar.size(); w++){
                     List<Day> week = calendar.get(w);
                     for(int i=0; i<7; i++){
                         Day day = week.get(i);
@@ -116,7 +116,9 @@ public class DatePicker {
         }
         calendar.add(firstWeek);
 
-        for(int week=2; week<=4; week++){
+        int last = ((end - day + 1) / 7) + 1;
+
+        for(int week=2; week<=last; week++){
             List<Day> nthWeek = new ArrayList<>();
             for(int j=1; j<=7; j++){
                 Day dayNow = new Day();

@@ -23,7 +23,7 @@
                                 <h5 class="m-b-10">예약 목록</h5>
                             </div>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="${path }/admin/"><i class="feather icon-calendar"></i></a></li>
+                                <li class="breadcrumb-item"><a href="${path }/admin/"><i class="feather icon-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="#!" onclick="return false;">예약 목록</a></li>
                             </ul>
                         </div>

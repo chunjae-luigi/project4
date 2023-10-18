@@ -1,5 +1,6 @@
 package kr.ed.haebeop.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibm.icu.text.SimpleDateFormat;
 import kr.ed.haebeop.domain.Day;
 
@@ -24,6 +25,7 @@ import java.text.ParseException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -195,5 +197,60 @@ public class AcademyCtrl {
         reservationService.reservationUpdateStatus(reservation);
 
         return "redirect: reservationList";
+    }
+
+    @GetMapping("reservationSetting")
+    public String reservationSetting(Model model) throws IOException {
+        Map<String, String> business = SettingConfig.businessSetting();
+        Map<String, String> open = SettingConfig.openSetting();
+        Map<String, String> close = SettingConfig.closeSetting();
+        Map<String, Integer> reservation = SettingConfig.reservationSetting();
+
+        String[] weekday = new String[]{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "holiday"};
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String businessS = objectMapper.writeValueAsString(business);
+        String openS = objectMapper.writeValueAsString(open);
+        String closeS = objectMapper.writeValueAsString(close);
+//        String reservationS = objectMapper.writeValueAsString(reservation);
+
+
+        model.addAttribute("business", businessS);
+        model.addAttribute("open", openS);
+        model.addAttribute("close", closeS);
+        model.addAttribute("reservation", reservation);
+        model.addAttribute("weekday", weekday);
+
+
+        return "/admin/academy/reservationSetting";
+    }
+
+    @PostMapping("reservationSettingUpdate")
+    public String reservationSettingUpdate(HttpServletRequest request, Model model) throws IOException {
+        String[] weekday = new String[]{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "holiday"};
+
+        Map<String, String> setting = new HashMap<>();
+        for(String w: weekday){
+            String businessday = request.getParameter(w);
+            if(businessday == null){
+                setting.put("businessday."+w, "false");
+                setting.put("openhour."+w, "none");
+                setting.put("closehour."+w, "none");
+            } else{
+                setting.put("businessday."+w, "true");
+                setting.put("openhour."+w, request.getParameter("open"+w));
+                setting.put("closehour."+w, request.getParameter("close"+w));
+            }
+        }
+
+        setting.put("reservation.interval", request.getParameter("interval"));
+        setting.put("reservation.capacity", request.getParameter("capacity"));
+
+        for (String key : setting.keySet()) {
+            String value = setting.get(key);
+            SettingConfig.editProperty(key, value);
+        }
+
+        return "redirect: reservationSetting";
     }
 }

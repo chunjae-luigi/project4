@@ -9,12 +9,24 @@ public class SettingConfig {
     private static String path = "D:\\sangmin0816\\luigi\\project4\\src\\main\\resources\\settings.properties";
     private static String[] weeks = new String[]{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "holiday"};
     public static void main(String[] args) {
-        try {
-            System.out.println("YES");
-        } catch (Exception e) {
-            e.printStackTrace();
+        String[] weekKr = new String[]{"월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일", "공휴일"};
+        for(String w: weekKr){
+            uniHex(w);
         }
+
+        uniHex("해법학원");
     }
+    public static void uniHex(String input){
+        StringBuilder result = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            // 각 문자의 유니코드 코드 포인트를 16진수로 변환하여 추가
+            result.append("\\u"+String.format("%04x", (int) c).toUpperCase());
+        }
+        System.out.println(input+": "+result.toString());
+        Properties prop = new Properties();
+
+    }
+
 
     public static Properties loadProperty() throws IOException {
         // 프로퍼티 파일을 로드
@@ -95,5 +107,49 @@ public class SettingConfig {
         }
 
         return businesshours;
+    }
+
+    public static Map<String, String> businessSetting() throws IOException {
+        Map<String, String> setting = new HashMap<>();
+
+        for(int i=0; i<8; i++){
+            String dayofweek = weeks[i];
+            setting.put(dayofweek, getProperty("businessday."+dayofweek));
+        }
+
+        return setting;
+    }
+
+
+    public static Map<String, String> openSetting() throws IOException {
+        Map<String, String> setting = new HashMap<>();
+
+        for(int i=0; i<8; i++){
+            String dayofweek = weeks[i];
+            setting.put(dayofweek, getProperty("openhour."+dayofweek));
+        }
+
+        return setting;
+    }
+
+
+    public static Map<String, String> closeSetting() throws IOException {
+        Map<String, String> setting = new HashMap<>();
+
+        for(int i=0; i<8; i++){
+            String dayofweek = weeks[i];
+            setting.put(dayofweek, getProperty("closehour."+dayofweek));
+        }
+
+        return setting;
+    }
+
+
+    public static Map<String, Integer> reservationSetting() throws IOException {
+        Map<String, Integer> reservation = new HashMap<>();
+        reservation.put("interval", Integer.parseInt(getProperty("reservation.interval")));
+        reservation.put("capacity", Integer.parseInt(getProperty("reservation.capacity")));
+
+        return reservation;
     }
 }

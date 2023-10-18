@@ -355,12 +355,26 @@
       <version>4.0.1</version>
     </dependency>
 
+
     <!-- 채팅 웹소켓  추가 -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-websocket</artifactId>
-      <version>5.3.20</version>
+      <version>${org.springframework-version}</version>
     </dependency>
+    <!--  채팅 관련 추가(NO 강사님 YES Velog)  -->
+    <!--  출처: https://velog.io/@jyyoun1022/Spring-Web-Socket%EC%9B%B9-%EC%86%8C%EC%BC%93%EA%B3%BC-Chatting%EC%B1%84%ED%8C%85-3  -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-messaging</artifactId>
+      <version>${org.springframework-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${org.springframework-version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>
