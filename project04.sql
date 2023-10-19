@@ -78,6 +78,7 @@ CREATE TABLE files(
 	uploadDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,	-- 파일 업로드 일자
 	toUse VARCHAR(100) NOT NULL										-- 사용 테이블
 );
+-- 여기까지는 완료
 
 CREATE TABLE review(
     rno INT PRIMARY KEY AUTO_INCREMENT,             	-- 리뷰 번호 : 자동증가
@@ -129,20 +130,21 @@ CREATE TABLE study(
 	canYn BOOLEAN DEFAULT FALSE					-- 수강 가능 여부
 );
 
+-- 여기 아래도 완료
 CREATE TABLE payment(
-    payno INT AUTO_INCREMENT PRIMARY KEY,					-- 결제 번호 : 자동증가
-    id VARCHAR(20) NOT NULL,        					-- 회원 아이디
-    plec VARCHAR(100) NOT NULL,                                -- 상품 이름
-    sno INT NOT NULL,												-- 수강 번호
-    amount INT DEFAULT 1,           							-- 결제 수량
-    pmethod VARCHAR(10),                					-- 결제 방법 - [1:신용카드 | 2:체크카드 | 3:계좌이체]
-    pcom VARCHAR(100),                  					-- 결제 대행사
-    pnum VARCHAR(100),                  					-- 결제카드(계좌)번호
-    price INT DEFAULT 1000,      							-- 결제 금액
-    status INT DEFAULT 0,           						-- 배송상태 - [0:결제완료 | 1:결제완료 | 2:결제취소]
-    dno INT DEFAULT 0,							               			-- 배송 번호
-    resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()     	-- 결제 등록일
+    payno INT AUTO_INCREMENT PRIMARY KEY,		    -- 결제 번호 : 자동증가
+    id VARCHAR(20) NOT NULL,                        -- 회원 아이디
+    plec VARCHAR(100) NOT NULL,                     -- 상품 이름
+    sno INT NOT NULL,                               -- 수강 번호
+    amount INT DEFAULT 1,                           -- 결제 수량
+    pmethod VARCHAR(10),                            -- 결제 방법 - [1:신용카드 | 2:체크카드 | 3:계좌이체]
+    pcom VARCHAR(100),                              -- 결제 대행사
+    pnum VARCHAR(100),                              -- 결제카드(계좌)번호
+    price INT DEFAULT 1000,                         -- 결제 금액
+    status INT DEFAULT 0,                           -- 배송상태 - [0:결제완료 | 1:결제완료 | 2:결제취소]
+    dno INT DEFAULT 0,                              -- 배송 번호
+    resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()   -- 결제 등록일
 );
 
-INSERT INTO payment VALUES (DEFAULT, 'admin', '상품2번' , 2, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 2, DEFAULT)
-INSERT INTO payment VALUES (DEFAULT, 'qeee', '상품1번' , 1, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 1, DEFAULT)
+INSERT INTO payment VALUES (DEFAULT, 'admin', '상품2번' , 2, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 2, DEFAULT);
+INSERT INTO payment VALUES (DEFAULT, 'qeee', '상품1번' , 1, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 1, DEFAULT);

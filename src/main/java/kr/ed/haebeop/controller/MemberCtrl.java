@@ -84,8 +84,8 @@ public class MemberCtrl {
         return "redirect:/";
     }
 
-    @GetMapping("/fire")
-    public String firepoinIn(HttpServletRequest req,Model model) throws Exception {
+    @PostMapping("/fire")
+    public String firepoint(HttpServletRequest req, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
         int pt = 10000;
         Member member = memberService.memberGet(id);
@@ -95,6 +95,10 @@ public class MemberCtrl {
         return "redirect:/firework";
     }
 
+    @GetMapping("/myPage.do")
+    public String myPage(Model model) throws Exception {
+        return "/member/myPage";
+    }
 
     /*
     @InitBinder
