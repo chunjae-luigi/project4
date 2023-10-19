@@ -29,7 +29,7 @@
                     <a href="${path }/admin/" class="btn btn-success px-4"><i class="fas fa-user-cog pr-2" style="color:#ffffff;"></i></i>관리자페이지</a>
                 </c:if>
                 <c:if test="${sid ne 'admin'}">
-                    <a href="${path }/user/mypage.do" class="btn btn-success px-4"><i class="fas fa-user-circle pr-2" style="color:#ffffff;"></i></i>마이페이지</a>
+                    <a href="${path }/user/myPage.do" class="btn btn-success px-4"><i class="fas fa-user-circle pr-2" style="color:#ffffff;"></i></i>마이페이지</a>
                 </c:if>
             </c:if>
             <c:if test="${sid == null}">

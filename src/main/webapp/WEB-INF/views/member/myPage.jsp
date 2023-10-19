@@ -12,6 +12,19 @@
         .myPage {background-color:#e1e1e1;}
 
         .left_side, .right_side {background-color:#fff}
+
+        .left_top {
+            display: block;
+            width: 100%;
+            text-align: center;
+            height: 80px;
+            line-height: 80px;
+            background-color: var(--main-color);
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.4em;
+            letter-spacing: 4px;
+        }
     </style>
 </head>
 <body class="myPage">
@@ -23,13 +36,13 @@
                 <div class="row">
                     <div class="col-2 p-2">
                         <div class="d-flex flex-column align-items-center justify-content-center border left_side">
-                            <div>
+                            <div class="left_top">
                                 <p>마이페이지</p>
                             </div>
                             <ul>
-                                <li>나의 정보</li>
-                                <li>메뉴2</li>
-                                <li>메뉴3</li>
+                                <li><a href="/user/myPage.do" class="active">나의 정보</a></li>
+                                <li><a href="/user/myLecture.do">나의 강의정보</a></li>
+                                <li><a href="/user/myPay.do">나의 결제정보</a></li>
                             </ul>
                         </div>
                     </div>
