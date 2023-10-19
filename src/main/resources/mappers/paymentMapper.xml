@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ed.haebeop.persistence.PaymentMapper">
+
+    <select id="paymentList_Member" resultType="kr.ed.haebeop.domain.Payment">
+        SELECT * FROM payment where id=#{id}
+    </select>
+
+    <select id="paymentList_Lecture" resultType="kr.ed.haebeop.domain.Payment">
+        SELECT * FROM payment where dno=#{dno} order by resDate desc
+    </select>
+
+
+<!--    관리자페이지 결제내역-->
+    <select id="paymentpage" resultType="kr.ed.haebeop.domain.Payment">
+        <![CDATA[
+        SELECT * FROM payment
+        ]]>
+        <where>
+            id NOT IN ('admin')
+            <if test="searchType != null">
+                <choose>
+                    <when test="searchType == 'id'.toString()">
+                        AND id LIKE concat('%', #{searchKeyword}, '%')
+                    </when>
+                    <when test="searchType == 'sno'.toString()">
+                        AND sno LIKE concat('%', #{searchKeyword}, '%')
+                    </when>
+                </choose>
+            </if>
+        </where>
+        <![CDATA[
+        ORDER BY payno DESC, regDate ASC LIMIT #{postStart}, #{postCount}
+        ]]>
+    </select>
+
+    <select id="paymentCount" resultType="integer">
+        <![CDATA[
+        SELECT COUNT(*) FROM payment
+        ]]>
+        <where>
+            id NOT IN ('admin')
+            <if test="searchType != null">
+                <choose>
+                    <when test="searchType == 'id'.toString()">
+                        AND id LIKE concat('%', #{searchKeyword}, '%')
+                    </when>
+                    <when test="searchType == 'sno'.toString()">
+                        AND sno LIKE concat('%', #{searchKeyword}, '%')
+                    </when>
+                </choose>
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertpayment">
+        INSERT INTO payment VALUES (DEFAULT, #{id}, #{plec}, #{sno}, DEFAULT, #{pmethod}, #{pcom}, #{pnum}, #{price}, DEFAULT, DEFAULT, DEFAULT)
+    </insert>
+
+    <delete id="deletepayment">
+        delete from payment where payno = #{payno}
+    </delete>
+</mapper>

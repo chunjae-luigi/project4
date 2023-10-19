@@ -84,6 +84,19 @@ public class MemberCtrl {
         return "redirect:/";
     }
 
+    @PostMapping("/fire")
+    public String firepoint(HttpServletRequest req, Model model) {
+        String id = (String) session.getAttribute("sid");
+        int pt = Integer.parseInt(req.getParameter("pt"));
+//        int pt = 0;
+        Member member = new Member();
+        member.setId(id);
+        member.setPt(pt);
+
+        memberService.firepoint(member);
+
+        return "/firework";
+    }
     /*
     @InitBinder
     protected void initBinder(WebDataBinder binder){

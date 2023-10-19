@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
+<c:set var="sid" value="${pageContext.session.getAttribute('sid') }"/>
+
 
 <div class="container-fluid bg-light position-relative shadow">
     <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
@@ -18,6 +20,9 @@
                 <a href="team.html" class="nav-item nav-link">Teachers</a>
                 <a href="${path }/lecture/list.do?no=4" class="nav-item nav-link">강의테스트</a>
                 <div class="nav-item dropdown board_drop_menu">
+                    <a href="${path}/payment/rrr.do" class="nav-item nav-link">임시 샘플</a>
+                    <a href="${path}/payment/list.do" class="nav-item nav-link">강의목록(임시)</a>
+                    <a href="${path}/payment/paylistMember.do?sid=${sid }" class="nav-item nav-link">결제창</a>
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu rounded-0 m-0" id="boardMenuArea"></div>
                 </div>

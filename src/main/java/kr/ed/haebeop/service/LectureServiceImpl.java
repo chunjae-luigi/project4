@@ -1,5 +1,6 @@
 package kr.ed.haebeop.service;
 
+import kr.ed.haebeop.domain.Lecture;
 import kr.ed.haebeop.domain.LectureVO;
 import kr.ed.haebeop.persistence.LectureMapper;
 import kr.ed.haebeop.util.Page;
@@ -22,5 +23,15 @@ public class LectureServiceImpl implements LectureService {
     @Override
     public int lectureCount(Page page) throws Exception {
         return lectureMapper.lectureCount(page);
+    }
+
+    @Override
+    public Lecture lectureGet(int lno) throws Exception {
+        return lectureMapper.lectureGet(lno);
+    }
+
+    @Override
+    public Lecture lecturepay(int dno) throws Exception {
+        return lectureMapper.lecturepay(dno);
     }
 }

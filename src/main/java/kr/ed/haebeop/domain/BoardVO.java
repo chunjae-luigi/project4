@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BoardVO {
 
+
     private int bno;
     private int bmNo;
     private String title;
