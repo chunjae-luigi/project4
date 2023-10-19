@@ -20,18 +20,18 @@ public class LectureServiceImpl implements LectureService{
     }
 
     @Override
-    public Lecture lectureDetail(int lno) throws Exception {
-        return lectureMapper.lectureDetail(lno);
+    public Lecture lectureGet(int lno) throws Exception {
+        return lectureMapper.lectureGet(lno);
     }
 
     @Override
-    public void lectureInsert(Lecture lecture) throws Exception {
-        lectureMapper.lectureInsert(lecture);
+    public void lectureAdd(Lecture lecture) throws Exception {
+        lectureMapper.lectureAdd(lecture);
     }
 
     @Override
-    public void lectureEdit(Lecture lecture) throws Exception {
-        lectureMapper.lectureEdit(lecture);
+    public void lectureUpdate(Lecture lecture) throws Exception {
+        lectureMapper.lectureUpdate(lecture);
     }
 
     @Override

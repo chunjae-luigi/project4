@@ -25,17 +25,17 @@
     </select>
 
     <!-- 강의 상세보기 -->
-    <select id="lectureDetail" resultType="kr.ed.haebeop.domain.Lecture">
+    <select id="lectureGet" resultType="kr.ed.haebeop.domain.Lecture">
         select * from lecture where lno=#{lno}
     </select>
 
     <!-- 강의 입력 -->
-    <insert id="lectureInsert">
+    <insert id="lectureAdd">
         insert into lecture values (default, #{title}, #{subTitle}, #{content}, #{lectureType}, #{studentCnt}, default, default, default, #{teacherId}, #{thumbnail}, #{lvideo}, #{sno}, #{cost}, #{bookname}, #{bthumbnail})
     </insert>
 
     <!-- 강의 수정 -->
-    <update id="lectureEdit">
+    <update id="lectureUpdate">
         update lecture set title=#{title}, subTitle=#{subTitle}, content=#{content}, lectureType=#{lectureType}, studentCnt=#{studentCnt}, teacherId=#{teacherId}, sno=#{sno}, cost=#{cost} where lno=#{lno}
     </update>
 

@@ -20,13 +20,13 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void reviewInsert(Review dto) throws Exception {
-        reviewMapper.reviewInsert(dto);
+    public void reviewAdd(Review review) throws Exception {
+        reviewMapper.reviewAdd(review);
     }
 
     @Override
-    public void reviewUpdate(Review dto) throws Exception {
-        reviewMapper.reviewUpdate(dto);
+    public void reviewUpdate(Review review) throws Exception {
+        reviewMapper.reviewUpdate(review);
     }
 
     @Override

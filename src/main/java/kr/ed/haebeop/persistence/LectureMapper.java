@@ -11,11 +11,11 @@ public interface LectureMapper {
 
     public List<Lecture> lectureList(Page page);
 
-    public Lecture lectureDetail(int lno);
+    public Lecture lectureGet(int lno);
 
-    public void lectureInsert(Lecture lecture);
+    public void lectureAdd(Lecture lecture);
 
-    public void lectureEdit(Lecture lecture);
+    public void lectureUpdate(Lecture lecture);
 
     public void lectureDelete(int lno);
 

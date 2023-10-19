@@ -23,27 +23,25 @@ public class SubjectCtrl {
     @Autowired
     HttpSession session;
 
-    @GetMapping("insert.do")
+    @GetMapping("add.do")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
         return "/admin/lectDetail";
     }
 
-    @PostMapping("insert.do")
+    @PostMapping("add.do")
     public String subjectInsert(HttpServletRequest request, Model model) throws Exception {
         Subject subject = new Subject();
         subject.setTitle(request.getParameter("title"));
 
-        subjectService.subjectInsert(subject);
+        subjectService.subjectAdd(subject);
         return "redirect:/admin/lectDetail.do?fno="+request.getParameter("par");
     }
 
     @GetMapping("delete.do")
-    public ModelAndView subjectDelete(HttpServletRequest request, Model model) throws Exception {
+    public String subjectDelete(HttpServletRequest request, Model model) throws Exception {
         int sno = Integer.parseInt(request.getParameter("sno"));
         subjectService.subjectDelete(sno);
 
-        ModelAndView mav = new ModelAndView();
-
-        return mav;
+        return "/admin/lectDetail";
     }
 }

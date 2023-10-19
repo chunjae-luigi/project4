@@ -7,9 +7,9 @@ import java.util.List;
 public interface ReviewMapper {
     public List<Review> reviewList(int lno) throws Exception;
 
-    void reviewInsert(Review dto) throws Exception;
+    void reviewAdd(Review review) throws Exception;
 
-    void reviewUpdate(Review dto) throws Exception;
+    void reviewUpdate(Review review) throws Exception;
 
     public void reviewDelete(int rno) throws Exception;
 }

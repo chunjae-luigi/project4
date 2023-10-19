@@ -10,7 +10,7 @@
     <select id="subjectGet" resultType="kr.ed.haebeop.domain.Subject">
         select * from subject where sno=#{sno}
     </select>
-    <insert id="subjectInsert">
+    <insert id="subjectAdd">
         insert into subject values (default, #{title})
     </insert>
     <delete id="subjectDelete">

@@ -20,13 +20,13 @@ public class ReviewMapperImpl implements ReviewMapper {
     }
 
     @Override
-    public void reviewInsert(Review dto) throws Exception {
-        sqlSession.insert("review.reviewInsert", dto);
+    public void reviewAdd(Review review) throws Exception {
+        sqlSession.insert("review.reviewAdd", review);
     }
 
     @Override
-    public void reviewUpdate(Review dto) throws Exception {
-        sqlSession.update("review.reviewUpdate", dto);
+    public void reviewUpdate(Review review) throws Exception {
+        sqlSession.update("review.reviewUpdate", review);
     }
 
     @Override

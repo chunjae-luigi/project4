@@ -20,13 +20,13 @@ public class CurriMapperImpl implements CurriMapper {
     }
 
     @Override
-    public void curriInsert(Curri dto) throws Exception {
-        sqlSession.insert("curri.curriInsert", dto);
+    public void curriAdd(Curri curri) throws Exception {
+        sqlSession.insert("curri.curriAdd", curri);
     }
 
     @Override
-    public void curriUpdate(Curri dto) throws Exception {
-        sqlSession.update("curri.curriUpdate", dto);
+    public void curriUpdate(Curri curri) throws Exception {
+        sqlSession.update("curri.curriUpdate", curri);
     }
 
     @Override

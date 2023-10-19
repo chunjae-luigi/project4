@@ -20,13 +20,13 @@ public class CurriServiceImpl implements CurriService {
     }
 
     @Override
-    public void curriInsert(Curri dto) throws Exception {
-        curriMapper.curriInsert(dto);
+    public void curriAdd(Curri curri) throws Exception {
+        curriMapper.curriAdd(curri);
     }
 
     @Override
-    public void curriUpdate(Curri dto) throws Exception {
-        curriMapper.curriUpdate(dto);
+    public void curriUpdate(Curri curri) throws Exception {
+        curriMapper.curriUpdate(curri);
     }
 
     @Override

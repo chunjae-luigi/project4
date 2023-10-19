@@ -25,13 +25,13 @@ public class SubjectMapperImpl implements SubjectMapper {
     }
 
     @Override
-    public void subjectInsert(Subject dto) throws Exception {
-        sqlSession.insert("subject.subjectInsert", dto);
+    public void subjectAdd(Subject subject) throws Exception {
+        sqlSession.insert("subject.subjectInsert", subject);
     }
 
     @Override
-    public void subjectUpdate(Subject dto) throws Exception {
-        sqlSession.update("subject.subjectEdit", dto);
+    public void subjectUpdate(Subject subject) throws Exception {
+        sqlSession.update("subject.subjectEdit", subject);
     }
 
     @Override

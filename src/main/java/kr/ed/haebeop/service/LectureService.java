@@ -8,11 +8,11 @@ import java.util.List;
 public interface LectureService {
     public List<Lecture> lectureList(Page page) throws Exception;
 
-    public Lecture lectureDetail(int lno) throws Exception;
+    public Lecture lectureGet(int lno) throws Exception;
 
-    public void lectureInsert(Lecture lecture) throws Exception;
+    public void lectureAdd(Lecture lecture) throws Exception;
 
-    public void lectureEdit(Lecture lecture) throws Exception;
+    public void lectureUpdate(Lecture lecture) throws Exception;
 
     public void lectureDelete(int lno) throws Exception;
 

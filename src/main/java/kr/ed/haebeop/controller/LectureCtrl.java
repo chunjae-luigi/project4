@@ -62,27 +62,27 @@ public class LectureCtrl {
         List<Lecture> lectureList = lectureService.lectureList(page);
         model.addAttribute("lectureList", lectureList);
 
-        return "/lect/lectList";
+        return "/lecture/lectList";
     }
 
     //회원의 강의 상세보기
     @GetMapping("get.do")
-    public String lectureDetail(HttpServletRequest request, Model model) throws Exception{
+    public String lectureUpdate(HttpServletRequest request, Model model) throws Exception{
         int lno = Integer.parseInt(request.getParameter("lno"));
 
-        Lecture dto = lectureService.lectureDetail(lno);
+        Lecture lecture = lectureService.lectureGet(lno);
 
         List<Review> reviewList = reviewService.reviewList(lno);
         List<Curri> curriList = curriService.curriList(lno);
-        Subject subject = subjectService.subjectGet(dto.getSno());
+        Subject subject = subjectService.subjectGet(lecture.getSno());
 
         model.addAttribute("reviewList", reviewList);
         model.addAttribute("subject", subject);
         model.addAttribute("curriList", curriList);
-        model.addAttribute("lecture", dto);
+        model.addAttribute("lecture", lecture);
         model.addAttribute("lno", lno);
 
-        return "/lect/lectGet";
+        return "/lecture/lectGet";
 
     }
 

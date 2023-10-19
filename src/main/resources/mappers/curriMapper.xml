@@ -8,7 +8,7 @@
     <select id="curriList" resultType="kr.ed.haebeop.domain.Curri">
         select * from curri where lno = #{lno} order by cno asc
     </select>
-    <insert id="curriInsert">
+    <insert id="curriAdd">
         insert into curri values (default, #{lno}, #{content})
     </insert>
     <delete id="curriDelete">

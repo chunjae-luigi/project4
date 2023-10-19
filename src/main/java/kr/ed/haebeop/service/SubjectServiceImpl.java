@@ -25,13 +25,13 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public void subjectInsert(Subject dto) throws Exception {
-        subjectMapper.subjectInsert(dto);
+    public void subjectAdd(Subject subject) throws Exception {
+        subjectMapper.subjectAdd(subject);
     }
 
     @Override
-    public void subjectUpdate(Subject dto) throws Exception {
-        subjectMapper.subjectUpdate(dto);
+    public void subjectUpdate(Subject subject) throws Exception {
+        subjectMapper.subjectUpdate(subject);
     }
 
     @Override

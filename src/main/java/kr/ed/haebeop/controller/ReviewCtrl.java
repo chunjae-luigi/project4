@@ -24,12 +24,12 @@ public class ReviewCtrl {
     @Autowired
     HttpSession session;
 
-    @GetMapping("insert.do")
+    @GetMapping("add.do")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
-        return "/lect/lectGet";
+        return "/lecture/lectGet";
     }
 
-    @PostMapping("insert.do")
+    @PostMapping("add.do")
     public String reviewInsert(HttpServletRequest request, Model model) throws Exception {
         Review review = new Review();
 
@@ -38,32 +38,20 @@ public class ReviewCtrl {
         review.setStar(Integer.parseInt(request.getParameter("star")));
         review.setLno(Integer.parseInt(request.getParameter("lno")));
 
-        reviewService.reviewInsert(review);
+        reviewService.reviewAdd(review);
 
         return "redirect:/lecture/get.do?lno="+request.getParameter("lno");
     }
 
     @GetMapping("delete.do")
-    public ModelAndView reviewDelete(HttpServletRequest request, Model model) throws Exception {
+    public String reviewDelete(HttpServletRequest request, Model model) throws Exception {
         String sid = session.getAttribute("sid") != null ? (String) session.getAttribute("sid") : "";
 
         int rno = Integer.parseInt(request.getParameter("rno"));
         int lno = Integer.parseInt(request.getParameter("lno"));
         reviewService.reviewDelete(rno);
         model.addAttribute("lno", lno);
-        ModelAndView mav = new ModelAndView();
 
-        if(!sid.equals("admin")) {
-            mav.setView(new RedirectView(request.getContextPath() + "/lecture/get.do"));
-        } else {
-            mav.setView(new RedirectView(request.getContextPath() + "/admin/lectGet.do"));
-        }
-        return mav;
-        //String referer = request.getHeader("Referer");      // 요청한 페이지를 기억해서 보냄
-        //System.out.println(referer);
-        //return "redirect:/" + referer;
-//        RedirectView redirectView = new RedirectView();
-//        redirectView.setUrl("http://www.naver.com");
-//        return redirectView;
+        return "/lecture/lectGet";
     }
 }

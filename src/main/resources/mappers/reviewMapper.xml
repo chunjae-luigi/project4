@@ -8,7 +8,7 @@
     <select id="reviewList" resultType="kr.ed.haebeop.domain.Review">
         select * from review where lno = #{lno} order by regdate desc
     </select>
-    <insert id="reviewInsert">
+    <insert id="reviewAdd">
         insert into review values (default, #{lno}, #{memId}, #{content}, #{star}, default)
     </insert>
     <delete id="reviewDelete">
