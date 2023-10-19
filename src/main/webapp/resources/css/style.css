@@ -365,7 +365,7 @@ h1, h2, h3, h4, h5, h6,
   font-family: "Handlee", cursive;
   font-weight: bold;
   line-height: 1.2;
-  color: #154f00;
+  color: #16668d;
 }
 
 h1, .h1 {
@@ -2414,8 +2414,8 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #fff;
-  background-color: #154f00;
-  border-color: #154f00;
+  background-color: #16668d;
+  border-color: #16668d;
 }
 
 .btn-secondary:hover {

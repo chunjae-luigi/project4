@@ -55,10 +55,6 @@ CREATE TABLE board(
 	answerYn BOOLEAN DEFAULT FALSE, 									-- 답변 유무
 	visited INT DEFAULT 0   											-- 조회수
 );
-SELECT b.bno AS bno, b.bmNo AS bmNo, b.title AS title, b.content AS content, b.author AS author,
-       b.resDate AS resDate, b.visited as visited,bm.boardNm AS boardNm, m.nm AS nm,
-       bm.aboutAuth AS aboutAuth, bm.commentUse AS commentUse, bm.fileUse AS fileUse
-FROM board b, member m, boardMgn bm WHERE b.author = m.id AND bm.bmNo = b.bmNo order BY b.bno ASC
 
 CREATE VIEW boardList AS (SELECT b.bno AS bno, b.bmNo AS bmNo, b.title AS title, b.content AS content, b.author AS author, b.resDate AS resDate, b.answer AS answer, b.answerDate AS answerDate, b.answerYn AS answerYn, b.visited as visited, bm.boardType as boardType, bm.boardNm AS boardNm, m.nm AS nm, bm.aboutAuth AS aboutAuth, bm.commentUse AS commentUse, bm.fileUse AS fileUse FROM board b, member m, boardMgn bm WHERE b.author = m.id AND bm.bmNo = b.bmNo order BY b.bno ASC);
 
@@ -82,6 +78,7 @@ CREATE TABLE files(
 	uploadDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,	-- 파일 업로드 일자
 	toUse VARCHAR(100) NOT NULL										-- 사용 테이블
 );
+-- 여기까지는 완료
 
 CREATE TABLE review(
     rno INT PRIMARY KEY AUTO_INCREMENT,             	-- 리뷰 번호 : 자동증가
@@ -133,69 +130,21 @@ CREATE TABLE study(
 	canYn BOOLEAN DEFAULT FALSE					-- 수강 가능 여부
 );
 
-CREATE TABLE product(
-   prono INT AUTO_INCREMENT PRIMARY KEY,					-- 도서 번호 : 자동증가
-   proNm VARCHAR(100) NOT NULL,                 		-- 도서 이름
-   proPrice INT DEFAULT 1000,               				-- 상품 가격
-   proComment VARCHAR(2000) NOT NULL,						-- 상품 설명
-   proList VARCHAR(2000),                            	-- 상품 목차
-   thumbnail INT,                							-- 상품 섬네일 fno 입력
-   useyn BOOLEAN DEFAULT TRUE,                    		-- 판매 여부
-   resDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()		-- 상품 등록일
-);
-
-CREATE TABLE receive(
-   rno INT AUTO_INCREMENT PRIMARY KEY,					-- 입고 번호 : 자동증가
-   prono INT NOT NULL,                       		-- 상품 번호
-   amount INT DEFAULT 1,                     		-- 입고 갯수
-   rPrice INT DEFAULT 1000,                  		-- 입고 가격
-   resDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()   -- 입고일
-);
-
-CREATE TABLE serve(
-   sno INT AUTO_INCREMENT PRIMARY KEY,					-- 출고 번호 : 자동증가
-   prono INT NOT NULL,                       		-- 상품 번호
-   amount INT DEFAULT 1,                     		-- 출고 갯수
-   sPrice INT DEFAULT 1000,                  		-- 출고 가격
-   resDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()   -- 출고일
-);
-
-CREATE VIEW serveProfit AS (SELECT prono, sum(sPrice * amount) AS tot FROM serve GROUP BY prono);
-CREATE VIEW receiveProfit AS (SELECT prono, sum(rPrice * amount) AS tot FROM receive GROUP BY prono);
-CREATE VIEW profit AS (SELECT a.prono AS prono, sum(a.tot - b.tot) AS tot FROM serveProfit a, receiveProfit b WHERE a.prono = b.prono GROUP BY a.prono);
-
-CREATE VIEW serveInventory AS (SELECT prono, sum(amount) AS amount FROM serve GROUP BY prono);
-CREATE VIEW receiveInventory AS (SELECT prono, sum(amount) AS amount FROM receive GROUP BY prono);
-CREATE VIEW inventory AS (SELECT a.prono AS prono, (a.amount - b.amount) AS amount FROM receiveInventory a, serveInventory b WHERE a.prono = b.prono);
-
-CREATE TABLE delivery(
-	dno INT AUTO_INCREMENT PRIMARY KEY,						-- 배송 번호 : 자동증가
-   cusNm VARCHAR(300) NOT NULL,                      	-- 배송 고객 이름
-   cusTel VARCHAR(13) NOT NULL,                       -- 배송 고객 연락처
-	cusAddr VARCHAR(300) NOT NULL,                     -- 배송 고객 주소
-   dTel VARCHAR(13),                                  -- 배송회사 전화번호
-   dStatus INT DEFAULT 0,										-- 배송상태 - [0:배송전 | 1:배송중 | 2:도착 | 3:구매결정 | 4.구매취소]
-	resDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),     -- 배송 등록일
-   DeliveryDate TIMESTAMP,                            -- 배송 완료일
-   dCode VARCHAR(30),                                 -- 화물코드
-   author VARCHAR(20) NOT NULL                        -- 구매 고객 아이디
-);
-
+-- 여기 아래도 완료
 CREATE TABLE payment(
-    payno INT AUTO_INCREMENT PRIMARY KEY,					-- 결제 번호 : 자동증가
-    id VARCHAR(20) NOT NULL,        					-- 회원 아이디
-    plec VARCHAR(100) NOT NULL,                                -- 상품 이름
-    sno INT NOT NULL,												-- 수강 번호
-    amount INT DEFAULT 1,           							-- 결제 수량
-    pmethod VARCHAR(10),                					-- 결제 방법 - [1:신용카드 | 2:체크카드 | 3:계좌이체]
-    pcom VARCHAR(100),                  					-- 결제 대행사
-    pnum VARCHAR(100),                  					-- 결제카드(계좌)번호
-    price INT DEFAULT 1000,      							-- 결제 금액
-    status INT DEFAULT 0,           						-- 배송상태 - [0:결제완료 | 1:결제완료 | 2:결제취소]
-    dno INT DEFAULT 0,							               			-- 배송 번호
-    resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()     	-- 결제 등록일
+    payno INT AUTO_INCREMENT PRIMARY KEY,		    -- 결제 번호 : 자동증가
+    id VARCHAR(20) NOT NULL,                        -- 회원 아이디
+    plec VARCHAR(100) NOT NULL,                     -- 상품 이름
+    sno INT NOT NULL,                               -- 수강 번호
+    amount INT DEFAULT 1,                           -- 결제 수량
+    pmethod VARCHAR(10),                            -- 결제 방법 - [1:신용카드 | 2:체크카드 | 3:계좌이체]
+    pcom VARCHAR(100),                              -- 결제 대행사
+    pnum VARCHAR(100),                              -- 결제카드(계좌)번호
+    price INT DEFAULT 1000,                         -- 결제 금액
+    status INT DEFAULT 0,                           -- 배송상태 - [0:결제완료 | 1:결제완료 | 2:결제취소]
+    dno INT DEFAULT 0,                              -- 배송 번호
+    resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()   -- 결제 등록일
 );
 
-CREATE VIEW studyPayList AS (SELECT pay.payno AS payno, pay.id AS id, pay.sno AS sno, pay.amount AS amount, pay.pMethod AS pMethod, pay.pCom AS pCom, pay.pNum AS pNum, pay.payPrice AS payPrice, pay.payStatus AS payStatus, l.title AS lectureTitle, f.saveFolder AS thumbnailSaveFolder, f.originNm AS thumbnailOriginNm, f.saveNm AS thumbnailSaveNm, deli.dno AS dno, deli.cusNm AS cusNm, deli.cusTel AS cusTel, deli.cusAddr AS cusAddr, deli.dTel AS dTel, deli.dStatus AS dStatus, deli.resDate AS resDate, deli.DeliveryDate AS DeliveryDate, deli.dCode AS dCode FROM payment pay, delivery deli, lecture l, study s, files f WHERE pay.sno = s.sno AND l.lno = s.lno AND l.thumbnail = f.fno AND pay.dno = deli.dno);
-INSERT INTO payment VALUES (DEFAULT, 'admin', '상품2번' , 2, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 2, DEFAULT)
-INSERT INTO payment VALUES (DEFAULT, 'qeee', '상품1번' , 1, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 1, DEFAULT)
+INSERT INTO payment VALUES (DEFAULT, 'admin', '상품2번' , 2, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 2, DEFAULT);
+INSERT INTO payment VALUES (DEFAULT, 'qeee', '상품1번' , 1, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 1, DEFAULT);
