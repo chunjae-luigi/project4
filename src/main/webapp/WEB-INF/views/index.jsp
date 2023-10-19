@@ -14,7 +14,7 @@
     <jsp:include page="./layout/header.jsp" />
     <div class="container-fluid bg-primary px-0 px-md-5 mb-5">
         <div class="row align-items-center px-3">
-            <div class="col-lg-6 text-center">
+            <div class="col-lg-12 text-center py-5">
                 <h4 class="text-white mb-4 mt-5 mt-lg-0">에듀 강의 교육 센터</h4>
                 <h1 class="display-4 font-weight-bold text-white">새로운 학습 관련 홈페이지</h1>
                 <p class="text-white mb-4">
@@ -23,9 +23,6 @@
                     그만 쓰꼬 싶스빈다. <br />
                 </p>
                 <a href="#" class="btn btn-secondary mt-1 py-3 px-5">강의 배우기</a>
-            </div>
-            <div class="col-lg-6 text-center">
-                <img class="img-fluid2 my-5" src="${path }/resources/image/main/header.png" alt="메인 썸네일 이미지" />
             </div>
         </div>
     </div>
@@ -245,9 +242,65 @@
             </div>
         </div>
     </div>
-
+    <div class="outer-container">
+        <img src="${path}/resources/image/main/movingca.png" alt="움직이는 이미지" id="moving-image">
+    </div>
     <jsp:include page="./layout/footer.jsp" />
     <script src="${path }/resources/js/owl.carousel.min.js"></script>
     <script src="${path }/resources/js/main.js"></script>
+    <style>
+        .outer-container {
+            position: absolute;
+            top: 25%;
+            left: -5%;
+            /* transform: translate(-50%, -50%); */
+        }
+
+        #moving-image {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 90px;
+            height: auto;
+        }
+    </style>
+    <script>
+        const movingImage = document.getElementById('moving-image');
+        let direction = 1; // 이동 방향 (1: 오른쪽, -1: 왼쪽)
+
+        function moveImage() {
+            const currentPosition = parseInt(movingImage.style.left) || 0;
+            setTimeout(() => {direction = 0}, 15000)
+            if (currentPosition >= movingImage.width && direction === 1) {
+                direction = 0; // 정지
+                setTimeout(() => {
+                    direction = -1; // 왼쪽으로 이동
+                }, 3000); // 5초 후에 방향 전환
+            } else if (currentPosition <= 0 && direction === -1) {
+                direction = 0; // 정지
+                setTimeout(() => {
+                    direction = 1; // 오른쪽으로 이동
+                }, 5000); // 5초 후에 방향 전환
+            }
+
+            movingImage.style.left = currentPosition + direction + 'px';
+            requestAnimationFrame(moveImage);
+        }
+        moveImage();
+
+        $(document).ready(function (){
+            let count = 0;
+            $("#moving-image").click(function(){
+                if(count === 5 ){
+                    $(location).attr("href", "${path}/fire")
+                    count = 0;
+                }else{
+                    count = count + 1;
+                }
+            })
+        });
+    </script>
 </body>
 </html>

@@ -13,16 +13,16 @@
 
             <div class="navbar-nav font-weight-bold mx-auto py-0">
                 <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="class.html" class="nav-item nav-link">Classes</a>
-                <a href="team.html" class="nav-item nav-link">Teachers</a>
+                <a href="${path}/payment/rrr.do" class="nav-item nav-link">임시 샘플</a>
+                <a href="${path}/payment/list.do" class="nav-item nav-link">강의목록(임시)</a>
+                <a href="${path}/payment/paylistMember.do?sid=${sid }" class="nav-item nav-link">결제창</a>
                 <a href="${path }/lecture/list.do?no=4" class="nav-item nav-link">강의테스트</a>
-                <div class="nav-item dropdown board_drop_menu">
+                <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu rounded-0 m-0" id="boardMenuArea"></div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
+
             <c:if test="${sid != null}">
                 <a href="${path }/user/logout.do" class="btn btn-primary px-4 mr-2"><i class="fas fa-sign-out-alt pr-2" style="color:#ffffff;"></i> 로그아웃</a>
                 <c:if test="${sid eq 'admin'}">

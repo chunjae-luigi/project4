@@ -8,58 +8,150 @@
     <title>HEABEOP::로그인</title>
     <jsp:include page="../layout/head.jsp" />
     <link rel="stylesheet" href="${path }/resources/css/sub.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        h1{
+            color: #3BBAE2
+        }
+        body {
+            background: url(${path}/resources/image/common/loginback.jpg) no-repeat;
+            background-size: cover;
+            color: #fff;
+            font-family: 'Muli', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            width: 100vw;
+        }
+
+        .container-login {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px 40px;
+            border-radius: 5px;
+            width: 500px;
+        }
+
+        .container-login h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 30px;
+        }
+
+        .container-login a {
+            text-decoration: none;
+            color: #3BBAE2;
+        }
+
+        .login-btn {
+            cursor: pointer;
+            display: inline-block;
+            width: 100%;
+            background: #3BBAE2;
+            padding: 15px;
+            font-family: inherit;
+            font-size: 16px;
+            border: 0;
+            border-radius: 5px;
+        }
+
+        .login-btn:focus {
+            outline: 0;
+        }
+
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+
+        .text {
+            margin-top: 30px;
+        }
+
+        .form-controller {
+            position: relative;
+            margin: 20px 0 40px;
+            width: 100%;
+        }
+
+        .form-controller input {
+            border: none;
+            border-bottom: 2px #fff solid;
+            width: 100%;
+            padding: 10px 0;
+            font-size: 18px;
+            color: black;
+            display: block;
+            visibility: hidden;
+        }
+
+        .form-controller input:focus,
+        .form-controller input:valid {
+            outline: 0;
+            border-bottom-color: #3BBAE2;
+        }
+
+        .form-controller label {
+            position: absolute;
+            top: 19px;
+            left: 8px;
+            pointer-events: none;
+            color: #3BBAE2;
+        }
+
+        form p {
+            letter-spacing: 0.3rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-controller label span {
+            display: inline-block;
+            font-size: 18px;
+            min-width: 5px;
+            transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+    </style>
 </head>
+
 <body>
-<section class="bg-image join_area my-5">
-    <div class="mask d-flex align-items-center">
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                    <div class="card">
-                        <div class="card-body p-5">
 
-                            <a class="logo text-center font-weight-bold text-secondary" href="${path }/" style="font-size:35px;"><img src="${path }/resources/image/common/logo.png" title="해법 로고" alt="해법 로고" />HAEBEOP</a>
-
-                            <h2 class="text-uppercase text-center mt-3 mb-5">로그인</h2>
-
-                            <form name="frm1" id="frm1" action="${path }/user/loginPro.do" method="post">
-
-                                <div class="form-outline mb-4">
-                                    <input type="text" name="id" id="id" placeholder="아이디 입력" class="form-control" autofocus required />
-                                    <label class="form-label blind" for="id">아이디</label>
-                                </div>
-
-                                <div class="form-outline mb-4">
-                                    <input type="password" name="pw" id="pw" placeholder="비밀번호 입력" class="form-control" required />
-                                    <label class="form-label blind" for="pw">비밀번호</label>
-                                </div>
-
-                                <c:if test="${msg eq 'fail' }">
-                                    <div class="d-flex justify-content-md-center align-items-center">
-                                        <p class="login_err text-danger"><i class="fas fa-exclamation-circle"></i> 아이디나 비밀번호가 맞지 않습니다.</p>
-                                    </div>
-                                </c:if>
-
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn px-3">로그인하기</button>
-                                </div>
-
-                                <div class="d-flex justify-content-center mt-1">
-                                    <p class="small fw-bold my-0">회원이 아니신가요? <a href="${path }/user/term.do" class="link-danger">회원가입</a></p>
-                                </div>
-
-                            </form>
-
-                            <script src="${path }/resources/js/jquery-3.7.1.min.js"></script>
-                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-                            <script src="${path }/resources/js/common.js"></script>
-                            <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container-login">
+    <h1>로그인</h1>
+    <form action="${path }/user/loginPro.do" id="login_frm" class="frm" method="post">
+        <div class="form-controller">
+            <input type="text" class="input" name="id" id="id" required />
+            <label><span>아이디</span></label>
         </div>
-    </div>
-</section>
+
+        <div class="form-controller">
+            <input type="password" class="input" name="pw" id="pw" required />
+            <label><span>비밀번호</span></label>
+        </div>
+
+        <button type="submit" class="login-btn">로그인</button>
+
+        <p class="text">회원이 아니신가요? <a href="${path }/user/term.do">회원가입</a></p>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $(".container-login").click(function(){
+            $(".form-controller label span").css("transform", "translateY(-50px)");
+            $(".form-controller input").css({"visibility": "visible", "transition-delay": "0.3s", "transition-duration": "1s"});
+        })
+
+    })
+</script>
+<script src="${path }/resources/js/jquery-3.7.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="${path }/resources/js/common.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

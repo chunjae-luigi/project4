@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ed.haebeop.persistence.LectureMapper">
-    <select id="lectureList" resultType="kr.ed.haebeop.domain.LectureVO">
+    <select id="lectureList" resultType="kr.ed.haebeop.domain.Lecture">
         <![CDATA[
-        select * from lectureView
+        select * from lecture
         ]]>
         <where>
             <if test="searchType != null">
@@ -38,5 +38,12 @@
                 </choose>
             </if>
         </where>
+    </select>
+
+    <select id="lectureGet" resultType="kr.ed.haebeop.domain.Lecture">
+            select * from lecture where lno=#{lno}
+    </select>
+    <select id="lecturepay" resultType="kr.ed.haebeop.domain.Lecture">
+        select * from lecture where dno=#{dno}
     </select>
 </mapper>

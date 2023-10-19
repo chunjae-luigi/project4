@@ -341,6 +341,12 @@
       <scope>compile</scope>
     </dependency>
 
+    <dependency>
+      <groupId>com.github.iamport</groupId>
+      <artifactId>iamport-rest-client-java</artifactId>
+      <version>0.2.23</version>
+    </dependency>
+
     <!-- 애노테이션 설정 api 추가 -->
     <dependency>
       <groupId>javax.annotation</groupId>
@@ -364,6 +370,14 @@
     </dependency>
 
   </dependencies>
+
+  <!-- https://mvnrepository.com/artifact/com.github.iamport/iamport-rest-client-java -->
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
 
   <build>
     <finalName>team44</finalName>
@@ -418,3 +432,5 @@
     </plugins>
   </build>
 </project>
+
+

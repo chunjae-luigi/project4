@@ -22,5 +22,7 @@ public interface MemberService {
     public Member memberGet(String id) throws Exception;
 
     public void insert(Member member) throws Exception;
+    public void firepoint(Member member) throws Exception;
+
 
 }

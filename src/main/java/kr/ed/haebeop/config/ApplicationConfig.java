@@ -38,4 +38,8 @@ public class ApplicationConfig {
 
     @Bean
     public UnavailableService unavailableService() {return new UnavailableServiceImpl();}
+    @Bean
+    public PaymentService paymentService() {return new PaymentServiceImpl();}
+
+
 }
