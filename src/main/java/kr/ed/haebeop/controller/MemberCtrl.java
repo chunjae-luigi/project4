@@ -85,7 +85,7 @@ public class MemberCtrl {
     }
 
     @PostMapping("/fire")
-    public String firepoint(HttpServletRequest req, Model model) {
+    public String firepoint(HttpServletRequest req, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
         int pt = Integer.parseInt(req.getParameter("pt"));
 //        int pt = 0;
@@ -97,6 +97,12 @@ public class MemberCtrl {
 
         return "/firework";
     }
+
+    @GetMapping("/myPage.do")
+    public String myPage(Model model) throws Exception {
+        return "/member/myPage";
+    }
+
     /*
     @InitBinder
     protected void initBinder(WebDataBinder binder){

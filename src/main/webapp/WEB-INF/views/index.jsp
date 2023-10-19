@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
-<c:set var="sid" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
     <jsp:include page="./layout/header.jsp" />
     <div class="container-fluid bg-primary px-0 px-md-5 mb-5">
         <div class="row align-items-center px-3">
-            <div class="col-lg-6 text-center">
+            <div class="col-lg-12 text-center py-5">
                 <h4 class="text-white mb-4 mt-5 mt-lg-0">에듀 강의 교육 센터</h4>
                 <h1 class="display-4 font-weight-bold text-white">새로운 학습 관련 홈페이지</h1>
                 <p class="text-white mb-4">
@@ -24,9 +23,6 @@
                     그만 쓰꼬 싶스빈다. <br />
                 </p>
                 <a href="#" class="btn btn-secondary mt-1 py-3 px-5">강의 배우기</a>
-            </div>
-            <div class="col-lg-6 text-center">
-                <img class="img-fluid2 my-5" src="${path }/resources/image/main/header.png" alt="메인 썸네일 이미지" />
             </div>
         </div>
     </div>
