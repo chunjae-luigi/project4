@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ed.haebeop.persistence.ReviewMapper">
+
+    <!-- 리뷰 목록 -->
+    <select id="reviewList" resultType="kr.ed.haebeop.domain.Review">
+        select * from review where lno = #{lno} order by regdate desc
+    </select>
+    <insert id="reviewInsert">
+        insert into review values (default, #{lno}, #{memId}, #{content}, #{star}, default)
+    </insert>
+    <delete id="reviewDelete">
+        delete from review where rno=#{rno}
+    </delete>
+    <update id="reviewUpdate">
+        update review set content=#{content}, star=#{star} where cno=#{cno}
+    </update>
+
+
+</mapper>

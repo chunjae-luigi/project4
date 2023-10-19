@@ -80,16 +80,10 @@ CREATE TABLE files(
 );
 -- 여기까지는 완료
 
-CREATE TABLE review(
-    rno INT PRIMARY KEY AUTO_INCREMENT,             	-- 리뷰 번호 : 자동증가
-    par INT NOT NULL,											-- 해당 리뷰사용 번호
-    author VARCHAR(20) NOT NULL,                    	-- 회원 아이디
-    content VARCHAR(1000) NOT NULL,                  	-- 리뷰 내역
-    star INT DEFAULT 5,                        			-- 리뷰 별점
-    resDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()     -- 리뷰 등록일
-);
+-- ========================= 슬비시작(내가 헷갈려서 썼어 지워도돼ㅠ_ㅠ) ================================
+-- 강의, 과목, 목차, 수강후기, 수강
 
-CREATE VIEW reviewList AS (SELECT r.rno AS rno, r.par AS par, r.author AS author, r.content AS content, r.star AS star, r.resDate AS resDate, m.nm AS nm FROM review r, member m WHERE r.author = m.id order BY r.rno ASC);
+USE team44;
 
 CREATE TABLE lecture(
 	lno INT AUTO_INCREMENT PRIMARY KEY,			-- 강의 번호 : 자동증가
@@ -101,12 +95,52 @@ CREATE TABLE lecture(
 	startDate TIMESTAMP,								-- 강의 시작 기간 - 오프라인 사용
 	endDate TIMESTAMP,								-- 강의 종료 기간 - 오프라인 사용
 	daily VARCHAR(200),								-- 강의 하루 일정 - 오프라인 사용
-	prono INT,											-- 강의 서적
 	teacherId VARCHAR(20) NOT NULL,				-- 강의 담당 선생 아이디
-    thumbnail INT,                				-- 강의 섬네일 fno 입력
-    useYn BOOLEAN DEFAULT TRUE,                -- 판매 여부
-    price INT
+	thumbnail VARCHAR(100),                	-- 강의 썸네일
+   lvideo VARCHAR(100)  ,    						-- 샘플영상
+   sno INT NOT NULL, 								-- 과목
+   cost INT NOT NULL, 								-- 강의가격
+   bookname VARCHAR(150),							-- 교재명
+   bthumbnail VARCHAR(100)    					-- 교재 썸네일
 );
+
+CREATE TABLE subject(
+   sno INT PRIMARY KEY AUTO_INCREMENT,	-- 과목번호
+   title VARCHAR(200) NOT NULL			-- 과목명
+);
+
+INSERT INTO subject VALUES (1, "영어");
+INSERT INTO subject VALUES (2, "수학");
+INSERT INTO subject VALUES (3, "기타");
+
+CREATE TABLE curri(
+	cno INT PRIMARY KEY AUTO_INCREMENT,	-- 목차번호
+	lno INT NOT NULL, 						-- 강의 번호
+	content VARCHAR(100) NOT NULL   		-- 목차제목
+);
+
+CREATE TABLE review(
+	rno INT PRIMARY KEY AUTO_INCREMENT, 						-- 후기 번호
+	lno INT NOT NULL, 												-- 강의 번호
+	memId VARCHAR(16) NOT NULL, 									-- 회원 아이디
+	content VARCHAR(1000), 											-- 후기 내용
+	star INT DEFAULT 5, 												-- 별점
+	regdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,	-- 후기 작성일
+);
+
+CREATE TABLE study(
+	sno INT AUTO_INCREMENT PRIMARY KEY,	-- 수강 번호 : 자동증가
+	lno INT NOT NULL,							-- 수강 강의 번호
+	studentId VARCHAR(20) NOT NULL,		-- 수강생 아이디
+	studyYn BOOLEAN DEFAULT FALSE,		-- 수강 진행 여부(수강중:0, 수강완료유저:1)
+	canYn BOOLEAN DEFAULT FALSE			-- 수강 가능 여부(미수강:0, 결제완료유저:1)
+);
+
+-- ============================ 슬비끝  ===================================
+
+
+
+
 INSERT into lecture(title, subTitle, content, lectureType, studentCnt, teacherId) VALUES('제목1', '소제목1', '내용1', 0, 20, 'qeee' );
 
 CREATE VIEW lectureView AS (SELECT l.lno AS lno, l.title AS title, l.subTitle AS subTitle, l.content AS content, l.lectureType AS lectureType, l.studentCnt AS studentCnt,

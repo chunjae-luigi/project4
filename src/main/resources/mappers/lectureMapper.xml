@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ed.haebeop.persistence.LectureMapper">
+
+    <!-- 강의 목록 보기(썸네일 포함) -->
     <select id="lectureList" resultType="kr.ed.haebeop.domain.Lecture">
         <![CDATA[
         select * from lecture
@@ -18,13 +20,34 @@
             </if>
         </where>
         <![CDATA[
-        ORDER BY useYn DESC, lno ASC LIMIT #{postStart}, #{postCount}
+        ORDER BY lno ASC LIMIT #{postStart}, #{postCount}
         ]]>
     </select>
 
+    <!-- 강의 상세보기 -->
+    <select id="lectureDetail" resultType="kr.ed.haebeop.domain.Lecture">
+        select * from lecture where lno=#{lno}
+    </select>
+
+    <!-- 강의 입력 -->
+    <insert id="lectureInsert">
+        insert into lecture values (default, #{title}, #{subTitle}, #{content}, #{lectureType}, #{studentCnt}, default, default, default, #{teacherId}, #{thumbnail}, #{lvideo}, #{sno}, #{cost}, #{bookname}, #{bthumbnail})
+    </insert>
+
+    <!-- 강의 수정 -->
+    <update id="lectureEdit">
+        update lecture set title=#{title}, subTitle=#{subTitle}, content=#{content}, lectureType=#{lectureType}, studentCnt=#{studentCnt}, teacherId=#{teacherId}, sno=#{sno}, cost=#{cost} where lno=#{lno}
+    </update>
+
+    <!-- 강의 삭제 -->
+    <delete id="lectureDelete">
+        delete from lecture where lno=#{lno}
+    </delete>
+
+    <!-- 페이징 처리를 위한 카운트 -->
     <select id="lectureCount" resultType="integer">
         <![CDATA[
-        select count(*) from lectureView
+        select count(*) from lecture
         ]]>
         <where>
             <if test="searchType != null">
@@ -38,12 +61,5 @@
                 </choose>
             </if>
         </where>
-    </select>
-
-    <select id="lectureGet" resultType="kr.ed.haebeop.domain.Lecture">
-            select * from lecture where lno=#{lno}
-    </select>
-    <select id="lecturepay" resultType="kr.ed.haebeop.domain.Lecture">
-        select * from lecture where dno=#{dno}
     </select>
 </mapper>
