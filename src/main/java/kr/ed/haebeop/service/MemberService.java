@@ -25,4 +25,6 @@ public interface MemberService {
     public void firepoint(Member member) throws Exception;
 
 
+
+
 }
