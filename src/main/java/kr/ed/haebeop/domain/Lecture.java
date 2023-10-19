@@ -9,16 +9,18 @@ public class Lecture {
 
     private int lno;
     private String title;
-    private String subTitle;
+    private String subtitle;
     private String content;
-    private int lectureType;
-    private int studentCnt;
-    private String startDate;
-    private String endDate;
+    private int lecturetype;
+    private int studentcnt;
+    private String startdate;
+    private String enddate;
     private String daily;
     private int prono;
-    private String teacherId;
+    private String teacherid;
     private int thumbnail;
-    private boolean useYn;
+    private boolean useyn;
+    private int dno;            // 배송 번호
+    private int price;
 
 }

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
+<c:set var="sid" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -245,9 +246,65 @@
             </div>
         </div>
     </div>
-
+    <div class="outer-container">
+        <img src="${path}/resources/image/main/movingca.png" alt="움직이는 이미지" id="moving-image">
+    </div>
     <jsp:include page="./layout/footer.jsp" />
     <script src="${path }/resources/js/owl.carousel.min.js"></script>
     <script src="${path }/resources/js/main.js"></script>
+    <style>
+        .outer-container {
+            position: absolute;
+            top: 25%;
+            left: -5%;
+            /* transform: translate(-50%, -50%); */
+        }
+
+        #moving-image {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 90px;
+            height: auto;
+        }
+    </style>
+    <script>
+        const movingImage = document.getElementById('moving-image');
+        let direction = 1; // 이동 방향 (1: 오른쪽, -1: 왼쪽)
+
+        function moveImage() {
+            const currentPosition = parseInt(movingImage.style.left) || 0;
+            setTimeout(() => {direction = 0}, 15000)
+            if (currentPosition >= movingImage.width && direction === 1) {
+                direction = 0; // 정지
+                setTimeout(() => {
+                    direction = -1; // 왼쪽으로 이동
+                }, 3000); // 5초 후에 방향 전환
+            } else if (currentPosition <= 0 && direction === -1) {
+                direction = 0; // 정지
+                setTimeout(() => {
+                    direction = 1; // 오른쪽으로 이동
+                }, 5000); // 5초 후에 방향 전환
+            }
+
+            movingImage.style.left = currentPosition + direction + 'px';
+            requestAnimationFrame(moveImage);
+        }
+        moveImage();
+
+        $(document).ready(function (){
+            let count = 0;
+            $("#moving-image").click(function(){
+                if(count === 5 ){
+                    $(location).attr("href", "${path}/fire")
+                    count = 0;
+                }else{
+                    count = count + 1;
+                }
+            })
+        });
+    </script>
 </body>
 </html>
