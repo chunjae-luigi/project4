@@ -1,17 +1,17 @@
 package kr.ed.haebeop.domain;
 
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Study {
-
     private int sno;
     private int lno;
     private String studentId;
     private boolean studyYn;
-    private int totalTime;
     private boolean canYn;
-
 }

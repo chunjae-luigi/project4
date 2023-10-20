@@ -14,11 +14,11 @@
 
             <div class="navbar-nav font-weight-bold mx-auto py-0">
                 <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="${path}/payment/rrr.do" class="nav-item nav-link">임시 샘플</a>
+                <a href="${path}/main.do" class="nav-item nav-link">오픈페이지</a>
                 <a href="${path}/payment/list.do" class="nav-item nav-link">강의목록(임시)</a>
                 <a href="${path}/payment/paylistMember.do?sid=${sid }" class="nav-item nav-link">결제창</a>
-                <a href="${path }/lecture/list.do?no=4" class="nav-item nav-link">강의테스트</a>
-                <div class="nav-item dropdown">
+                <a href="${path }/lecture/list.do" class="nav-item nav-link">온라인강의</a>
+                <div class="nav-item dropdown board_drop_menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu rounded-0 m-0" id="boardMenuArea"></div>
                 </div>
@@ -26,12 +26,6 @@
 
             <c:if test="${sid != null}">
                 <a href="${path }/user/logout.do" class="btn btn-primary px-4 mr-2"><i class="fas fa-sign-out-alt pr-2" style="color:#ffffff;"></i> 로그아웃</a>
-                <c:if test="${sid eq 'admin'}">
-                    <a href="${path }/admin/" class="btn btn-success px-4"><i class="fas fa-user-cog pr-2" style="color:#ffffff;"></i></i>관리자페이지</a>
-                </c:if>
-                <c:if test="${sid ne 'admin'}">
-                    <a href="${path }/user/mypage.do" class="btn btn-success px-4"><i class="fas fa-user-circle pr-2" style="color:#ffffff;"></i></i>마이페이지</a>
-                </c:if>
             </c:if>
             <c:if test="${sid == null}">
                 <a href="${path }/user/term.do" class="btn btn-primary px-4 mr-2"><i class="fas fa-user-plus pr-2" style="color:#ffffff;"></i>회원가입</a>

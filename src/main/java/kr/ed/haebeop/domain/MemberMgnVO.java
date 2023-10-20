@@ -12,6 +12,7 @@ public class MemberMgnVO {
     private int mmNo;
     private String author;
     private boolean approveYn;
+    private int mStatus;
     private String content;
     private String nm;
 

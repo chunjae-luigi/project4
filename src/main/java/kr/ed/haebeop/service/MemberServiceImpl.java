@@ -67,9 +67,26 @@ public class MemberServiceImpl implements MemberService {
         member.setPw(pw);
         memberMapper.insert(member);
     }
-
     @Override
     public void firepoint(Member member) throws Exception {
         memberMapper.firepoint(member);
+    }
+
+    @Override
+    public void updateMember(Member member) throws Exception {
+        memberMapper.updateMember(member);
+    }
+
+    @Override
+    public void updatePw(Member member) throws Exception {
+        String ppw = member.getPw();
+        String pw = pwEncoder.encode(ppw);
+        member.setPw(pw);
+        memberMapper.updatePw(member);
+    }
+
+    @Override
+    public void removeMember(String id) throws Exception {
+        memberMapper.removeMember(id);
     }
 }

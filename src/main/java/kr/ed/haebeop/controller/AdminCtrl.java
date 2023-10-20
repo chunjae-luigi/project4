@@ -46,6 +46,15 @@ public class AdminCtrl {
     @Autowired
     private LectureService lectureService;
 
+    @Autowired
+    private CurriService curriService;
+
+    @Autowired
+    private SubjectService subjectService;
+
+    @Autowired
+    private PaymentService paymentService;
+
     @GetMapping("/")
     public String home(Model model) throws Exception {
         return "/admin/home";
@@ -91,7 +100,6 @@ public class AdminCtrl {
 
         List<BoardMgn> boardMgnList = boardMgnService.listBoardMgn(page);
         model.addAttribute("boardMgnList", boardMgnList);
-
 
 
         return "/admin/boardTypeList";
@@ -169,8 +177,8 @@ public class AdminCtrl {
         return "redirect:/admin/boardMgnConf.do";
     }
 
-    @GetMapping("/lectureConf.do")
-    public String lectureList(HttpServletRequest request, Model model) throws Exception {
+    @GetMapping("/lectList.do")         //비
+    public String lectureList(HttpServletRequest request, Model model) throws Exception{
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -189,15 +197,61 @@ public class AdminCtrl {
         model.addAttribute("page", page);
         model.addAttribute("curPage", curPage);
 
-        List<LectureVO> lectureList = lectureService.lectureList(page);
+        List<Lecture> lectureList = lectureService.lectureList(page);
         model.addAttribute("lectureList", lectureList);
 
-        return "/admin/lectureList";
+        return "/admin/lectList";
     }
 
-    @GetMapping("/lectureAdd.do")
+    @GetMapping("/lectAdd.do")   //비
     public String lectureAdd(Model model) throws Exception {
-        return "/admin/lectureAdd";
+        return "/admin/lectAdd";
+    }
+
+    @PostMapping("lectAdd.do")   //비
+    public String lectureInsertpro(HttpServletRequest request, Model model, MultipartFile thumbnail, MultipartFile lvideo, MultipartFile bthumbnail) throws Exception{
+        String msg = "";
+
+        ServletContext application = request.getSession().getServletContext();
+        //String realPath = application.getRealPath("/resources/upload");       // 운영 서버
+        String realPath = "D:\\seulbee\\uploadtest";     // 개발 서버
+
+        Lecture lecture = new Lecture();
+        lecture.setTitle(request.getParameter("title"));
+        lecture.setSubTitle(request.getParameter("subTitle"));
+        lecture.setContent(request.getParameter("content"));
+        lecture.setTeacherId(request.getParameter("teacherId"));
+        lecture.setBookname(request.getParameter("bookname"));
+        lecture.setBthumbnail(request.getParameter("bthumnail"));
+        lecture.setLectureType(Integer.parseInt(request.getParameter("lectureType")));
+        lecture.setStudentCnt(Integer.parseInt(request.getParameter("studentCnt")));
+        lecture.setCost(Integer.parseInt(request.getParameter("cost")));
+        lecture.setSno(Integer.parseInt(request.getParameter("sno")));
+
+        if(thumbnail != null) {
+            String originalThumbnailname = thumbnail.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            String uploadThumbnailname = uuid.toString() + "_" + originalThumbnailname;
+            thumbnail.transferTo(new File(realPath, uploadThumbnailname));     //파일 등록
+            lecture.setThumbnail(uploadThumbnailname);
+        }
+        if(lvideo != null) {
+            String originalFilename = lvideo.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            String uploadFilename = uuid.toString() + "_" + originalFilename;
+            lvideo.transferTo(new File(realPath, uploadFilename));     //파일 등록
+            lecture.setLvideo(uploadFilename);
+        }
+        if(bthumbnail != null) {
+            String originalFilename = bthumbnail.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            String uploadFilename = uuid.toString() + "_" + originalFilename;
+            bthumbnail.transferTo(new File(realPath, uploadFilename));     //파일 등록
+            lecture.setBthumbnail(uploadFilename);
+        }
+
+        lectureService.lectureAdd(lecture);
+        return "redirect:/admin/lectList.do";
     }
 
     @GetMapping("/findPro.do")
@@ -252,7 +306,7 @@ public class AdminCtrl {
         return "/admin/findTeacher";
     }
 
-    @GetMapping("/findLecture.do")
+    @GetMapping("/findLecture.do")      //이건뭘까요?
     public String findLecture(HttpServletRequest request, Model model) throws Exception {
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
@@ -272,10 +326,103 @@ public class AdminCtrl {
         model.addAttribute("page", page);
         model.addAttribute("curPage", curPage);
 
-        List<LectureVO> lectureList = lectureService.lectureList(page);
+        List<Lecture> lectureList = lectureService.lectureList(page);
         model.addAttribute("lectureList", lectureList);
 
         return "/admin/findLecture";
     }
+
+    @GetMapping("lectGet.do")      //비
+    public String lectureGet(HttpServletRequest request, Model model) throws Exception{
+        int lno = Integer.parseInt(request.getParameter("lno"));
+
+        Lecture lecture = lectureService.lectureGet(lno);
+        Member teacher = memberService.memberGet(lecture.getTeacherId());
+        Subject subject = subjectService.subjectGet(lecture.getSno());
+        List<Curri> curriList = curriService.curriList(lno);
+
+        model.addAttribute("curriList", curriList);
+        model.addAttribute("subject", subject);
+        model.addAttribute("lecture", lecture);
+        model.addAttribute("lno", lno);
+        model.addAttribute("teacher", teacher);
+
+        return "/admin/lectGet";
+    }
+
+    @GetMapping("lectUpdate.do")     //비
+    public String lectureUpdate(HttpServletRequest request, Model model) throws Exception{
+        int lno = Integer.parseInt(request.getParameter("lno"));
+        Lecture lecture = lectureService.lectureGet(lno);
+        model.addAttribute("lecture", lecture);
+        return "/admin/lectUpdate";
+    }
+    @PostMapping("lectUpdate.do")       //비
+    public String lectureUpdatepro(HttpServletRequest request, Model model) throws Exception{
+
+        int lno = Integer.parseInt(request.getParameter("lno"));
+        ServletContext application = request.getSession().getServletContext();
+
+        //String realPath = application.getRealPath("/resources/upload");                   //운영 서버
+        String realPath = "D:\\seulbee\\uploadtest";   //개발 서버
+
+        Lecture lecture = new Lecture();
+        lecture.setLno(lno);
+        lecture.setTitle(request.getParameter("title"));
+        lecture.setSubTitle(request.getParameter("subTitle"));
+        lecture.setContent(request.getParameter("content"));
+        lecture.setTeacherId(request.getParameter("teacherId"));
+        lecture.setLectureType(Integer.parseInt(request.getParameter("lectureType")));
+        lecture.setStudentCnt(Integer.parseInt(request.getParameter("studentCnt")));
+        lecture.setCost(Integer.parseInt(request.getParameter("cost")));
+        lecture.setBookname(request.getParameter("bookname"));
+        lecture.setBthumbnail(request.getParameter("bthumnail"));
+        lecture.setSno(Integer.parseInt(request.getParameter("sno")));
+
+        lectureService.lectureUpdate(lecture);
+        return "redirect:/admin/lectList.do";
+    }
+
+    @GetMapping("lectDelete.do")    //비
+    public String lectureDelete(HttpServletRequest request, Model model) throws Exception{
+        int lno = Integer.parseInt(request.getParameter("lno"));
+        lectureService.lectureDelete(lno);
+        return "redirect:/admin/lectList.do";
+    }
+
+
+    //관리자페이지 payList
+    @GetMapping("/paylistAdmin.do")
+    public String payment(HttpServletRequest request, Model model) throws Exception {
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("sid");
+
+        String type = request.getParameter("type");
+        String keyword = request.getParameter("keyword");
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+        int bmNo = request.getParameter("no") != null ? Integer.parseInt(request.getParameter("no")) : 1;
+
+        Page page = new Page();
+        page.setSearchType(type);
+        page.setSearchKeyword(keyword);
+        int total = paymentService.paymentCount(page);
+
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        List<Payment> paymentList = paymentService.paymentList_admin(page);
+
+        model.addAttribute("type", type);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("page", page);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("paymentList", paymentList);
+
+
+        return "/admin/payList";
+
+    }
+
 
 }

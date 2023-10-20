@@ -69,8 +69,8 @@
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" name="address1" id="address1" placeholder="기본 주소 입력" class="form-control" required />
-                                    <input type="text" name="address2" id="address2" placeholder="상세 주소 입력" class="form-control" required />
+                                    <input type="text" name="addr1" id="address1" placeholder="기본 주소 입력" class="form-control" required />
+                                    <input type="text" name="addr2" id="address2" placeholder="상세 주소 입력" class="form-control" required />
                                     <input type="text" name="postcode" id="postcode" placeholder="우편번호" class="form-control">
                                     <button type="button" id="post_btn" onclick="findAddr()" class="btn">우편번호 검색</button>
                                     <label class="form-label blind" for="address1">주소</label>
