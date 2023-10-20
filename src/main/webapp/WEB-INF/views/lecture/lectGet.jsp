@@ -22,12 +22,12 @@
                 <img src="${path}/resources/image/lecture/thumnail(6).png">
             </div>
             <div class="col-lg-6">
-                <p>과목 : ${subject.title } </p>
+                <h3 style="color: var(--main-color);">${subject.title } </h3>
                 <h1 class="display-5 fw-bolder text-white mb-2">${lecture.title }</h1>
                 <h3 class="lead text-white-50 mb-4">${lecture.subTitle }</h3>
                 <h3 class="lead text-white-50 mb-4">${teacher.nm }</h3>
-                <a class="btn btn-primary btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
-                <a class="btn btn-outline-light btn-lg px-4" href="#lect_review">수강후기</a>
+                <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
+                <a class="btn btn-warning btn-lg px-4" href="#lect_review" >수강생 후기</a>
             </div>
         </div>
     </div>

@@ -738,7 +738,6 @@ pre code {
 }
 
 .row-lect {
-    flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
 }

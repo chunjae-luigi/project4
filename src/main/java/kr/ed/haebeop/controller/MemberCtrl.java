@@ -344,7 +344,7 @@ public class MemberCtrl {
         model.addAttribute("lecture", lecture);
         model.addAttribute("lno", lno);
 
-        return "/member/lecture";
+        return "/member/myLecture";
 
     }
 

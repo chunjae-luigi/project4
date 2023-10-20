@@ -9,6 +9,12 @@
     <jsp:include page="../layout/adminHead.jsp" />
     <link rel="stylesheet" href="${path }/resources/css/admin.css" />
     <link rel="stylesheet" href="${path }/resources/css/owl.carousel.css" />
+    <style>
+        .floating-label lect {
+            color: var(--main-color) !important;
+            font-size: 20px !important;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../layout/adminHeader.jsp" />
@@ -39,7 +45,7 @@
                         <h5>${lecture.title }</h5>
                     </div>
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row-lect">
                             <div class="card-body">
                                 <div class="row-lect">
                                     <div class="col">
@@ -47,24 +53,17 @@
 
                                             <%-- 썸네일 경로 임시로 해놓은거라 수정필요함. //비--%>
 
-                                            <label class="floating-label d-block">강의 썸네일</label>
-                                            <div><img src="${path}/resources/image/lecture/thumnail(6).png"></div>
+                                            <label class="floating-label lect">강의 썸네일</label>
+                                            <div><img src="${path}/resources/image/lecture/thumnail(6).png" width="400" height="225"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <a href="${path }/resources/image/common/videosample.mp4" class="btn btn-primary d-inline-block" target="_blank">강의영상</a>
-                                            <div><img src="${path}/resources/image/lecture/thumnail(6).png" height="225" width="400"></div>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
                                             <!-- 경로수정필요//비-->
-                                            <a class="btn btn-primary btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/common/videosample.mp4" target="_blank" >강의영상</a>
+                                            <a class="btn btn-primary btn-lg px-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의영상</a>
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +71,7 @@
                                 <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label">강의 제목</label>
+                                            <label class="floating-label lect">강의 제목</label>
                                             <div> ${lecture.title }</div>
                                         </div>
                                     </div>
@@ -80,7 +79,7 @@
                                 <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label">강의 소제목</label>
+                                            <label class="floating-label lect">강의 소제목</label>
                                             <div> ${lecture.subTitle }</div>
                                         </div>
                                     </div>
@@ -88,7 +87,7 @@
                                 <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label d-block">해당 과목</label>
+                                            <label class="floating-label lect">해당 과목</label>
                                             <div>${subject.title }</div>
                                         </div>
                                     </div>
@@ -96,7 +95,7 @@
                                 <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label">강의유형</label>
+                                            <label class="floating-label lect">강의유형</label>
                                             <div> ${lecture.lectureType }</div>
                                         </div>
                                     </div>
@@ -104,7 +103,7 @@
                             <div class="row-lect">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label class="floating-label">내용</label>
+                                        <label class="floating-label lect">내용</label>
                                         <div class="board_view py-3 pl-4">${lecture.content }</div>
                                     </div>
                                 </div>
@@ -112,7 +111,7 @@
                                 <div class="row-lect forOffline">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label d-block">강의 인원수</label>
+                                            <label class="floating-label lect">강의 인원수</label>
                                             <div> ${lecture.studentCnt } 명</div>
                                         </div>
                                     </div>
@@ -124,7 +123,7 @@
                             <div class="row-lect forOffline">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label class="floating-label">강의 일정</label>
+                                        <label class="floating-label lect">강의 일정</label>
                                         <div >${lecture.startDate }</div>
                                     </div>
                                 </div>
@@ -133,7 +132,7 @@
                             <div class="row-lect forOffline">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label class="floating-label">강의 하루 일정</label>
+                                        <label class="floating-label lect">강의 하루 일정</label>
                                         <div >${lecture.daily }</div>
                                     </div>
                                 </div>
@@ -142,7 +141,7 @@
                                 <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label d-block">담당 강사</label>
+                                            <label class="floating-label lect">담당 강사</label>
                                             <div>${lecture.teacherNm }</div>
                                         </div>
                                     </div>
@@ -150,7 +149,7 @@
                                 <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label d-block">강의 교재</label>
+                                            <label class="floating-label lect">강의 교재</label>
                                             <div>${lecture.bookname }</div>
                                         </div>
                                     </div>
@@ -158,7 +157,7 @@
                                 <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label d-block">교재</label>
+                                            <label class="floating-label lect">교재</label>
                                             <div><img src="${path}/resources/image/common/booksample.jpg"></div>
                                         </div>
                                     </div>
@@ -166,7 +165,7 @@
                                 <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label d-block">강의 가격</label>
+                                            <label class="floating-label lect">강의 가격</label>
                                             <div>${lecture.cost }</div>
                                         </div>
                                     </div>

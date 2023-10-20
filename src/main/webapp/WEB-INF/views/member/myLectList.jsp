@@ -96,7 +96,7 @@
 
                         <div class="container" id="mylect">
                         <c:forEach items="${lectureList }" var="lecture" varStatus="status">
-                            <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+                            <div class="col-lg-4 col-12 mb-4">
                                 <div class="custom-block custom-block-full">
                                     <div class="custom-block-image-wrap">
                                         <a href="detail-page.html">
@@ -106,7 +106,7 @@
 
                                     <div class="custom-block-info">
                                         <h3 class="mb-2">
-                                            <a href="detail-page.html">${lecture.title }</a>
+                                            <a href="${path}/user/myLecture.do">${lecture.title }</a>
                                         </h3>
 
                                             <p> ${lecture.teacherNm } 선생님</p>
@@ -116,16 +116,6 @@
 
                                         <a href="${path}/lecture/get.do?lno=${lecture.lno}#lect_review" class="btn btn-primary px-4 mr-2">후기작성</a>
                                         <a href="" class="btn btn-success px-4">질문하기</a>
-                                    </div>
-
-                                    <div class="social-share d-flex flex-column ms-auto">
-                                        <a href="#" class="badge ms-auto">
-                                            <i class="bi-heart"></i>
-                                        </a>
-
-                                        <a href="#" class="badge ms-auto">
-                                            <i class="bi-bookmark"></i>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
