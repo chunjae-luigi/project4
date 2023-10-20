@@ -102,6 +102,7 @@ public class AdminCtrl {
         model.addAttribute("boardMgnList", boardMgnList);
 
 
+
         return "/admin/boardTypeList";
     }
 
@@ -177,7 +178,7 @@ public class AdminCtrl {
         return "redirect:/admin/boardMgnConf.do";
     }
 
-    @GetMapping("/lectList.do")         //비
+    @GetMapping("/lectList.do")
     public String lectureList(HttpServletRequest request, Model model) throws Exception{
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
@@ -203,7 +204,7 @@ public class AdminCtrl {
         return "/admin/lectList";
     }
 
-    @GetMapping("/lectAdd.do")   //비
+    @GetMapping("/lectAdd.do")
     public String lectureAdd(Model model) throws Exception {
         return "/admin/lectAdd";
     }
@@ -306,7 +307,7 @@ public class AdminCtrl {
         return "/admin/findTeacher";
     }
 
-    @GetMapping("/findLecture.do")      //이건뭘까요?
+    @GetMapping("/findLecture.do")
     public String findLecture(HttpServletRequest request, Model model) throws Exception {
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
@@ -332,7 +333,7 @@ public class AdminCtrl {
         return "/admin/findLecture";
     }
 
-    @GetMapping("lectGet.do")      //비
+    @GetMapping("lectGet.do")
     public String lectureGet(HttpServletRequest request, Model model) throws Exception{
         int lno = Integer.parseInt(request.getParameter("lno"));
 
@@ -350,14 +351,14 @@ public class AdminCtrl {
         return "/admin/lectGet";
     }
 
-    @GetMapping("lectUpdate.do")     //비
+    @GetMapping("lectUpdate.do")
     public String lectureUpdate(HttpServletRequest request, Model model) throws Exception{
         int lno = Integer.parseInt(request.getParameter("lno"));
         Lecture lecture = lectureService.lectureGet(lno);
         model.addAttribute("lecture", lecture);
         return "/admin/lectUpdate";
     }
-    @PostMapping("lectUpdate.do")       //비
+    @PostMapping("lectUpdate.do")
     public String lectureUpdatepro(HttpServletRequest request, Model model) throws Exception{
 
         int lno = Integer.parseInt(request.getParameter("lno"));

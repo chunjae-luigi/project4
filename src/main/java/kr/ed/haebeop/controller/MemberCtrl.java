@@ -1,15 +1,14 @@
 package kr.ed.haebeop.controller;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
-import kr.ed.haebeop.domain.Board;
 import kr.ed.haebeop.domain.FileDTO;
+import kr.ed.haebeop.domain.Comment;
+import kr.ed.haebeop.domain.Lecture;
 import kr.ed.haebeop.domain.Member;
 import kr.ed.haebeop.domain.MemberMgn;
 import kr.ed.haebeop.domain.Payment;
-import kr.ed.haebeop.service.FilesService;
-import kr.ed.haebeop.service.MemberMgnService;
-import kr.ed.haebeop.service.MemberService;
-import kr.ed.haebeop.service.PaymentService;
+import kr.ed.haebeop.service.*;
+import kr.ed.haebeop.service.LectureService;
 import kr.ed.haebeop.util.NaverLogin;
 import kr.ed.haebeop.util.Page;
 import org.json.simple.JSONObject;
@@ -29,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -40,6 +40,9 @@ public class MemberCtrl {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private LectureService lectureService;
 
     @Autowired
     private MemberMgnService memberMgnService;
@@ -299,6 +302,18 @@ public class MemberCtrl {
         return "redirect:/user/myPage.do";
     }
 
+    //비
+    @GetMapping("/myLectList.do")
+    public String myLectList(HttpServletRequest request, Model model) throws Exception {
+        String sid = (String) session.getAttribute("sid");
+        int lno = Integer.parseInt(request.getParameter("lno"));
+        Member member = memberService.memberGet(sid);
+        List<Lecture> myLectList = lectureService.myLectList(lno);
+        model.addAttribute("myLectList", myLectList);
+        model.addAttribute("member", member);
+        return "/member/myLectList";
+    }
+
     /*
     @InitBinder
     protected void initBinder(WebDataBinder binder){
@@ -350,7 +365,7 @@ public class MemberCtrl {
         return "redirect:/";
 
     }
-    
+
     //멤버 payList
     @GetMapping("/paylistMem.do")
     public String paymentMem(HttpServletRequest request, Model model) throws Exception {
@@ -383,5 +398,5 @@ public class MemberCtrl {
 
     }
 
-    
+
 }

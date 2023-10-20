@@ -81,11 +81,6 @@ CREATE TABLE files(
 );
 -- 여기까지는 완료
 
--- ========================= 슬비시작(내가 헷갈려서 썼어 지워도돼ㅠ_ㅠ) ================================
--- 강의, 과목, 목차, 수강후기, 수강
-
-USE team44;
-
 CREATE TABLE lecture(
 	lno INT AUTO_INCREMENT PRIMARY KEY,			-- 강의 번호 : 자동증가
 	title VARCHAR(150) NOT NULL,					-- 강의 제목
@@ -99,17 +94,16 @@ CREATE TABLE lecture(
 	teacherId VARCHAR(20) NOT NULL,				-- 강의 담당 선생 아이디
 	teacherNm VARCHAR(20),
 	thumbnail VARCHAR(100),                	-- 강의 썸네일
-       lvideo VARCHAR(100)  ,    						-- 샘플영상
-       sno INT NOT NULL, 								-- 과목
-       cost INT NOT NULL, 								-- 강의가격
-       bookname VARCHAR(150),							-- 교재명
-       bthumbnail VARCHAR(100)    					-- 교재 썸네일
+    lvideo VARCHAR(100)  ,    						-- 샘플영상
+    sno INT NOT NULL, 								-- 과목
+    cost INT NOT NULL, 								-- 강의가격
+    bookname VARCHAR(150),							-- 교재명
+    bthumbnail VARCHAR(100)    					-- 교재 썸네일
 );
 
 insert into lecture(lno, title, subTitle, content, lectureType, studentCnt, teacherId, teacherNm, sno, cost) value(default, '강의 제목 1번', '강의 소제목 1번', '강의 내용 1번', 0, 20, 'qeee', '선생님 이름', 1, 50000);
 
 SELECT * FROM lecture;
-
 
 CREATE TABLE subject(
    sno INT PRIMARY KEY AUTO_INCREMENT,	-- 과목번호
@@ -163,5 +157,8 @@ CREATE TABLE payment(
     status INT DEFAULT 0,                           -- 배송상태 - [0:결제완료 | 1:결제완료 | 2:결제취소]
     resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()   -- 결제 등록일
 );
--- ============================ 교진끝  ===================================
 
+INSERT INTO payment VALUES (DEFAULT, 'admin', '상품2번' , 2, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 2, DEFAULT);
+INSERT INTO payment VALUES (DEFAULT, 'qeee', '상품1번' , 1, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 1, DEFAULT);
+
+-- ============================ 교진끝  ===================================
