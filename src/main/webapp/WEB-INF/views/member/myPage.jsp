@@ -8,27 +8,6 @@
     <title>HEABEOP::마이페이지</title>
     <jsp:include page="../layout/head.jsp" />
     <link rel="stylesheet" href="${path }/resources/css/sub.css">
-    <style>
-        .myPage {background-color:#e1e1e1;}
-
-        .left_side, .right_side {background-color:#fff}
-
-        .left_top {
-            display: block;
-            width: 100%;
-            text-align: center;
-            height: 80px;
-            line-height: 80px;
-            background-color: var(--main-color);
-            color: #fff;
-            font-weight: 800;
-            font-size: 1.4em;
-            letter-spacing: 4px;
-        }
-
-        .left_side ul a {display: block;width: 100%;font-weight: 500;}
-        .left_side ul a.active {text-decoration:underline;color:#333;}
-    </style>
 </head>
 <body class="myPage">
     <jsp:include page="../layout/header.jsp" />
@@ -70,7 +49,7 @@
                                     </tr>
                                     <tr>
                                         <th class="text-center">비밀번호</th>
-                                        <td><a href="${path }/user/changePw.do?id=${member.id }">비밀번호 변경</a></td>
+                                        <td><c:if test="${sid ne 'admin'}"><a href="${path }/user/changePw.do?id=${member.id }">비밀번호 변경</a></c:if></td>
                                     </tr>
                                     <tr>
                                         <th class="text-center">이메일</th>
@@ -99,7 +78,7 @@
                                                 <c:when test="${member.grade == 1 }">선생님</c:when>
                                                 <c:when test="${member.grade == 2 }">회원</c:when>
                                                 <c:otherwise>관리자</c:otherwise>
-                                            </c:choose> - <a href="${path }/user/changeGrade.do">선생님 신청하기</a>
+                                            </c:choose> - <c:if test="${checkTeacher eq 'ing' }"><span style="color:var(--main-color);">선생님 신청 진행 중</span></c:if><c:if test="${checkTeacher eq 'fail' || checkTeacher eq 'noApply' }"><a href="${path }/user/changeGrade.do">선생님 신청하기</a></c:if>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -108,7 +87,7 @@
 
                             <div class="d-flex justify-content-end">
                                 <a href="${path }/user/myPageEdit.do" class="btn btn-primary px-3 py-2 my-4 mr-2">수정하기</a>
-                                <a href="${path }/user/removeUser.do" class="btn btn-success px-3 py-2 my-4">탈퇴하기</a>
+                                <c:if test="${sid ne 'admin'}"><a href="${path }/user/removeUser.do?id=${sid }" class="btn btn-success px-3 py-2 my-4">탈퇴하기</a></c:if>
                             </div>
                         </div>
                     </div>
@@ -119,5 +98,10 @@
     </div>
 
     <jsp:include page="../layout/footer.jsp" />
+    <script>
+        <c:if test="${msg eq 'pwSuccess'}">
+        alert("비밀번호가 성공적으로 변경되었습니다.");
+        </c:if>
+    </script>
 </body>
 </html>
