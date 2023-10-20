@@ -183,28 +183,31 @@
                     </tfoot>
                 </table>
 
-                <h3>주문자 정보</h3>
-                <div class="row">
+                <h3 >주문자 정보 </h3><p id="closebar1">▲</p>
+                <section id="closebar2" style="display: block">
+                <div class="row" >
                     <div class="col-2"><label for="nm" class="form-label">이름</label></div>
-                    <div class="col-8"><input type="text" class="form-control" id="nm" name="nm" readonly value="${mem.nm}"></div>
-                    <div class="col-8"><input type="hidden" class="form-control" id="id" name="id" readonly value="${mem.id}"></div>
+                    <div class="col-4"><input type="text" class="form-control" id="nm" name="nm" readonly value="${mem.nm}"></div>
+                    <div class="col-4"><input type="hidden" class="form-control" id="id" name="id" readonly value="${mem.id}"></div>
                 </div>
-                <div class="row">
+                <div class="row" >
                     <div class="col-2"><label for="email" class="form-label">이메일</label></div>
                     <div class="col-4"><input type="email" class="form-control" id="email" name="email" readonly value="${mem.email}"></div>
                     <div class="col-2"><label for="tel" class="form-label">전화번호</label></div>
                     <div class="col-4"><input type="tel" class="form-control" id="tel" name="tel" readonly value="${mem.tel}"></div>
                     <input type="hidden" class="form-control" id="amount" name="amount" readonly value="1">
                 </div>
-
-                <div class="form-outline mb-4">
-                    <input type="text" name="address1" id="address1" placeholder="기본 주소 입력" class="form-control" required />
-                    <input type="text" name="address2" id="address2" placeholder="상세 주소 입력" class="form-control" required />
-                    <input type="text" name="postcode" id="postcode" placeholder="우편번호" class="form-control">
-                    <button type="button" id="post_btn" onclick="findAddr()" class="btn">우편번호 검색</button>
-                    <label class="form-label blind" for="address1">주소</label>
+                <div class="row">
+                    <div class="col-2"><label for="addr1" class="form-label">기본 주소</label></div>
+                    <div class="col-4"><input type="text" name="addr1" id="addr1" class="form-control" value="${mem.addr1}" required /></div>
+                    <div class="col-2"><label for="addr2" class="form-label">상세 주소</label></div>
+                    <div class="col-4"><input type="text" name="addr2" id="addr2" class="form-control" value="${mem.addr2}"required /></div>
+                    <div class="col-2"><label for="postcode" class="form-label">우편 번호</label></div>
+                    <div class="col-4"><input type="text" name="postcode" id="postcode" value="${mem.postcode}" class="form-control"></div>
+                    <div class="col-2"></div>
+                    <div class="col-4"><button type="button" id="post_btn" onclick="findAddr()" class="btn btn-primary">우편번호 검색</button></div>
                 </div>
-
+                </section>
                 <hr>
                 <h3>결제 정보</h3>
                 <%--  Payment의 method, pcom, paccount --%>
@@ -259,6 +262,26 @@
 </body>
 </html>
 <script>
+    // 주문자 정보 close bar
+        $(document).ready(function () {
+            var sw = true;
+            sw=!sw
+            $("#closebar1").click(function () {
+                $("#closebar2").slideToggle()
+                if(sw==true){
+                    $("#closebar1").text('▲');
+                    sw = false
+                }else if(sw==false) {
+                    $("#closebar1").text('▼');
+                    sw = true
+                }
+            });
+
+    });
+
+</script>
+        <script>
+    // 포인트 계산
     $(document).ready(function() {
         let total = 0;
         total = $("#total").val()
@@ -344,11 +367,11 @@
                 var jibunAddr = data.jibunAddress;
                 document.getElementById("postcode").value = data.zonecode;
                 if(roadAddr !== '') {
-                    document.getElementById("address1").value = roadAddr;
+                    document.getElementById("addr1").value = roadAddr;
                 } else if(jibunAddr !== ''){
-                    document.getElementById("address1").value = jibunAddr;
+                    document.getElementById("addr1").value = jibunAddr;
                 }
-                document.getElementById("address2").focus();
+                document.getElementById("addr2").focus();
             }
         }).open();
     }
@@ -367,7 +390,7 @@
         oPay.open({
             merchantUserKey: "12341234",
             merchantPayKey: "1524213",
-            productName: "GitHub 마스터 강좌",
+            productName: $("#plec").val(),
             totalPayAmount: totalPayAmount,
             taxScopeAmount: totalPayAmount,
             taxExScopeAmount: "0",
@@ -377,110 +400,57 @@
 
 </script>
 
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script>
-    //결제모듈 API 연동
     $(document).ready(function(){
         $("#paybtn").click(function(){
-            var email = $("#email").val();
-            var cname = $("#nm").val();
-            var tel = $("#tel").val();
-            var postcode = $("#postcode").val();
-            proName = $("#proName").val();
-            if($("#amount").val()!="") {
-                totalPay = parseInt($("#price").val());
-            } else {
-                alert("구매할 수량을 입력하지 않으셨습니다.");
-                $("#amount").focus();
-                return;
-            }
-            alert("결제할 금액 : " + totalPay);
-            //상품명_현재시간
-            var d = new Date();
-            var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-            var IMP = window.IMP; // 생략가능
-            alert("date: "+ date)
-
-            IMP.init('imp67615784'); // 결제 API를 사용하기 위한 코드 입력!
-                IMP.request_pay({		//결제 요청
-                    pg: "iamport00m",     //iamport00m  //T5102001
-                    merchant_uid: '상품명_' + date, //상점 거래 ID
-                    name: proName,				// 결제 명
-                    amount: totalPay,					// 결제금액
-                    buyer_email: email, // 구매자 email
-                    buyer_name: cname,				// 구매자 이름
-                    buyer_tel: tel,		// 구매자 전화번호
-                    buyer_postcode: postcode			// 구매자 우편번호
-                }, function (rsp) {
-                    if (rsp.success) {
-                        console.log(rsp);
-                        var msg = '결제가 완료 되었습니다.';
-                        var r1 = '고유 아이디 : ' +rsp.imp_uid;
-                        var r2 = '상점 거래 아이디 : ' +rsp.merchant_uid;
-                        var r3 = '결제 금액 : ' +rsp.paid_amount;
-                        var r4 = '카드 승인 번호 : '+rsp.apply_num;
-
-                        // 실제 결제 창
-                        // $("#payCk").val("yes");
-                        // $("#payAmount").val(rsp.paid_amount);
-                        // $("#pmethod").val(rsp.pay_method);
-                        // $("#pcom").val(rsp.pg_provider);
-                        // $("#cnum").val(rsp.apply_num);
-                        // alert(msg);
-                        // $("#paymentResult").html(r1+"<br>"+r2+"<br>"+r3+"<br>"+r4);
-                    } else {
-                        //$("#paymentResult").html('결제실패<br>'+'에러내용 : ' +rsp.error_msg);
+        IMP.init('imp67615784'); // 결제 API를 사용하기 위한 코드 입력!
+        IMP.request_pay({
+            pg : 'T5102001',
+            pay_method : 'card',
+            merchant_uid: "order_no_0001", //상점에서 생성한 고유 주문번호
+            name : $("#plec").val(),
+            amount : $("#price").val(),
+            buyer_email : 'iamport@siot.do',
+            buyer_name : $('#nm').val(),
+            buyer_tel : '010-1234-5678',
+            buyer_addr : '서울특별시 강남구 삼성동',
+            buyer_postcode : '123-456',
+            m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
+        }, function(rsp) {
+            if ( rsp.success ) {
+                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+                jQuery.ajax({
+                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        imp_uid : rsp.imp_uid
+                        //기타 필요한 데이터가 있으면 추가 전달
                     }
-                    //테스트용이므로 실패시에도 그냥 통과시킴
-                    $("#payCk").val("yes");
-                    $("#payAmount").val(totalPay);
-                    // $("#pmethod").val("신용카드");
-                    // $("#pcom").val("삼성카드");
-                    // $("#cnum").val("123-1234-1234-1278");
-                    $("#paymentResult").text("결제 완료 : " + totalPay);
+                }).done(function(data) {
+                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                    if ( everythings_fine ) {
+                        var msg = '결제가 완료되었습니다.';
+                        msg += '\n고유ID : ' + rsp.imp_uid;
+                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                        msg += '\n결제 금액 : ' + rsp.paid_amount;
+                        msg += '카드 승인번호 : ' + rsp.apply_num;
+
+                        alert(msg);
+                    } else {
+                        //[3] 아직 제대로 결제가 되지 않았습니다.
+                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                    }
                 });
-                console.log(totalPay, proName, email, cname, tel, postcode, totalPay, IMP)
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
 
+                alert(msg);
+            }
         });
-    });
+        })})
 </script>
-<script>
-    function payCheck(f){
-        var payCk = f.payCk.value;
-        console.log(payCk);
-        if(payCk!="yes"){
-            alert("아직 결제 전 입니다.");
-            return false;
-        }
-    }
-</script>
-
-<%--<script>--%>
-<%--    $(document).ready(function(){--%>
-<%--        $("#paybtn").click(function() {--%>
-<%--            var IMP = window.IMP; // 생략가능--%>
-<%--            alert(IMP)--%>
-<%--            IMP.request_pay({--%>
-<%--                pg : 'chai',--%>
-<%--                pay_method : 'trans',--%>
-<%--                merchant_uid: "order_no_0001", //상점에서 생성한 고유 주문번호--%>
-<%--                name : '주문명:결제테스트',--%>
-<%--                amount : 14000,--%>
-<%--                buyer_email : 'iamport@siot.do',--%>
-<%--                buyer_name : '구매자이름',--%>
-<%--                buyer_tel : '010-1234-5678',--%>
-<%--                buyer_addr : '서울특별시 강남구 삼성동',--%>
-<%--                buyer_postcode : '123-456',--%>
-<%--                m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete--%>
-<%--            }, function(rsp) {--%>
-<%--                if ( !rsp.success ) {--%>
-<%--                    //결제 시작 페이지로 리디렉션되기 전에 오류가 난 경우--%>
-<%--                    var msg = '오류로 인하여 결제가 시작되지 못하였습니다.';--%>
-<%--                    msg += '에러내용 : ' + rsp.error_msg;--%>
-
-<%--                    alert(msg);--%>
-<%--                }--%>
-<%--            });--%>
-<%--        })--%>
-<%--    })--%>
-<%--</script>--%>

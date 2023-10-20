@@ -84,7 +84,7 @@ public class MemberCtrl {
         return "redirect:/";
     }
 
-    @PostMapping("/fire")
+    @GetMapping("/fire")
     public String firepoint(HttpServletRequest req, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
         int pt = 10000;
