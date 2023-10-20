@@ -1,6 +1,8 @@
 package kr.ed.haebeop.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -9,18 +11,20 @@ public class Lecture {
 
     private int lno;
     private String title;
-    private String subtitle;
+    private String subTitle;
     private String content;
-    private int lecturetype;
-    private int studentcnt;
-    private String startdate;
-    private String enddate;
+    private int lectureType;
+    private int studentCnt;
+    private String startDate;
+    private String endDate;
     private String daily;
-    private int prono;
-    private String teacherid;
-    private int thumbnail;
-    private boolean useyn;
-    private int dno;            // 배송 번호
-    private int price;
+    private String teacherId;
+    private String teacherNm;
+    private String thumbnail;
+    private String lvideo;
+    private int sno;
+    private int cost;
+    private String bookname;
+    private String bthumbnail;
 
 }
