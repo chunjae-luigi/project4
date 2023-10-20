@@ -75,7 +75,7 @@ public class PaymentCtrl {
         page.makeLastPageNum(total);
         page.makePostStart(curPage, total);
 
-        List<LectureVO> lecture = lectureService.lectureList(page);
+        List<Lecture> lecture = lectureService.lectureList(page);
         model.addAttribute("type", type);
         model.addAttribute("keyword", keyword);
         model.addAttribute("page", page);

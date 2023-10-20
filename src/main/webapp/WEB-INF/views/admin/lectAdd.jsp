@@ -25,7 +25,7 @@
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="${path }/admin/"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#!" onclick="return false;">강의 설정</a></li>
+                                <li class="breadcrumb-item"><a href="${path }/admin/lectList" onclick="return false;">강의 설정</a></li>
                             </ul>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
             </div>
             <!-- [ breadcrumb ] end -->
             <!-- [ Main Content ] start -->
-            <form action="${path }/admin/lectureAdd.do" name="frm1" method="post" enctype="multipart/form-data">
+            <form action="${path }/admin/lectAdd.do" name="frm1" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card">
@@ -60,6 +60,25 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
+                                            <label class="floating-label d-block">해당 과목</label>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="sno1" name="sno" class="custom-control-input" value="1">
+                                                <label class="custom-control-label" for="sno1">수학</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="sno2" name="sno" class="custom-control-input" value="2">
+                                                <label class="custom-control-label" for="sno2">영어</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="sno3" name="sno" class="custom-control-input" value="3" checked>
+                                                <label class="custom-control-label" for="sno3">기타</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
                                             <label class="floating-label" for="content">내용</label>
                                             <textarea name="content" id="content" class="form-control" rows="8" cols="100" maxlength="1400" required></textarea>
                                         </div>
@@ -68,7 +87,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label d-block">강의 설정</label>
+                                            <label class="floating-label d-block">강의 유형</label>
                                             <div class="custom-control custom-radio custom-control-inline">
                                                 <input type="radio" id="lectureType0" name="lectureType" class="custom-control-input" value="0" onchange="changeType(this)">
                                                 <label class="custom-control-label" for="lectureType0">온라인</label>
@@ -104,16 +123,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label class="floating-label d-block" for="prono">강의 서적</label>
-                                            <input type="text" class="form-control d-inline-block" name="proNm" id="proNm" readonly style="width:calc(100% - 170px)">
-                                            <input type="hidden" name="prono" id="prono" value="0">
-                                            <button type="button" class="form-control ml-2 wid-150 d-inline-block" onclick="findPro()">찾기</button>
-                                        </div>
-                                    </div>
-                                </div>
+
+
+
+                            <%-- 슨생님 찾는 칸이다 슬비슬비슬비슬비슬비슬비슬비슬비슬비슬비 --%>
+
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
@@ -124,37 +138,67 @@
                                         </div>
                                     </div>
                                 </div>
+                                <%--              슨생님 찾는 칸이다 슬비슬비슬비슬비슬비슬비슬비슬비슬비슬비 --%>
+
+
+
+
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">강의 썸네일 업로드(10MB 이하)</label>
-                                            <input type="file" class="form-control uploadThumbnail" name="uploadThumbnail" id="uploadThumbnail" multiple required>
+                                            <input type="file" class="form-control uploadThumbnail" name="thumbnail" id="thumbnail" multiple required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label d-block" for="lPrice">강의 가격</label>
-                                            <input type="number" class="form-control wid-150 d-inline-block" name="lPrice" id="lPrice" aria-describedby="강의 가격 입력" min="0"><p class="ml-2 d-inline-block">원</p>
+                                            <label class="floating-label d-block">강의 영상 업로드(10MB 이하)</label>
+                                            <input type="file" class="form-control uploadThumbnail" name="lvideo" id="lvideo" multiple required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label d-block">사용 설정</label>
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="useYn1" name="useYn" class="custom-control-input" value="true" checked>
-                                                <label class="custom-control-label" for="useYn1">사용</label>
-                                            </div>
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="useYn2" name="useYn" class="custom-control-input" value="false">
-                                                <label class="custom-control-label" for="useYn2">사용안함</label>
-                                            </div>
+                                            <label class="floating-label d-block">교재 이미지 업로드(10MB 이하)</label>
+                                            <input type="file" class="form-control uploadThumbnail" name="bthumbnail" id="bthumbnail" multiple required>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="bookname">강의 교재</label>
+                                            <input type="text" class="form-control" name="bookname" id="bookname" placeholder="교재명을 입력해주세요." aria-describedby="강의 소제목 도움" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="floating-label d-block" for="cost">강의 가격</label>
+                                            <input type="number" class="form-control wid-150 d-inline-block" name="cost" id="cost" aria-describedby="강의 가격 입력" min="0"><p class="ml-2 d-inline-block">원</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+<%--                                <div class="row">--%>
+<%--                                    <div class="col">--%>
+<%--                                        <div class="form-group">--%>
+<%--                                            <label class="floating-label d-block">사용 설정</label>--%>
+<%--                                            <div class="custom-control custom-radio custom-control-inline">--%>
+<%--                                                <input type="radio" id="useYn1" name="useYn" class="custom-control-input" value="true" checked>--%>
+<%--                                                <label class="custom-control-label" for="useYn1">사용</label>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="custom-control custom-radio custom-control-inline">--%>
+<%--                                                <input type="radio" id="useYn2" name="useYn" class="custom-control-input" value="false">--%>
+<%--                                                <label class="custom-control-label" for="useYn2">사용안함</label>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
                             </div>
                         </div>
                     </div>
