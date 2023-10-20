@@ -1,6 +1,5 @@
 package kr.ed.haebeop.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Study {
-    private int sno;
+public class Curri {
+    private int cno;
     private int lno;
-    private String studentId;
-    private boolean studyYn;
-    private boolean canYn;
+    private String content;
 }

@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Study {
+public class Subject {
     private int sno;
-    private int lno;
-    private String studentId;
-    private boolean studyYn;
-    private boolean canYn;
+    private String title;
 }

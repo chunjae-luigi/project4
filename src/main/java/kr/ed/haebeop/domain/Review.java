@@ -1,17 +1,17 @@
 package kr.ed.haebeop.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Review {
-
     private int rno;
-    private int par;
-    private String author;
+    private int lno;
+    private String memId;
     private String content;
     private int star;
-    private String resDate;
-
+    private String regdate;
 }

@@ -61,29 +61,25 @@
                                     <table class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">강의 이름</th>
-                                            <th class="text-center">강의 타입</th>
-                                            <th class="text-center">사용 여부</th>
-                                            <th class="text-center">비고</th>
+                                            <th class="text-center">NO</th>
+                                            <th class="text-center">타입</th>
+                                            <th class="text-center">과목</th>
+                                            <th class="text-center">강의명</th>
+                                            <th class="text-center">강사명</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${lectureList }" var="lecture" varStatus="status">
                                             <tr>
                                                 <td class="text-center">${status.count }</td>
-                                                <td class="text-center"><a href="${path }/admin/getLecture.do?no=${lecture.lno }">${lecture.title }</a></td>
                                                 <td class="text-center">
                                                     <c:choose>
                                                         <c:when test="${lecture.lectureType == 0}">온라인</c:when>
                                                         <c:otherwise>오프라인</c:otherwise>
                                                     </c:choose>
                                                 </td>
-                                                <td class="text-center">
-                                                    <c:if test="${lecture.useYn == true}">사용중</c:if>
-                                                    <c:if test="${lecture.useYn == false}">사용안함</c:if>
-                                                </td>
-                                                <td class="text-center"></td>
+                                                <td class="text-center"><a href="${path }/admin/lectGet.do?lno=${lecture.lno }">${lecture.title }</a></td>
+                                                <td class="text-center">${lecture.teacherNm }</td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -92,20 +88,20 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">
                                         <c:if test="${curPage > page.pageCount }">
-                                            <li class="page-item"><a class="page-link" href="${path }/admin/lectureConf.do?page=${page.blockStartNum - 1 }" aria-label="Previous"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+                                            <li class="page-item"><a class="page-link" href="${path }/admin/lectList.do?page=${page.blockStartNum - 1 }" aria-label="Previous"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
                                         </c:if>
                                         <c:forEach var="i" begin="${page.blockStartNum }" end="${page.blockLastNum }">
                                             <c:choose>
                                                 <c:when test="${i == curPage }">
-                                                    <li class="page-item active"><a class="page-link" href="${path }/admin/lectureConf.do?page=${i }">1</a></li>
+                                                    <li class="page-item active"><a class="page-link" href="${path }/admin/lectList.do?page=${i }">1</a></li>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <li class="page-item"><a class="page-link" href="${path }/admin/lectureConf.do?page=${i }">1</a></li>
+                                                    <li class="page-item"><a class="page-link" href="${path }/admin/lectList.do?page=${i }">1</a></li>
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:forEach>
                                         <c:if test="${page.blockLastNum < page.totalPageCount }">
-                                            <li class="page-item"><a class="page-link" href="${path }/admin/lectureConf.do?page=${page.blockLastNum + 1 }" aria-label="Next"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+                                            <li class="page-item"><a class="page-link" href="${path }/admin/lectList.do?page=${page.blockLastNum + 1 }" aria-label="Next"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
                                         </c:if>
                                     </ul>
                                 </nav>
@@ -119,7 +115,7 @@
             </div>
             <div class="row justify-content-md-end">
                 <div class="col-md-1">
-                    <a href="${path }/admin/lectureAdd.do" class="btn btn-primary" style="width:100%;">등록</a>
+                    <a href="${path }/admin/lectAdd.do" class="btn btn-primary" style="width:100%;">등록</a>
                 </div>
             </div>
             <!-- [ Main Content ] end -->

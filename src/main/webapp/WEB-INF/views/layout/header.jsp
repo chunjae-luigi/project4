@@ -17,7 +17,7 @@
                 <a href="${path}/payment/rrr.do" class="nav-item nav-link">임시 샘플</a>
                 <a href="${path}/payment/list.do" class="nav-item nav-link">강의목록(임시)</a>
                 <a href="${path}/payment/paylistMember.do?sid=${sid }" class="nav-item nav-link">결제창</a>
-                <a href="${path }/lecture/list.do?no=4" class="nav-item nav-link">강의테스트</a>
+                <a href="${path }/lecture/list.do" class="nav-item nav-link">온라인강의</a>
                 <div class="nav-item dropdown board_drop_menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu rounded-0 m-0" id="boardMenuArea"></div>
