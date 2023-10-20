@@ -21,8 +21,13 @@ public class PaymentServiceImpl implements PaymentService{
     }
 
     @Override
-    public List<Payment> paymentpage(Page page) throws Exception {
-        return paymentMapper.paymentpage(page);
+    public List<Payment> paymentList_admin(Page page) throws Exception {
+        return paymentMapper.paymentList_admin(page);
+    }
+
+    @Override
+    public List<Payment> paymentList_mypage(Page page) throws Exception {
+        return paymentMapper.paymentList_mypage(page);
     }
 
     @Override

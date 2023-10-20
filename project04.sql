@@ -97,14 +97,16 @@ CREATE TABLE lecture(
 	endDate TIMESTAMP,								-- 강의 종료 기간 - 오프라인 사용
 	daily VARCHAR(200),								-- 강의 하루 일정 - 오프라인 사용
 	teacherId VARCHAR(20) NOT NULL,				-- 강의 담당 선생 아이디
-	teacherId VARCHAR(20),
+	teacherNm VARCHAR(20),
 	thumbnail VARCHAR(100),                	-- 강의 썸네일
-   lvideo VARCHAR(100)  ,    						-- 샘플영상
-   sno INT NOT NULL, 								-- 과목
-   cost INT NOT NULL, 								-- 강의가격
-   bookname VARCHAR(150),							-- 교재명
-   bthumbnail VARCHAR(100)    					-- 교재 썸네일
+       lvideo VARCHAR(100)  ,    						-- 샘플영상
+       sno INT NOT NULL, 								-- 과목
+       cost INT NOT NULL, 								-- 강의가격
+       bookname VARCHAR(150),							-- 교재명
+       bthumbnail VARCHAR(100)    					-- 교재 썸네일
 );
+
+insert into lecture(lno, title, subTitle, content, lectureType, studentCnt, teacherId, teacherNm, sno, cost) value(default, '강의 제목 1번', '강의 소제목 1번', '강의 내용 1번', 0, 20, 'qeee', '선생님 이름', 1, 50000);
 
 SELECT * FROM lecture;
 
@@ -145,21 +147,21 @@ CREATE TABLE study(
 
 -- ============================ 슬비끝  ===================================
 
--- 여기 아래도 완료
 CREATE TABLE payment(
     payno INT AUTO_INCREMENT PRIMARY KEY,		    -- 결제 번호 : 자동증가
     id VARCHAR(20) NOT NULL,                        -- 회원 아이디
-    plec VARCHAR(100) NOT NULL,                     -- 상품 이름
-    sno INT NOT NULL,                               -- 수강 번호
-    amount INT DEFAULT 1,                           -- 결제 수량
+    pno int default 0,                              -- 강의 공유번호
+    plec VARCHAR(100) NOT NULL,                     -- 강의 이름
+    tecid VARCHAR(100) NOT NULL,                    -- 선생님 아이디
+    tecnm VARCHAR(100) NOT NULL,                    -- 선생님 이름
+    booknm VARCHAR(100),                            -- 책 교재명
     pmethod VARCHAR(10),                            -- 결제 방법 - [1:신용카드 | 2:체크카드 | 3:계좌이체]
     pcom VARCHAR(100),                              -- 결제 대행사
     pnum VARCHAR(100),                              -- 결제카드(계좌)번호
     price INT DEFAULT 1000,                         -- 결제 금액
+    amount INT DEFAULT 1,                           -- 결제 수량
     status INT DEFAULT 0,                           -- 배송상태 - [0:결제완료 | 1:결제완료 | 2:결제취소]
-    dno INT DEFAULT 0,                              -- 배송 번호
     resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()   -- 결제 등록일
 );
+-- ============================ 교진끝  ===================================
 
-INSERT INTO payment VALUES (DEFAULT, 'admin', '상품2번' , 2, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 2, DEFAULT);
-INSERT INTO payment VALUES (DEFAULT, 'qeee', '상품1번' , 1, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 1, DEFAULT);
