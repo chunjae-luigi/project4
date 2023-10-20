@@ -2,6 +2,8 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.Member;
 import kr.ed.haebeop.util.Page;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -27,6 +29,8 @@ public interface MemberService {
 
     public void updateMember(Member member) throws Exception;
 
+    public void updatePw(Member member) throws Exception;
 
+    public void removeMember(String id) throws Exception;
 
 }

@@ -25,6 +25,8 @@ public class ApplicationConfig {
     @Bean
     public MemberService memberService() {return new MemberServiceImpl();}
 
+    public MemberMgnService memberMgnService() {return new MemberMgnServiceImpl();}
+
     @Bean
     public BoardMgnService boardMgnService() {return new BoardMgnServiceImpl();}
 

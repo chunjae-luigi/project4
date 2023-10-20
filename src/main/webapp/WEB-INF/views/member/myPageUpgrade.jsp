@@ -30,15 +30,20 @@
                     </div>
                     <div class="col-10 p-2">
                         <div class="d-flex flex-column align-items-center justify-content-center right_side">
-                            <h5 class="my-4" style="font-size:2.5em;font-weight:600;">회원 정보 수정</h5>
-                            <form action="${path }/user/myPageEdit.do" method="post" style="width:100%;">
-
+                            <h5 class="my-4" style="font-size:2.5em;font-weight:600;">선생님 신청하기</h5>
+                            <form action="${path }/user/changeGrade.do" method="post" style="width:100%;" enctype="multipart/form-data">
+                                <input type="hidden" value="${checkTeacher}" name="checkTeacher" />
                                 <div class="container px-5">
                                     <table class="table table-bordered mx-3">
                                         <colgroup>
                                             <col style="width:20%;">
                                             <col style="width:auto;">
                                         </colgroup>
+                                        <c:if test="${checkTeacher eq 'fail' }">
+                                            <thead>
+                                            <th class="text-center" style="color:var(--danger);" colspan="2">[취소 사유] ${memberMgn.content }</th>
+                                            </thead>
+                                        </c:if>
                                         <tbody>
                                         <tr>
                                             <th class="text-center">이름</th>
@@ -48,27 +53,19 @@
                                             <th class="text-center">아이디</th>
                                             <td>${member.id }</td>
                                         </tr>
+                                        <c:if test="${checkTeacher eq 'fail' || checkTeacher eq 'noApply' }">
                                         <tr>
-                                            <th class="text-center">이메일</th>
-                                            <td><input type="email" name="email" id="email" class="form-control" value="${member.email }" /></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-center">전화번호</th>
-                                            <td><input type="text" name="tel" id="tel" class="form-control" value="${member.tel }" /></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-center">주소</th>
+                                            <th class="text-center">사진 등록하기</th>
                                             <td>
-                                                <input type="text" name="addr1" id="address1" value="${member.addr1 }" class="form-control mb-1" />
-                                                <input type="text" name="addr2" id="address2" value="${member.addr2 }" class="form-control mb-1" />
-                                                <input type="text" name="postcode" id="postcode" value="${member.postcode }" class="form-control">
-                                                <button type="button" id="post_btn" onclick="findAddr()" class="btn">우편번호 검색</button>
-                                                <label class="form-label blind" for="address1">주소</label>
+                                                <input type="file" class="form-control uploadFiles" name="uploadFiles" multiple required>
                                             </td>
                                         </tr>
+                                        </c:if>
                                         <tr>
-                                            <th class="text-center">생일</th>
-                                            <td><input type="date" name="birth" id="birth" class="form-control" value="${member.birth }" /></td>
+                                            <th class="text-center">관련 서류 등록하기</th>
+                                            <td>
+                                                <input type="file" class="form-control uploadFiles" name="uploadFiles" multiple required>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -76,7 +73,7 @@
 
                                 <div class="d-flex justify-content-center">
                                     <a href="${path }/user/myPage.do" class="btn btn-primary px-5 py-2 my-4 mr-2">취소</a>
-                                    <button type="submit" class="btn btn-success px-5 py-2 my-4">수정</button>
+                                    <button type="submit" class="btn btn-success px-5 py-2 my-4">신청하기</button>
                                 </div>
                             </form>
                         </div>

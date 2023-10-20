@@ -13,10 +13,13 @@ import java.util.List;
 public interface MemberMgnMapper {
 
     @Select("SELECT * FROM MemberMgn WHERE !approveYn AND content IS NULL LIMIT #{postStart}, #{postCount}")
-    public List<MemberMgnMapper> memberMgnList(Page page) throws Exception;
+    public List<MemberMgn> memberMgnList(Page page) throws Exception;
 
     @Select("SELECT COUNT(*) FROM MemberMgn WHERE !approveYn AND content IS NULL")
     public int memberMgnCount() throws Exception;
+
+    @Select("SELECT * FROM MemberMgn WHERE author = #{id}")
+    public MemberMgn memberMgnGet(String id) throws Exception;
 
     @Insert("INSERT INTO memberMgn VALUES(DEFAULT, #{author}, DEFAULT, NULL)")
     public void memberMgnInsert(String id) throws Exception;
