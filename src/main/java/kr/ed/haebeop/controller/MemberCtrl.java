@@ -99,7 +99,25 @@ public class MemberCtrl {
 
     @GetMapping("/myPage.do")
     public String myPage(Model model) throws Exception {
+        String sid = (String) session.getAttribute("sid");
+        Member member = memberService.memberGet(sid);
+        model.addAttribute("member", member);
         return "/member/myPage";
+    }
+
+    @GetMapping("/myPageEdit.do")
+    public String memberUpdate(Model model) throws Exception {
+        String sid = (String) session.getAttribute("sid");
+        Member member = memberService.memberGet(sid);
+        model.addAttribute("member", member);
+        return "/member/myPageEdit";
+    }
+
+    @PostMapping("/myPageEdit.do")
+    public String memberUpdatePost(Member member, Model model) throws Exception {
+        member.setId((String) session.getAttribute("sid"));
+        memberService.updateMember(member);
+        return "redirect:/user/myPage.do";
     }
 
     /*
