@@ -25,7 +25,7 @@
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="${path }/admin/"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#!" onclick="return false;">강의 설정</a></li>
+                                <li class="breadcrumb-item"><a href="${path }/admin/lectList" onclick="return false;">강의 설정</a></li>
                             </ul>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
             </div>
             <!-- [ breadcrumb ] end -->
             <!-- [ Main Content ] start -->
-            <form action="${path }/admin/lectureAdd.do" name="frm1" method="post" enctype="multipart/form-data">
+            <form action="${path }/admin/lectAdd.do" name="frm1" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card">
@@ -71,7 +71,7 @@
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
                                                 <input type="radio" id="sno3" name="sno" class="custom-control-input" value="3" checked>
-                                                <label class="custom-control-label" for="sno3">영어</label>
+                                                <label class="custom-control-label" for="sno3">기타</label>
                                             </div>
                                         </div>
                                     </div>

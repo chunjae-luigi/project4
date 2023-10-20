@@ -13,7 +13,7 @@
                     <when test="searchType == 'title'.toString()">
                         title LIKE concat('%', #{searchKeyword}, '%')
                     </when>
-                    <when test="searchType == 'name'.toString()">
+                    <when test="searchType == 'teacherNm'.toString()">
                         nm LIKE concat('%', #{searchKeyword}, '%')
                     </when>
                 </choose>
@@ -31,12 +31,12 @@
 
     <!-- 강의 입력 -->
     <insert id="lectureAdd">
-        insert into lecture values (default, #{title}, #{subTitle}, #{content}, #{lectureType}, #{studentCnt}, default, default, default, #{teacherId}, #{thumbnail}, #{lvideo}, #{sno}, #{cost}, #{bookname}, #{bthumbnail})
+        insert into lecture values (default, #{title}, #{subTitle}, #{content}, #{lectureType}, #{studentCnt}, default, default, default, #{teacherId}, #{teacherNm}, #{thumbnail}, #{lvideo}, #{sno}, #{cost}, #{bookname}, #{bthumbnail})
     </insert>
 
     <!-- 강의 수정 -->
     <update id="lectureUpdate">
-        update lecture set title=#{title}, subTitle=#{subTitle}, content=#{content}, lectureType=#{lectureType}, studentCnt=#{studentCnt}, teacherId=#{teacherId}, sno=#{sno}, cost=#{cost} where lno=#{lno}
+        update lecture set title=#{title}, subTitle=#{subTitle}, content=#{content}, lectureType=#{lectureType}, studentCnt=#{studentCnt}, teacherId=#{teacherId}, teacherNm=#{teacherId}, sno=#{sno}, cost=#{cost} where lno=#{lno}
     </update>
 
     <!-- 강의 삭제 -->
@@ -55,7 +55,7 @@
                     <when test="searchType == 'title'.toString()">
                         title LIKE concat('%', #{searchKeyword}, '%')
                     </when>
-                    <when test="searchType == 'name'.toString()">
+                    <when test="searchType == 'teacherNm'.toString()">
                         nm LIKE concat('%', #{searchKeyword}, '%')
                     </when>
                 </choose>

@@ -1,13 +1,7 @@
 package kr.ed.haebeop.controller;
 
-import kr.ed.haebeop.domain.Curri;
-import kr.ed.haebeop.domain.Lecture;
-import kr.ed.haebeop.domain.Review;
-import kr.ed.haebeop.domain.Subject;
-import kr.ed.haebeop.service.CurriService;
-import kr.ed.haebeop.service.LectureService;
-import kr.ed.haebeop.service.ReviewService;
-import kr.ed.haebeop.service.SubjectService;
+import kr.ed.haebeop.domain.*;
+import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +31,9 @@ public class LectureCtrl {
 
     @Autowired
     private SubjectService subjectService;
+
+    @Autowired
+    private MemberService memberService;
 
     //회원이 보는 강의 리스트
     @GetMapping("/list.do")
@@ -71,11 +68,12 @@ public class LectureCtrl {
         int lno = Integer.parseInt(request.getParameter("lno"));
 
         Lecture lecture = lectureService.lectureGet(lno);
-
+        Member teacher = memberService.memberGet(lecture.getTeacherId());
+        Subject subject = subjectService.subjectGet(lecture.getSno());
         List<Review> reviewList = reviewService.reviewList(lno);
         List<Curri> curriList = curriService.curriList(lno);
-        Subject subject = subjectService.subjectGet(lecture.getSno());
 
+        model.addAttribute("teacher", teacher);
         model.addAttribute("reviewList", reviewList);
         model.addAttribute("subject", subject);
         model.addAttribute("curriList", curriList);

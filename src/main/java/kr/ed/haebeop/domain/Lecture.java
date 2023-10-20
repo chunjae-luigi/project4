@@ -19,6 +19,7 @@ public class Lecture {
     private String endDate;
     private String daily;
     private String teacherId;
+    private String teacherNm;
     private String thumbnail;
     private String lvideo;
     private int sno;

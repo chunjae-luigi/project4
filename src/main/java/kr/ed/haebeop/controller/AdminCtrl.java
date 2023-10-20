@@ -212,7 +212,7 @@ public class AdminCtrl {
 
         ServletContext application = request.getSession().getServletContext();
         //String realPath = application.getRealPath("/resources/upload");       // 운영 서버
-        String realPath = "D:\\seulbee\\project04\\src\\main\\webapp\\resources\\upload";     // 개발 서버
+        String realPath = "D:\\seulbee\\uploadtest";     // 개발 서버
 
         Lecture lecture = new Lecture();
         lecture.setTitle(request.getParameter("title"));
@@ -335,7 +335,7 @@ public class AdminCtrl {
         int lno = Integer.parseInt(request.getParameter("lno"));
 
         Lecture lecture = lectureService.lectureGet(lno);
-
+        Member teacher = memberService.memberGet(lecture.getTeacherId());
         Subject subject = subjectService.subjectGet(lecture.getSno());
         List<Curri> curriList = curriService.curriList(lno);
 
@@ -343,6 +343,7 @@ public class AdminCtrl {
         model.addAttribute("subject", subject);
         model.addAttribute("lecture", lecture);
         model.addAttribute("lno", lno);
+        model.addAttribute("teacher", teacher);
 
         return "/admin/lectGet";
     }
@@ -361,7 +362,7 @@ public class AdminCtrl {
         ServletContext application = request.getSession().getServletContext();
 
         //String realPath = application.getRealPath("/resources/upload");                   //운영 서버
-        String realPath = "D:\\seulbee\\project04\\src\\main\\webapp\\resources\\upload";   //개발 서버
+        String realPath = "D:\\seulbee\\uploadtest";   //개발 서버
 
         Lecture lecture = new Lecture();
         lecture.setLno(lno);

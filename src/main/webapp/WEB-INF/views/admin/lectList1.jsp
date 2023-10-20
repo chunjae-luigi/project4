@@ -78,8 +78,8 @@
                                                         <c:otherwise>오프라인</c:otherwise>
                                                     </c:choose>
                                                 </td>
-                                                <td class="text-center"><a href="${path }/admin/lectGet.do?no=${lecture.lno }">${lecture.title }</a></td>
-                                                <td class="text-center">${lecture.teacherId }</td>
+                                                <td class="text-center"><a href="${path }/admin/lectGet.do?lno=${lecture.lno }">${lecture.title }</a></td>
+                                                <td class="text-center">${lecture.teacherNm }</td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -115,7 +115,7 @@
             </div>
             <div class="row justify-content-md-end">
                 <div class="col-md-1">
-                    <a href="${path }/admin/lectureAdd.do" class="btn btn-primary" style="width:100%;">등록</a>
+                    <a href="${path }/admin/lectAdd.do" class="btn btn-primary" style="width:100%;">등록</a>
                 </div>
             </div>
             <!-- [ Main Content ] end -->

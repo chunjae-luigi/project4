@@ -26,7 +26,7 @@ public class CurriCtrl {
 
     @GetMapping("add.do")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
-        return "/admin/lectDetail";
+        return "/admin/lectGet";
     }
 
     @PostMapping("add.do")
@@ -36,7 +36,7 @@ public class CurriCtrl {
         curri.setLno(Integer.parseInt(request.getParameter("lno")));
 
         curriService.curriAdd(curri);
-        return "redirect:/admin/lectDetail.do?lno=" + request.getParameter("lno");
+        return "redirect:/admin/lectGet.do?lno=" + request.getParameter("lno");
 
     }
 
@@ -49,6 +49,6 @@ public class CurriCtrl {
         curriService.curriDelete(rno);
         model.addAttribute("lno", lno);
 
-        return "/admin/lectDetail";
+        return "/admin/lectGet";
     }
 }

@@ -32,7 +32,7 @@
         </div>
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
-        <div class="row">
+        <div >
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header">
@@ -44,15 +44,19 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
+
+
+                                            <%-- 썸네일 경로 임시로 해놓은거라 수정필요함. //비--%>
+
                                             <label class="floating-label d-block">강의 썸네일</label>
-                                            <div class="form-control"><img src="${path}/resources/upload/${lecture.thumbnail }"></div>
+                                            <div><img src="${path}/resources/image/common/thumnail(6).png"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <a href="${path}/resources/upload/${lecture.lvideo}" class="btn btn-primary d-inline-block" target="_blank">강의영상</a>
+                                            <a href="${path }/resources/image/common/videosample.mp4" class="btn btn-primary d-inline-block" target="_blank">강의영상</a>
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +65,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label">강의 제목</label>
-                                            <div class="form-control"> ${lecture.title }</div>
+                                            <div> ${lecture.title }</div>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +73,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label">강의 소제목</label>
-                                            <div class="form-control"> ${lecture.subTitle }</div>
+                                            <div> ${lecture.subTitle }</div>
                                         </div>
                                     </div>
                                 </div>
@@ -77,69 +81,71 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">해당 과목</label>
-                                            <div class="form-control">${subject.title }</div>
+                                            <div>${subject.title }</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label">내용</label>
-                                            <textarea class="form-control" readonly>${lecture.content }</textarea>
+                                            <label class="floating-label">강의유형</label>
+                                            <div> ${lecture.lectureType }</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label class="floating-label d-block">강의 유형</label>
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="lectureType0" name="lectureType" class="custom-control-input" value="true" onclick="return false" <c:if test="${lecture.lectureType }">checked</c:if>>
-                                                <label class="custom-control-label" for="lectureType0" onclick="return false">사용</label>
-                                            </div>
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="lectureType1" name="lectureType" class="custom-control-input" value="false" onclick="return false" <c:if test="${!lecture.lectureType }">checked</c:if>>
-                                                <label class="custom-control-label" for="lectureType1" onclick="return false">사용안함</label>
-                                            </div>
-                                        </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="floating-label">내용</label>
+                                        <div class="board_view py-3 pl-4">${lecture.content }</div>
                                     </div>
                                 </div>
+                            </div>
                                 <div class="row forOffline">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">강의 인원수</label>
-                                            <div class="form-control"> ${lecture.studentCnt } 명</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row forOffline">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label class="floating-label">강의 하루 일정</label>
-                                            <div class="form-control">${lecture.startDate }</div>
+                                            <div> ${lecture.studentCnt } 명</div>
                                         </div>
                                     </div>
                                 </div>
 
 
+                            <%-- 온라인 일정--%>
+                            <c:if test="${ lecture.lectureType eq 0}">
+                            <div class="row forOffline">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="floating-label">강의 일정</label>
+                                        <div >${lecture.startDate }</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row forOffline">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="floating-label">강의 하루 일정</label>
+                                        <div >${lecture.daily }</div>
+                                    </div>
+                                </div>
+                            </div>
+                            </c:if>
 
-                                <%-- 슨생님 찾는 칸이다 슬비슬비슬비슬비슬비슬비슬비슬비슬비슬비 --%>
+
 
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">담당 강사</label>
-                                            <div class="form-control">${lecture.teacherId }</div>
+                                            <div>${lecture.teacherNm }</div>
                                         </div>
                                     </div>
                                 </div>
-                                <%--              슨생님 찾는 칸이다 슬비슬비슬비슬비슬비슬비슬비슬비슬비슬비 --%>
-
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">강의 교재</label>
-                                            <div class="form-control">${lecture.bookname }</div>
+                                            <div>${lecture.bookname }</div>
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +153,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">교재</label>
-                                            <div class="form-control"><img src="${path}/resources/upload/${lecture.bthumbnail }"></div>
+                                            <div><img src="${path}/resources/image/common/booksample.jpg"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -156,10 +162,43 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">강의 가격</label>
-                                            <div class="form-control">${lecture.cost }</div>
+                                            <div>${lecture.cost }</div>
                                         </div>
                                     </div>
                                 </div>
+
+                            <!-- 커리큘럼 영역 -->
+                            <div class="comment_add">
+                                <h4 class="tit">커리큘럼 등록하기</h4>
+                                <div>
+                                    <form action="${path }/curri/add.do" method="post">
+
+                                        <input type="hidden" name="lno" id="lno" value="${lecture.lno}">
+                                        <input class="input" type="text" name="content" id="content" placeholder="커리큘럼 입력" maxlength="98" required>
+                                        <input type="submit" class="button is-primary" value="등록">
+
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- 커리큘럼 목록 -->
+                            <div id="lect_list">
+                                <ul class="list-group">
+                                    <h2> 목차 </h2>
+                                    <c:forEach var="curri" items="${curriList }">
+                                        <li class="list-group-item">
+                                                ${curri.content}
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+
+                            <c:if test="${empty curriList }">
+                                <tr>
+                                    <td colspan="4">목차를 등록해주세요.</td>
+                                </tr>
+                            </c:if>
+                        </div>
+                        <!-- 커리큘럼 영역 끝 -->
 
                                 <%--                                <div class="row">--%>
                                 <%--                                    <div class="col">--%>
@@ -185,8 +224,8 @@
         </div>
         <div class="row justify-content-md-end">
             <div class="col-md-2 text-right">
-                <a href="${path }/admin/lectDelete.do?no=${lecture.lno }" class="btn btn-primary d-inline-block">삭제</a>
                 <a href="${path }/admin/lectUpdate.do?no=${lecture.lno }" class="btn btn-success d-inline-block ml-2">수정</a>
+                <a href="${path }/admin/lectDelete.do?no=${lecture.lno }" class="btn btn-primary d-inline-block">삭제</a>
             </div>
         </div>
         <!-- [ Main Content ] end -->
