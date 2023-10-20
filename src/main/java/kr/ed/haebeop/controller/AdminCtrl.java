@@ -52,6 +52,9 @@ public class AdminCtrl {
     @Autowired
     private SubjectService subjectService;
 
+    @Autowired
+    private PaymentService paymentService;
+
     @GetMapping("/")
     public String home(Model model) throws Exception {
         return "/admin/home";
@@ -97,7 +100,6 @@ public class AdminCtrl {
 
         List<BoardMgn> boardMgnList = boardMgnService.listBoardMgn(page);
         model.addAttribute("boardMgnList", boardMgnList);
-
 
 
         return "/admin/boardTypeList";
@@ -387,4 +389,40 @@ public class AdminCtrl {
         lectureService.lectureDelete(lno);
         return "redirect:/admin/lectList.do";
     }
+
+
+    //관리자페이지 payList
+    @GetMapping("/paylistAdmin.do")
+    public String payment(HttpServletRequest request, Model model) throws Exception {
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("sid");
+
+        String type = request.getParameter("type");
+        String keyword = request.getParameter("keyword");
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+        int bmNo = request.getParameter("no") != null ? Integer.parseInt(request.getParameter("no")) : 1;
+
+        Page page = new Page();
+        page.setSearchType(type);
+        page.setSearchKeyword(keyword);
+        int total = paymentService.paymentCount(page);
+
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        List<Payment> paymentList = paymentService.paymentList_admin(page);
+
+        model.addAttribute("type", type);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("page", page);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("paymentList", paymentList);
+
+
+        return "/admin/payList";
+
+    }
+
+
 }

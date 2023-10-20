@@ -172,16 +172,20 @@
                     <tr>
                         <td class="can1" > ${lecture.title}
                             <input type="hidden" name="plec" id="plec" value="${lecture.title}">
-                            <input type="hidden" name="dno" id="dno" value="${lecture.lno}">
+                            <input type="hidden" name="pno" id="pno" value="${lecture.lno}">
                         </td>
-                        <td class="can2" >선생님 이름</td>
+                        <td class="can2"  >${lecture.teacherNm}
+                            <input type="hidden" name="tecid" id="tecid" value="${lecture.teacherId}">
+                            <input type="hidden" name="tecnm" id="tecnm" value="${lecture.teacherNm}">
+                            <input type="hidden" name="booknm" id="booknm" value="${lecture.bookname}">
+                        </td>
                         <td class="can3" >
-                            <input type="number" name="total" id="total" style="border: none; text-align: center;" readonly value="${lecture.price}">원
+                            <input type="number" name="total" id="total" style="border: none; text-align: center;" readonly value="${lecture.cost}">원
                         </td>
                         <td class="can4">
                             <input type="number" name="inpt" id="inpt" value="width: 200px; float: left; margin-top: 8px;">
                             <input type="button" name="ptbtn" id="ptbtn" class="btn btn-primary" value="사용" onclick= "pointuse()">
-                            <input type="button" name="ptbre" id="ptre" class="btn btn-primary" value="취소" style="margin-left: 5px" onclick= "pointreset()">
+                            <input type="button" name="ptbre" id="ptbre" class="btn btn-primary" value="취소" style="margin-left: 5px" onclick= "pointreset()">
 
                         </td>
 
@@ -405,7 +409,7 @@
 
     //직접 만드신 네이버페이 결제버튼에 click Event를 할당하세요
     var elNaverPayBtn = document.getElementById("naverPayBtn");
-    var totalPayAmount = ${lecture.price};
+    var totalPayAmount = ${lecture.cost};
     elNaverPayBtn.addEventListener("click", function() {
         oPay.open({
             merchantUserKey: "12341234",

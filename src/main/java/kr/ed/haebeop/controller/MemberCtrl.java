@@ -2,8 +2,11 @@ package kr.ed.haebeop.controller;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import kr.ed.haebeop.domain.Member;
+import kr.ed.haebeop.domain.Payment;
 import kr.ed.haebeop.service.MemberService;
+import kr.ed.haebeop.service.PaymentService;
 import kr.ed.haebeop.util.NaverLogin;
+import kr.ed.haebeop.util.Page;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user/")
@@ -30,6 +34,9 @@ public class MemberCtrl {
 
     @Autowired
     NaverLogin naverLogin;
+
+    @Autowired
+    private PaymentService paymentService;
 
     @GetMapping("term.do")
     public String term(Model model) throws Exception {
@@ -120,6 +127,37 @@ public class MemberCtrl {
         return "redirect:/user/myPage.do";
     }
 
+    //멤버 payList
+    @GetMapping("/paylistMem.do")
+    public String paymentMem(HttpServletRequest request, Model model) throws Exception {
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("sid");
+
+        String type = request.getParameter("type");
+        String keyword = request.getParameter("keyword");
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+
+        Page page = new Page();
+        page.setSearchType(type);
+        page.setSearchKeyword(keyword);
+        int total = paymentService.paymentCount(page);
+
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        List<Payment> paymentList = paymentService.paymentList_mypage(page);
+
+        model.addAttribute("type", type);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("page", page);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("paymentList", paymentList);
+
+
+        return "/user/payList";
+
+    }
     /*
     @InitBinder
     protected void initBinder(WebDataBinder binder){

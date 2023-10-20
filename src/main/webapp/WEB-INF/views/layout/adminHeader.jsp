@@ -49,6 +49,12 @@
                 <li class="nav-item">
                     <a href="${path }/academy/reservationSetting" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">예약 설정</span></a>
                 </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>결제 관리</label>
+                </li>
+                <li class="nav-item">
+                    <a href="${path }/admin/paylistAdmin.do" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">결제 내역</span></a>
+                </li>
             </ul>
         </div>
     </div>
