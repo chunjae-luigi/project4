@@ -25,7 +25,7 @@
                             <form name="frm1" id="frm1" action="${path }/user/joinPro.do" method="post" onsubmit="return joinCheck(this)">
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" name="id" id="id" placeholder="영문소문자 및 숫자를 혼용하여 아이디 입력" class="form-control" pattern="^[a-z0-9]{8,16}" maxlength="16" autofocus required />
+                                    <input type="text" name="id" id="id" placeholder="영문소문자 및 숫자를 혼용하여 아이디 입력" class="form-control" <%--pattern="^[a-z0-9]{8,16}"--%> maxlength="16" autofocus required />
                                     <label class="form-label blind" for="id">아이디</label>
                                     <input type="button" class="btn check_btn" value="아이디 중복 확인" onclick="idCheck()">
                                     <input type="hidden" name="idCk" id="idCk" value="no">
@@ -38,13 +38,13 @@
                                 </div>
 
                                 <div class="form-outline mb-1">
-                                    <input type="password" name="pw" id="pw" placeholder="비밀번호 입력" class="form-control" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" maxlength="16" required />
+                                    <input type="password" name="pw" id="pw" placeholder="비밀번호 입력" class="form-control" <%--pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$"--%> maxlength="16" required />
                                     <label class="form-label blind" for="pw">비밀번호</label>
                                     <p class="info mb-0"><i class="fas fa-check"></i> 비밀번호는 최소 8자리에서 최대 16자리까지 숫자, 영문, 특수문자 각 1개 이상 포함</p>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="password" name="pw2" id="pw2" placeholder="비밀번호  확인 입력" class="form-control" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" maxlength="16" required />
+                                    <input type="password" name="pw2" id="pw2" placeholder="비밀번호  확인 입력" class="form-control" <%--pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$"--%> maxlength="16" required />
                                     <label class="form-label blind" for="pw2">비밀번호 확인</label>
                                 </div>
 
