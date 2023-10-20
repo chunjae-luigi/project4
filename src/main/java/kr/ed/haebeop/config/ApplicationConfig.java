@@ -2,6 +2,7 @@ package kr.ed.haebeop.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.ed.haebeop.service.*;
+import kr.ed.haebeop.util.NaverLogin;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,9 @@ public class ApplicationConfig {
     // Chat
     @Bean
     public ObjectMapper mapper() { return new ObjectMapper(); }
+
+    @Bean
+    public NaverLogin naverLogin() {return new NaverLogin();}
 
 
     // Service

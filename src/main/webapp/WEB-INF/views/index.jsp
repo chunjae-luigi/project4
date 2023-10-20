@@ -243,7 +243,7 @@
         </div>
     </div>
     <div class="outer-container">
-        <img src="${path}/resources/image/main/movingca.png" alt="움직이는 이미지" id="moving-image">
+        <img src="${path}/resources/image/main/movingca_remove.png" alt="움직이는 이미지" id="moving-image">
     </div>
     <jsp:include page="./layout/footer.jsp" />
     <script src="${path }/resources/js/owl.carousel.min.js"></script>
@@ -288,6 +288,7 @@
             movingImage.style.left = currentPosition + direction + 'px';
             requestAnimationFrame(moveImage);
         }
+
         moveImage();
 
         $(document).ready(function (){
