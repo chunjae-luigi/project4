@@ -4,6 +4,60 @@
 <%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
+<!-- quickMenu -->
+<c:if test="${sid != null}">
+<div class="quickMenu">
+    <div class="quick_title">
+        Quick
+        <br>
+        Menu
+    </div>
+    <div class="quick_btn">
+        <c:if test="${sid eq 'admin'}">
+                <ul>
+                    <li class="quick01">
+                        <a href="${path }/admin/MemberListAdmin">
+                            <p>관리자페이지</p>
+                        </a>
+                    </li>
+                    <li class="quick02">
+                        <a href="${path }/member/get?sid=${sid}">
+                            <p>마이페이지</p>
+                        </a>
+                    </li>
+                    <li class="quick03">
+                        <a href="${path }/member/lesson">
+                            <p>나의 강의실</p>
+                        </a>
+                    </li>
+                </ul>
+        </c:if>
+        <c:if test="${sid ne 'admin'}">
+                <ul>
+                    <li class="quick01">
+                        <a href="${path }/member/get?sid=${sid}">
+                            <p>마이페이지</p>
+                        </a>
+                    </li>
+                    <li class="quick02">
+                        <a href="${path }/member/lesson">
+                            <p>나의 강의실</p>
+                        </a>
+                    </li>
+                    <li class="quick03">
+                        <a href="${path }/member/payList">
+                            <p>나의 결제내역</p>
+                        </a>
+                    </li>
+                </ul>
+        </c:if>
+    </div>
+    <div class="quick_top">
+        <a href="#">TOP</a>
+    </div>
+</div>
+</c:if>
+
 <div class="container-fluid bg-secondary text-white py-3 px-sm-3 px-md-5">
     <div class="container-fluid text-center">
         <ul class="btn-group">
