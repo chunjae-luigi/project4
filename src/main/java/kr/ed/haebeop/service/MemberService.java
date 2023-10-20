@@ -27,4 +27,6 @@ public interface MemberService {
 
     public void updateMember(Member member) throws Exception;
 
+
+
 }
