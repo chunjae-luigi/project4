@@ -229,17 +229,17 @@ public class MemberCtrl {
 
     @PostMapping("/changeGrade.do")
     public String memberUpgradePro(HttpServletRequest request, List<MultipartFile> uploadFiles) throws Exception {
-        String sid = session.getAttribute("sid") != null ? (String) session.getAttribute("sid") : "";
+        String sid = (String) session.getAttribute("sid");
         String checkTeacher = request.getParameter("checkTeacher") != null ? request.getParameter("checkTeacher") : "'";
         Member member = memberService.memberGet(sid);
 
-        if (sid != "") {
+        if (sid != null) {
 
-            if(checkTeacher == "noApply") {
+            if(checkTeacher.equals("noApply")) {
                 memberMgnService.memberMgnInsert(sid);
             }
 
-            if(checkTeacher == "fail") {
+            if(checkTeacher.equals("fail")) {
                 int par = member.getMno();
                 FileDTO files = filesService.fileByParForGrade(par);
                 File file = new File(files.getSaveFolder() + File.separator + files.getSaveNm());

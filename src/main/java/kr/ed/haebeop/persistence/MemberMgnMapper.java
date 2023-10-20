@@ -18,8 +18,8 @@ public interface MemberMgnMapper {
     @Select("SELECT COUNT(*) FROM MemberMgn WHERE !approveYn AND content IS NULL")
     public int memberMgnCount() throws Exception;
 
-    @Select("SELECT * FROM MemberMgn WHERE author = #{id}")
-    public MemberMgn memberMgnGet(String id) throws Exception;
+    @Select("SELECT * FROM MemberMgn WHERE author = #{author}")
+    public MemberMgn memberMgnGet(String author) throws Exception;
 
     @Insert("INSERT INTO memberMgn VALUES(DEFAULT, #{author}, DEFAULT, NULL)")
     public void memberMgnInsert(String id) throws Exception;

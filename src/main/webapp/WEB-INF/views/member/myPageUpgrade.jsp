@@ -53,7 +53,7 @@
                                             <th class="text-center">아이디</th>
                                             <td>${member.id }</td>
                                         </tr>
-                                        <c:if test="${checkTeacher eq 'fail' || checkTeacher eq 'noApply' }">
+                                        <c:if test="${checkTeacher eq 'noApply' }">
                                         <tr>
                                             <th class="text-center">사진 등록하기</th>
                                             <td>
