@@ -49,7 +49,7 @@
                                             <%-- 썸네일 경로 임시로 해놓은거라 수정필요함. //비--%>
 
                                             <label class="floating-label d-block">강의 썸네일</label>
-                                            <div><img src="${path}/resources/image/common/thumnail(6).png"></div>
+                                            <div><img src="${path}/resources/image/lecture/thumnail(6).png"></div>
                                         </div>
                                     </div>
                                 </div>

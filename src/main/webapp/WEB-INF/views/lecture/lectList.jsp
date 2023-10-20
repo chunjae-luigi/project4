@@ -64,7 +64,7 @@
                         <div class="img-box">
                             <!-- 썸네일 - 누르면 상세페이지 이동 -->
                             <a href="${path }/lecture/get.do?lno=${lecture.lno }">
-                                <img src=${path}/resources/image/common/thumnail(6).png">
+                                <img src=${path}/resources/image/lecture/thumnail(6).png">
                             </a>
                         </div>
                     </div>

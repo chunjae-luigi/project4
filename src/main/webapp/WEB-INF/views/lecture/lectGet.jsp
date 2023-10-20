@@ -10,34 +10,6 @@
     <jsp:include page="../layout/head.jsp" />
     <link rel="stylesheet" href="${path }/resources/css/sub.css">
     <link rel="stylesheet" href="${path }/resources/css/lecture.css">
-
-
-    <style>
-        .star-icon {
-            background-image:url("${path }/resources/image/common/heart0.png");
-            background-repeat:no-repeat;
-            width:20px;
-            height:20px;
-            background-size:cover;
-        }
-        .star-icon.click-star {
-            cursor:pointer;
-        }
-        /* 색칠된 상태 */
-        .star-icon.filled {
-            background-image:url("${path }/resources/image/common/heart1.png");
-        }
-        .star-rating {
-            display:flex;
-            align-items:center;
-        }
-        .star-rating label {
-            margin-right:10px;
-        }
-        .star-icons {
-            display:flex;
-        }
-    </style>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp" />
@@ -47,15 +19,15 @@
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
-                <img src="${path}/resources/image/common/thumnail(6).png">
+                <img src="${path}/resources/image/lecture/thumnail(6).png">
             </div>
             <div class="col-lg-6">
                 <p>과목 : ${subject.title } </p>
                 <h1 class="display-5 fw-bolder text-white mb-2">${lecture.title }</h1>
                 <h3 class="lead text-white-50 mb-4">${lecture.subTitle }</h3>
                 <h3 class="lead text-white-50 mb-4">${teacher.nm }</h3>
-                <a class="btn btn-primary btn-lg px-4 me-sm-3" id="vvv" >강의 맛보기</a>
-                <a class="btn btn-outline-light btn-lg px-4" href="#!">수강후기</a>
+                <a class="btn btn-primary btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
+                <a class="btn btn-outline-light btn-lg px-4" href="#lect_review">수강후기</a>
             </div>
         </div>
     </div>
@@ -69,10 +41,10 @@
             <!-- 내부탭 -->
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">강의내용</button>
-                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">커리큘럼</button>
-                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">수강후기</button>
-                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">질문하기</button>
+                    <button class="nav-link active" id="tab-content" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" role="tab" aria-selected="true">강의내용</button>
+                    <button class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" type="button" role="tab" aria-selected="false">커리큘럼</button>
+                    <button class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" type="button" role="tab" aria-selected="false">수강후기</button>
+                    <button class="nav-link" id="tab-qna" data-bs-toggle="tab" data-bs-target="#tab-qna" type="button" role="tab"  aria-selected="false">질문하기</button>
                 </div>
             </nav>
             <!-- 강의 내용 -->
@@ -84,10 +56,9 @@
                 <section class="mb-5">
                     ${lecture.content }
 
-                    <!-- 교재 추가 *******수정중 -->
-                    ${lecture.bthumbnail }  
-                    ${lecture.bookname }
-
+                        <!-- 교재 추가 경로 변경 해야함 //비 -->
+                        <div>강의 교재 </div>
+                        <div><img src="${path}/resources/image/lecture/booksample.jpg"></div>
                 </section>
             </article>
             <!-- 목차 -->
@@ -147,10 +118,10 @@
 
                         <c:forEach var="review" items="${reviewList }">
                         <div class="d-flex">
-                            <div class="flex-shrink-0">
-                                아이디
+                            <div class="review_mem">
+                                ${review.memId }</div>
                             <div class="ms-3">
-
+                            <div>
                                 <div class="star-rating">
                                         <%-- 별점 출력 --%>
                                     <c:forEach begin="1" end="${review.star}" var="i">
@@ -161,14 +132,12 @@
                                         <span class="star-icon"></span>
                                     </c:forEach>
                                 </div>
-
-
-                                <div class="fw-bold">${review.memId }</div>
                                 <div>${review.content } </div>
                                 <p id="reg">
                                     <fmt:parseDate value="${review.regdate }" var="regdate" pattern="yyyy-MM-dd HH:mm:ss" />
                                     <fmt:formatDate value="${regdate }" pattern="yyyy-MM-dd" />
                                 </p>
+                                <div>
                             </div>
                         </div>
                         </c:forEach>
@@ -238,7 +207,7 @@
 <script>
     // tab click 하면 지정 구역으로 이동
     document.addEventListener('DOMContentLoaded', function() {
-        const lectureTab = document.getElementById('nav-home-tab');
+        const lectureTab = document.getElementById('tab-content');
         const lectureContent = document.getElementById('lect_con');
         lectureTab.addEventListener('click', function() {
             const scrollPosition = lectureContent.offsetTop - 100;
@@ -246,7 +215,7 @@
         });
     });
     document.addEventListener('DOMContentLoaded', function() {
-        const lectureTab = document.getElementById('nav-profile-tab');
+        const lectureTab = document.getElementById('tab-curri');
         const lectureContent = document.getElementById('lect_list');
         lectureTab.addEventListener('click', function() {
             const scrollPosition = lectureContent.offsetTop - 100;
@@ -254,7 +223,7 @@
         });
     });
     document.addEventListener('DOMContentLoaded', function() {
-        const lectureTab = document.getElementById('nav-contact-tab');
+        const lectureTab = document.getElementById('tab-review');
         const lectureContent = document.getElementById('lect_review');
         lectureTab.addEventListener('click', function() {
             const scrollPosition = lectureContent.offsetTop - 100;
@@ -264,10 +233,10 @@
 </script>
 <!-- 동영상 열 때 크기 지정 -->
 <%-- 동영상 경로는 임시로 해놓은거라 최종 때 수정해야함 //비--%>
-<script>
+<%-- <script>
     document.getElementById('vvv').addEventListener('click', function() {
         window.open('${path }/resources/image/common/videosample.mp4', 'Video Window', 'width=720, height=540');
     });
-</script>
+</script>--%>
 </body>
 </html>

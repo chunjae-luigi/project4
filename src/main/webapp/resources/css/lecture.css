@@ -157,3 +157,37 @@
 }
 
 
+/* 별점 */
+.star-icon {
+    background-image:url("../../resources/image/lecture/heart0.png");
+    background-repeat:no-repeat;
+    width:20px;
+    height:20px;
+    background-size:cover;
+}
+.star-icon.click-star {
+    cursor:pointer;
+}
+/* 색칠된 상태 */
+.star-icon.filled {
+    background-image:url("../../resources/image/lecture/heart1.png");
+}
+.star-rating {
+    display:flex;
+    align-items:center;
+}
+.star-rating label {
+    margin-right:10px;
+}
+.star-icons {
+    display:flex;
+}
+.review_mem{
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    background-color: black;
+    color: #FFFFFF;
+    margin: auto 0;
+}
