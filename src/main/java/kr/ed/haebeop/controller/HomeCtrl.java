@@ -32,5 +32,8 @@ public class HomeCtrl {
         return "/sample";
     }
 
-
+    @RequestMapping(value = "/firework")
+    public String firework(Model model) {
+        return "/firework";
+    }
 }

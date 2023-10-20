@@ -242,13 +242,21 @@
             </div>
         </div>
     </div>
-    <div class="outer-container">
-        <img src="${path}/resources/image/main/movingca.png" alt="움직이는 이미지" id="moving-image">
-    </div>
+    <c:if test="${ sid != null }" >
+        <div class="outer-container">
+            <img src="${path}/resources/image/main/movingca.png" alt="움직이는 이미지" id="moving-image">
+        </div>
+        <img src="${path}/resources/image/main/pikachu.png" alt="피카츄"  class="ant" >
+        <script src="ant.js"></script>
+    </c:if>
     <jsp:include page="./layout/footer.jsp" />
     <script src="${path }/resources/js/owl.carousel.min.js"></script>
     <script src="${path }/resources/js/main.js"></script>
+
+
+
     <style>
+        /*Left moving Image*/
         .outer-container {
             position: absolute;
             top: 25%;
@@ -265,7 +273,15 @@
             width: 90px;
             height: auto;
         }
+        /*개미이동*/
+        .ant {
+            width: 3px;
+            height: auto;
+            position: absolute;
+            border: none;
+        }
     </style>
+    <%--    Left moving Image--%>
     <script>
         const movingImage = document.getElementById('moving-image');
         let direction = 1; // 이동 방향 (1: 오른쪽, -1: 왼쪽)
@@ -294,7 +310,68 @@
             let count = 0;
             $("#moving-image").click(function(){
                 if(count === 5 ){
-                    $(location).attr("href", "${path}/fire")
+                    $(location).attr("href", "${path}/user/fire")
+                    count = 0;
+                }else{
+                    count = count + 1;
+                }
+            })
+        });
+    </script>
+    <%--    개미 이동--%>
+    <script>
+        const ant = document.querySelector('.ant');
+        ant.style.top = Math.random() * 900 + 'vh'; // 초기 무작위 Y 좌표
+        ant.style.left = Math.random() * 100 + 'vw'; // 초기 무작위 X 좌표
+
+        let x = parseFloat(ant.style.left); // 초기 X 좌표 (실수 값)
+        let y = parseFloat(ant.style.top); // 초기 Y 좌표 (실수 값)
+
+        const speed = 0.111111; // 이동 속도
+        const directionChangeInterval = 5000; // 2초마다 방향을 변경
+        //
+        function changeDirection() {
+            const randomAngle = 200 * Math.PI * Math.random(); // 0에서 2π까지의 무작위 각도
+            x += speed * Math.cos(randomAngle);
+            y += speed * Math.sin(randomAngle);
+
+            // 윈도우 바깥으로 벗어나는 경우, 다시 화면 안쪽으로 이동
+            if (x < 0) {
+                x = 0;
+            } else if (x > window.innerWidth) {
+                x = window.innerWidth;
+            }
+
+            if (y < 0) {
+                y = 0;
+            } else if (y > window.innerHeight) {
+                y = window.innerHeight;
+            }
+
+            ant.style.top = y + 'px';
+            ant.style.left = x + 'px';
+        }
+
+        function moveAnt() {
+            changeDirection(); // 방향 변경
+            setInterval(changeDirection, directionChangeInterval); // 방향을 2초마다 변경
+
+            requestAnimationFrame(moveAnt);
+        }
+        moveAnt();
+
+
+        $(document).ready(function (){
+            let count = 0;
+            $(".ant").click(function() {
+                if(count === 3 ){
+                    $(this).css({"width": "50px", "transition-duration": "3s"})
+                    count = count + 1;
+                } else if (count === 5 ){
+                    $(this).css({"width": "200px", "transition-duration": "3s"})
+                    count = count + 1;
+                } else if (count === 7 ) {
+                    $(location).attr("href", "${path}/user/fire")
                     count = 0;
                 }else{
                     count = count + 1;
