@@ -94,6 +94,6 @@
     </update>
 
     <update id="firepoint">
-        UPDATE member SET pt=#{pt} WHERE id = #{id}
+        UPDATE member SET pt= pt + #{pt} WHERE id = #{id}
     </update>
 </mapper>

@@ -87,15 +87,12 @@ public class MemberCtrl {
     @PostMapping("/fire")
     public String firepoint(HttpServletRequest req, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
-        int pt = Integer.parseInt(req.getParameter("pt"));
-//        int pt = 0;
-        Member member = new Member();
-        member.setId(id);
+        int pt = 10000;
+        Member member = memberService.memberGet(id);
         member.setPt(pt);
-
+        member.setId(id);
         memberService.firepoint(member);
-
-        return "/firework";
+        return "redirect:/firework";
     }
 
     @GetMapping("/myPage.do")

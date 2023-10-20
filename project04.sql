@@ -20,7 +20,7 @@ CREATE TABLE member(
 	grade INT DEFAULT 2										-- 회원 등급 [ 0 : 관리자, 1 : 선생님, 2 : 일반사용자]
 );
 
-INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
+INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, 100000, DEFAULT, DEFAULT, 0);
 
 CREATE TABLE memberMgn(
 	mmNo INT AUTO_INCREMENT PRIMARY KEY,				-- 회원 등급 요청 번호 : 자동 발생
@@ -107,7 +107,7 @@ CREATE TABLE lecture(
     useYn BOOLEAN DEFAULT TRUE,                -- 판매 여부
     price INT
 );
-INSERT into lecture(title, subTitle, content, lectureType, studentCnt, teacherId) VALUES('제목1', '소제목1', '내용1', 0, 20, 'qeee' );
+INSERT into lecture(title, subTitle, content, lectureType, studentCnt, teacherId, price) VALUES('제목1', '소제목1', '내용1', 0, 20, 'qeee', 50000 );
 
 CREATE VIEW lectureView AS (SELECT l.lno AS lno, l.title AS title, l.subTitle AS subTitle, l.content AS content, l.lectureType AS lectureType, l.studentCnt AS studentCnt,
 l.startDate AS startDate, l.endDate AS endDate, l.daily AS daily, l.prono AS prono, l.teacherId AS teacherId, l.thumbnail AS thumbnail, l.useYn AS useYn,
