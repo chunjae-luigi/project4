@@ -11,14 +11,13 @@
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
 
-
             <div class="navbar-nav font-weight-bold mx-auto py-0">
                 <a href="index.html" class="nav-item nav-link active">Home</a>
                 <a href="${path}/payment/rrr.do" class="nav-item nav-link">임시 샘플</a>
                 <a href="${path}/payment/list.do" class="nav-item nav-link">강의목록(임시)</a>
                 <a href="${path}/payment/paylistMember.do?sid=${sid }" class="nav-item nav-link">결제창</a>
                 <a href="${path }/lecture/list.do?no=4" class="nav-item nav-link">강의테스트</a>
-                <div class="nav-item dropdown">
+                <div class="nav-item dropdown board_drop_menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu rounded-0 m-0" id="boardMenuArea"></div>
                 </div>
@@ -30,7 +29,7 @@
                     <a href="${path }/admin/" class="btn btn-success px-4"><i class="fas fa-user-cog pr-2" style="color:#ffffff;"></i></i>관리자페이지</a>
                 </c:if>
                 <c:if test="${sid ne 'admin'}">
-                    <a href="${path }/user/mypage.do" class="btn btn-success px-4"><i class="fas fa-user-circle pr-2" style="color:#ffffff;"></i></i>마이페이지</a>
+                    <a href="${path }/user/myPage.do" class="btn btn-success px-4"><i class="fas fa-user-circle pr-2" style="color:#ffffff;"></i></i>마이페이지</a>
                 </c:if>
             </c:if>
             <c:if test="${sid == null}">
