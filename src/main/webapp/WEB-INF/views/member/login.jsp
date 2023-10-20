@@ -135,6 +135,7 @@
         </div>
 
         <button type="submit" class="login-btn">로그인</button>
+        <div class="mt-3"><a href="${naver}"><img src="${path}/resources/image/common/naverLoginBtn.png" alt="naver login" style="width: 40%;"></a></div>
 
         <p class="text">회원이 아니신가요? <a href="${path }/user/term.do">회원가입</a></p>
     </form>
@@ -148,7 +149,7 @@
         })
 
     })
-</script>
+</script>`
 <script src="${path }/resources/js/jquery-3.7.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="${path }/resources/js/common.js"></script>

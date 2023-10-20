@@ -24,6 +24,7 @@ INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGI
 SELECT * FROM member;
 UPDATE member SET grade = 1 WHERE grade = 2;;
 
+
 CREATE TABLE memberMgn(
 	mmNo INT AUTO_INCREMENT PRIMARY KEY,				-- 회원 등급 요청 번호 : 자동 발생
 	author VARCHAR(20) NOT NULL,							-- 회원 아이디

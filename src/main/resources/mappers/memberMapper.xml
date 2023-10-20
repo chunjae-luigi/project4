@@ -94,6 +94,10 @@
     </update>
 
     <update id="firepoint">
-        UPDATE member SET pt=#{pt} WHERE id = #{id}
+        UPDATE member SET pt= pt + #{pt} WHERE id = #{id}
+    </update>
+
+    <update id="updateMember">
+        UPDATE member SET email = #{email}, tel = #{tel}, addr1 = #{addr1}, addr2 = #{addr2}, postcode = #{postcode}, birth = #{birth} WHERE id = #{id}
     </update>
 </mapper>
