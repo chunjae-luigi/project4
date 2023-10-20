@@ -24,6 +24,11 @@
         ]]>
     </select>
 
+    <!-- 나의 강의 -->
+    <select id="myLectList" resultType="kr.ed.haebeop.domain.Review">
+        select * from lecture
+    </select>
+
     <!-- 강의 상세보기 -->
     <select id="lectureGet" resultType="kr.ed.haebeop.domain.Lecture">
         select * from lecture where lno=#{lno}

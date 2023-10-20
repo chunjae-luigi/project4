@@ -32,16 +32,14 @@
         </div>
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
-        <div >
+        <div class="row-lect">
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header">
                         <h5>${lecture.title }</h5>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
 
@@ -49,19 +47,20 @@
                                             <%-- 썸네일 경로 임시로 해놓은거라 수정필요함. //비--%>
 
                                             <label class="floating-label d-block">강의 썸네일</label>
-                                            <div><img src="${path}/resources/image/lecture/thumnail(6).png"></div>
+                                            <div><img src="${path}/resources/image/lecture/thumnail(6).png" height="225" width="400"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
-                                            <a href="${path }/resources/image/common/videosample.mp4" class="btn btn-primary d-inline-block" target="_blank">강의영상</a>
+                                            <!-- 경로수정필요//비-->
+                                            <a class="btn btn-primary btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/common/videosample.mp4" target="_blank" >강의영상</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label">강의 제목</label>
@@ -69,7 +68,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label">강의 소제목</label>
@@ -77,7 +76,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">해당 과목</label>
@@ -85,7 +84,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label">강의유형</label>
@@ -93,7 +92,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            <div class="row">
+                            <div class="row-lect">
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="floating-label">내용</label>
@@ -101,7 +100,7 @@
                                     </div>
                                 </div>
                             </div>
-                                <div class="row forOffline">
+                                <div class="row-lect forOffline">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">강의 인원수</label>
@@ -113,7 +112,7 @@
 
                             <%-- 온라인 일정--%>
                             <c:if test="${ lecture.lectureType eq 0}">
-                            <div class="row forOffline">
+                            <div class="row-lect forOffline">
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="floating-label">강의 일정</label>
@@ -121,7 +120,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row forOffline">
+                            <div class="row-lect forOffline">
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="floating-label">강의 하루 일정</label>
@@ -133,7 +132,7 @@
 
 
 
-                                <div class="row">
+                                <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">담당 강사</label>
@@ -141,7 +140,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">강의 교재</label>
@@ -149,7 +148,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">교재</label>
@@ -158,7 +157,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row-lect">
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">강의 가격</label>

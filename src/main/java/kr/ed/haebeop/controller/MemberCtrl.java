@@ -1,7 +1,10 @@
 package kr.ed.haebeop.controller;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import kr.ed.haebeop.domain.Comment;
+import kr.ed.haebeop.domain.Lecture;
 import kr.ed.haebeop.domain.Member;
+import kr.ed.haebeop.service.LectureService;
 import kr.ed.haebeop.service.MemberService;
 import kr.ed.haebeop.util.NaverLogin;
 import org.json.simple.JSONObject;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user/")
@@ -24,6 +28,9 @@ public class MemberCtrl {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private LectureService lectureService;
 
     @Autowired
     HttpSession session;
@@ -118,6 +125,18 @@ public class MemberCtrl {
         member.setId((String) session.getAttribute("sid"));
         memberService.updateMember(member);
         return "redirect:/user/myPage.do";
+    }
+
+    //비
+    @GetMapping("/myLectList.do")
+    public String myLectList(HttpServletRequest request, Model model) throws Exception {
+        String sid = (String) session.getAttribute("sid");
+        int lno = Integer.parseInt(request.getParameter("lno"));
+        Member member = memberService.memberGet(sid);
+        List<Lecture> myLectList = lectureService.myLectList(lno);
+        model.addAttribute("myLectList", myLectList);
+        model.addAttribute("member", member);
+        return "/member/myLectList";
     }
 
     /*
