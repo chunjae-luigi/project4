@@ -32,18 +32,16 @@
 
     <style>
         .custom-block-full {
-            background-color: palegoldenrod;
+            background-color: #ededed;
             border-color: transparent;
         }
         .custom-block {
             position: relative;
-            border: 2px solid gray;
-            border-radius: 20px;
+            border-radius: 10px;
             overflow: hidden;
             padding: 30px;
             transition: all 0.3s ease 0s;
-
-            width: 400px;
+            width: 330px;
         }
         .custom-block-image-wrap {
             position: relative;
@@ -52,7 +50,7 @@
         }
         .mb-2 a {
             display: inline-block;
-            color: palevioletred;
+            color: --main-color;
             text-decoration: none;
         }
         .custom-block-full .custom-block-image {
@@ -60,6 +58,10 @@
         }
         .custom-block-full .custom-block-info {
             padding: 10px;
+            text-align: center;
+        }
+        #mylect {
+            display: flex;
         }
     </style>
 
@@ -88,48 +90,47 @@
                     <div class="d-flex flex-column align-items-center justify-content-center right_side">
                         <h5 class="my-4" style="font-size:2.5em;font-weight:600;">나의 강의 목록</h5>
 
-                        <c:forEach items="${myLectList }" var="lecture" varStatus="status">
-                        <div class="col-lg-4 col-12 mb-4 mb-lg-0">
-                            <div class="custom-block custom-block-full">
-                                <div class="custom-block-image-wrap">
-                                    <a href="detail-page.html">
-                                        <img src="assets/thumnail(4).png" class="custom-block-image img-fluid"
-                                             alt="">
-                                    </a>
-                                </div>
 
-                                <div class="custom-block-info">
-                                    <h3 class="mb-2">
+
+
+
+                        <div class="container" id="mylect">
+                        <c:forEach items="${lectureList }" var="lecture" varStatus="status">
+                            <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+                                <div class="custom-block custom-block-full">
+                                    <div class="custom-block-image-wrap">
                                         <a href="detail-page.html">
-                                            ${lecture.title }
+                                            <img src=${path}/resources/image/lecture/thumnail(8).png class="custom-block-image img-fluid">
                                         </a>
-                                    </h3>
-                                    <div class="profile-block d-flex">
-                                        <p> ${lecture.teacherNm } 선생님</p>
                                     </div>
 
-                                    <div class="profile-block d-flex">
+                                    <div class="custom-block-info">
+                                        <h3 class="mb-2">
+                                            <a href="detail-page.html">${lecture.title }</a>
+                                        </h3>
 
-                                        <p>수강상태(완강ㄹ여부)
-                                        </p>
+                                            <p> ${lecture.teacherNm } 선생님</p>
+
+                                            <p>수강상태(완강ㄹ여부)
+                                            </p>
+
+                                        <a href="${path}/lecture/get.do?lno=${lecture.lno}#lect_review" class="btn btn-primary px-4 mr-2">후기작성</a>
+                                        <a href="" class="btn btn-success px-4">질문하기</a>
                                     </div>
-                                    <button>후기작성</button>
-                                    <button>질문하기</button>
-                                </div>
 
-                                <div class="social-share d-flex flex-column ms-auto">
-                                    <a href="#" class="badge ms-auto">
-                                        <i class="bi-heart"></i>
-                                    </a>
+                                    <div class="social-share d-flex flex-column ms-auto">
+                                        <a href="#" class="badge ms-auto">
+                                            <i class="bi-heart"></i>
+                                        </a>
 
-                                    <a href="#" class="badge ms-auto">
-                                        <i class="bi-bookmark"></i>
-                                    </a>
+                                        <a href="#" class="badge ms-auto">
+                                            <i class="bi-bookmark"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </c:forEach>
-
+                        </div>
 
 
 
@@ -145,6 +146,5 @@
     </div>
 </div>
 <jsp:include page="../layout/footer.jsp" />
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

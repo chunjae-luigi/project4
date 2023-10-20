@@ -1,12 +1,7 @@
 package kr.ed.haebeop.controller;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
-import kr.ed.haebeop.domain.FileDTO;
-import kr.ed.haebeop.domain.Comment;
-import kr.ed.haebeop.domain.Lecture;
-import kr.ed.haebeop.domain.Member;
-import kr.ed.haebeop.domain.MemberMgn;
-import kr.ed.haebeop.domain.Payment;
+import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.service.LectureService;
 import kr.ed.haebeop.util.NaverLogin;
@@ -24,14 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -43,6 +35,12 @@ public class MemberCtrl {
 
     @Autowired
     private LectureService lectureService;
+
+    @Autowired
+    private SubjectService subjectService;
+
+    @Autowired
+    private CurriService curriService;
 
     @Autowired
     private MemberMgnService memberMgnService;
@@ -302,17 +300,55 @@ public class MemberCtrl {
         return "redirect:/user/myPage.do";
     }
 
-    //비
-    @GetMapping("/myLectList.do")
-    public String myLectList(HttpServletRequest request, Model model) throws Exception {
-        String sid = (String) session.getAttribute("sid");
-        int lno = Integer.parseInt(request.getParameter("lno"));
-        Member member = memberService.memberGet(sid);
-        List<Lecture> myLectList = lectureService.myLectList(lno);
-        model.addAttribute("myLectList", myLectList);
-        model.addAttribute("member", member);
+
+    //회원이 보는 강의 리스트
+    @GetMapping("myLectList.do")
+    public String myLectList(HttpServletRequest request, Model model) throws Exception{
+        String type = request.getParameter("type");
+        String keyword = request.getParameter("keyword");
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+
+        Page page = new Page();
+        page.setSearchType(type);
+        page.setSearchKeyword(keyword);
+        int total = lectureService.lectureCount(page);
+
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        model.addAttribute("type", type);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("page", page);
+        model.addAttribute("curPage", curPage);
+
+        List<Lecture> lectureList = lectureService.lectureList(page);
+        model.addAttribute("lectureList", lectureList);
+
         return "/member/myLectList";
     }
+
+    //회원의 강의 상세보기
+    @GetMapping("myLecture.do")
+    public String lectureUpdate(HttpServletRequest request, Model model) throws Exception{
+        int lno = Integer.parseInt(request.getParameter("lno"));
+
+        Lecture lecture = lectureService.lectureGet(lno);
+        Member teacher = memberService.memberGet(lecture.getTeacherId());
+        Subject subject = subjectService.subjectGet(lecture.getSno());
+        List<Curri> curriList = curriService.curriList(lno);
+
+        model.addAttribute("teacher", teacher);
+        model.addAttribute("subject", subject);
+        model.addAttribute("curriList", curriList);
+        model.addAttribute("lecture", lecture);
+        model.addAttribute("lno", lno);
+
+        return "/member/lecture";
+
+    }
+
+
 
     /*
     @InitBinder

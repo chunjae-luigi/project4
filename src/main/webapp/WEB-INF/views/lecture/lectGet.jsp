@@ -210,7 +210,7 @@
         const lectureTab = document.getElementById('tab-content');
         const lectureContent = document.getElementById('lect_con');
         lectureTab.addEventListener('click', function() {
-            const scrollPosition = lectureContent.offsetTop - 100;
+            const scrollPosition = lectureContent.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
     });
@@ -218,7 +218,7 @@
         const lectureTab = document.getElementById('tab-curri');
         const lectureContent = document.getElementById('lect_list');
         lectureTab.addEventListener('click', function() {
-            const scrollPosition = lectureContent.offsetTop - 100;
+            const scrollPosition = lectureContent.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
     });
@@ -226,7 +226,7 @@
         const lectureTab = document.getElementById('tab-review');
         const lectureContent = document.getElementById('lect_review');
         lectureTab.addEventListener('click', function() {
-            const scrollPosition = lectureContent.offsetTop - 100;
+            const scrollPosition = lectureContent.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
     });

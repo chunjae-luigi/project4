@@ -209,7 +209,7 @@ public class AdminCtrl {
         return "/admin/lectAdd";
     }
 
-    @PostMapping("lectAdd.do")   //비
+    @PostMapping("lectAdd.do")
     public String lectureInsertpro(HttpServletRequest request, Model model, MultipartFile thumbnail, MultipartFile lvideo, MultipartFile bthumbnail) throws Exception{
         String msg = "";
 

@@ -23,7 +23,7 @@
                             </div>
                             <ul class="my-2" style="width:100%;">
                                 <li><a href="${path }/user/myPage.do" class="active px-4 py-2">나의 정보</a></li>
-                                <li><a href="${path }/user/myLecture.do" class="px-4 py-2">나의 강의실</a></li>
+                                <li><a href="${path }/user/myLectList.do" class="px-4 py-2">나의 강의실</a></li>
                                 <li><a href="${path }/user/myPay.do" class="px-4 py-2">나의 결제정보</a></li>
                             </ul>
                         </div>
