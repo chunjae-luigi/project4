@@ -10,8 +10,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
+import java.util.Locale;
 
 @Configuration
 @ComponentScan(basePackages = "kr.ed.haebeop.service")
@@ -59,5 +64,4 @@ public class RootConfig {
         commonsMultipartResolver.setMaxInMemorySize(100000000);
         return commonsMultipartResolver;
     }
-
 }

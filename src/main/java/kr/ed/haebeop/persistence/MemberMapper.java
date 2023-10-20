@@ -19,5 +19,6 @@ public interface MemberMapper {
     public int idCheck(String id) throws Exception;
     public void insert(Member member) throws Exception;
     public void firepoint(Member member) throws Exception;
+    public void updateMember(Member member) throws Exception;
 
 }
