@@ -19,7 +19,7 @@
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
-                <img src="${path}/resources/image/lecture/thumnail(6).png">
+                <img src="${path }/resources/image/lecture/thumnail(1).png">
             </div>
             <div class="col-lg-6">
                 <h3 style="color: var(--main-color);">${subject.title } </h3>
@@ -50,7 +50,7 @@
             <!-- 강의 내용 -->
             <article id="lect_con">
                 <header class="mb-4">
-                    <h1 class="fw-bolder mb-1">${lecture.title }</h1>
+                    <h1 class="fw-bolder mb-1" style="margin-top: 2rem;">${lecture.title }</h1>
                     <div class="text-muted fst-italic mb-2">${lecture.subTitle }</div>
                 </header>
                 <section class="mb-5">
@@ -58,7 +58,7 @@
 
                         <!-- 교재 추가 경로 변경 해야함 //비 -->
                         <div>강의 교재 </div>
-                        <div><img src="${path}/resources/image/lecture/booksample.jpg"></div>
+                        <div><img src="${path}/resources/image/lecture/booksample.jpg" width="300px"></div>
                 </section>
             </article>
             <!-- 목차 -->
@@ -75,7 +75,6 @@
                 <h2> 수강후기 </h2>
                 <div class="card bg-light">
                     <div class="card-body">
-
                         <!-- 수강후기 입력칸-->
                         <form action="${path }/review/add.do" method="post" class="mb-4">
                             <input type="hidden" name="id" id="id"  value="${sid}">
@@ -109,36 +108,41 @@
                                     $('.click-star').slice(0, initialStar).addClass('filled');
                                 });
                             </script>
-
+                            <div class="review_con">
                             <textarea name="content" id="content" class="form-control" rows="3" required placeholder="수강생만 댓글입력창 뜨게하기!"></textarea>
-                            <input type="submit" class="button is-primary" value="등록">
+                            <span><input type="submit" class="btn btn-warning" value="등록"></span>
+                            </div>
                         </form>
+
                         <!-- 수강후기 리스트 -->
                         <div>
 
                         <c:forEach var="review" items="${reviewList }">
                         <div class="d-flex">
                             <div class="review_mem">
-                                ${review.memId }</div>
-                            <div class="ms-3">
-                            <div>
-                                <div class="star-rating">
-                                        <%-- 별점 출력 --%>
-                                    <c:forEach begin="1" end="${review.star}" var="i">
-                                        <span class="star-icon filled"></span>
-                                    </c:forEach>
-
-                                    <c:forEach begin="${review.star + 1}" end="5" var="i">
-                                        <span class="star-icon"></span>
-                                    </c:forEach>
-                                </div>
-                                <div>${review.content } </div>
-                                <p id="reg">
-                                    <fmt:parseDate value="${review.regdate }" var="regdate" pattern="yyyy-MM-dd HH:mm:ss" />
-                                    <fmt:formatDate value="${regdate }" pattern="yyyy-MM-dd" />
-                                </p>
-                                <div>
+                                <p>${member.nm }</p>
                             </div>
+                                <div class="riview_list">
+                                    <div class="star-rating">
+                                            <%-- 별점 출력 --%>
+                                        <c:forEach begin="1" end="${review.star}" var="i">
+                                            <span class="star-icon filled"></span>
+                                        </c:forEach>
+
+                                        <c:forEach begin="${review.star + 1}" end="5" var="i">
+                                            <span class="star-icon"></span>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="fw-bold">회원아이디나 이름</div>
+                                    <div>${review.content } </div>
+                                    <div id="reg">
+                                        <fmt:parseDate value="${review.regdate }" var="regdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                                        <fmt:formatDate value="${regdate }" pattern="yyyy-MM-dd" />
+                                    </div>
+                                </div>
+                            <div>
+                            </div>
+
                         </div>
                         </c:forEach>
 

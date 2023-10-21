@@ -78,6 +78,7 @@
                                                         <c:otherwise>오프라인</c:otherwise>
                                                     </c:choose>
                                                 </td>
+                                                <td class="text-center">${subject.title }</td>
                                                 <td class="text-center"><a href="${path }/admin/lectGet.do?lno=${lecture.lno }">${lecture.title }</a></td>
                                                 <td class="text-center">${lecture.teacherNm }</td>
                                             </tr>
@@ -121,6 +122,35 @@
             <!-- [ Main Content ] end -->
         </div>
     </div>
+
+    <script>
+        const sqlData = [
+            { subject: 1 },
+            { subject: 2 },
+            { subject: 3 }
+        ];
+
+        // 각 탭에 대한 이벤트 리스너 추가
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // 현재 활성화된 탭 제거
+                document.querySelector('.nav-link.active').classList.remove('active');
+                // 클릭한 탭 활성화
+                link.classList.add('active');
+            });
+        });
+
+        // SQL 데이터에 따라 탭을 활성화
+        const currentPath = window.location.pathname; // 현재 URL 경로
+        for (let i = 0; i < sqlData.length; i++) {
+            if (currentPath.endsWith(`/${sqlData[i].subject}`)) {
+                navLinks[i].classList.add('active');
+            }
+        }
+    </script>
+
+
     <jsp:include page="../layout/adminFooter.jsp" />
 </body>
 </html>

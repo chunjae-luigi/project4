@@ -34,7 +34,7 @@ public class SubjectCtrl {
         subject.setTitle(request.getParameter("title"));
 
         subjectService.subjectAdd(subject);
-        return "redirect:/admin/lectDetail.do?fno="+request.getParameter("par");
+        return "redirect:/admin/lectGet.do?fno="+request.getParameter("par");
     }
 
     @GetMapping("delete.do")
@@ -42,6 +42,6 @@ public class SubjectCtrl {
         int sno = Integer.parseInt(request.getParameter("sno"));
         subjectService.subjectDelete(sno);
 
-        return "/admin/lectDetail";
+        return "/admin/lectGet";
     }
 }

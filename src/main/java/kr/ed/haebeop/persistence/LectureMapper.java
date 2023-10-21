@@ -11,8 +11,6 @@ public interface LectureMapper {
 
     public List<Lecture> lectureList(Page page);
 
-    public List<Lecture> myLectList(int lno);
-
     public Lecture lectureGet(int lno);
 
     public void lectureAdd(Lecture lecture);

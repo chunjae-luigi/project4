@@ -12,6 +12,13 @@
     <jsp:include page="../layout/head.jsp" />
     <link rel="stylesheet" href="${path }/resources/css/sub.css">
     <link rel="stylesheet" href="${path }/resources/css/lecture.css">
+
+    <style>
+        .lect-frame {
+
+        }
+
+    </style>
 </head>
 <body>
 
@@ -19,13 +26,13 @@
 <%-- 페이지 상단 --%>
 <div class="container-fluid bg-primary mb-5">
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
-        <h3 class="display-3 font-weight-bold text-white">커뮤니티</h3>
+        <h3 class="display-3 font-weight-bold text-white">온라인 강의</h3>
         <div class="d-inline-flex text-white">
             <p class="m-0"><a class="text-white" href="${path }/">Home</a></p>
             <p class="m-0 px-2">/</p>
-            <p class="m-0"><a class="text-white" href="${path }/board/list.do?no=1">커뮤니티</a></p>
+            <p class="m-0"><a class="text-white" href="${path }/lecture/list.do?no=1">해법강의</a></p>
             <p class="m-0 px-2">/</p>
-            <p class="m-0">${boardMgn.boardNm }</p>
+            <p class="m-0"><a class="text-white" href="${path }/lecture/list.do?no=1">온라인강의</a></p>
         </div>
     </div>
 </div>
@@ -33,6 +40,15 @@
 
 <div class="content">
 <section class="latest-podcast-section section-padding pb-0" id="section_2">
+
+    <!-- 과목탭 -->
+    <nav class="nav nav-pills flex-column flex-sm-row" style="width: 1200px; margin: 0 auto;">
+        <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="${path }/lecture/list.do">전체보기</a>
+        <a class="flex-sm-fill text-sm-center nav-link" href="${path }/lecture/list.do?sno=1">영어</a>
+        <a class="flex-sm-fill text-sm-center nav-link" href="${path }/lecture/list.do?sno=${lecture.sno }=2">수학</a>
+        <a class="flex-sm-fill text-sm-center nav-link" href="${path }/lecture/list.do?sno=3">기타</a>
+    </nav>
+
 
     <form action="${path }/lecture/list.do" method="get" class="field has-addons has-addons-right">
         <input type="hidden" name="no" value="${lecture.lno }" />
@@ -51,42 +67,34 @@
     </form>
 
     <div class="container">
-        <div class="row justify-content-center">
-
-            <div class="col-lg-10 col-12">
-                <div class="section-title-wrap mb-5">
-                    <h3 class="section-title">테스트</h3>
-                </div>
                 <c:forEach items="${lectureList }" var="lecture" varStatus="status">
-                <div class="lect-frame">
+                    <div class="lect-frame">
                     <div class="border-00">
                     <div class="d-inline-block img-box-wrap">
                         <div class="img-box">
                             <!-- 썸네일 - 누르면 상세페이지 이동 -->
                             <a href="${path }/lecture/get.do?lno=${lecture.lno }">
-                                <img src=${path}/resources/image/lecture/thumnail(6).png">
+                                <img src="${path }/resources/image/lecture/thumnail(1).png">
                             </a>
                         </div>
                     </div>
                     <div class="d-inline-block lect_info">
                         <div class="custom-block-info">
-
-                            <h2 class="mb-2">
-                                <a href="${path }/lecture/get.do?lno=${lecture.lno }">${lecture.title }</a>
-                            </h2>
-
-                            <h3>${lecture.subTitle }</h3>
-                            <p>과목 : ${lecture.sno } </p>
-                            <p>강사 : ${lecture.teacherNm } 선생님</p>
-                            <p>수강인원 : ${lecture.studentCnt }명</p>
-                            <p>${lecture.cost }원</p>
-
+                            <h5>${subject.title }</h5>
+                            <h1><a href="${path }/lecture/get.do?lno=${lecture.lno }">${lecture.title }</a></h1>
+                            <h3>${lecture.teacherNm } 선생님</h3>
+                            <h5>${lecture.subTitle }</h5><br>
+                            <div>
+                                <p style="font-size: 16px;">수강인원 : ${lecture.studentCnt }명 </p>
+                                <p style="font-size: 20px; color: #5a6268; font-weight: bold"> ${lecture.cost }원</p>
+                            </div>
                         </div>
                     </div>
                     </div>
                     </div>
-                </div>
                 </c:forEach>
+
+
                 <c:if test="${empty lectureList }">
                     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height:20vh;">
                         <h5 class="font-weight-bold">새로운 강의를 기대해주세요!</h5>
@@ -94,7 +102,6 @@
 
                 </c:if>
             </div>
-        </div>
 
 
     <nav class="pagination is-rounded is-centered mb-6" role="navigation" aria-label="pagination">

@@ -215,7 +215,7 @@ public class AdminCtrl {
 
         ServletContext application = request.getSession().getServletContext();
         //String realPath = application.getRealPath("/resources/upload");       // 운영 서버
-        String realPath = "D:\\seulbee\\uploadtest";     // 개발 서버
+        String realPath = "C:\\Users\\user\\Documents\\seulbee\\uploadtest";     // 개발 서버, 이건 임시
 
         Lecture lecture = new Lecture();
         lecture.setTitle(request.getParameter("title"));
@@ -365,7 +365,7 @@ public class AdminCtrl {
         ServletContext application = request.getSession().getServletContext();
 
         //String realPath = application.getRealPath("/resources/upload");                   //운영 서버
-        String realPath = "D:\\seulbee\\uploadtest";   //개발 서버
+        String realPath = "C:\\Users\\user\\Documents\\seulbee\\uploadtest";   //개발 서버
 
         Lecture lecture = new Lecture();
         lecture.setLno(lno);
@@ -384,7 +384,7 @@ public class AdminCtrl {
         return "redirect:/admin/lectList.do";
     }
 
-    @GetMapping("lectDelete.do")    //비
+    @GetMapping("lectDelete.do")
     public String lectureDelete(HttpServletRequest request, Model model) throws Exception{
         int lno = Integer.parseInt(request.getParameter("lno"));
         lectureService.lectureDelete(lno);
