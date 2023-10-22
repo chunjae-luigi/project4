@@ -45,7 +45,7 @@ public class LectureCtrl {
         Page page = new Page();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
-        int total = lectureService.lectureCount(page);
+        int total = lectureService.lectureviewCount(page);
 
         page.makeBlock(curPage, total);
         page.makeLastPageNum(total);
@@ -56,7 +56,7 @@ public class LectureCtrl {
         model.addAttribute("page", page);
         model.addAttribute("curPage", curPage);
 
-        List<LectureVO> lectureviewList = lectureService.lectureList(page);
+        List<LectureVO> lectureviewList = lectureService.lectureviewList(page);
         model.addAttribute("lectureviewList", lectureviewList);
 
         return "/lecture/lectList";

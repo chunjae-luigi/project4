@@ -26,7 +26,7 @@
     <!-- 유저 강의 리스트 -->
     <select id="lectureviewList" resultType="kr.ed.haebeop.domain.LectureVO">
         <![CDATA[
-        select * from lectureview
+        select * from lecture
         ]]>
         <where>
             <if test="searchType != null">
@@ -45,7 +45,15 @@
         ]]>
     </select>
 
-<!-- 결제 강의 리스트 -->
+    <!-- 결제 강의 리스트 -->
+    <select id="mylectList" resultType="kr.ed.haebeop.domain.LectlistVO">
+        select * from mylect where payno=not null
+    </select>
+
+    <!-- 강의 메인페이지 노출-->
+    <select id="lectureList_main" resultType="kr.ed.haebeop.domain.Lecture">
+        select * from lecture ORDER BY lno desc limit 3
+    </select>
 
     <!-- 강의 상세보기 -->
     <select id="lectureGet" resultType="kr.ed.haebeop.domain.Lecture">
@@ -89,7 +97,7 @@
     <!-- 페이징 처리를 위한 카운트 -->
     <select id="lectureviewCount" resultType="integer">
         <![CDATA[
-        select count(*) from lectureview
+        select count(*) from lecture
         ]]>
         <where>
             <if test="searchType != null">

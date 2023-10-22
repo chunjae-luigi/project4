@@ -55,7 +55,7 @@
         <div class="input-group">
             <div class="input-group-append">
                 <select id="inputState" name="type" class="form-control rounded-0 border-right-0">
-                    <option value="title"<c:if test="${type eq 'title'}"> selected="selected"</c:if>>강의명</option>
+                    <option value="title"<c:if test="${type eq 'lect_tit'}"> selected="selected"</c:if>>강의명</option>
                     <option value="nm"<c:if test="${type eq 'teacherId'}"> selected="selected"</c:if>>강사</option>
                 </select>
             </div>
@@ -80,9 +80,9 @@
                     </div>
                     <div class="d-inline-block lect_info">
                         <div class="custom-block-info">
-                            <h5>${subject.title }</h5>
-                            <h1><a href="${path }/lecture/get.do?lno=${lecture.lno }">${lecture.title }</a></h1>
-                            <h3>${lecture.teacherId } 선생님</h3>
+                            <h5>${lecture.sub_tit }</h5>
+                            <h1><a href="${path }/lecture/get.do?lno=${lecture.lno }">${lecture.lect_tit }</a></h1>
+                            <h4>${lecture.teacherId } 선생님</h4>
                             <h5>${lecture.subTitle }</h5><br>
                             <div>
                                 <p style="font-size: 16px;">수강인원 : ${lecture.studentCnt }명 </p>

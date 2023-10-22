@@ -1,6 +1,8 @@
 package kr.ed.haebeop.persistence;
 
+import kr.ed.haebeop.domain.LectlistVO;
 import kr.ed.haebeop.domain.Lecture;
+import kr.ed.haebeop.domain.LectureVO;
 import kr.ed.haebeop.util.Page;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,4 +24,10 @@ public interface LectureMapper {
     public void lectureDelete(int lno);
 
     public int lectureCount(Page page);
+
+    public int lectureviewCount(Page page);
+
+    public List<LectlistVO> mylectList(int lno);
+
+    public List<Lecture> lectureList_main();
 }

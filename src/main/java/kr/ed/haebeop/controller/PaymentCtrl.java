@@ -58,7 +58,7 @@ public class PaymentCtrl {
     public String insertpaypro(@ModelAttribute Payment payment, @ModelAttribute Member member, Model model )throws Exception{
         paymentService.insertpayment(payment);
         memberService.firepoint(member);
-        return "redirect:/payment/list.do";
+        return "redirect:/user/paylistMem.do";
     }
 
     //    회원 페이지
@@ -71,7 +71,7 @@ public class PaymentCtrl {
 
         model.addAttribute("paymentList", paymentList);
         model.addAttribute("mem", member);
-        return "/member/paymentList";
+        return "/user/paymentList";
 
     }
 

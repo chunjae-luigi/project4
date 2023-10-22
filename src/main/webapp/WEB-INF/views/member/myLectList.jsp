@@ -95,7 +95,7 @@
 
 
                         <div class="container" id="mylect">
-                        <c:forEach items="${lectureList }" var="lecture" varStatus="status">
+                        <c:forEach items="${mylectlist }" var="lecture" varStatus="status">
                             <div class="col-lg-4 col-12 mb-4">
                                 <div class="custom-block custom-block-full">
                                     <div class="custom-block-image-wrap">
@@ -108,8 +108,10 @@
                                         <h3 class="mb-2">
                                             <a href="${path}/user/myLecture.do">${lecture.title }</a>
                                         </h3>
-
-                                            <p> ${lecture.teacherNm } 선생님</p>
+                                        <p> ${lecture.lno } 강의번호</p>
+                                        <p> ${lecture.teacherNm } 선생님</p>
+                                        <p> ${lecture.teacherNm } 선생님</p>
+                                            <p> ${payment.payno } </p>
 
                                             <p>수강상태(완강ㄹ여부)
                                             </p>

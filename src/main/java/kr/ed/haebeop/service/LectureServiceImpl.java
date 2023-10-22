@@ -1,6 +1,8 @@
 package kr.ed.haebeop.service;
 
+import kr.ed.haebeop.domain.LectlistVO;
 import kr.ed.haebeop.domain.Lecture;
+import kr.ed.haebeop.domain.LectureVO;
 import kr.ed.haebeop.persistence.LectureMapper;
 import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +49,20 @@ public class LectureServiceImpl implements LectureService{
     @Override
     public int lectureCount(Page page) throws Exception {
         return lectureMapper.lectureCount(page);
+    }
+
+    @Override
+    public int lectureviewCount(Page page) throws Exception {
+        return lectureMapper.lectureCount(page);
+    }
+
+    @Override
+    public List<Lecture> lectureList_main() throws Exception {
+        return lectureMapper.lectureList_main();
+    }
+
+    @Override
+    public List<LectlistVO> mylectList(int lno) throws Exception {
+        return lectureMapper.mylectList(lno);
     }
 }
