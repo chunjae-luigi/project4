@@ -1,7 +1,11 @@
 package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.BoardMgn;
+import kr.ed.haebeop.domain.Lecture;
+import kr.ed.haebeop.domain.Review;
 import kr.ed.haebeop.service.BoardMgnService;
+import kr.ed.haebeop.service.LectureService;
+import kr.ed.haebeop.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +22,24 @@ public class HomeCtrl {
     @Autowired
     private BoardMgnService boardMgnService;
 
+    @Autowired
+    private ReviewService reviewService;
+
+    @Autowired
+    private LectureService lectureService;
+
     @RequestMapping(value = "/")
     public String index(Model model) throws Exception {
 
         List<BoardMgn> boardMgnListForHeader = boardMgnService.listBoardMgnForHeader();
         model.addAttribute("boardMgnListForHeader", boardMgnListForHeader);
+
+        List<Review> reviewList = reviewService.reviewList_main();
+        model.addAttribute("reviewList", reviewList);
+
+        List<Lecture> lectureList = lectureService.lectureList_main();
+        model.addAttribute("lectureList", lectureList);
+
 
         return "/index";
     }

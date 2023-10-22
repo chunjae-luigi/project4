@@ -17,6 +17,8 @@
     <update id="reviewUpdate">
         update review set content=#{content}, star=#{star} where cno=#{cno}
     </update>
-
+    <select id="reviewList_main" resultType="kr.ed.haebeop.domain.Review">
+        select * from review where star = 5 order by regdate desc limit 5
+    </select>
 
 </mapper>

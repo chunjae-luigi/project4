@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="${path }/resources/css/owl.carousel.css" />
 </head>
 <body>
-<%--<jsp:include page="../layout/adminHeader.jsp" />--%>
+<jsp:include page="../layout/adminHeader.jsp" />
 <div class="pcoded-main-container">
     <div class="pcoded-content">
         <!-- [ breadcrumb ] start -->
@@ -61,8 +61,6 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
-                                    <th class="text-center">회원 아이디</th>
-
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">회원 아이디</th>
@@ -73,11 +71,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <td class="text-center">${mem.id}</td>
                                     <c:forEach items="${paymentList }" var="pay" varStatus="status">
                                         <tr>
                                             <td class="text-center">${status.count }</td>
-                                            <td class="text-center">${pay.id }</td>
+                                            <td class="text-center"><a href="${path}/admin/memberget.do?id=${pay.id }">${pay.id }</a></td>
                                             <td class="text-center">${pay.plec }</td>
                                             <td class="text-center">${pay.price }</td>
                                             <td class="text-center">${pay.pmethod }</td>
