@@ -64,7 +64,7 @@
                                 <div class="col-6 py-1">${lec.cost}</div>
                             </div>
                         </div>
-                        <a href="${path}/lecture/get.do?lno=${lec.lno}" class="btn btn-primary px-4 mx-auto mb-4">신청하기</a>
+                        <a href="${path}/lecture/get.do" class="btn btn-primary px-4 mx-auto mb-4">신청하기</a>
                     </div>
                 </div>
                 <c:if test="${empty reviewList}">
@@ -86,58 +86,32 @@
         </div>
     </div>
 
-    <div class="container-fluid mb-5">
-        <div class="container">
-            <div class="text-center pb-2">
-                <p class="section-title px-5">
-                    <span class="px-2">Our Teachers</span>
-                </p>
-                <h1 class="mb-4">강사님들을 만나보세요.</h1>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-3 text-center team">
-                    <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-                        <img class="img-fluid w-100" src="${path }/resources/image/main/team-1.jpg" alt="선생님1의 이미지" />
-                        <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                            <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fas fa-phone-alt"></i></a>
-                            <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="#" ><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                    <h4 class="mb-0">최리자</h4>
+    <c:if test="${not empty teacherList }">
+        <div class="container-fluid mb-5">
+            <div class="container">
+                <div class="text-center pb-2">
+                    <p class="section-title px-5">
+                        <span class="px-2">Our Teachers</span>
+                    </p>
+                    <h1 class="mb-4">강사님들을 만나보세요.</h1>
                 </div>
-                <div class="col-md-6 col-lg-3 text-center team">
-                    <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-                        <img class="img-fluid w-100" src="${path }/resources/image/main/team-2.jpg" alt="선생님2의 이미지" />
-                        <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                            <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fas fa-phone-alt"></i></a>
-                            <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="#" ><i class="fas fa-envelope"></i></a>
+                <div class="row">
+                <c:forEach var="teacher" items="${teacherList }" varStatus="status">
+                    <div class="col-md-6 col-lg-3 text-center team">
+                        <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
+                            <img class="img-fluid w-100" src="${path }/resources/image/main/team-${status.count }.jpg" alt="${teacher.nm }의 이미지" />
+                            <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                                <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="tel:${teacher.tel }"><i class="fas fa-phone-alt"></i></a>
+                                <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="email:${teacher.email }" ><i class="fas fa-envelope"></i></a>
+                            </div>
                         </div>
+                        <h4 class="mb-0">${teacher.nm }</h4>
                     </div>
-                    <h4 class="mb-0">박리자</h4>
-                </div>
-                <div class="col-md-6 col-lg-3 text-center team">
-                    <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-                        <img class="img-fluid w-100" src="${path }/resources/image/main/team-3.jpg" alt="선생님3의 이미지" />
-                        <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                            <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fas fa-phone-alt"></i></a>
-                            <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="#" ><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                    <h4 class="mb-0">김리자</h4>
-                </div>
-                <div class="col-md-6 col-lg-3 text-center team">
-                    <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-                        <img class="img-fluid w-100" src="${path }/resources/image/main/team-4.jpg" alt="선생님4의 이미지" />
-                        <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                            <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fas fa-phone-alt"></i></a>
-                            <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="#" ><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                    <h4 class="mb-0">이리자</h4>
+                </c:forEach>
                 </div>
             </div>
         </div>
-    </div>
+    </c:if>
 
     <div class="container-fluid py-5">
         <div class="container p-0">

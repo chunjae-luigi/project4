@@ -61,5 +61,18 @@ public class PaymentCtrl {
         return "redirect:/user/paylistMem.do";
     }
 
+//    회원 페이지
+    @GetMapping("/paylistMember.do")
+    public String paymentList(HttpServletRequest request, Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+
+        List<Payment> paymentList = paymentService.paymentList_Member(id);
+        Member member = memberService.memberGet(id);
+
+        model.addAttribute("paymentList", paymentList);
+        model.addAttribute("mem", member);
+        return "/user/paymentList";
+
+    }
 
 }
