@@ -34,4 +34,8 @@ public class ReviewMapperImpl implements ReviewMapper {
         sqlSession.delete("review.reviewDelete", rno);
     }
 
+    @Override
+    public List<Review> reviewList_main() throws Exception {
+        return sqlSession.selectList("review.reviewList_main");
+    }
 }

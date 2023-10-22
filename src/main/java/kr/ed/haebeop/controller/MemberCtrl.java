@@ -12,6 +12,7 @@ import kr.ed.haebeop.service.MemberService;
 import kr.ed.haebeop.service.PaymentService;
 import kr.ed.haebeop.util.NaverLogin;
 import kr.ed.haebeop.util.Page;
+import kr.ed.haebeop.util.PayListmem;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -354,16 +355,16 @@ public class MemberCtrl {
     //멤버 payList
     @GetMapping("/paylistMem.do")
     public String paymentMem(HttpServletRequest request, Model model) throws Exception {
-        HttpSession session = request.getSession();
         String id = (String) session.getAttribute("sid");
 
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
-        Page page = new Page();
+        PayListmem page = new PayListmem();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
+        page.setId(id);
         int total = paymentService.paymentCount(page);
 
         page.makeBlock(curPage, total);
@@ -379,9 +380,9 @@ public class MemberCtrl {
         model.addAttribute("paymentList", paymentList);
 
 
-        return "/user/payList";
+        return "/member/payList";
 
     }
 
-    
+
 }

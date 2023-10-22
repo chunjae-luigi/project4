@@ -13,4 +13,7 @@ public interface ReviewService {
 
     public void reviewDelete(int rno) throws Exception;
 
+    public List<Review> reviewList_main() throws Exception;
+
+
 }

@@ -3,101 +3,273 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>폭죽 애니메이션</title>
+    <title>파티 애니메이션</title>
     <style>
-        *   {
-            background-color: black;
-        }
-        body {
-            /*display: flex;*/
-            /*justify-content: center;*/
-            align-items: center;
-            margin: 0;
-        }
-        canvas {
-            border: none;
-            background-color: black;
-            border-radius: 35%;
-            width: 350px;
-            height: auto;
-
-        }
-
+        canvas{z-index:10;pointer-events: none;position: fixed;top: 0;transform: scale(1.1);}
         img {
             margin: 0;
             padding: 0;
             position: absolute;
-            z-index: 1100;
+            z-index: -5;
             top: 20%;
-            left:50%;
+            left: 22%;
+        }
+        a{
+            color: black;
+            visibility: hidden;
+            position: absolute;
+            top: 53%;
+            left: 46%;
+            font-size: 30px;
+            font-weight: bold;
         }
     </style>
-    <jsp:include page="./layout/head.jsp" />
-
 </head>
 <body>
-<%--<jsp:include page="./layout/header.jsp" />--%>
-<canvas id="fireworkCanvas" width="5000px" height="1000px"></canvas>
 <img src="${path}/resources/image/main/congpoint.png" alt="축하 포인트 ">
+<a href="${path}/">메인으로 이동</a>
+
+
+
+<canvas id="canvas"></canvas>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-    const canvas = document.getElementById('fireworkCanvas');
-    const ctx = canvas.getContext('2d');
 
-    // 폭죽을 그리는 함수
-    function drawFirework(x, y) {
-        const numParticles = 1500;
-        const particles = [];
+    $(document).ready(function () {
+        // globals
+        var canvas;
+        var ctx;
+        var W;
+        var H;
+        var mp = 150; //max particles
+        var particles = [];
+        var angle = 0;
+        var tiltAngle = 0;
+        var confettiActive = true;
+        var animationComplete = true;
+        var deactivationTimerHandler;
+        var reactivationTimerHandler;
+        var animationHandler;
 
-        for (let i = 0; i < numParticles; i++) {
-            const particle = { x, y,
-                radius: Math.random() * 3 + 2,
-                color: `rgb(193, 26, 26)`,
-                speed: { x: (Math.random() - 0.5) * 8, y: (Math.random() - 0.5) * 8 }
-            };
-            particles.push(particle);
+        // objects
+
+        var particleColors = {
+            colorOptions: ["DodgerBlue", "OliveDrab", "Gold", "pink", "SlateBlue", "lightblue", "Violet", "PaleGreen", "SteelBlue", "SandyBrown", "Chocolate", "Crimson"],
+            colorIndex: 0,
+            colorIncrementer: 0,
+            colorThreshold: 10,
+            getColor: function () {
+                if (this.colorIncrementer >= 10) {
+                    this.colorIncrementer = 0;
+                    this.colorIndex++;
+                    if (this.colorIndex >= this.colorOptions.length) {
+                        this.colorIndex = 0;
+                    }
+                }
+                this.colorIncrementer++;
+                return this.colorOptions[this.colorIndex];
+            }
         }
 
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function confettiParticle(color) {
+            this.x = Math.random() * W; // x-coordinate
+            this.y = (Math.random() * H) - H; //y-coordinate
+            this.r = RandomFromTo(10, 15); //radius;
+            this.d = (Math.random() * mp) + 10; //density;
+            this.color = color;
+            this.tilt = Math.floor(Math.random() * 10) - 10;
+            this.tiltAngleIncremental = (Math.random() * 0.07) + .05;
+            this.tiltAngle = 0;
 
-            for (let i = 0; i < particles.length; i++) {
-                const particle = particles[i];
+            this.draw = function () {
                 ctx.beginPath();
-                ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 5);
-                ctx.fillStyle = particle.color;
-                ctx.fill();
+                ctx.lineWidth = this.r / 2;
+                ctx.strokeStyle = this.color;
+                ctx.moveTo(this.x + this.tilt + (this.r / 4), this.y);
+                ctx.lineTo(this.x + this.tilt, this.y + this.tilt + (this.r / 4));
+                return ctx.stroke();
+            }
+        }
 
-                particle.x += particle.speed.x;
-                particle.y += particle.speed.y;
-                particle.radius *= 0.98; // Particle size decreases over time
+        $(document).ready(function () {
+            SetGlobals();
+            RestartConfetti()
+            // InitializeButton();
+            // InitializeConfetti();
 
-                if (particle.radius < 0.5) {
-                    particles.splice(i, 3);
-                    i--;
+            $(window).resize(function () {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = W;
+                canvas.height = H;
+            });
+
+        });
+
+        function InitializeButton() {
+            $('#stopButton').click(DeactivateConfetti);
+            $('#startButton').click(RestartConfetti);
+        }
+
+        function SetGlobals() {
+            canvas = document.getElementById("canvas");
+            ctx = canvas.getContext("2d");
+            W = window.innerWidth;
+            H = window.innerHeight;
+            canvas.width = W;
+            canvas.height = H;
+        }
+
+        function InitializeConfetti() {
+            particles = [];
+            animationComplete = false;
+            for (var i = 0; i < mp; i++) {
+                var particleColor = particleColors.getColor();
+                particles.push(new confettiParticle(particleColor));
+            }
+            StartConfetti();
+        }
+
+        function Draw() {
+            ctx.clearRect(0, 0, W, H);
+            var results = [];
+            for (var i = 0; i < mp; i++) {
+                (function (j) {
+                    results.push(particles[j].draw());
+                })(i);
+            }
+            Update();
+
+            return results;
+        }
+
+        function RandomFromTo(from, to) {
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+
+
+        function Update() {
+            var remainingFlakes = 0;
+            var particle;
+            angle += 0.01;
+            tiltAngle += 0.1;
+
+            for (var i = 0; i < mp; i++) {
+                particle = particles[i];
+                if (animationComplete) return;
+
+                if (!confettiActive && particle.y < -15) {
+                    particle.y = H + 100;
+                    continue;
                 }
+
+                stepParticle(particle, i);
+
+                if (particle.y <= H) {
+                    remainingFlakes++;
+                }
+                CheckForReposition(particle, i);
             }
 
-            requestAnimationFrame(draw);
+            if (remainingFlakes === 0) {
+                StopConfetti();
+            }
         }
 
-        draw();
-    }
+        function CheckForReposition(particle, index) {
+            if ((particle.x > W + 20 || particle.x < -20 || particle.y > H) && confettiActive) {
+                if (index % 5 > 0 || index % 2 == 0) //66.67% of the flakes
+                {
+                    repositionParticle(particle, Math.random() * W, -10, Math.floor(Math.random() * 10) - 20);
+                } else {
+                    if (Math.sin(angle) > 0) {
+                        //Enter from the left
+                        repositionParticle(particle, -20, Math.random() * H, Math.floor(Math.random() * 10) - 20);
+                    } else {
+                        //Enter from the right
+                        repositionParticle(particle, W + 20, Math.random() * H, Math.floor(Math.random() * 10) - 20);
+                    }
+                }
+            }
+        }
+        function stepParticle(particle, particleIndex) {
+            particle.tiltAngle += particle.tiltAngleIncremental;
+            particle.y += (Math.cos(angle + particle.d) + 3 + particle.r / 2) / 3;
+            particle.x += Math.sin(angle);
+            particle.tilt = (Math.sin(particle.tiltAngle - (particleIndex / 3))) * 15;
+        }
 
-    // 폭죽을 발사하는 함수
-    function launchFirework() {
-        const startX = Math.random() * canvas.width;
-        const startY = canvas.height;
-        drawFirework(startX, startY);
-    }
+        function repositionParticle(particle, xCoordinate, yCoordinate, tilt) {
+            particle.x = xCoordinate;
+            particle.y = yCoordinate;
+            particle.tilt = tilt;
+        }
 
-    // 일정 간격으로 폭죽 발사
-    setInterval(launchFirework, 1500); // Launch a firework every 2 seconds
+        function StartConfetti() {
+            W = window.innerWidth;
+            H = window.innerHeight;
+            canvas.width = W;
+            canvas.height = H;
+            (function animloop() {
+                if (animationComplete) return null;
+                animationHandler = requestAnimFrame(animloop);
+                return Draw();
+            })();
+        }
+
+        function ClearTimers() {
+            clearTimeout(reactivationTimerHandler);
+            clearTimeout(animationHandler);
+        }
+
+        function DeactivateConfetti() {
+            confettiActive = false;
+            ClearTimers();
+        }
+
+        function StopConfetti() {
+            animationComplete = true;
+            if (ctx == undefined) return;
+            ctx.clearRect(0, 0, W, H);
+        }
+
+        function RestartConfetti() {
+            ClearTimers();
+            StopConfetti();
+            reactivationTimerHandler = setTimeout(function () {
+                confettiActive = true;
+                animationComplete = false;
+                InitializeConfetti();
+            }, 100);
+
+        }
+
+        window.requestAnimFrame = (function () {
+            return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback) {
+                    return window.setTimeout(callback, 1000 / 60);
+                };
+        })();
+    })();
+
+
 </script>
-</body>
+<script>
+    $(document).ready(function(){
+        setTimeout(function (){
+            $("body a").css("visibility", "visible");
+        }, 3000)
+    })
+</script>
 </html>

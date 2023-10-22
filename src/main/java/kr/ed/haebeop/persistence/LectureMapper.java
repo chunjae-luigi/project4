@@ -20,4 +20,6 @@ public interface LectureMapper {
     public void lectureDelete(int lno);
 
     public int lectureCount(Page page);
+
+    public List<Lecture> lectureList_main();
 }

@@ -14,9 +14,8 @@
 
             <div class="navbar-nav font-weight-bold mx-auto py-0">
                 <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="${path}/main.do" class="nav-item nav-link">오픈페이지</a>
-                <a href="${path}/payment/list.do" class="nav-item nav-link">강의목록(임시)</a>
-                <a href="${path}/payment/paylistMember.do?sid=${sid }" class="nav-item nav-link">결제창</a>
+                <a href="${path}/main.do" class="nav-item nav-link">메인페이지 작업</a>
+                <a href="#" class="nav-item nav-link">공백</a>
                 <a href="${path }/lecture/list.do" class="nav-item nav-link">온라인강의</a>
                 <div class="nav-item dropdown board_drop_menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>

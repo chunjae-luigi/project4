@@ -74,7 +74,7 @@
                                         <c:forEach items="${memberList }" var="member" varStatus="status">
                                             <tr>
                                                 <td class="text-center">${status.count }</td>
-                                                <td class="text-center">${member.id }</td>
+                                                <td class="text-center"><a href="${path}/admin/memberget.do?id=${member.id }">${member.id }</a></td>
                                                 <td class="text-center">${member.nm }</td>
                                                 <td class="text-center">
                                                     <c:choose>
