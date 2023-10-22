@@ -64,7 +64,7 @@
                                 <div class="col-6 py-1">${lec.cost}</div>
                             </div>
                         </div>
-                        <a href="${path}/lecture/get.do" class="btn btn-primary px-4 mx-auto mb-4">신청하기</a>
+                        <a href="${path}/lecture/get.do?lno=${lec.lno}" class="btn btn-primary px-4 mx-auto mb-4">신청하기</a>
                     </div>
                 </div>
                 <c:if test="${empty reviewList}">
