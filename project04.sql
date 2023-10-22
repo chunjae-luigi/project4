@@ -27,11 +27,11 @@ CREATE TABLE memberMgn(
 	mmNo INT AUTO_INCREMENT PRIMARY KEY,				-- 회원 등급 요청 번호 : 자동 발생
 	author VARCHAR(20) NOT NULL,							-- 회원 아이디
 	approveYn BOOLEAN DEFAULT FALSE,						-- 회원 등급 승인 여부
-	mStatus INT DEFAULT 0,									-- 회원 상태 [0 : 미신청, 1 : 승인 대기, 2 : 승인 취소, 3 : 승인 완료]
+	mStatus INT DEFAULT 0,									-- 회원 상태 [0 : 미신청, 1 : 승인 대기, 2 : 승인 취소, 3 : 승인 완료, 4 : 재 신청]
 	content VARCHAR(2000)									-- 등급 승인 거절 사유
 );
 
-CREATE VIEW memberMgnList AS (SELECT mm.mmNo AS mmNo, mm.author AS author,  mm.approveYn AS approveYn, mm.content AS content, m.nm AS nm FROM memberMgn mm, member m WHERE mm.author = m.id order BY mm.mmNo ASC);
+CREATE VIEW memberMgnList AS (SELECT mm.mmNo AS mmNo, mm.author AS author,  mm.approveYn AS approveYn, mm.mStatus AS mStatus, mm.content AS content, m.nm AS nm FROM memberMgn mm, member m WHERE mm.author = m.id order BY mm.mmNo ASC);
 
 CREATE TABLE boardMgn(
 	bmNo INT AUTO_INCREMENT PRIMARY KEY,	-- 게시판 번호 : 자동 발생

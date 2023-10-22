@@ -5,119 +5,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>HEABEOP</title>
-    <jsp:include page="../layout/adminHead.jsp" />
-    <link rel="stylesheet" href="${path }/resources/css/admin.css" />
-    <link rel="stylesheet" href="${path }/resources/css/owl.carousel.css" />
+    <title>HEABEOP::마이페이지</title>
+    <jsp:include page="../layout/head.jsp" />
+    <link rel="stylesheet" href="${path }/resources/css/sub.css">
 </head>
-<body>
-<%--<jsp:include page="../layout/adminHeader.jsp" />--%>
-<div class="pcoded-main-container">
-    <div class="pcoded-content">
-        <!-- [ breadcrumb ] start -->
-        <div class="page-header">
-            <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <div class="page-header-title">
-                            <h5 class="m-b-10">결제 내역</h5>
+<body class="myPage">
+<jsp:include page="../layout/header.jsp" />
+
+<div class="container-fluid">
+    <div class="row justify-content-md-center my-5">
+        <div class="col-8">
+            <div class="row">
+                <div class="col-2 p-2">
+                    <div class="d-flex flex-column align-items-center justify-content-center border left_side">
+                        <div class="left_top">
+                            <p>마이페이지</p>
                         </div>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="${path }/admin/"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!" onclick="return false;">강의 설정</a></li>
+                        <ul class="my-2" style="width:100%;">
+                            <li><a href="${path }/user/myPage.do" class="active px-4 py-2">나의 정보</a></li>
+                            <li><a href="${path }/user/myLecture.do" class="px-4 py-2">나의 강의실</a></li>
+                            <li><a href="${path }/user/paylistMem.do" class="px-4 py-2">나의 결제정보</a></li>
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- [ breadcrumb ] end -->
-        <!-- [ Main Content ] start -->
-        <div class="row justify-content-md-end mb-3">
-            <div class="col-md-3 searchArea">
-                <form action="" method="get" class="field has-addons has-addons-right">
-                    <div class="input-group">
-                        <div class="input-group-append">
-                            <select id="inputState" name="type" class="form-control">
-                                <option value="plec"<c:if test="${type eq 'plec'}"> selected="selected"</c:if>>책 제목</option>
-                                <option value="tec"<c:if test="${type eq 'tec'}"> selected="selected"</c:if>>선생님 이름</option>
-                            </select>
-                        </div>
-                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어를 입력하세요" value="${keyword }" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">검색</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>강의 내역</h5>
-                    </div>
-                    <c:if test="${!empty paymentList }">
-                        <div class="card-body table-border-style">
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <th class="text-center">회원 아이디</th>
+                <div class="col-10 p-2">
+                    <div class="d-flex flex-column align-items-center justify-content-center right_side">
+                        <h5 class="my-4" style="font-size:2.5em;font-weight:600;">결제 내역</h5>
 
+                        <div class="container px-5">
+                            <table class="table table-bordered mx-3">
+                                <colgroup>
+                                    <col style="width:20%;">
+                                    <col style="width:auto;">
+                                </colgroup>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">강의 이름</th>
+                                    <th class="text-center">선생님 이름</th>
+                                    <th class="text-center">가 격</th>
+                                    <th class="text-center">결제 방법</th>
+                                    <th class="text-center">결제 날짜</th>
+                                </tr>
+                                <tbody>
+                                <c:forEach items="${paymentList }" var="pay" varStatus="status">
                                     <tr>
-                                        <th class="text-center">#</th>
-                                        <th class="text-center">강의 이름</th>
-                                        <th class="text-center">선생님 이름</th>
-                                        <th class="text-center">가 격</th>
-                                        <th class="text-center">결제 방법</th>
-                                        <th class="text-center">결제 날짜</th>
+                                        <td class="text-center">${status.count }</td>
+                                        <td class="text-center">${pay.plec }</td>
+                                        <td class="text-center"> ${pay.tecnm } </td>
+                                        <td class="text-center">${pay.price }</td>
+                                        <td class="text-center">${pay.pmethod }</td>
+                                        <td class="text-center">${pay.resdate }</td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    <td class="text-center">${mem.id}</td>
-                                    <c:forEach items="${paymentList }" var="pay" varStatus="status">
-                                        <tr>
-                                            <td class="text-center">${status.count }</td>
-                                            <td class="text-center">${pay.plec }</td>
-                                            <td class="text-center"> ${pay.tecnm } </td>
-                                            <td class="text-center">${pay.price }</td>
-                                            <td class="text-center">${pay.pmethod }</td>
-                                            <td class="text-center">${pay.resdate }</td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-center">
-                                        <c:if test="${curPage > page.pageCount }">
-                                            <li class="page-item"><a class="page-link" href="${path }/admin/paymentList_mypage.do?page=${page.blockStartNum - 1 }" aria-label="Previous"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
-                                        </c:if>
-                                        <c:forEach var="i" begin="${page.blockStartNum }" end="${page.blockLastNum }">
-                                            <c:choose>
-                                                <c:when test="${i == curPage }">
-                                                    <li class="page-item active"><a class="page-link" href="${path }/admin/paymentList_mypage.do?page=${i }">1</a></li>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <li class="page-item"><a class="page-link" href="${path }/admin/paymentList_mypage.do?page=${i }">1</a></li>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:forEach>
-                                        <c:if test="${page.blockLastNum < page.totalPageCount }">
-                                            <li class="page-item"><a class="page-link" href="${path }/admin/paymentList_mypage.do?page=${page.blockLastNum + 1 }" aria-label="Next"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
-                                        </c:if>
-                                    </ul>
-                                </nav>
+                                </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
-                    </c:if>
-                    <c:if test="${empty paymentList }">
-                        <p class="f-18 f-w-600 text-center mt-3">등록된 결제 내역이 없습니다.</p>
-                    </c:if>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <c:if test="${curPage > page.pageCount }">
+                                    <li class="page-item"><a class="page-link" href="${path }/admin/paymentList_mypage.do?page=${page.blockStartNum - 1 }" aria-label="Previous"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+                                </c:if>
+                                <c:forEach var="i" begin="${page.blockStartNum }" end="${page.blockLastNum }">
+                                    <c:choose>
+                                        <c:when test="${i == curPage }">
+                                            <li class="page-item active"><a class="page-link" href="${path }/admin/paymentList_mypage.do?page=${i }">1</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item"><a class="page-link" href="${path }/admin/paymentList_mypage.do?page=${i }">1</a></li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <c:if test="${page.blockLastNum < page.totalPageCount }">
+                                    <li class="page-item"><a class="page-link" href="${path }/admin/paymentList_mypage.do?page=${page.blockLastNum + 1 }" aria-label="Next"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+                                </c:if>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
+                <c:if test="${empty paymentList }">
+                    <p class="f-18 f-w-600 text-center mt-3">등록된 결제 내역이 없습니다.</p>
+                </c:if>
             </div>
         </div>
-
     </div>
+
 </div>
-<jsp:include page="../layout/adminFooter.jsp" />
+
+<jsp:include page="../layout/footer.jsp" />
+<script>
+    <c:if test="${msg eq 'pwSuccess'}">
+    alert("비밀번호가 성공적으로 변경되었습니다.");
+    </c:if>
+</script>
 </body>
 </html>
