@@ -16,6 +16,7 @@ public interface MemberMapper {
     public List<Member> memberTeacherList(Page page) throws Exception;
     public int memberTeacherCount(Page page) throws Exception;
     public Member getMember(String id) throws Exception;
+    public List<Member> getTeacherMain() throws Exception;
     public int idCheck(String id) throws Exception;
     public void insert(Member member) throws Exception;
     public void updateMemberForTeacher(String id) throws Exception;

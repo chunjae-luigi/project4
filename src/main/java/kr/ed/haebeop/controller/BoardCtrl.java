@@ -125,8 +125,8 @@ public class BoardCtrl {
 
         if(uploadFiles != null) {
             ServletContext application = request.getSession().getServletContext();
-            //String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
-            String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
+            String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
+            //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
             Date date = new Date();
@@ -144,7 +144,7 @@ public class BoardCtrl {
 
                 FileDTO fileDTO = new FileDTO();
                 fileDTO.setPar(bno);
-                fileDTO.setSaveFolder(String.valueOf(uploadPath));
+                fileDTO.setSaveFolder(dateFolder);
 
                 String fileType = multipartFile.getContentType();
                 String[] fileTypeArr = fileType.split("/");
@@ -271,8 +271,8 @@ public class BoardCtrl {
 
         if(uploadFiles != null) {
             ServletContext application = request.getSession().getServletContext();
-            //String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
-            String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
+            String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
+            //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
             Date date = new Date();
@@ -290,7 +290,7 @@ public class BoardCtrl {
 
                 FileDTO fileDTO = new FileDTO();
                 fileDTO.setPar(bno);
-                fileDTO.setSaveFolder(String.valueOf(uploadPath));
+                fileDTO.setSaveFolder(dateFolder);
 
                 String fileType = multipartFile.getContentType();
                 String[] fileTypeArr = fileType.split("/");

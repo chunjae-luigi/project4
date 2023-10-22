@@ -113,7 +113,6 @@ public class AdminCtrl {
             Member mem = memberService.memberGet(member.getAuthor());
             FileDTO fileDTO = filesService.fileByParForGrade(mem.getMno());
             member.setFno(fileDTO.getFno());
-            System.out.println(member.getMStatus());
         }
         model.addAttribute("memberMgnList", memberMgnList);
 

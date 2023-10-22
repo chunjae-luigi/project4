@@ -23,6 +23,8 @@ public interface MemberService {
 
     public Member memberGet(String id) throws Exception;
 
+    public List<Member> getTeacherMain() throws Exception;
+
     public void insert(Member member) throws Exception;
 
     public void updateMemberForTeacher(String id) throws Exception;

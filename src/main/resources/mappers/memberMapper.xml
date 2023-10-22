@@ -85,6 +85,10 @@
         SELECT COUNT(*) FROM member WHERE id = #{id}
     </select>
 
+    <select id="getTeacherMain" resultType="kr.ed.haebeop.domain.Member">
+        select * from member where grade = 1 limit 4;
+    </select>
+
     <insert id="insert">
         INSERT INTO member VALUES (DEFAULT, #{id}, #{pw}, #{nm}, #{email}, #{tel}, #{addr1}, #{addr2}, #{postcode}, DEFAULT, #{birth}, DEFAULT, DEFAULT, DEFAULT, #{grade})
     </insert>
