@@ -66,7 +66,6 @@
                                             <th class="text-center">아이디</th>
                                             <th class="text-center">이름</th>
                                             <th class="text-center">등급</th>
-                                            <th class="text-center">탈퇴여부</th>
                                             <th class="text-center">비고</th>
                                         </tr>
                                         </thead>
@@ -84,13 +83,9 @@
                                                     </c:choose>
                                                 </td>
                                                 <td class="text-center">
-                                                    <c:if test="${member.useYn == true}">사용중</c:if>
-                                                    <c:if test="${member.useYn == false}">사용중지</c:if>
-                                                </td>
-                                                <td class="text-center">
                                                     <c:if test="${member.useYn == true}">
                                                         <div class="buttons are-small is-centered">
-                                                            <a href="${path }/user/deletePro.do?id=${member.id }" class="btn btn-primary btn-sm">회원탈퇴</a>
+                                                            <a href="${path }/user/removeUser.do?id=${member.id }" class="btn btn-primary btn-sm">회원탈퇴</a>
                                                         </div>
                                                     </c:if>
                                                 </td>

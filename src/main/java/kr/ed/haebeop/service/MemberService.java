@@ -25,6 +25,8 @@ public interface MemberService {
 
     public void insert(Member member) throws Exception;
 
+    public void updateMemberForTeacher(String id) throws Exception;
+
     public void firepoint(Member member) throws Exception;
 
     public void updateMember(Member member) throws Exception;
