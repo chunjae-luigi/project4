@@ -25,7 +25,7 @@
                 <h3 style="color: var(--main-color);">${subject.title } </h3>
                 <h1 class="display-5 fw-bolder text-white mb-2">${lecture.title }</h1>
                 <h3 class="lead text-white-50 mb-4">${lecture.subTitle }</h3>
-                <h3 class="lead text-white-50 mb-4">${teacher.nm }</h3>
+                <h3 class="lead text-white-50 mb-4">${lecture.teacherId } 선생님</h3>
                 <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
                 <a class="btn btn-warning btn-lg px-4" href="#lect_review" >수강생 후기</a>
             </div>
@@ -120,7 +120,7 @@
                         <c:forEach var="review" items="${reviewList }">
                         <div class="d-flex">
                             <div class="review_mem">
-                                <p>${member.nm }</p>
+                                <p>${member.id }</p>
                             </div>
                                 <div class="riview_list">
                                     <div class="star-rating">
@@ -133,7 +133,6 @@
                                             <span class="star-icon"></span>
                                         </c:forEach>
                                     </div>
-                                    <div class="fw-bold">회원아이디나 이름</div>
                                     <div>${review.content } </div>
                                     <div id="reg">
                                         <fmt:parseDate value="${review.regdate }" var="regdate" pattern="yyyy-MM-dd HH:mm:ss" />

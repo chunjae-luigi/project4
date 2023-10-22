@@ -80,7 +80,7 @@
                                                 </td>
                                                 <td class="text-center">${subject.title }</td>
                                                 <td class="text-center"><a href="${path }/admin/lectGet.do?lno=${lecture.lno }">${lecture.title }</a></td>
-                                                <td class="text-center">${lecture.teacherNm }</td>
+                                                <td class="text-center">${lecture.teacherId }</td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -109,7 +109,7 @@
                             </div>
                         </c:if>
                         <c:if test="${empty lectureList }">
-                            <p class="f-18 f-w-600 text-center mt-3">등록된 강의가 없습니다.</p>
+                            <p class="f-18 f-w-600 text-center mt-3">강의를 등록해주세요!</p>
                         </c:if>
                     </div>
                 </div>

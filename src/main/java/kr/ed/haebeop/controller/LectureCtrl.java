@@ -37,7 +37,7 @@ public class LectureCtrl {
 
     //회원이 보는 강의 리스트
     @GetMapping("/list.do")
-    public String lectureList(HttpServletRequest request, Model model) throws Exception{
+    public String lectureviewList(HttpServletRequest request, Model model) throws Exception{
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -56,8 +56,8 @@ public class LectureCtrl {
         model.addAttribute("page", page);
         model.addAttribute("curPage", curPage);
 
-        List<Lecture> lectureList = lectureService.lectureList(page);
-        model.addAttribute("lectureList", lectureList);
+        List<LectureVO> lectureviewList = lectureService.lectureList(page);
+        model.addAttribute("lectureviewList", lectureviewList);
 
         return "/lecture/lectList";
     }

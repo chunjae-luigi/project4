@@ -67,7 +67,7 @@
     </form>
 
     <div class="container">
-                <c:forEach items="${lectureList }" var="lecture" varStatus="status">
+                <c:forEach items="${lectureviewList }" var="lecture" varStatus="status">
                     <div class="lect-frame">
                     <div class="border-00">
                     <div class="d-inline-block img-box-wrap">
@@ -82,7 +82,7 @@
                         <div class="custom-block-info">
                             <h5>${subject.title }</h5>
                             <h1><a href="${path }/lecture/get.do?lno=${lecture.lno }">${lecture.title }</a></h1>
-                            <h3>${lecture.teacherNm } 선생님</h3>
+                            <h3>${lecture.teacherId } 선생님</h3>
                             <h5>${lecture.subTitle }</h5><br>
                             <div>
                                 <p style="font-size: 16px;">수강인원 : ${lecture.studentCnt }명 </p>
@@ -95,7 +95,7 @@
                 </c:forEach>
 
 
-                <c:if test="${empty lectureList }">
+                <c:if test="${empty lectureviewList }">
                     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height:20vh;">
                         <h5 class="font-weight-bold">새로운 강의를 기대해주세요!</h5>
                     </div>

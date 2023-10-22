@@ -222,6 +222,7 @@ public class AdminCtrl {
         lecture.setSubTitle(request.getParameter("subTitle"));
         lecture.setContent(request.getParameter("content"));
         lecture.setTeacherId(request.getParameter("teacherId"));
+        lecture.setTeacherId(request.getParameter("teacherNm"));
         lecture.setBookname(request.getParameter("bookname"));
         lecture.setBthumbnail(request.getParameter("bthumnail"));
         lecture.setLectureType(Integer.parseInt(request.getParameter("lectureType")));

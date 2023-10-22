@@ -20,6 +20,11 @@ public class LectureServiceImpl implements LectureService{
     }
 
     @Override
+    public List<LectureVO> lectureviewList(Page page) throws Exception {
+        return lectureMapper.lectureviewList(page);
+    }
+
+    @Override
     public Lecture lectureGet(int lno) throws Exception {
         return lectureMapper.lectureGet(lno);
     }

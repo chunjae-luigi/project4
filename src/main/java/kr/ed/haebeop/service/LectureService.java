@@ -8,6 +8,8 @@ import java.util.List;
 public interface LectureService {
     public List<Lecture> lectureList(Page page) throws Exception;
 
+    public List<LectureVO> lectureviewList(Page page) throws Exception;
+
     public Lecture lectureGet(int lno) throws Exception;
 
     public void lectureAdd(Lecture lecture) throws Exception;
