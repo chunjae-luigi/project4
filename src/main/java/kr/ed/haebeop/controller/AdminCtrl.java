@@ -410,7 +410,6 @@ public class AdminCtrl {
         page.makePostStart(curPage, total);
 
         List<Payment> paymentList = paymentService.paymentList_admin(page);
-
         model.addAttribute("type", type);
         model.addAttribute("keyword", keyword);
         model.addAttribute("page", page);
@@ -422,5 +421,11 @@ public class AdminCtrl {
 
     }
 
-
+    @GetMapping("memberget.do")
+    public String memberGet(HttpServletRequest request, Model model) throws Exception {
+        String id = (String) request.getParameter("id");
+        Member member = memberService.memberGet(id);
+        model.addAttribute("member", member);
+        return "/admin/memberGet";
+    }
 }

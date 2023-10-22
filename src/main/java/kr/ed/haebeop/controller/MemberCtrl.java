@@ -12,6 +12,7 @@ import kr.ed.haebeop.service.MemberService;
 import kr.ed.haebeop.service.PaymentService;
 import kr.ed.haebeop.util.NaverLogin;
 import kr.ed.haebeop.util.Page;
+import kr.ed.haebeop.util.PayListmem;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -360,7 +361,7 @@ public class MemberCtrl {
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
-        Page page = new Page();
+        PayListmem page = new PayListmem();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
         page.setId(id);
@@ -383,5 +384,5 @@ public class MemberCtrl {
 
     }
 
-    
+
 }
