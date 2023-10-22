@@ -62,7 +62,7 @@
                                         <div class="form-group">
                                             <label class="floating-label d-block">해당 과목</label>
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="sno1" name="sno" class="custom-control-input" value="1">
+                                                <input type="radio" id="sno1" name="sno" class="custom-control-input" value="1" checked>
                                                 <label class="custom-control-label" for="sno1">수학</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
@@ -70,7 +70,7 @@
                                                 <label class="custom-control-label" for="sno2">영어</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="sno3" name="sno" class="custom-control-input" value="3" checked>
+                                                <input type="radio" id="sno3" name="sno" class="custom-control-input" value="3">
                                                 <label class="custom-control-label" for="sno3">기타</label>
                                             </div>
                                         </div>

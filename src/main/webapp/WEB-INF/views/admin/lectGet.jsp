@@ -113,6 +113,11 @@
                                         <strong class="d-inline me-4">강의 가격 </strong>
                                         <span>${lecture.cost }</span>
                                     </p>
+                                    <p class="d-flex border-bottom pb-3 mb-4">
+                                        <strong class="d-inline me-4">후기 관리 </strong>
+                                        <span><a href="${path}/lecture/get.do?lno=${lecture.lno}#lect_review" class="btn btn-primary px-4 mr-2">수강생후기</a></span>
+                                    </p>
+
                                 </div>
                             </div>
                         </div>
@@ -132,7 +137,6 @@
                             <!-- 커리큘럼 목록 -->
                             <div class="curri-list">
                                 <ul class="list-group">
-                                    <h4> 커리큘럼 </h4>
                                     <c:forEach var="curri" items="${curriList }">
                                         <li class="list-group-item">
                                                 ${curri.content}
@@ -148,6 +152,10 @@
                             </c:if>
                         </div>
                         <!-- 커리큘럼 영역 끝 -->
+
+
+
+
 
                     </div>
                     </div>

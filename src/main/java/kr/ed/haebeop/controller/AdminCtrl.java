@@ -229,6 +229,7 @@ public class AdminCtrl {
         lecture.setCost(Integer.parseInt(request.getParameter("cost")));
         lecture.setSno(Integer.parseInt(request.getParameter("sno")));
 
+
         if(thumbnail != null) {
             String originalThumbnailname = thumbnail.getOriginalFilename();
             UUID uuid = UUID.randomUUID();
