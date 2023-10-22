@@ -304,7 +304,11 @@ public class AdminCtrl {
         return "/admin/findTeacher";
     }
 
+<<<<<<< HEAD
     @GetMapping("/findLecture.do")      //비
+=======
+    @GetMapping("/findLecture.do")      //이건뭘까요?
+>>>>>>> 9dc6e84ce33b6a21d6b84742f1782d4a7151a167
     public String findLecture(HttpServletRequest request, Model model) throws Exception {
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");

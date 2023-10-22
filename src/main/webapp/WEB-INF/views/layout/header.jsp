@@ -11,6 +11,7 @@
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
 
+
             <div class="navbar-nav font-weight-bold mx-auto py-0">
                 <a href="index.html" class="nav-item nav-link active">Home</a>
                 <a href="${path}/payment/rrr.do" class="nav-item nav-link">임시 샘플</a>

@@ -30,8 +30,8 @@
                     </div>
                     <div class="col-10 p-2">
                         <div class="d-flex flex-column align-items-center justify-content-center right_side">
-                            <h5 class="my-4" style="font-size:2.5em;font-weight:600;">회원 정보 수정</h5>
-                            <form action="${path }/user/myPageEdit.do" method="post" style="width:100%;">
+                            <h5 class="my-4" style="font-size:2.5em;font-weight:600;">회원 비밀번호 수정</h5>
+                            <form action="${path }/user/changePw.do" method="post" style="width:100%;" onsubmit="return pwCheck(this)">
 
                                 <div class="container px-5">
                                     <table class="table table-bordered mx-3">
@@ -41,34 +41,16 @@
                                         </colgroup>
                                         <tbody>
                                         <tr>
-                                            <th class="text-center">이름</th>
-                                            <td>${member.nm }</td>
+                                            <th class="text-center">현재 비밀번호 입력</th>
+                                            <td><input type="password" name="checkPw" id="checkPw" class="form-control" /></td>
                                         </tr>
                                         <tr>
-                                            <th class="text-center">아이디</th>
-                                            <td>${member.id }</td>
+                                            <th class="text-center">새로운 비밀번호 입력</th>
+                                            <td><input type="password" name="pw" id="pw" class="form-control" required /></td>
                                         </tr>
                                         <tr>
-                                            <th class="text-center">이메일</th>
-                                            <td><input type="email" name="email" id="email" class="form-control" value="${member.email }" /></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-center">전화번호</th>
-                                            <td><input type="text" name="tel" id="tel" class="form-control" value="${member.tel }" /></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-center">주소</th>
-                                            <td>
-                                                <input type="text" name="addr1" id="address1" value="${member.addr1 }" class="form-control mb-1" />
-                                                <input type="text" name="addr2" id="address2" value="${member.addr2 }" class="form-control mb-1" />
-                                                <input type="text" name="postcode" id="postcode" value="${member.postcode }" class="form-control">
-                                                <button type="button" id="post_btn" onclick="findAddr()" class="btn">우편번호 검색</button>
-                                                <label class="form-label blind" for="address1">주소</label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-center">생일</th>
-                                            <td><input type="date" name="birth" id="birth" class="form-control" value="${member.birth }" /></td>
+                                            <th class="text-center">새로운 비밀번호 확인</th>
+                                            <td><input type="password" name="pw2" id="pw2" class="form-control" required /></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -86,6 +68,17 @@
         </div>
     </div>
     <jsp:include page="../layout/footer.jsp" />
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        <c:if test="${msg eq 'fail' }">
+        alert("현재 비밀번호가 맞지 않습니다.\n다시 한번 확인해주세요.");
+        </c:if>
+        function pwCheck(data){
+            if(data.pw.value != data.pw2.value){
+                alert("새로운 비밀번호와 새로운 비밀번호 확인이 서로 다릅니다.");
+                data.pw.focus();
+                return false;
+            }
+        }
+    </script>
 </body>
 </html>

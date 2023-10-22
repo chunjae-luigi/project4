@@ -21,14 +21,18 @@ CREATE TABLE member(
 );
 
 INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
+<<<<<<< HEAD
 SELECT * FROM member;
 UPDATE member SET grade = 1 WHERE grade = 2;;
 
+=======
+>>>>>>> 9dc6e84ce33b6a21d6b84742f1782d4a7151a167
 
 CREATE TABLE memberMgn(
 	mmNo INT AUTO_INCREMENT PRIMARY KEY,				-- 회원 등급 요청 번호 : 자동 발생
 	author VARCHAR(20) NOT NULL,							-- 회원 아이디
 	approveYn BOOLEAN DEFAULT FALSE,						-- 회원 등급 승인 여부
+	mStatus INT DEFAULT 0,									-- 회원 상태 [0 : 미신청, 1 : 승인 대기, 2 : 승인 취소, 3 : 승인 완료]
 	content VARCHAR(2000)									-- 등급 승인 거절 사유
 );
 
