@@ -37,16 +37,15 @@
                         <div class="d-flex flex-column align-items-center justify-content-center right_side">
                             <h5 class="my-4" style="font-size:2.5em;font-weight:600;">선생님 신청하기</h5>
                             <form action="${path }/user/changeGrade.do" method="post" style="width:100%;" enctype="multipart/form-data">
-                                <input type="hidden" value="${checkTeacher}" name="checkTeacher" />
                                 <div class="container px-5">
                                     <table class="table table-bordered mx-3">
                                         <colgroup>
                                             <col style="width:20%;">
                                             <col style="width:auto;">
                                         </colgroup>
-                                        <c:if test="${checkTeacher eq 'fail' }">
+                                        <c:if test="${showFailContent }">
                                             <thead>
-                                            <th class="text-center" style="color:var(--danger);" colspan="2">[취소 사유] ${memberMgn.content }</th>
+                                            <th class="text-center" colspan="2"><p style="color:var(--danger);">[취소 사유]</p> ${memberMgnVO.content }</th>
                                             </thead>
                                         </c:if>
                                         <tbody>
@@ -58,7 +57,7 @@
                                             <th class="text-center">아이디</th>
                                             <td>${member.id }</td>
                                         </tr>
-                                        <c:if test="${checkTeacher eq 'noApply' }">
+                                        <c:if test="${empty memberMgnVO }">
                                         <tr>
                                             <th class="text-center">사진 등록하기</th>
                                             <td>

@@ -2,8 +2,10 @@ package kr.ed.haebeop.controller;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import kr.ed.haebeop.domain.*;
-import kr.ed.haebeop.service.*;
-import kr.ed.haebeop.service.LectureService;
+import kr.ed.haebeop.service.FilesService;
+import kr.ed.haebeop.service.MemberMgnService;
+import kr.ed.haebeop.service.MemberService;
+import kr.ed.haebeop.service.PaymentService;
 import kr.ed.haebeop.util.NaverLogin;
 import kr.ed.haebeop.util.Page;
 import kr.ed.haebeop.util.PayListmem;
@@ -20,11 +22,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -130,22 +134,12 @@ public class MemberCtrl {
         Member member = memberService.memberGet(sid);
         model.addAttribute("member", member);
 
-        String checkTeacher = "";
-        MemberMgn memberMgn = memberMgnService.memberMgnGet(sid);
-        if(memberMgn != null){
-            if(!memberMgn.isApproveYn()) {
-                if(memberMgn.getContent() == null) {
-                    checkTeacher = "ing";
-                } else {
-                    checkTeacher = "fail";
-                }
-            } else {
-                checkTeacher = "finish";
-            }
-        } else {
-            checkTeacher = "noApply";
+        boolean canUpgrade = true;
+        MemberMgnVO memberMgn = memberMgnService.memberMgnGet(sid);
+        if(memberMgn != null && (memberMgn.getMStatus() == 1 || memberMgn.getMStatus() == 3 || memberMgn.getMStatus() == 4)) {
+            canUpgrade = false;
         }
-        model.addAttribute("checkTeacher", checkTeacher);
+        model.addAttribute("canUpgrade", canUpgrade);
 
         return "/member/myPage";
     }
@@ -166,12 +160,15 @@ public class MemberCtrl {
     }
 
     @GetMapping("/removeUser.do")
-    public String memberDeletePost(Model model) throws Exception {
-        String id = (String) session.getAttribute("sid");
-        if(id != "admin") {
-            memberService.removeMember(id);
+    public String memberDeletePost(HttpServletRequest request, Model model) throws Exception {
+        String sid = (String) session.getAttribute("sid");
+        String id = request.getParameter("id");
+        memberService.removeMember(id);
+        if(sid.equals("admin")) {
+            return "redirect:/admin/memberConf.do";
+        } else {
+            return "redirect:/user/logout.do";
         }
-        return "redirect:/user/logout.do";
     }
 
     @GetMapping("/changePw.do")
@@ -214,23 +211,13 @@ public class MemberCtrl {
         Member member = memberService.memberGet(sid);
         model.addAttribute("member", member);
 
-        String checkTeacher = "";
-        MemberMgn memberMgn = memberMgnService.memberMgnGet(sid);
-        if(memberMgn != null){
-            model.addAttribute("memberMgn", memberMgn);
-            if(!memberMgn.isApproveYn()) {
-                if(memberMgn.getContent() == null) {
-                    checkTeacher = "ing";
-                } else {
-                    checkTeacher = "fail";
-                }
-            } else {
-                checkTeacher = "finish";
-            }
-        } else {
-            checkTeacher = "noApply";
+        boolean showFailContent = false;
+        MemberMgnVO memberMgnVO = memberMgnService.memberMgnGet(sid);
+        model.addAttribute("memberMgnVO", memberMgnVO);
+        if(memberMgnVO != null && memberMgnVO.getMStatus() == 2) {
+            showFailContent = true;
         }
-        model.addAttribute("checkTeacher", checkTeacher);
+        model.addAttribute("showFailContent", showFailContent);
 
         return "/member/myPageUpgrade";
     }
@@ -238,32 +225,36 @@ public class MemberCtrl {
     @PostMapping("/changeGrade.do")
     public String memberUpgradePro(HttpServletRequest request, List<MultipartFile> uploadFiles) throws Exception {
         String sid = (String) session.getAttribute("sid");
-        String checkTeacher = request.getParameter("checkTeacher") != null ? request.getParameter("checkTeacher") : "'";
+        //String checkTeacher = request.getParameter("checkTeacher") != null ? request.getParameter("checkTeacher") : "'";
         Member member = memberService.memberGet(sid);
+        MemberMgnVO memberMgnVO = memberMgnService.memberMgnGet(sid);
 
         if (sid != null) {
 
-            if(checkTeacher.equals("noApply")) {
+            if(memberMgnVO == null || memberMgnVO.getMStatus() == 0) {
                 memberMgnService.memberMgnInsert(sid);
             }
 
-            if(checkTeacher.equals("fail")) {
+            if(memberMgnVO != null && memberMgnVO.getMStatus() == 2) {
                 int par = member.getMno();
-                FileDTO files = filesService.fileByParForGrade(par);
-                File file = new File(files.getSaveFolder() + File.separator + files.getSaveNm());
+                FileDTO fileList = filesService.fileByParForGrade(par);
+                File file = new File(fileList.getSaveFolder() + File.separator + fileList.getSaveNm());
                 if (file.exists()) { // 해당 파일이 존재하면
                     file.delete(); // 파일 삭제
-                    filesService.filesDelete(files.getFno());
+                    filesService.filesDelete(fileList.getFno());
                 }
+
+                MemberMgn memberMgn = new MemberMgn();
+                memberMgn.setMStatus(4);
+                memberMgn.setAuthor(sid);
+                memberMgnService.memberMgnStatusUpdate(memberMgn);
             }
 
             if(uploadFiles != null) {
 
                 ServletContext application = request.getSession().getServletContext();
-                //String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
-                String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
-
-                System.out.println(realPath);
+                String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
+                //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
                 Date date = new Date();
@@ -281,7 +272,7 @@ public class MemberCtrl {
 
                     FileDTO fileDTO = new FileDTO();
                     fileDTO.setPar(member.getMno());
-                    fileDTO.setSaveFolder(String.valueOf(uploadPath));
+                    fileDTO.setSaveFolder(dateFolder);
 
                     String fileType = multipartFile.getContentType();
                     String[] fileTypeArr = fileType.split("/");
@@ -368,29 +359,27 @@ public class MemberCtrl {
 
 
 
-    /*
-    @InitBinder
-    protected void initBinder(WebDataBinder binder){
-        binder.setValidator(new CheckValidator());
-    }
 
-    @PostMapping("idCheck.do")
-    public void idCheck(@ModelAttribute @Valid Member member, BindingResult result, HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
+    @GetMapping("/memberMgnAccept.do")
+    public String memberUpgradeAccept(HttpServletRequest request, Model model) throws Exception {
+        String urlPath = request.getHeader("referer");
         String id = request.getParameter("id");
-        //Member mem = memberService.getMember(id);
-        boolean result = false;
 
-        if(!result.hasErrors()) {
-            result = true;
-        }
+        memberMgnService.memberMgnUpdateAccept(id);
+        memberService.updateMemberForTeacher(id);
 
-        JSONObject json = new JSONObject();
-        json.put("result", result);
-        PrintWriter out = response.getWriter();
-        out.println(json.toString());
+        return "redirect:" + urlPath;
     }
-    */
 
+    @PostMapping("/memberMgnRefuse.do")
+    @ResponseBody
+    public boolean memberUpgradeRefuse(@RequestParam("no") int mmNo, @RequestParam("content") String content) throws Exception {
+        MemberMgn memberMgn = new MemberMgn();
+        memberMgn.setMmNo(mmNo);
+        memberMgn.setContent(content);
+        memberMgnService.memberMgnUpdate(memberMgn);
+        return true;
+    }
 
     @GetMapping("naver/login")
 
@@ -419,7 +408,7 @@ public class MemberCtrl {
         return "redirect:/";
 
     }
-
+    
     //멤버 payList
     @GetMapping("/paylistMem.do")
     public String paymentMem(HttpServletRequest request, Model model) throws Exception {
