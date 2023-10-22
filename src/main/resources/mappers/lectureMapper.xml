@@ -24,14 +24,16 @@
         ]]>
     </select>
 
-<<<<<<< HEAD
+    <!-- 강의 메인페이지 노출-->
+    <select id="lectureList_main" resultType="kr.ed.haebeop.domain.Lecture">
+        select * from lecture ORDER BY lno desc limit 3
+    </select>
+
     <!-- 나의 강의 -->
     <select id="myLectList" resultType="kr.ed.haebeop.domain.Review">
         select * from lecture
     </select>
 
-=======
->>>>>>> 9dc6e84ce33b6a21d6b84742f1782d4a7151a167
     <!-- 강의 상세보기 -->
     <select id="lectureGet" resultType="kr.ed.haebeop.domain.Lecture">
         select * from lecture where lno=#{lno}

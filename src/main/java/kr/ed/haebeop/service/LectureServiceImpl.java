@@ -51,4 +51,9 @@ public class LectureServiceImpl implements LectureService{
     public int lectureCount(Page page) throws Exception {
         return lectureMapper.lectureCount(page);
     }
+
+    @Override
+    public List<Lecture> lectureList_main() throws Exception {
+        return lectureMapper.lectureList_main();
+    }
 }

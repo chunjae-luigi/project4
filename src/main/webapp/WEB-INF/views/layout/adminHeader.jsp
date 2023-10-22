@@ -28,6 +28,9 @@
                 <li class="nav-item">
                     <a href="${path }/admin/memberConf.do" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">회원</span></a>
                 </li>
+                <li class="nav-item">
+                    <a href="${path }/admin/memberMgnConf.do" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">회원 등급</span></a>
+                </li>
                 <li class="nav-item pcoded-menu-caption">
                     <label>게시판 관리</label>
                 </li>
@@ -39,6 +42,12 @@
                 </li>
                 <li class="nav-item">
                     <a href="${path }/admin/lectList.do" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">강의 설정</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>결제 관리</label>
+                </li>
+                <li class="nav-item">
+                    <a href="${path }/admin/paylistAdmin.do" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">결제 내역</span></a>
                 </li>
                 <li class="nav-item pcoded-menu-caption">
                     <label>예약 관리</label>

@@ -22,4 +22,7 @@ public interface LectureService {
     public void lectureDelete(int lno) throws Exception;
 
     public int lectureCount(Page page) throws Exception;
+
+    public List<Lecture> lectureList_main() throws Exception;
+
 }

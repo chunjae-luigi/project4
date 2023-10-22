@@ -11,7 +11,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -123,8 +125,8 @@ public class BoardCtrl {
 
         if(uploadFiles != null) {
             ServletContext application = request.getSession().getServletContext();
-            //String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
-            String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
+            String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
+            //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
             Date date = new Date();
@@ -142,7 +144,7 @@ public class BoardCtrl {
 
                 FileDTO fileDTO = new FileDTO();
                 fileDTO.setPar(bno);
-                fileDTO.setSaveFolder(String.valueOf(uploadPath));
+                fileDTO.setSaveFolder(dateFolder);
 
                 String fileType = multipartFile.getContentType();
                 String[] fileTypeArr = fileType.split("/");
@@ -162,11 +164,31 @@ public class BoardCtrl {
     }
 
     @GetMapping("/get.do")
-    public String boardDetail(HttpServletRequest request, Model model) throws Exception {
+    public String boardDetail(HttpServletRequest request, Model model, HttpServletResponse response) throws Exception {
         String sid = session.getAttribute("sid") != null ? (String) session.getAttribute("sid") : "";
         int bno = Integer.parseInt(request.getParameter("bno"));
 
-        BoardVO board = boardService.boardGet(bno, sid);
+        Cookie[] cookies = request.getCookies();
+        boolean hasCookie = false;
+        if (cookies != null) {
+            String bcookie = "board"+bno;
+            for (Cookie cookie : cookies) {
+                if (bcookie.equals(cookie.getName())) {
+                    hasCookie = true;
+                    break;
+                }
+            }
+            if(!hasCookie){
+                Cookie cookie = new Cookie(bcookie, bcookie);
+                cookie.setMaxAge(3600); // 초 단위, 1시간
+
+                // 응답 헤더에 쿠키 추가
+                response.addCookie(cookie);
+            }
+        }
+
+        BoardVO board = boardService.boardGet(hasCookie, bno, sid);
+
         String bNm = board.getNm();
 
         if(!bNm.equals("관리자")) {
@@ -214,7 +236,7 @@ public class BoardCtrl {
         String sid = session.getAttribute("sid") != null ? (String) session.getAttribute("sid") : "";
         int bno = Integer.parseInt(request.getParameter("bno"));
 
-        BoardVO board = boardService.boardGet(bno, sid);
+        BoardVO board = boardService.boardGet(true, bno, sid);
         model.addAttribute("board", board);
 
         // 권한 관련 - 수정
@@ -249,8 +271,8 @@ public class BoardCtrl {
 
         if(uploadFiles != null) {
             ServletContext application = request.getSession().getServletContext();
-            //String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
-            String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
+            String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
+            //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
             Date date = new Date();
@@ -268,7 +290,7 @@ public class BoardCtrl {
 
                 FileDTO fileDTO = new FileDTO();
                 fileDTO.setPar(bno);
-                fileDTO.setSaveFolder(String.valueOf(uploadPath));
+                fileDTO.setSaveFolder(dateFolder);
 
                 String fileType = multipartFile.getContentType();
                 String[] fileTypeArr = fileType.split("/");
@@ -291,7 +313,7 @@ public class BoardCtrl {
         String sid = session.getAttribute("sid") != null ? (String) session.getAttribute("sid") : "";
         int bno = Integer.parseInt(request.getParameter("bno"));
 
-        BoardVO boardVO = boardService.boardGet(bno, sid);
+        BoardVO boardVO = boardService.boardGet(true, bno, sid);
 
         if(sid.equals(boardVO.getAuthor()) || sid.equals("admin")) {
             int bmNo = boardVO.getBmNo();
