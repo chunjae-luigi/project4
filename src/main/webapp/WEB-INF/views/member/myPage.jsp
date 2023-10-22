@@ -78,7 +78,11 @@
                                                 <c:when test="${member.grade == 1 }">선생님</c:when>
                                                 <c:when test="${member.grade == 2 }">회원</c:when>
                                                 <c:otherwise>관리자</c:otherwise>
-                                            </c:choose> - <c:if test="${checkTeacher eq 'ing' }"><span style="color:var(--main-color);">선생님 신청 진행 중</span></c:if><c:if test="${checkTeacher eq 'fail' || checkTeacher eq 'noApply' }"><a href="${path }/user/changeGrade.do">선생님 신청하기</a></c:if>
+                                            </c:choose>
+                                            <c:if test="${member.grade == 2 }"> -
+                                                <c:if test="${!canUpgrade }"><span style="color:var(--main-color);">선생님 신청 진행 중</span></c:if>
+                                                <c:if test="${canUpgrade }"><a href="${path }/user/changeGrade.do">선생님 신청하기</a></c:if>
+                                            </c:if>
                                         </td>
                                     </tr>
                                     </tbody>
