@@ -210,13 +210,14 @@
                     <div class="col-2"><label for="nm" class="form-label">이름</label></div>
                     <div class="col-4"><input type="text" class="form-control" id="nm" name="nm" readonly value="${mem.nm}"></div>
                     <div class="col-4"><input type="hidden" class="form-control" id="id" name="id" readonly value="${mem.id}"></div>
+                    <div class="col-2"><label for="tel" class="form-label">전화번호</label></div>
+                    <div class="col-4"><input type="tel" class="form-control" id="tel" name="tel" readonly value="${mem.tel}"></div>
+                    <input type="hidden" class="form-control" id="amount" name="amount" readonly value="1">
                 </div>
                 <div class="row" >
                     <div class="col-2"><label for="email" class="form-label">이메일</label></div>
                     <div class="col-4"><input type="email" class="form-control" id="email" name="email" readonly value="${mem.email}"></div>
-                    <div class="col-2"><label for="tel" class="form-label">전화번호</label></div>
-                    <div class="col-4"><input type="tel" class="form-control" id="tel" name="tel" readonly value="${mem.tel}"></div>
-                    <input type="hidden" class="form-control" id="amount" name="amount" readonly value="1">
+
                 </div>
                     <br>
                     <br>
