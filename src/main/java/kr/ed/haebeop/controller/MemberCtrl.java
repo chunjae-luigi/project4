@@ -354,7 +354,6 @@ public class MemberCtrl {
     //멤버 payList
     @GetMapping("/paylistMem.do")
     public String paymentMem(HttpServletRequest request, Model model) throws Exception {
-        HttpSession session = request.getSession();
         String id = (String) session.getAttribute("sid");
 
         String type = request.getParameter("type");
@@ -364,6 +363,7 @@ public class MemberCtrl {
         Page page = new Page();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
+        page.setId(id);
         int total = paymentService.paymentCount(page);
 
         page.makeBlock(curPage, total);
@@ -379,7 +379,7 @@ public class MemberCtrl {
         model.addAttribute("paymentList", paymentList);
 
 
-        return "/user/payList";
+        return "/member/payList";
 
     }
 

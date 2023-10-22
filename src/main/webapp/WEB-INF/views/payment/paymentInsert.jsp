@@ -182,11 +182,10 @@
                         <td class="can3" >
                             <input type="number" name="total" id="total" style="border: none; text-align: center;" readonly value="${lecture.cost}">원
                         </td>
-                        <td class="can4">
-                            <input type="number" name="inpt" id="inpt" value="width: 200px; float: left; margin-top: 8px;">
-                            <input type="button" name="ptbtn" id="ptbtn" class="btn btn-primary" value="사용" onclick= "pointuse()">
+                        <td class="can4" style="text-align: center; border: none">
+                            <input type="number" name="inpt" id="inpt" style="width: 160px; margin-top: 8px; ">
+                            <input type="button" name="ptbtn" id="ptbtn" style="margin-left: 30px;" class="btn btn-primary" value="사용" onclick= "pointuse()">
                             <input type="button" name="ptbre" id="ptbre" class="btn btn-primary" value="취소" style="margin-left: 5px" onclick= "pointreset()">
-
                         </td>
 
                     </tr>
@@ -197,8 +196,8 @@
                         <td>
                             <input type="number" name="price" id="price" value="" readonly style="border: none; text-align: center; font-weight: bold;"/>원
                         </td>
-                        <td style="padding-left: 60px">사용가능한 포인트 :
-                            <input type="text" name="pt" id="pt" value="" readonly style="border: none; padding-left: 25px;"/>
+                        <td>
+                            &nbsp&nbsp&nbsp사용가능한 포인트 :<input type="text" name="pt" id="pt" value="" readonly style="border: none; padding-left: 8px;"/>
                         </td>
                     </tr>
                     </tfoot>
@@ -209,9 +208,9 @@
                 <div class="row" >
                     <div class="col-2"><label for="nm" class="form-label">이름</label></div>
                     <div class="col-4"><input type="text" class="form-control" id="nm" name="nm" readonly value="${mem.nm}"></div>
-                    <div class="col-4"><input type="hidden" class="form-control" id="id" name="id" readonly value="${mem.id}"></div>
                     <div class="col-2"><label for="tel" class="form-label">전화번호</label></div>
                     <div class="col-4"><input type="tel" class="form-control" id="tel" name="tel" readonly value="${mem.tel}"></div>
+                    <input type="hidden" class="form-control" id="id" name="id" readonly value="${mem.id}">
                     <input type="hidden" class="form-control" id="amount" name="amount" readonly value="1">
                 </div>
                 <div class="row" >
@@ -277,7 +276,7 @@
                 <%--  일단은 pay했다고 치기  --%>
                 <input type="hidden" name="payCk" id="payCk" value="yes">
                 <input type="submit" id="buy" value="구매" class="btn btn-primary">
-                <a href="${path }/payment/list.do" class="btn btn-primary">제품 목록</a>
+                <a href="${path }/lecture/list.do" class="btn btn-primary">제품 목록</a>
             </form>
 
         </div>

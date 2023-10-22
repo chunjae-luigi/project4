@@ -12,4 +12,8 @@ public interface ReviewMapper {
     void reviewUpdate(Review review) throws Exception;
 
     public void reviewDelete(int rno) throws Exception;
+
+    public List<Review> reviewList_main() throws Exception;
+
+
 }

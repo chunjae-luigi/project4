@@ -394,13 +394,11 @@ public class AdminCtrl {
     //관리자페이지 payList
     @GetMapping("/paylistAdmin.do")
     public String payment(HttpServletRequest request, Model model) throws Exception {
-        HttpSession session = request.getSession();
         String id = (String) session.getAttribute("sid");
 
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
-        int bmNo = request.getParameter("no") != null ? Integer.parseInt(request.getParameter("no")) : 1;
 
         Page page = new Page();
         page.setSearchType(type);

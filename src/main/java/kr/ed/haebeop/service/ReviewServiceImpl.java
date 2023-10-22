@@ -33,4 +33,9 @@ public class ReviewServiceImpl implements ReviewService {
     public void reviewDelete(int cno) throws Exception {
         reviewMapper.reviewDelete(cno);
     }
+
+    @Override
+    public List<Review> reviewList_main() throws Exception {
+        return reviewMapper.reviewList_main();
+    }
 }
