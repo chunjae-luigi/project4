@@ -5,32 +5,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>HEABEOP::마이페이지</title>
-    <jsp:include page="../layout/head.jsp" />
-    <link rel="stylesheet" href="${path }/resources/css/sub.css">
+    <title>HEABEOP</title>
+    <jsp:include page="../layout/adminHead.jsp" />
+    <link rel="stylesheet" href="${path }/resources/css/admin.css" />
+    <link rel="stylesheet" href="${path }/resources/css/owl.carousel.css" />
 </head>
-<body class="myPage">
-    <jsp:include page="../layout/header.jsp" />
-
-    <div class="container-fluid">
-        <div class="row justify-content-md-center my-5">
-            <div class="col-8">
-                <div class="row">
-                    <div class="col-2 p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center border left_side">
-                            <div class="left_top">
-                                <p>마이페이지</p>
-                            </div>
-                            <ul class="my-2" style="width:100%;">
-                                <li><a href="${path }/user/myPage.do" class="active px-4 py-2">나의 정보</a></li>
-                                <li><a href="${path }/user/myLecture.do" class="px-4 py-2">나의 강의실</a></li>
-                                <li><a href="${path }/user/paylistMem.do" class="px-4 py-2">나의 결제정보</a></li>
-                            </ul>
+<body>
+<jsp:include page="../layout/adminHeader.jsp" />
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">회원</h5>
                         </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="${path }/admin/"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!" onclick="return false;">회원</a></li>
+                        </ul>
                     </div>
-                    <div class="col-10 p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center right_side">
-                            <h5 class="my-4" style="font-size:2.5em;font-weight:600;">회원정보</h5>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+          <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>회원 내역</h5>
+                    </div>
+                        <div class="card-body table-border-style">
 
                             <div class="container px-5">
                                 <table class="table table-bordered mx-3">
@@ -46,10 +53,6 @@
                                     <tr>
                                         <th class="text-center">아이디</th>
                                         <td>${member.id }</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-center">비밀번호</th>
-                                        <td><c:if test="${sid ne 'admin'}"><a href="${path }/user/changePw.do?id=${member.id }">비밀번호 변경</a></c:if></td>
                                     </tr>
                                     <tr>
                                         <th class="text-center">이메일</th>
@@ -78,34 +81,21 @@
                                                 <c:when test="${member.grade == 1 }">선생님</c:when>
                                                 <c:when test="${member.grade == 2 }">회원</c:when>
                                                 <c:otherwise>관리자</c:otherwise>
-                                            </c:choose>
-                                            <c:if test="${member.grade == 2 }"> -
-                                                <c:if test="${!canUpgrade }"><span style="color:var(--main-color);">선생님 신청 진행 중</span></c:if>
-                                                <c:if test="${canUpgrade }"><a href="${path }/user/changeGrade.do">선생님 신청하기</a></c:if>
-                                            </c:if>
+                                            </c:choose> - <c:if test="${checkTeacher eq 'ing' }"><span style="color:var(--main-color);">선생님 신청 진행 중</span></c:if><c:if test="${checkTeacher eq 'fail' || checkTeacher eq 'noApply' }"><a href="${path }/user/changeGrade.do">선생님 신청하기</a></c:if>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
-
-                            <div class="d-flex justify-content-end">
-                                <a href="${path }/user/myPageEdit.do" class="btn btn-primary px-3 py-2 my-4 mr-2">수정하기</a>
-                                <c:if test="${sid ne 'admin'}"><a href="${path }/user/removeUser.do?id=${sid }" class="btn btn-success px-3 py-2 my-4">탈퇴하기</a></c:if>
-                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
+
+
         </div>
-
+        <!-- [ Main Content ] end -->
     </div>
-
-    <jsp:include page="../layout/footer.jsp" />
-    <script>
-        <c:if test="${msg eq 'pwSuccess'}">
-        alert("비밀번호가 성공적으로 변경되었습니다.");
-        </c:if>
-    </script>
+</div>
+<jsp:include page="../layout/adminFooter.jsp" />
 </body>
 </html>

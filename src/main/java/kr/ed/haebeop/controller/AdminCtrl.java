@@ -32,6 +32,9 @@ public class AdminCtrl {
     private MemberService memberService;
 
     @Autowired
+    private MemberMgnService memberMgnService;
+
+    @Autowired
     private BoardMgnService boardMgnService;
 
     @Autowired
@@ -51,6 +54,9 @@ public class AdminCtrl {
 
     @Autowired
     private SubjectService subjectService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     @GetMapping("/")
     public String home(Model model) throws Exception {
@@ -82,6 +88,37 @@ public class AdminCtrl {
         return "/admin/memberList";
     }
 
+    @GetMapping("/memberMgnConf.do")
+    public String memberMgnList(HttpServletRequest request, Model model) throws Exception {
+        String type = request.getParameter("type") != null ? request.getParameter("type") : "";
+        String keyword = request.getParameter("keyword") != null ? request.getParameter("keyword") : "";
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+
+        int total = memberMgnService.memberMgnCount();
+
+        Page page = new Page();
+        page.setSearchType(type);
+        page.setSearchKeyword(keyword);
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        model.addAttribute("type", type);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("page", page);
+        model.addAttribute("curPage", curPage);
+
+        List<MemberMgnVO> memberMgnList = memberMgnService.memberMgnList(page);
+        for(MemberMgnVO member : memberMgnList) {
+            Member mem = memberService.memberGet(member.getAuthor());
+            FileDTO fileDTO = filesService.fileByParForGrade(mem.getMno());
+            member.setFno(fileDTO.getFno());
+        }
+        model.addAttribute("memberMgnList", memberMgnList);
+
+        return "/admin/memberApprove";
+    }
+
     @GetMapping("/boardMgnConf.do")
     public String boardMgnList(HttpServletRequest request, Model model) throws Exception {
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -97,7 +134,6 @@ public class AdminCtrl {
 
         List<BoardMgn> boardMgnList = boardMgnService.listBoardMgn(page);
         model.addAttribute("boardMgnList", boardMgnList);
-
 
 
         return "/admin/boardTypeList";
@@ -386,5 +422,44 @@ public class AdminCtrl {
         int lno = Integer.parseInt(request.getParameter("lno"));
         lectureService.lectureDelete(lno);
         return "redirect:/admin/lectList.do";
+    }
+
+
+    //관리자페이지 payList
+    @GetMapping("/paylistAdmin.do")
+    public String payment(HttpServletRequest request, Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+
+        String type = request.getParameter("type");
+        String keyword = request.getParameter("keyword");
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+
+        Page page = new Page();
+        page.setSearchType(type);
+        page.setSearchKeyword(keyword);
+        int total = paymentService.paymentCount(page);
+
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        List<Payment> paymentList = paymentService.paymentList_admin(page);
+        model.addAttribute("type", type);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("page", page);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("paymentList", paymentList);
+
+
+        return "/admin/payList";
+
+    }
+
+    @GetMapping("memberget.do")
+    public String memberGet(HttpServletRequest request, Model model) throws Exception {
+        String id = (String) request.getParameter("id");
+        Member member = memberService.memberGet(id);
+        model.addAttribute("member", member);
+        return "/admin/memberGet";
     }
 }

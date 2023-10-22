@@ -16,17 +16,17 @@
         <c:if test="${sid eq 'admin'}">
                 <ul>
                     <li class="quick01">
-                        <a href="${path }/admin/MemberListAdmin">
+                        <a href="${path }/admin/">
                             <p>관리자페이지</p>
                         </a>
                     </li>
                     <li class="quick02">
-                        <a href="${path }/member/get?sid=${sid}">
+                        <a href="${path }/user/myPage.do">
                             <p>마이페이지</p>
                         </a>
                     </li>
                     <li class="quick03">
-                        <a href="${path }/member/lesson">
+                        <a href="${path }/user/lesson">
                             <p>나의 강의실</p>
                         </a>
                     </li>
@@ -35,17 +35,17 @@
         <c:if test="${sid ne 'admin'}">
                 <ul>
                     <li class="quick01">
-                        <a href="${path }/member/get?sid=${sid}">
+                        <a href="${path }/user/myPage.do">
                             <p>마이페이지</p>
                         </a>
                     </li>
                     <li class="quick02">
-                        <a href="${path }/member/lesson">
+                        <a href="${path }/user/lesson">
                             <p>나의 강의실</p>
                         </a>
                     </li>
                     <li class="quick03">
-                        <a href="${path }/member/payList">
+                        <a href="${path }/user/paylistMem.do">
                             <p>나의 결제내역</p>
                         </a>
                     </li>

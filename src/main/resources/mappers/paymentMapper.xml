@@ -12,27 +12,47 @@
 
 
 <!--    관리자페이지 결제내역-->
-    <select id="paymentpage" resultType="kr.ed.haebeop.domain.Payment">
+    <select id="paymentList_admin" resultType="kr.ed.haebeop.domain.Payment">
         <![CDATA[
-        SELECT * FROM payment
+        select * from payment
         ]]>
         <where>
-            id NOT IN ('admin')
             <if test="searchType != null">
                 <choose>
                     <when test="searchType == 'id'.toString()">
-                        AND id LIKE concat('%', #{searchKeyword}, '%')
+                        id LIKE concat('%', #{searchKeyword}, '%')
                     </when>
-                    <when test="searchType == 'sno'.toString()">
-                        AND sno LIKE concat('%', #{searchKeyword}, '%')
+                    <when test="searchType == 'plec'.toString()">
+                        plec LIKE concat('%', #{searchKeyword}, '%')
                     </when>
                 </choose>
             </if>
         </where>
         <![CDATA[
-        ORDER BY payno DESC, regDate ASC LIMIT #{postStart}, #{postCount}
+        order by resdate desc LIMIT #{postStart}, #{postCount}
         ]]>
     </select>
+
+    <!--    회원 마이페이지-->
+    <select id="paymentList_mypage" resultType="kr.ed.haebeop.domain.Payment">
+        <![CDATA[
+        SELECT * FROM payment
+        ]]>
+        <where>
+            id = #{id}
+              <if test="searchType != null">
+                <choose>
+                    <when test="searchType == 'plec'.toString()">
+                        AND plec LIKE concat('%', #{searchKeyword}, '%')
+                    </when>
+                </choose>
+             </if>
+        </where>
+        <![CDATA[
+        ORDER BY resdate desc LIMIT #{postStart}, #{postCount}
+        ]]>
+    </select>
+
 
     <select id="paymentCount" resultType="integer">
         <![CDATA[
@@ -45,8 +65,8 @@
                     <when test="searchType == 'id'.toString()">
                         AND id LIKE concat('%', #{searchKeyword}, '%')
                     </when>
-                    <when test="searchType == 'sno'.toString()">
-                        AND sno LIKE concat('%', #{searchKeyword}, '%')
+                    <when test="searchType == 'payno'.toString()">
+                        AND payno LIKE concat('%', #{searchKeyword}, '%')
                     </when>
                 </choose>
             </if>
@@ -54,7 +74,7 @@
     </select>
 
     <insert id="insertpayment">
-        INSERT INTO payment VALUES (DEFAULT, #{id}, #{plec}, #{sno}, DEFAULT, #{pmethod}, #{pcom}, #{pnum}, #{price}, DEFAULT, DEFAULT, DEFAULT)
+        INSERT INTO payment VALUES (DEFAULT, #{id}, #{pno}, #{plec}, #{tecid}, #{tecnm}, #{booknm}, #{pmethod}, #{pcom}, #{pnum}, #{price}, DEFAULT, DEFAULT, DEFAULT)
     </insert>
 
     <delete id="deletepayment">

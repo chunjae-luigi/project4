@@ -58,7 +58,6 @@
         }
 
         table {
-            width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
@@ -69,11 +68,11 @@
 
         th, td {
             padding: 10px;
-            text-align: left;
+            text-align: center;
         }
 
         input[type="number"]{
-            width: 100px;
+            width: 120px;
         }
 
         .form-label {
@@ -125,6 +124,16 @@
             height: 50px;
             border: none;
         }
+
+        .can1 { width: 30% }
+        .can2 { width: 15% }
+        .can3 { width: 15% }
+        .can4 { width: 40% }
+
+        .row {
+            margin-bottom: 5px;
+        }
+
     </style>
 </head>
 
@@ -153,74 +162,73 @@
                 <table class="table" id="tb1">
                     <thead>
                     <tr>
-                        <th>강의 이름</th>
-                        <th>선생님</th>
-                        <th>강의 가격</th>
-                        <th>포인트 사용</th>
+                        <th class="can1" >강의 이름</th>
+                        <th class="can2" >선생님</th>
+                        <th class="can3" >강의 가격</th>
+                        <th class="can4" >포인트 사용</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td> ${lecture.title}
+                        <td class="can1" > ${lecture.title}
                             <input type="hidden" name="plec" id="plec" value="${lecture.title}">
-                            <input type="hidden" name="dno" id="dno" value="${lecture.lno}">
+                            <input type="hidden" name="pno" id="pno" value="${lecture.lno}">
                         </td>
-                        <td>선생님 이름 추가필요</td>
-                        <td>
-                            <input type="number" name="total" id="total" style="border: none; text-align: center;" readonly value="${lecture.price}">원
-                        <td>
-                            <input type="number" name="total" id="total" style="border: none; text-align: center;" readonly value="${lecture.price}">원
+                        <td class="can2"  >${lecture.teacherNm}
+                            <input type="hidden" name="tecid" id="tecid" value="${lecture.teacherId}">
+                            <input type="hidden" name="tecnm" id="tecnm" value="${lecture.teacherNm}">
+                            <input type="hidden" name="booknm" id="booknm" value="${lecture.bookname}">
                         </td>
-                        <td><input type="number" name="inpt" id="inpt" value="">
-
-                            <input type="button" name="ptbtn" id="ptbtn" class="btn btn-primary" value="사용" onclick= "pointuse()">
-                            <input type="button" name="ptbre" id="ptre" class="btn btn-primary" value="취소" onclick= "pointreset()">
-                            <br>
-                            <input type="button" name="ptbtn" id="ptbtn" class="btn btn-primary" value="사용" onclick= "pointuse()">
-                            <input type="button" name="ptbre" id="ptre" class="btn btn-primary" value="취소" onclick= "pointreset()">
-                            <br>
-                            <br>
-                            사용가능한 포인트 :
-                            사용가능한 포인트 :
-                            <input type="text" name="pt" id="pt" value="" readonly style="border: none"/>
-
-
+                        <td class="can3" >
+                            <input type="number" name="total" id="total" style="border: none; text-align: center;" readonly value="${lecture.cost}">원
+                        </td>
+                        <td class="can4" style="text-align: center; border: none">
+                            <input type="number" name="inpt" id="inpt" style="width: 160px; margin-top: 8px; ">
+                            <input type="button" name="ptbtn" id="ptbtn" style="margin-left: 30px;" class="btn btn-primary" value="사용" onclick= "pointuse()">
+                            <input type="button" name="ptbre" id="ptbre" class="btn btn-primary" value="취소" style="margin-left: 5px" onclick= "pointreset()">
                         </td>
 
                     </tr>
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="2" class="text-center">총계</td>
+                        <td colspan="2" class="text-center" style="font-weight: bold; font-size: 20px"> 총 계 </td>
                         <td>
-                            <input type="number" name="price" id="price" value="" readonly style="border: none; text-align: center;"/>원
-                            <input type="number" name="price" id="price" value="" readonly style="border: none; text-align: center;"/>원
+                            <input type="number" name="price" id="price" value="" readonly style="border: none; text-align: center; font-weight: bold;"/>원
+                        </td>
+                        <td>
+                            &nbsp&nbsp&nbsp사용가능한 포인트 :<input type="text" name="pt" id="pt" value="" readonly style="border: none; padding-left: 8px;"/>
                         </td>
                     </tr>
                     </tfoot>
                 </table>
 
-                <h3 >주문자 정보 </h3><p id="closebar1">▲</p>
+                <h3 style="display: inline-block">주문자 정보 </h3><p id="closebar1" style="display: inline-block" >▲</p>
                 <section id="closebar2" style="display: block">
                 <div class="row" >
                     <div class="col-2"><label for="nm" class="form-label">이름</label></div>
                     <div class="col-4"><input type="text" class="form-control" id="nm" name="nm" readonly value="${mem.nm}"></div>
-                    <div class="col-4"><input type="hidden" class="form-control" id="id" name="id" readonly value="${mem.id}"></div>
+                    <div class="col-2"><label for="tel" class="form-label">전화번호</label></div>
+                    <div class="col-4"><input type="tel" class="form-control" id="tel" name="tel" readonly value="${mem.tel}"></div>
+                    <input type="hidden" class="form-control" id="id" name="id" readonly value="${mem.id}">
+                    <input type="hidden" class="form-control" id="amount" name="amount" readonly value="1">
                 </div>
                 <div class="row" >
                     <div class="col-2"><label for="email" class="form-label">이메일</label></div>
                     <div class="col-4"><input type="email" class="form-control" id="email" name="email" readonly value="${mem.email}"></div>
-                    <div class="col-2"><label for="tel" class="form-label">전화번호</label></div>
-                    <div class="col-4"><input type="tel" class="form-control" id="tel" name="tel" readonly value="${mem.tel}"></div>
-                    <input type="hidden" class="form-control" id="amount" name="amount" readonly value="1">
+
                 </div>
+                    <br>
+                    <br>
                 <div class="row">
                     <div class="col-2"><label for="addr1" class="form-label">기본 주소</label></div>
-                    <div class="col-4"><input type="text" name="addr1" id="addr1" class="form-control" value="${mem.addr1}" required /></div>
+                    <div class="col-4"><input type="text" name="addr1" id="addr1" class="form-control" value="${mem.addr1}" readonly /></div>
                     <div class="col-2"><label for="addr2" class="form-label">상세 주소</label></div>
-                    <div class="col-4"><input type="text" name="addr2" id="addr2" class="form-control" value="${mem.addr2}"required /></div>
+                    <div class="col-4"><input type="text" name="addr2" id="addr2" class="form-control" value="${mem.addr2}" readonly /></div>
+                </div>
+                <div class="row">
                     <div class="col-2"><label for="postcode" class="form-label">우편 번호</label></div>
-                    <div class="col-4"><input type="text" name="postcode" id="postcode" value="${mem.postcode}" class="form-control"></div>
+                    <div class="col-4"><input type="text" name="postcode" id="postcode" value="${mem.postcode}" readonly class="form-control"></div>
                     <div class="col-2"></div>
                     <div class="col-4"><button type="button" id="post_btn" onclick="findAddr()" class="btn btn-primary">우편번호 검색</button></div>
                 </div>
@@ -256,36 +264,19 @@
                     <div class="col-6" id="labels4" style="display: none; color: black;">
                         <label class="form-label" >061702 - 04 - 152352</label></div>
 
-
-                    <div class="col-2" id="labels1" >
-                        <label for="pnum" class="form-label" >결제 번호</label></div>
-                    <div class="col-2" id="labels2" style="display: none">
-                        <label class="form-label" >계좌 번호</label></div>
-
-                    <div class="col-6" id="labels3">
-                        <input type="text" class="form-control" id="pnum" name="pnum" value="" required></div>
-                    <div class="col-6" id="labels4" style="display: none; color: black;">
-                        <label class="form-label" >061702 - 04 - 152352</label></div>
-
-
                     <div class="col-2">
                         <input type="button" id="paybtn" value="결제하기" class="btn btn-primary">
                     </div>
                     <div class="col-2">
                         <input type="button" id="naverPayBtn" >
                     </div>
-
-                    <div class="col-2">
-                        <input type="button" id="naverPayBtn" >
-                    </div>
-
                 </div>
 
 
                 <%--  일단은 pay했다고 치기  --%>
                 <input type="hidden" name="payCk" id="payCk" value="yes">
                 <input type="submit" id="buy" value="구매" class="btn btn-primary">
-                <a href="${path }/payment/list.do" class="btn btn-primary">제품 목록</a>
+                <a href="${path }/lecture/list.do" class="btn btn-primary">제품 목록</a>
             </form>
 
         </div>
@@ -313,7 +304,7 @@
     });
 
 </script>
-        <script>
+<script>
     // 포인트 계산
     $(document).ready(function() {
         let total = 0;
@@ -329,19 +320,13 @@
         point = point - inpoint;
         //포인트 정산
         if((0 < point) && (0 <= total) ){
-        if((0 < point) && (0 <= total) ){
             $("#pt").val(point);
             $("#price").val(total);
         }else if((0 > point) && (0 <= total) ) {
-        }else if((0 > point) && (0 <= total) ) {
             $("#inpt").val(0).focus;
-        }else if((0 === point) && (0 <= total) ){
         }else if((0 === point) && (0 <= total) ){
             $("#pt").val(0);
             $("#price").val(total);
-        }else{
-            return false;
-            $("#inpt").focus;
         }else{
             return false;
             $("#inpt").focus;
@@ -391,40 +376,10 @@
                     $("#pnum").val("계좌이체");
                     $("#labels2").css("display", "block");
                     $("#labels4").css("display", "block");
-            $("#pmethod").change(function(){
-                var th = $(this).val();
-                if(th==="신용카드"){
-                    for(var i=0;i<cardArr1.length;i++) {
-                        $("#pcom").append("<option value='" + cardArr1[i] + "'>" + cardArr1[i] + "</option>");
-                    }
-                    $("#labels1").css("display", "block");
-                    $("#labels3").css("display", "block");
-                    $("#labels2").css("display", "none");
-                    $("#labels4").css("display", "none");
-                    $("#pnum").val("");
-                } else if(th==="체크카드"){
-                    for(var i=0;i<cardArr2.length;i++) {
-                        $("#pcom").append("<option value='"+cardArr2[i]+"'>"+cardArr2[i]+"</option>");
-                    }
-                    $("#labels1").css("display", "block");
-                    $("#labels3").css("display", "block");
-                    $("#labels2").css("display", "none");
-                    $("#labels4").css("display", "none");
-                    $("#pnum").val("");
-                } else if(th==="계좌이체"){
-                    for (var i = 0; i < bankArr.length; i++) {
-                        $("#pcom").append("<option value='" + bankArr[i] + "'>" + bankArr[i] + "</option>");
-                    }
-                    $("#labels1").css("display", "none");
-                    $("#labels3").css("display", "none");
-                    $("#pnum").val("계좌이체");
-                    $("#labels2").css("display", "block");
-                    $("#labels4").css("display", "block");
                 }
         }).change();
     });
 </script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     //주소 연동 API
@@ -454,7 +409,7 @@
 
     //직접 만드신 네이버페이 결제버튼에 click Event를 할당하세요
     var elNaverPayBtn = document.getElementById("naverPayBtn");
-    var totalPayAmount = ${lecture.price};
+    var totalPayAmount = ${lecture.cost};
     elNaverPayBtn.addEventListener("click", function() {
         oPay.open({
             merchantUserKey: "12341234",
