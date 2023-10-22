@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.socket.WebSocketSession;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -20,7 +20,10 @@ public class ChatCtrl {
     private final ChatService service;
 
     @GetMapping("home")
-    public String loadHome(Model model){
+    public String loadHome(Model model, HttpServletRequest request){
+        List<ChatRoom> chatRooms = service.findAllRoom();
+
+        model.addAttribute("chatRooms", chatRooms);
         return "/chat/chat";
     }
 
@@ -29,19 +32,4 @@ public class ChatCtrl {
     public ChatRoom createRoom(@RequestParam String name){
         return service.createRoom(name);
     }
-
-    @GetMapping("allRoom")
-    @ResponseBody
-    public List<ChatRoom> findAllRooms(){
-        return service.findAllRoom();
-    }
-
-    @GetMapping("getRoom")
-    @ResponseBody
-    public ChatRoom getRoom(@RequestParam String roomId) { return service.findRoomById(roomId); }
-
-    @GetMapping("sendMsg")
-    public void sendMsg(@RequestParam WebSocketSession session, @RequestParam String message) { service.sendMessage(session, message); }
-
-
 }
