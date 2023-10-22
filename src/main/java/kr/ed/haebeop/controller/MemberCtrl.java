@@ -2,10 +2,7 @@ package kr.ed.haebeop.controller;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import kr.ed.haebeop.domain.*;
-import kr.ed.haebeop.service.FilesService;
-import kr.ed.haebeop.service.MemberMgnService;
-import kr.ed.haebeop.service.MemberService;
-import kr.ed.haebeop.service.PaymentService;
+import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.util.NaverLogin;
 import kr.ed.haebeop.util.Page;
 import kr.ed.haebeop.util.PayListmem;
@@ -294,31 +291,33 @@ public class MemberCtrl {
 
 
     //회원이 보는 강의 리스트
-    @GetMapping("myLectList.do")
-    public String myLectList(HttpServletRequest request, Model model) throws Exception{
-        String type = request.getParameter("type");
-        String keyword = request.getParameter("keyword");
-        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
-
-        Page page = new Page();
-        page.setSearchType(type);
-        page.setSearchKeyword(keyword);
-        int total = lectureService.lectureCount(page);
-
-        page.makeBlock(curPage, total);
-        page.makeLastPageNum(total);
-        page.makePostStart(curPage, total);
-
-        model.addAttribute("type", type);
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("page", page);
-        model.addAttribute("curPage", curPage);
-
-        List<Lecture> lectureList = lectureService.lectureList(page);
-        model.addAttribute("lectureList", lectureList);
-
-        return "/member/myLectList";
-    }
+//    @GetMapping("mylectList.do")
+//    public String mylectList(HttpServletRequest request, Model model) throws Exception{
+//        String sid = (String) session.getAttribute("sid");
+//
+//        String type = request.getParameter("type");
+//        String keyword = request.getParameter("keyword");
+//        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+//
+//        Page page = new Page();
+//        page.setSearchType(type);
+//        page.setSearchKeyword(keyword);
+//        int total = lectureService.lectureviewCount(page);
+//
+//        page.makeBlock(curPage, total);
+//        page.makeLastPageNum(total);
+//        page.makePostStart(curPage, total);
+//
+//        model.addAttribute("type", type);
+//        model.addAttribute("keyword", keyword);
+//        model.addAttribute("page", page);
+//        model.addAttribute("curPage", curPage);
+//
+//        List<LectlistVO> mylectList = lectureService.mylectList(page);
+//        model.addAttribute("mylectList", mylectList);
+//
+//        return "/member/myLectList";
+//    }
 
     //회원의 강의 상세보기
     @GetMapping("myLecture.do")
