@@ -43,6 +43,12 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    public BoardVO boardGetInfo(int bno) throws Exception {
+        BoardVO boardVO = boardMapper.boardGet(bno);
+        return boardVO;
+    }
+
+    @Override
     public int boardInsert(Board board) throws Exception {
         boardMapper.boardInsert(board);
         return boardMapper.boardGetLast();

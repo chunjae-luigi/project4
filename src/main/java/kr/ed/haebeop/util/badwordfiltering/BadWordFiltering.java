@@ -53,4 +53,16 @@ public class BadWordFiltering extends HashSet<String> implements BadWords, ReadU
     public boolean blankCheck(String text) {
         return check(text.replace(" ", ""));
     }
+
+
+    public String messagePrint(String text){
+        String msg = "";
+        if(check(text)){
+            msg = "비속어나 욕설이 존재합니다.";
+        } else {
+            msg = "비속어나 욕설이 포함되어 있지 않습니다.";
+        }
+        return msg;
+    }
+
 }
