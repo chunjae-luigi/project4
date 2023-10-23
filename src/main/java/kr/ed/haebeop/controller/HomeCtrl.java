@@ -48,9 +48,11 @@ public class HomeCtrl {
 
         List<Member> teacherList = memberService.getTeacherMain();
         for (Member member : teacherList) {
-            FileDTO fileDTO = filesService.fileByParForGrade(member.getMno());
-            member.setFileNm(fileDTO.getSaveNm());
-            member.setSaveFolder(fileDTO.getSaveFolder());
+            FileDTO fileDTO = filesService.fileByParForThumbnail(member.getMno());
+            if(fileDTO != null && fileDTO.getFileType().equals("image")) {
+                member.setFileNm(fileDTO.getSaveNm());
+                member.setSaveFolder(fileDTO.getSaveFolder());
+            }
         }
         model.addAttribute("teacherList", teacherList);
 
