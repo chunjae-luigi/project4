@@ -171,6 +171,7 @@ CREATE VIEW mylect AS (SELECT
                       WHERE l.lno = p.pno);
 
 SELECT * FROM mylect WHERE id = 'seulbee0224';
+
 -- ============================ 슬비끝  ===================================
 
 CREATE TABLE payment(
