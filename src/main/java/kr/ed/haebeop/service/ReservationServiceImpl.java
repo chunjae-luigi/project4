@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.util.List;
 
@@ -29,11 +30,11 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     @Transactional
-    public boolean reservationInsert(Reservation reservation) throws IOException {
+    public boolean reservationInsert(Reservation reservation, ServletContext servletContext) throws IOException {
         List<Reservation> reserved = reservationMapper.reservationGetTimeList(reservation);
 
         boolean success = true;
-        int capacity = Integer.parseInt(SettingConfig.getProperty("reservation.capacity"));
+        int capacity = Integer.parseInt(SettingConfig.getProperty("reservation.capacity", servletContext));
 
         if(!reserved.isEmpty() && reserved.size()>=capacity){success=false;}
         else{
@@ -55,5 +56,10 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public List<Reservation> reservationList(Page page) {
         return reservationMapper.reservationList(page);
+    }
+
+    @Override
+    public List<Reservation> reservationMyList(String id) {
+        return reservationMapper.reservationMyList(id);
     }
 }

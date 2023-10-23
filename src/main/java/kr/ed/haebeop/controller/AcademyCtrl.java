@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -48,6 +49,8 @@ public class AcademyCtrl {
 
     @GetMapping("calendar")
     public String calendar(HttpServletRequest request, Model model) throws Exception{
+        ServletContext application = request.getSession().getServletContext();
+
         int calNo = 0;
         String calstr = request.getParameter("calNo");
 
@@ -71,7 +74,7 @@ public class AcademyCtrl {
         }
 
         DatePicker datePicker = new DatePicker();
-        List<List<Day>> calendar = datePicker.makeRestDayCalendar(year+month);
+        List<List<Day>> calendar = datePicker.makeRestDayCalendar(year+month, application);
 
         model.addAttribute("yyyy", year);
         model.addAttribute("mm", month);
@@ -84,9 +87,10 @@ public class AcademyCtrl {
 
     @PostMapping("selectDay")
     @ResponseBody
-    public Map<String, Integer> calendarSelectDay(@RequestParam("rdate") String rdate, @RequestParam("dayW") String dayW) throws IOException, ParseException {
+    public Map<String, Integer> calendarSelectDay(HttpServletRequest request, @RequestParam("rdate") String rdate, @RequestParam("dayW") String dayW) throws IOException, ParseException {
+        ServletContext application = request.getSession().getServletContext();
 
-        Map<String, Integer> businesshour = new TreeMap<>(SettingConfig.businesshour(dayW));
+        Map<String, Integer> businesshour = new TreeMap<>(SettingConfig.businesshour(dayW, application));
 
         Reservation reservedDate = new Reservation();
         reservedDate.setRdate(rdate);
@@ -122,6 +126,8 @@ public class AcademyCtrl {
 
     @PostMapping("insertReservation")
     public String insertReservation(Model model, HttpServletRequest request) throws IOException {
+        ServletContext application = request.getSession().getServletContext();
+
         String id = (String) session.getAttribute("sid");
         String name = request.getParameter("name");
         String email = request.getParameter("email");
@@ -144,7 +150,7 @@ public class AcademyCtrl {
         reservation.setRtime(rtime);
 
 
-        boolean success = reservationService.reservationInsert(reservation);
+        boolean success = reservationService.reservationInsert(reservation, application);
 
         if(success){
             model.addAttribute("msg", "상담 신청에 성공했습니다. 관리자 승인 시 예약이 확정됩니다. 마이페이지에서 예약 내역을 확인할 수 있습니다.");
@@ -200,11 +206,13 @@ public class AcademyCtrl {
     }
 
     @GetMapping("reservationSetting")
-    public String reservationSetting(Model model) throws IOException {
-        Map<String, String> business = SettingConfig.businessSetting();
-        Map<String, String> open = SettingConfig.openSetting();
-        Map<String, String> close = SettingConfig.closeSetting();
-        Map<String, Integer> reservation = SettingConfig.reservationSetting();
+    public String reservationSetting(HttpServletRequest request, Model model) throws IOException {
+        ServletContext application = request.getSession().getServletContext();
+
+        Map<String, String> business = SettingConfig.businessSetting(application);
+        Map<String, String> open = SettingConfig.openSetting(application);
+        Map<String, String> close = SettingConfig.closeSetting(application);
+        Map<String, Integer> reservation = SettingConfig.reservationSetting(application);
 
         String[] weekday = new String[]{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "holiday"};
 
@@ -227,6 +235,8 @@ public class AcademyCtrl {
 
     @PostMapping("reservationSettingUpdate")
     public String reservationSettingUpdate(HttpServletRequest request, Model model) throws IOException {
+        ServletContext application = request.getSession().getServletContext();
+
         String[] weekday = new String[]{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "holiday"};
 
         Map<String, String> setting = new HashMap<>();
@@ -248,9 +258,19 @@ public class AcademyCtrl {
 
         for (String key : setting.keySet()) {
             String value = setting.get(key);
-            SettingConfig.editProperty(key, value);
+            SettingConfig.editProperty(key, value, application);
         }
 
         return "redirect: reservationSetting";
+    }
+
+    @GetMapping("myReservation")
+    public String myReservation(Model model){
+        String id = (String) session.getAttribute("sid");
+
+        List<Reservation> reservations = reservationService.reservationMyList(id);
+        model.addAttribute("reservations", reservations);
+
+        return "/member/myReservation";
     }
 }

@@ -1,14 +1,15 @@
 package kr.ed.haebeop.util;
 
+import javax.servlet.ServletContext;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class SettingConfig {
-    private static String path = "D:\\sangmin0816\\luigi\\project4\\src\\main\\resources\\settings.properties";
     private static String[] weeks = new String[]{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "holiday"};
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws IOException {
         String[] weekKr = new String[]{"월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일", "공휴일"};
         for(String w: weekKr){
             uniHex(w);
@@ -27,59 +28,62 @@ public class SettingConfig {
 
     }
 
-
-    public static Properties loadProperty() throws IOException {
+    public static Properties loadProperty(ServletContext servletContext) throws IOException {
         // 프로퍼티 파일을 로드
-        Properties prop = new Properties();
-        InputStream input = new FileInputStream(path);
-        prop.load(input);
-        return prop;
+        String realPath = servletContext.getRealPath("/resources/settings.properties");
+        try (InputStream input = new FileInputStream(realPath)) {
+            Properties prop = new Properties();
+            prop.load(input);
+            return prop;
+        }
     }
 
-    public static void saveProperty(Properties prop) throws IOException {
+    public static void saveProperty(Properties prop, ServletContext servletContext) throws IOException {
         // 변경 내용을 파일에 저장
-        OutputStream output = new FileOutputStream(path);
-        prop.store(output, "Updated settings");
+        String realPath = servletContext.getRealPath("/resources/settings.properties");
+        try (OutputStream output = new FileOutputStream(realPath)) {
+            prop.store(output, "Updated settings");
+        }
     }
 
-    public static String getProperty(String key) throws IOException {
-        Properties prop = loadProperty();
+    public static String getProperty(String key, ServletContext servletContext) throws IOException {
+        Properties prop = loadProperty(servletContext);
         return prop.getProperty(key);
     }
 
-    public static void editProperty(String key, String value) throws IOException {
-        Properties prop = loadProperty();
+    public static void editProperty(String key, String value, ServletContext servletContext) throws IOException {
+        Properties prop = loadProperty(servletContext);
 
         // 프로퍼티 값 추가 또는 수정
         prop.setProperty(key, value);
 
-        saveProperty(prop);
+        saveProperty(prop, servletContext);
     }
 
-    public static void deleteProperty(String key) throws IOException {
-        Properties prop = loadProperty();
+    public static void deleteProperty(String key, ServletContext servletContext) throws IOException {
+        Properties prop = loadProperty(servletContext);
 
         // 프로퍼티 삭제
         prop.remove(key);
 
-        saveProperty(prop);
+        saveProperty(prop, servletContext);
     }
 
-    public static Map<String, String> weekdays(String pre) throws IOException {
+    public static Map<String, String> weekdays(String pre, ServletContext servletContext) throws IOException {
         Map<String, String> business = new HashMap<>();
 
         for(String day: weeks){
-            System.out.println(getProperty(pre+"."+day));
-            business.put(day, getProperty(day));
+            System.out.println(getProperty(pre+"."+day, servletContext));
+            business.put(day, getProperty(day, servletContext));
         }
 
         return business;
     }
 
-    public static List<String> businessClosed() throws IOException {
+    public static List<String> businessClosed(ServletContext servletContext) throws IOException {
         List<String> closed = new ArrayList<>();
         for(int i=0; i<8; i++){
-            boolean isOpen = Boolean.parseBoolean(getProperty("businessday."+weeks[i]));
+            boolean isOpen = Boolean.parseBoolean(getProperty("businessday."+weeks[i], servletContext));
             if(!isOpen){
                 closed.add(weeks[i]);
             }
@@ -87,14 +91,14 @@ public class SettingConfig {
         return closed;
     }
 
-    public static Map<String, Integer> businesshour(String dayofweek) throws IOException, ParseException {
+    public static Map<String, Integer> businesshour(String dayofweek, ServletContext servletContext) throws IOException, ParseException {
         Map<String, Integer> businesshours = new HashMap<>();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
-        Date open = sdf.parse(getProperty("openhour."+dayofweek));
-        Date close = sdf.parse(getProperty("closehour."+dayofweek));
-        int capacity = Integer.parseInt(getProperty("reservation.capacity"));
-        int interval = Integer.parseInt(getProperty("reservation.interval"));
+        Date open = sdf.parse(getProperty("openhour."+dayofweek, servletContext));
+        Date close = sdf.parse(getProperty("closehour."+dayofweek, servletContext));
+        int capacity = Integer.parseInt(getProperty("reservation.capacity", servletContext));
+        int interval = Integer.parseInt(getProperty("reservation.interval", servletContext));
 
         long intervalms = interval * 60 * 1000;
 
@@ -109,46 +113,46 @@ public class SettingConfig {
         return businesshours;
     }
 
-    public static Map<String, String> businessSetting() throws IOException {
+    public static Map<String, String> businessSetting(ServletContext servletContext) throws IOException {
         Map<String, String> setting = new HashMap<>();
 
         for(int i=0; i<8; i++){
             String dayofweek = weeks[i];
-            setting.put(dayofweek, getProperty("businessday."+dayofweek));
+            setting.put(dayofweek, getProperty("businessday."+dayofweek, servletContext));
         }
 
         return setting;
     }
 
 
-    public static Map<String, String> openSetting() throws IOException {
+    public static Map<String, String> openSetting(ServletContext servletContext) throws IOException {
         Map<String, String> setting = new HashMap<>();
 
         for(int i=0; i<8; i++){
             String dayofweek = weeks[i];
-            setting.put(dayofweek, getProperty("openhour."+dayofweek));
+            setting.put(dayofweek, getProperty("openhour."+dayofweek, servletContext));
         }
 
         return setting;
     }
 
 
-    public static Map<String, String> closeSetting() throws IOException {
+    public static Map<String, String> closeSetting(ServletContext servletContext) throws IOException {
         Map<String, String> setting = new HashMap<>();
 
         for(int i=0; i<8; i++){
             String dayofweek = weeks[i];
-            setting.put(dayofweek, getProperty("closehour."+dayofweek));
+            setting.put(dayofweek, getProperty("closehour."+dayofweek, servletContext));
         }
 
         return setting;
     }
 
 
-    public static Map<String, Integer> reservationSetting() throws IOException {
+    public static Map<String, Integer> reservationSetting(ServletContext servletContext) throws IOException {
         Map<String, Integer> reservation = new HashMap<>();
-        reservation.put("interval", Integer.parseInt(getProperty("reservation.interval")));
-        reservation.put("capacity", Integer.parseInt(getProperty("reservation.capacity")));
+        reservation.put("interval", Integer.parseInt(getProperty("reservation.interval", servletContext)));
+        reservation.put("capacity", Integer.parseInt(getProperty("reservation.capacity", servletContext)));
 
         return reservation;
     }

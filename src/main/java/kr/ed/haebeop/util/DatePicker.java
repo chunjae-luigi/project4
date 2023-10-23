@@ -3,17 +3,17 @@ package kr.ed.haebeop.util;
 import kr.ed.haebeop.domain.Day;
 import kr.ed.haebeop.domain.RestDay;
 
+import javax.servlet.ServletContext;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class DatePicker {
     //달력 구하기 + 공휴일 추가
-    public List<List<Day>> makeRestDayCalendar(String yyyymm) throws Exception {
+    public List<List<Day>> makeRestDayCalendar(String yyyymm, ServletContext servletContext) throws Exception {
         List<List<Day>> calendar = getCalendar(yyyymm);
 
-
         // 영업일 추가
-        List<String> businessClosed = SettingConfig.businessClosed();
+        List<String> businessClosed = SettingConfig.businessClosed(servletContext);
         for(int w=0; w<calendar.size(); w++){
             List<Day> week = calendar.get(w);
             for(int i=0; i<7; i++){
