@@ -1,17 +1,17 @@
 package kr.ed.haebeop.service;
 
+import kr.ed.haebeop.domain.LectlistVO;
 import kr.ed.haebeop.domain.Lecture;
+import kr.ed.haebeop.domain.LectureVO;
+import kr.ed.haebeop.domain.Review;
 import kr.ed.haebeop.util.Page;
 
 import java.util.List;
 
 public interface LectureService {
     public List<Lecture> lectureList(Page page) throws Exception;
-<<<<<<< HEAD
 
-    public List<Lecture>  myLectList(int lno) throws Exception;
-=======
->>>>>>> 9dc6e84ce33b6a21d6b84742f1782d4a7151a167
+    public List<LectureVO> lectureviewList(Page page) throws Exception;
 
     public Lecture lectureGet(int lno) throws Exception;
 
@@ -23,6 +23,11 @@ public interface LectureService {
 
     public int lectureCount(Page page) throws Exception;
 
+    public int lectureviewCount(Page page) throws Exception;
+
     public List<Lecture> lectureList_main() throws Exception;
 
+    public List<LectlistVO> mylectList(int lno) throws Exception;
+
 }
+

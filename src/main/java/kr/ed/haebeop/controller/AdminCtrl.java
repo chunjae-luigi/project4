@@ -255,12 +255,14 @@ public class AdminCtrl {
         lecture.setSubTitle(request.getParameter("subTitle"));
         lecture.setContent(request.getParameter("content"));
         lecture.setTeacherId(request.getParameter("teacherId"));
+        lecture.setTeacherId(request.getParameter("teacherNm"));
         lecture.setBookname(request.getParameter("bookname"));
         lecture.setBthumbnail(request.getParameter("bthumnail"));
         lecture.setLectureType(Integer.parseInt(request.getParameter("lectureType")));
         lecture.setStudentCnt(Integer.parseInt(request.getParameter("studentCnt")));
         lecture.setCost(Integer.parseInt(request.getParameter("cost")));
         lecture.setSno(Integer.parseInt(request.getParameter("sno")));
+
 
         if(thumbnail != null) {
             String originalThumbnailname = thumbnail.getOriginalFilename();
@@ -340,11 +342,7 @@ public class AdminCtrl {
         return "/admin/findTeacher";
     }
 
-<<<<<<< HEAD
-    @GetMapping("/findLecture.do")      //비
-=======
-    @GetMapping("/findLecture.do")      //이건뭘까요?
->>>>>>> 9dc6e84ce33b6a21d6b84742f1782d4a7151a167
+    @GetMapping("/findLecture.do")
     public String findLecture(HttpServletRequest request, Model model) throws Exception {
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
@@ -388,14 +386,14 @@ public class AdminCtrl {
         return "/admin/lectGet";
     }
 
-    @GetMapping("lectUpdate.do")     //비
+    @GetMapping("lectUpdate.do")     /
     public String lectureUpdate(HttpServletRequest request, Model model) throws Exception{
         int lno = Integer.parseInt(request.getParameter("lno"));
         Lecture lecture = lectureService.lectureGet(lno);
         model.addAttribute("lecture", lecture);
         return "/admin/lectUpdate";
     }
-    @PostMapping("lectUpdate.do")       //비
+    @PostMapping("lectUpdate.do")
     public String lectureUpdatepro(HttpServletRequest request, Model model) throws Exception{
 
         int lno = Integer.parseInt(request.getParameter("lno"));
@@ -421,7 +419,7 @@ public class AdminCtrl {
         return "redirect:/admin/lectList.do";
     }
 
-    @GetMapping("lectDelete.do")    //비
+    @GetMapping("lectDelete.do")
     public String lectureDelete(HttpServletRequest request, Model model) throws Exception{
         int lno = Integer.parseInt(request.getParameter("lno"));
         lectureService.lectureDelete(lno);

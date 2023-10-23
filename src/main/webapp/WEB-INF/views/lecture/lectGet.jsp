@@ -19,15 +19,15 @@
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
-                <img src="${path}/resources/image/lecture/thumnail(6).png">
+                <img src="${path }/resources/image/lecture/thumnail(1).png">
             </div>
             <div class="col-lg-6">
-                <p>과목 : ${subject.title } </p>
+                <h3 style="color: var(--main-color);">${subject.title } </h3>
                 <h1 class="display-5 fw-bolder text-white mb-2">${lecture.title }</h1>
                 <h3 class="lead text-white-50 mb-4">${lecture.subTitle }</h3>
-                <h3 class="lead text-white-50 mb-4">${teacher.nm }</h3>
-                <a class="btn btn-primary btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
-                <a class="btn btn-outline-light btn-lg px-4" href="#lect_review">수강후기</a>
+                <h3 class="lead text-white-50 mb-4">${lecture.teacherId } 선생님</h3>
+                <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
+                <a class="btn btn-warning btn-lg px-4" href="#lect_review" >수강생 후기</a>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
             <!-- 강의 내용 -->
             <article id="lect_con">
                 <header class="mb-4">
-                    <h1 class="fw-bolder mb-1">${lecture.title }</h1>
+                    <h1 class="fw-bolder mb-1" style="margin-top: 2rem;">${lecture.title }</h1>
                     <div class="text-muted fst-italic mb-2">${lecture.subTitle }</div>
                 </header>
                 <section class="mb-5">
@@ -58,7 +58,7 @@
 
                         <!-- 교재 추가 경로 변경 해야함 //비 -->
                         <div>강의 교재 </div>
-                        <div><img src="${path}/resources/image/lecture/booksample.jpg"></div>
+                        <div><img src="${path}/resources/image/lecture/booksample.jpg" width="300px"></div>
                 </section>
             </article>
             <!-- 목차 -->
@@ -75,7 +75,6 @@
                 <h2> 수강후기 </h2>
                 <div class="card bg-light">
                     <div class="card-body">
-
                         <!-- 수강후기 입력칸-->
                         <form action="${path }/review/add.do" method="post" class="mb-4">
                             <input type="hidden" name="id" id="id"  value="${sid}">
@@ -109,36 +108,40 @@
                                     $('.click-star').slice(0, initialStar).addClass('filled');
                                 });
                             </script>
-
+                            <div class="review_con">
                             <textarea name="content" id="content" class="form-control" rows="3" required placeholder="수강생만 댓글입력창 뜨게하기!"></textarea>
-                            <input type="submit" class="button is-primary" value="등록">
+                            <span><input type="submit" class="btn btn-warning" value="등록"></span>
+                            </div>
                         </form>
+
                         <!-- 수강후기 리스트 -->
                         <div>
 
                         <c:forEach var="review" items="${reviewList }">
                         <div class="d-flex">
                             <div class="review_mem">
-                                ${review.memId }</div>
-                            <div class="ms-3">
-                            <div>
-                                <div class="star-rating">
-                                        <%-- 별점 출력 --%>
-                                    <c:forEach begin="1" end="${review.star}" var="i">
-                                        <span class="star-icon filled"></span>
-                                    </c:forEach>
-
-                                    <c:forEach begin="${review.star + 1}" end="5" var="i">
-                                        <span class="star-icon"></span>
-                                    </c:forEach>
-                                </div>
-                                <div>${review.content } </div>
-                                <p id="reg">
-                                    <fmt:parseDate value="${review.regdate }" var="regdate" pattern="yyyy-MM-dd HH:mm:ss" />
-                                    <fmt:formatDate value="${regdate }" pattern="yyyy-MM-dd" />
-                                </p>
-                                <div>
+                                <p>${member.id }</p>
                             </div>
+                                <div class="riview_list">
+                                    <div class="star-rating">
+                                            <%-- 별점 출력 --%>
+                                        <c:forEach begin="1" end="${review.star}" var="i">
+                                            <span class="star-icon filled"></span>
+                                        </c:forEach>
+
+                                        <c:forEach begin="${review.star + 1}" end="5" var="i">
+                                            <span class="star-icon"></span>
+                                        </c:forEach>
+                                    </div>
+                                    <div>${review.content } </div>
+                                    <div id="reg">
+                                        <fmt:parseDate value="${review.regdate }" var="regdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                                        <fmt:formatDate value="${regdate }" pattern="yyyy-MM-dd" />
+                                    </div>
+                                </div>
+                            <div>
+                            </div>
+
                         </div>
                         </c:forEach>
 
@@ -210,7 +213,7 @@
         const lectureTab = document.getElementById('tab-content');
         const lectureContent = document.getElementById('lect_con');
         lectureTab.addEventListener('click', function() {
-            const scrollPosition = lectureContent.offsetTop - 100;
+            const scrollPosition = lectureContent.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
     });
@@ -218,7 +221,7 @@
         const lectureTab = document.getElementById('tab-curri');
         const lectureContent = document.getElementById('lect_list');
         lectureTab.addEventListener('click', function() {
-            const scrollPosition = lectureContent.offsetTop - 100;
+            const scrollPosition = lectureContent.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
     });
@@ -226,7 +229,7 @@
         const lectureTab = document.getElementById('tab-review');
         const lectureContent = document.getElementById('lect_review');
         lectureTab.addEventListener('click', function() {
-            const scrollPosition = lectureContent.offsetTop - 100;
+            const scrollPosition = lectureContent.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
     });

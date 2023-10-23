@@ -25,12 +25,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-
-import java.util.List;
-
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -43,6 +41,13 @@ public class MemberCtrl {
     @Autowired
     private LectureService lectureService;
 
+    @Autowired
+    private SubjectService subjectService;
+
+    @Autowired
+    private CurriService curriService;
+
+    @Autowired
     private MemberMgnService memberMgnService;
 
     @Autowired
@@ -177,6 +182,7 @@ public class MemberCtrl {
         } else {
             return "redirect:/user/logout.do";
         }
+>>>>>>>>> Temporary merge branch 2
     }
 
     @GetMapping("/changePw.do")
@@ -300,6 +306,74 @@ public class MemberCtrl {
         return "redirect:/user/myPage.do";
     }
 
+
+    //회원이 보는 강의 리스트
+    @GetMapping("myLectList.do")
+    public String myLectList(HttpServletRequest request, Model model) throws Exception{
+        String type = request.getParameter("type");
+        String keyword = request.getParameter("keyword");
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+
+        Page page = new Page();
+        page.setSearchType(type);
+        page.setSearchKeyword(keyword);
+        int total = lectureService.lectureCount(page);
+
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        model.addAttribute("type", type);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("page", page);
+        model.addAttribute("curPage", curPage);
+
+        List<Lecture> lectureList = lectureService.lectureList(page);
+        model.addAttribute("lectureList", lectureList);
+
+        return "/member/myLectList";
+    }
+
+    //회원의 강의 상세보기
+    @GetMapping("myLecture.do")
+    public String lectureUpdate(HttpServletRequest request, Model model) throws Exception{
+        int lno = Integer.parseInt(request.getParameter("lno"));
+
+        Lecture lecture = lectureService.lectureGet(lno);
+        Member teacher = memberService.memberGet(lecture.getTeacherId());
+        Subject subject = subjectService.subjectGet(lecture.getSno());
+        List<Curri> curriList = curriService.curriList(lno);
+
+        model.addAttribute("teacher", teacher);
+        model.addAttribute("subject", subject);
+        model.addAttribute("curriList", curriList);
+        model.addAttribute("lecture", lecture);
+        model.addAttribute("lno", lno);
+
+        return "/member/myLecture";
+
+    }
+
+    @GetMapping("/mylectlist.do")
+    public String myPage(HttpServletRequest request, Model model) throws Exception {
+
+        String id = (String) session.getAttribute("sid");
+        int lno = Integer.parseInt(request.getParameter("lno"));
+
+        List<Payment> paymentList = paymentService.paymentList_Member(id);
+        List<LectlistVO> mylectList = lectureService.mylectList(lno);
+        Member member = memberService.memberGet(id);
+        Lecture lecture = lectureService.lectureGet(lno);
+
+        model.addAttribute("paymentList", paymentList);
+        model.addAttribute("mylectList", mylectList);
+
+        return "/member/myPage";
+    }
+
+
+
+
     @GetMapping("/memberMgnAccept.do")
     public String memberUpgradeAccept(HttpServletRequest request, Model model) throws Exception {
         String urlPath = request.getHeader("referer");
@@ -348,7 +422,7 @@ public class MemberCtrl {
         return "redirect:/";
 
     }
-
+    
     //멤버 payList
     @GetMapping("/paylistMem.do")
     public String paymentMem(HttpServletRequest request, Model model) throws Exception {

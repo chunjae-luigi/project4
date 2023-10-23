@@ -21,12 +21,6 @@ CREATE TABLE member(
 );
 
 INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
-<<<<<<< HEAD
-SELECT * FROM member;
-UPDATE member SET grade = 1 WHERE grade = 2;;
-
-=======
->>>>>>> 9dc6e84ce33b6a21d6b84742f1782d4a7151a167
 
 CREATE TABLE memberMgn(
 	mmNo INT AUTO_INCREMENT PRIMARY KEY,				-- 회원 등급 요청 번호 : 자동 발생
@@ -105,17 +99,16 @@ CREATE TABLE lecture(
 	teacherId VARCHAR(20) NOT NULL,				-- 강의 담당 선생 아이디
 	teacherNm VARCHAR(20),
 	thumbnail VARCHAR(100),                	-- 강의 썸네일
-       lvideo VARCHAR(100)  ,    						-- 샘플영상
-       sno INT NOT NULL, 								-- 과목
-       cost INT NOT NULL, 								-- 강의가격
-       bookname VARCHAR(150),							-- 교재명
-       bthumbnail VARCHAR(100)    					-- 교재 썸네일
+    lvideo VARCHAR(100)  ,    						-- 샘플영상
+    sno INT NOT NULL, 								-- 과목
+    cost INT NOT NULL, 								-- 강의가격
+    bookname VARCHAR(150),							-- 교재명
+    bthumbnail VARCHAR(100)    					-- 교재 썸네일
 );
 
 insert into lecture(lno, title, subTitle, content, lectureType, studentCnt, teacherId, teacherNm, sno, cost) value(default, '강의 제목 1번', '강의 소제목 1번', '강의 내용 1번', 0, 20, 'qeee', '선생님 이름', 1, 50000);
 
 SELECT * FROM lecture;
-
 
 CREATE TABLE subject(
    sno INT PRIMARY KEY AUTO_INCREMENT,	-- 과목번호
@@ -169,5 +162,9 @@ CREATE TABLE payment(
     status INT DEFAULT 0,                           -- 배송상태 - [0:결제완료 | 1:결제완료 | 2:결제취소]
     resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()   -- 결제 등록일
 );
+
+INSERT INTO payment VALUES (DEFAULT, 'admin', '상품2번' , 2, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 2, DEFAULT);
+INSERT INTO payment VALUES (DEFAULT, 'qeee', '상품1번' , 1, DEFAULT, '신용카드', '신한카드', '1234-1234-1234-1234', 50000, DEFAULT, 1, DEFAULT);
+
 -- ============================ 교진끝  ===================================
 

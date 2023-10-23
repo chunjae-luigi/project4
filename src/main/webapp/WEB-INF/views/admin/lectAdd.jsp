@@ -62,7 +62,7 @@
                                         <div class="form-group">
                                             <label class="floating-label d-block">해당 과목</label>
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="sno1" name="sno" class="custom-control-input" value="1">
+                                                <input type="radio" id="sno1" name="sno" class="custom-control-input" value="1" checked>
                                                 <label class="custom-control-label" for="sno1">수학</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
@@ -70,7 +70,7 @@
                                                 <label class="custom-control-label" for="sno2">영어</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="sno3" name="sno" class="custom-control-input" value="3" checked>
+                                                <input type="radio" id="sno3" name="sno" class="custom-control-input" value="3">
                                                 <label class="custom-control-label" for="sno3">기타</label>
                                             </div>
                                         </div>
@@ -123,26 +123,16 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-                            <%-- 슨생님 찾는 칸이다 슬비슬비슬비슬비슬비슬비슬비슬비슬비슬비 --%>
-
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="floating-label d-block" for="teacherId">강의 강사</label>
+                                            <label class="floating-label d-block" for="teacherNm">강의 강사</label>
                                             <input type="text" class="form-control d-inline-block" name="teacherNm" id="teacherNm" readonly style="width:calc(100% - 170px)">
                                             <input type="hidden" name="teacherId" id="teacherId">
                                             <button type="button" class="form-control ml-2 wid-150 d-inline-block" onclick="findTeacher()">찾기</button>
                                         </div>
                                     </div>
                                 </div>
-                                <%--              슨생님 찾는 칸이다 슬비슬비슬비슬비슬비슬비슬비슬비슬비슬비 --%>
-
-
-
-
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">

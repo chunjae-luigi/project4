@@ -20,14 +20,11 @@ public class LectureServiceImpl implements LectureService{
     }
 
     @Override
-<<<<<<< HEAD
-    public List<Lecture> myLectList(int lno) throws Exception {
-        return lectureMapper.myLectList(lno);
+    public List<LectureVO> lectureviewList(Page page) throws Exception {
+        return lectureMapper.lectureviewList(page);
     }
 
     @Override
-=======
->>>>>>> 9dc6e84ce33b6a21d6b84742f1782d4a7151a167
     public Lecture lectureGet(int lno) throws Exception {
         return lectureMapper.lectureGet(lno);
     }
@@ -53,7 +50,17 @@ public class LectureServiceImpl implements LectureService{
     }
 
     @Override
+    public int lectureviewCount(Page page) throws Exception {
+        return lectureMapper.lectureCount(page);
+    }
+
+    @Override
     public List<Lecture> lectureList_main() throws Exception {
         return lectureMapper.lectureList_main();
+    }
+
+    @Override
+    public List<LectlistVO> mylectList(int lno) throws Exception {
+        return lectureMapper.mylectList(lno);
     }
 }
