@@ -99,7 +99,6 @@
                     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height:20vh;">
                         <h5 class="font-weight-bold">새로운 강의를 기대해주세요!</h5>
                     </div>
-
                 </c:if>
             </div>
 

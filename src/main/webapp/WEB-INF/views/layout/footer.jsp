@@ -45,8 +45,8 @@
                         </a>
                     </li>
                     <li class="quick03">
-                        <a href="${path }/user/paylistMem.do">
-                            <p>나의 결제내역</p>
+                        <a href="${path }/chat/home">
+                            <p>채팅</p>
                         </a>
                     </li>
                 </ul>
