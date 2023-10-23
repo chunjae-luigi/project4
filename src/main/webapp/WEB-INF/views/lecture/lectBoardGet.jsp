@@ -41,17 +41,16 @@
             <!-- 내부탭 -->
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a href="${path }/lecture/get.do?lno=${lecture.lno }" class="nav-link active" id="tab-content" data-bs-toggle="tab" data-bs-target="#tab-content" role="tab" aria-selected="true">강의내용</a>
-                    <a href="${path }/lecture/get.do?lno=${lecture.lno }" class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" role="tab" aria-selected="true">커리큘럼</a>
-                    <a href="${path }/lecture/get.do?lno=${lecture.lno }" class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" role="tab" aria-selected="true">수강후기</a>
-                    <%--<button class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" type="button" role="tab" aria-selected="false">커리큘럼</button>
-                    <button class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" type="button" role="tab" aria-selected="false">수강후기</button>--%>
+                    <a href="${path }/lecture/get.do?lno=${lecture.lno }#tab-content" class="nav-link active" id="tab-content" data-bs-toggle="tab" data-bs-target="#tab-content" role="tab" aria-selected="true">강의내용</a>
+                    <a href="${path }/lecture/get.do?lno=${lecture.lno }#tab-curri" class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" role="tab" aria-selected="true">커리큘럼</a>
+                    <a href="${path }/lecture/get.do?lno=${lecture.lno }#tab-review" class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" role="tab" aria-selected="true">수강후기</a>
                     <%--<button class="nav-link" id="tab-qna" data-bs-toggle="tab" data-bs-target="#tab-qna" type="button" role="tab" aria-selected="false">질문하기</button>--%>
-                    <a href="${path }/lecture/boardList.do?lno=${lecture.lno }" class="nav-link">공지사항</a>
+                    <a href="${path }/lecture/boardList.do?lno=${lecture.lno }" class="nav-link active">공지사항</a>
                 </div>
             </nav>
+            <jsp:include page="../board/boardListForm.jsp" />
             <!-- 강의 내용 -->
-            <article id="lect_con">
+            <%--<article id="lect_con">
                 <header class="mb-4">
                     <h1 class="fw-bolder mb-1" style="margin-top: 2rem;">${lecture.title }</h1>
                     <div class="text-muted fst-italic mb-2">${lecture.subTitle }</div>
@@ -63,18 +62,18 @@
                         <div>강의 교재 </div>
                         <div><img src="${path}/resources/image/lecture/booksample.jpg" width="300px"></div>
                 </section>
-            </article>
+            </article>--%>
             <!-- 목차 -->
-            <div id="lect_list">
+            <%--<div id="lect_list">
                 <ul class="list-group">
                     <h2> 목차 </h2>
                     <c:forEach var="curri" items="${curriList }">
                     <li class="list-group-item">${curri.content}</li>
                     </c:forEach>
                 </ul>
-            </div>
+            </div>--%>
             <!-- 수강후기(review) 영역 -->
-            <section class="mb-5" id="lect_review">
+            <%--<section class="mb-5" id="lect_review">
                 <h2> 수강후기 </h2>
                 <div class="card bg-light">
                     <div class="card-body">
@@ -82,7 +81,7 @@
                         <form action="${path }/review/add.do" method="post" class="mb-4">
                             <input type="hidden" name="id" id="id"  value="${sid}">
                             <input type="hidden" name="lno" id="lno" value="${lecture.lno}">
-                            <%-- 별점 테스트 중입니다 --%>
+                            &lt;%&ndash; 별점 테스트 중입니다 &ndash;%&gt;
                             <div class="star-rating">
                                 <label for="star"></label>
                                 <div class="star-icons">
@@ -127,7 +126,7 @@
                             </div>
                                 <div class="riview_list">
                                     <div class="star-rating">
-                                            <%-- 별점 출력 --%>
+                                            &lt;%&ndash; 별점 출력 &ndash;%&gt;
                                         <c:forEach begin="1" end="${review.star}" var="i">
                                             <span class="star-icon filled"></span>
                                         </c:forEach>
@@ -156,7 +155,7 @@
                         </c:if>
                     </div>
                 </div>
-            </section>
+            </section>--%>
         </div>
         <!-- 우측 탭-->
         <div class="col-lg-4" id="lect_tab">
