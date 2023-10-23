@@ -12,6 +12,7 @@ public interface BoardService {
     public int boardCount(BoardPage page) throws Exception;
     public List<BoardVO> boardListForAdmin(int bmNo) throws Exception;
     public BoardVO boardGet(boolean hasCookie, int bno, String sid) throws Exception;
+    public BoardVO boardGetInfo(int bno) throws Exception;
     public int boardInsert(Board board) throws Exception;
     public void boardUpdate(Board board) throws Exception;
     public void qnaUpdate(Board board) throws Exception;
