@@ -29,5 +29,5 @@ public interface LectureMapper {
 
     public List<LectlistVO> mylectList(String id);
 
-    public List<Lecture> lectureList_main();
+    public List<LectureVO> lectureList_main();
 }

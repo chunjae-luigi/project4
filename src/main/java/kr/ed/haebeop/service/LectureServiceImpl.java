@@ -57,7 +57,7 @@ public class LectureServiceImpl implements LectureService{
     }
 
     @Override
-    public List<Lecture> lectureList_main() throws Exception {
+    public List<LectureVO> lectureList_main() throws Exception {
         return lectureMapper.lectureList_main();
     }
 
