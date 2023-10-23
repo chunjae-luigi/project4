@@ -3,6 +3,7 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.Review;
 import kr.ed.haebeop.persistence.ReviewMapper;
+import kr.ed.haebeop.util.badwordfiltering.BadWordFiltering;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,8 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public void reviewAdd(Review review) throws Exception {
+        BadWordFiltering bad = new BadWordFiltering();
+        review.setContent(bad.change("*", new String[] {"*"}));
         reviewMapper.reviewAdd(review);
     }
 
