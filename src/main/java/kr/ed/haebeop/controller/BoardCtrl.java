@@ -122,22 +122,27 @@ public class BoardCtrl {
 
         String word = board.getTitle();
         String word2 = board.getContent();
+
         BadWordFiltering filter = new BadWordFiltering();
         Boolean pass = filter.check(word);
         Boolean pass2 = filter.check(word2);
-        String msg = "";
 
         if(pass) {
-            msg = filter.messagePrint(word);
-            rttr.addFlashAttribute("msg", msg);
-            return "redirect:" + request.getHeader("Referer");
+            word = "♡♡";
+            board.setTitle(word);
+            board.setContent(word2);
         } else if(pass2){
-            msg = filter.messagePrint(word2);
-            rttr.addFlashAttribute("msg", msg);
-            return "redirect:" + request.getHeader("Referer");
-        } else {
+            word2 = "♡♡";
+            board.setTitle(word);
+            board.setContent(word2);
+        }else{
+            board.setTitle(word);
+            board.setContent(word2);
+        }
+
             board.setAuthor(author);
             board.setBmNo(bmNo);
+
             int bno = boardService.boardInsert(board);
 
 
@@ -181,7 +186,7 @@ public class BoardCtrl {
                 }
 
             }
-        }
+
         return "redirect:/board/list.do?no=" + bmNo;
     }
 
@@ -291,20 +296,21 @@ public class BoardCtrl {
         BadWordFiltering filter = new BadWordFiltering();
         Boolean pass = filter.check(title);
         Boolean pass2 = filter.check(content);
-        String msg = "";
 
         if(pass) {
-            msg = filter.messagePrint(title);
-            rttr.addFlashAttribute("msg", msg);
-            return "redirect:" + request.getHeader("Referer");
-        } else if(pass2){
-            msg = filter.messagePrint(content);
-            rttr.addFlashAttribute("msg", msg);
-            return "redirect:" + request.getHeader("Referer");
-        } else {
-            board.setBno(bno);
+            title = "♡♡";
             board.setTitle(title);
             board.setContent(content);
+        } else if(pass2){
+            content = "♡♡";
+            board.setTitle(title);
+            board.setContent(content);
+        }else{
+            board.setTitle(title);
+            board.setContent(content);
+        }
+             board.setBno(bno);
+
 
             boardService.boardUpdate(board);
 
@@ -350,7 +356,7 @@ public class BoardCtrl {
                 }
             }
 
-        }
+
 
 
         return "redirect:/board/get.do?bno=" + bno;
@@ -388,23 +394,34 @@ public class BoardCtrl {
 
     @PostMapping("commentAdd.do")
     @ResponseBody
-    public CommentVO commentInsert(@RequestParam("par") int par, @RequestParam("content") String content) throws Exception {
+    public CommentVO commentInsert(@RequestParam("par") int par, @RequestParam("content") String content, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
         String sid = session.getAttribute("sid") != null ? (String) session.getAttribute("sid") : "";
         Comment comment = new Comment();
-        comment.setAuthor(sid);
-        comment.setPar(par);
-        comment.setContent(content);
-        CommentVO commentVO = commentService.commentInsert(comment);
-        String originNm = commentVO.getNm();
-        if(!originNm.equals("관리자")) {
-            String nm = originNm.substring(0, 1);
-            for(int i = 0; i < originNm.length()-2; i++){
-                nm += "*";
-            }
-            nm += originNm.substring(originNm.length() - 1);
-            commentVO.setNm(nm);
+
+        BadWordFiltering filter = new BadWordFiltering();
+        Boolean pass = filter.check(content);
+        String msg = "";
+        if(pass) {
+            content = "♡♡";
+            comment.setContent(content);
+        }else {
+            comment.setContent(content);
         }
-        return commentVO;
+        comment.setPar(par);
+        comment.setAuthor(sid);
+
+        CommentVO commentVO = commentService.commentInsert(comment);
+
+            String originNm = commentVO.getNm();
+            if (!originNm.equals("관리자")) {
+                String nm = originNm.substring(0, 1);
+                for (int i = 0; i < originNm.length() - 2; i++) {
+                    nm += "*";
+                }
+                nm += originNm.substring(originNm.length() - 1);
+                commentVO.setNm(nm);
+            }
+            return commentVO;
     }
 
     @PostMapping("commentRemove.do")
@@ -424,10 +441,24 @@ public class BoardCtrl {
     @ResponseBody
     public String answerInsert(@RequestParam("bno") int bno, @RequestParam("answer") String answer) throws Exception {
         Board board = new Board();
+
+        BadWordFiltering filter = new BadWordFiltering();
+        Boolean pass = filter.check(answer);
+        String msg = "";
+
+        if (pass) {
+            answer = "♡♡";
+            board.setAnswer(answer);
+        } else {
+            board.setAnswer(answer);
+        }
+
         board.setBno(bno);
-        board.setAnswer(answer);
         boardService.qnaUpdate(board);
+
+
         return answer;
+
     }
 
 }

@@ -38,22 +38,22 @@ public class ReviewCtrl {
         String word = request.getParameter("content");
         BadWordFiltering filter = new BadWordFiltering();
         Boolean pass = filter.check(word);
-        String msg = "";
 
-        if(pass) {
-            msg = filter.messagePrint(word);
-            rttr.addFlashAttribute("msg", msg);
-            return "redirect:" + request.getHeader("Referer");
-        } else {
-            review.setMemId(request.getParameter("id"));
-            review.setContent(word);
-            review.setStar(Integer.parseInt(request.getParameter("star")));
-            review.setLno(Integer.parseInt(request.getParameter("lno")));
-            reviewService.reviewAdd(review);
+            if(pass) {
+                word = "♡♡";
+                review.setContent(word);
+            }else {
+                review.setContent(word);
+            }
+                review.setMemId(request.getParameter("id"));
 
-            return "redirect:/lecture/get.do?lno=" + request.getParameter("lno");
+                review.setStar(Integer.parseInt(request.getParameter("star")));
+                review.setLno(Integer.parseInt(request.getParameter("lno")));
+                reviewService.reviewAdd(review);
+
+                return "redirect:/lecture/get.do?lno=" + request.getParameter("lno");
         }
-    }
+
 
     @GetMapping("delete.do")
     public String reviewDelete(HttpServletRequest request, Model model) throws Exception {
