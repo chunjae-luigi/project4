@@ -22,8 +22,6 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public void reviewAdd(Review review) throws Exception {
-        BadWordFiltering bad = new BadWordFiltering();
-        review.setContent(bad.change("*", new String[] {"*"}));
         reviewMapper.reviewAdd(review);
     }
 
