@@ -16,7 +16,7 @@
         <div class="row align-items-center px-3">
             <div class="col-lg-12 text-center py-5">
                 <h4 class="text-white mb-4 mt-5 mt-lg-0">에듀 강의 교육 센터</h4>
-                <h1 class="display-4 font-weight-bold text-white">새로운 학습 관련 홈페이지</h1>
+                <h1 class="display-4 font-weight-bold text-white">스마트 해법</h1>
                 <p class="text-white mb-4">
                     지금 당신이 찾는 '그 강의' <br/>
                     해법에 다 있다 !  <br/>
