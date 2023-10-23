@@ -41,10 +41,11 @@
             <!-- 내부탭 -->
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="tab-content" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" role="tab" aria-selected="true">강의내용</button>
-                    <button class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" type="button" role="tab" aria-selected="false">커리큘럼</button>
-                    <button class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" type="button" role="tab" aria-selected="false">수강후기</button>
-                    <button class="nav-link" id="tab-qna" data-bs-toggle="tab" data-bs-target="#tab-qna" type="button" role="tab"  aria-selected="false">질문하기</button>
+                    <a href="${path }/lecture/get.do?lno=${lecture.lno }#tab-content" class="nav-link active" id="tab-content" data-bs-toggle="tab" data-bs-target="#tab-content" role="tab" aria-selected="true">강의내용</a>
+                    <a href="${path }/lecture/get.do?lno=${lecture.lno }#tab-curri" class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" role="tab" aria-selected="true">커리큘럼</a>
+                    <a href="${path }/lecture/get.do?lno=${lecture.lno }#tab-review" class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" role="tab" aria-selected="true">수강후기</a>
+                    <%--<button class="nav-link" id="tab-qna" data-bs-toggle="tab" data-bs-target="#tab-qna" type="button" role="tab" aria-selected="false">질문하기</button>--%>
+                    <a href="${path }/lecture/board/list.do?lno=${lecture.lno }" class="nav-link" id="tab-notice" data-bs-toggle="tab" data-bs-target="#tab-notice" role="tab" aria-selected="true">공지사항</a>
                 </div>
             </nav>
             <!-- 강의 내용 -->
@@ -159,7 +160,7 @@
         <div class="col-lg-4" id="lect_tab">
             <div class="card mb-4">
                 <div class="card-header">
-                    <h2>${lecture.cost }원</h2>
+                    <h2><fmt:formatNumber value="${lecture.cost }" pattern="#,###" />원</h2>
                     <a href="${path}/payment/payinsert.do?lno=${lecture.lno }" class="btn btn-primary" id="button-search" >바로 수강신청 하기</a>
                 </div>
                 <div class="card-body">
@@ -208,28 +209,32 @@
     });
 </script>
 <script>
-    // tab click 하면 지정 구역으로 이동
     document.addEventListener('DOMContentLoaded', function() {
-        const lectureTab = document.getElementById('tab-content');
-        const lectureContent = document.getElementById('lect_con');
-        lectureTab.addEventListener('click', function() {
-            const scrollPosition = lectureContent.offsetTop - 50;
+        const tabContent = document.getElementById('tab-content');
+        const tabCurri = document.getElementById('tab-curri');
+        const tabReview = document.getElementById('tab-review');
+        const tabNotice = document.getElementById('tab-notice');
+
+        const lectCon = document.getElementById('lect_con');
+        const lectList = document.getElementById('lect_list');
+        const lectReview = document.getElementById('lect_review');
+        const tabNotice = document.getElementById('lect_review');
+
+        tabContent.addEventListener('click', function(event) {
+            event.preventDefault();
+            const scrollPosition = lectCon.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-        const lectureTab = document.getElementById('tab-curri');
-        const lectureContent = document.getElementById('lect_list');
-        lectureTab.addEventListener('click', function() {
-            const scrollPosition = lectureContent.offsetTop - 50;
+
+        tabCurri.addEventListener('click', function(event) {
+            event.preventDefault();
+            const scrollPosition = lectList.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-        const lectureTab = document.getElementById('tab-review');
-        const lectureContent = document.getElementById('lect_review');
-        lectureTab.addEventListener('click', function() {
-            const scrollPosition = lectureContent.offsetTop - 50;
+
+        tabReview.addEventListener('click', function(event) {
+            event.preventDefault();
+            const scrollPosition = lectReview.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
     });

@@ -111,7 +111,7 @@
                                     </p>
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">강의 가격 </strong>
-                                        <span>${lecture.cost }</span>
+                                        <span><fmt:formatNumber value="${lecture.cost }" pattern="#,###" />원</span>
                                     </p>
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">후기 관리 </strong>

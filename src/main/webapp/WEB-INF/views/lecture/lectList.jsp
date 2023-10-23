@@ -86,7 +86,9 @@
                             <h5>${lecture.subTitle }</h5><br>
                             <div>
                                 <p style="font-size: 16px;">수강인원 : ${lecture.studentCnt }명 </p>
-                                <p style="font-size: 20px; color: #5a6268; font-weight: bold"> ${lecture.cost }원</p>
+                                <p style="font-size: 20px; color: #5a6268; font-weight: bold"><fmt:formatNumber value="${lecture.cost }" pattern="#,###" />원</p>
+
+
                             </div>
                         </div>
                     </div>
