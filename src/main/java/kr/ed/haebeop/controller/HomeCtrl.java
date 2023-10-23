@@ -1,10 +1,6 @@
 package kr.ed.haebeop.controller;
 
-import kr.ed.haebeop.domain.BoardMgn;
-import kr.ed.haebeop.domain.FileDTO;
-import kr.ed.haebeop.domain.Lecture;
-import kr.ed.haebeop.domain.Member;
-import kr.ed.haebeop.domain.Review;
+import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +39,7 @@ public class HomeCtrl {
         List<Review> reviewList = reviewService.reviewList_main();
         model.addAttribute("reviewList", reviewList);
 
-        List<Lecture> lectureList = lectureService.lectureList_main();
+        List<LectureVO> lectureList = lectureService.lectureList_main();
         model.addAttribute("lectureList", lectureList);
 
         List<Member> teacherList = memberService.getTeacherMain();

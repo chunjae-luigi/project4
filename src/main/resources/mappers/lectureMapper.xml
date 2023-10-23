@@ -51,8 +51,8 @@
     </select>
 
     <!-- 강의 메인페이지 노출-->
-    <select id="lectureList_main" resultType="kr.ed.haebeop.domain.Lecture">
-        select * from lecture ORDER BY lno desc limit 3
+    <select id="lectureList_main" resultType="kr.ed.haebeop.domain.LectureVO">
+        select * from lectview ORDER BY lno desc limit 3
     </select>
 
     <!-- 강의 상세보기 -->

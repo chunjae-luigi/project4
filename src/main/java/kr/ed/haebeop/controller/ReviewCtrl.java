@@ -2,6 +2,7 @@ package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.Review;
 import kr.ed.haebeop.service.ReviewService;
+import kr.ed.haebeop.util.badwordfiltering.BadWordFiltering;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,17 +32,27 @@ public class ReviewCtrl {
     }
 
     @PostMapping("add.do")
-    public String reviewInsert(HttpServletRequest request, Model model) throws Exception {
+    public String reviewInsert(HttpServletRequest request, RedirectAttributes rttr, Model model) throws Exception {
         Review review = new Review();
 
-        review.setMemId(request.getParameter("id"));
-        review.setContent(request.getParameter("content"));
-        review.setStar(Integer.parseInt(request.getParameter("star")));
-        review.setLno(Integer.parseInt(request.getParameter("lno")));
+        String word = request.getParameter("content");
+        BadWordFiltering filter = new BadWordFiltering();
+        Boolean pass = filter.check(word);
+        String msg = "";
 
-        reviewService.reviewAdd(review);
+        if(pass) {
+            msg = filter.messagePrint(word);
+            rttr.addFlashAttribute("msg", msg);
+            return "redirect:" + request.getHeader("Referer");
+        } else {
+            review.setMemId(request.getParameter("id"));
+            review.setContent(word);
+            review.setStar(Integer.parseInt(request.getParameter("star")));
+            review.setLno(Integer.parseInt(request.getParameter("lno")));
+            reviewService.reviewAdd(review);
 
-        return "redirect:/lecture/get.do?lno="+request.getParameter("lno");
+            return "redirect:/lecture/get.do?lno=" + request.getParameter("lno");
+        }
     }
 
     @GetMapping("delete.do")
