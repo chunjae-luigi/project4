@@ -22,6 +22,7 @@ CREATE TABLE member(
 
 INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
 
+
 CREATE TABLE memberMgn(
 	mmNo INT AUTO_INCREMENT PRIMARY KEY,				-- 회원 등급 요청 번호 : 자동 발생
 	author VARCHAR(20) NOT NULL,							-- 회원 아이디
@@ -165,3 +166,16 @@ CREATE TABLE payment(
 );
 -- ============================ 교진끝  ===================================
 
+CREATE TABLE reservation(
+    rno INT AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(20),							-- 회원 아이디
+    name VARCHAR(50) NOT NULL,				-- 예약자 이름
+    email VARCHAR(50) NOT NULL,				-- 예약자 이메일
+    tel VARCHAR(20) NOT NULL,				-- 예약자 전화번호
+    birth DATE,								-- 예약자 나이
+    school VARCHAR(100) NOT NULL,			-- 예약자 학교급
+    grade INT NOT NULL,						-- 예약자 학년
+    rdate DATE,								-- 예약 날짜
+    rtime VARCHAR(30),						-- 예약 시간
+    status VARCHAR(30) DEFAULT 'pending'	-- 예약 상태
+);
