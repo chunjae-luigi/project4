@@ -22,7 +22,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public void reviewAdd(Review review) throws Exception {
-         reviewMapper.reviewAdd(review);
+        reviewMapper.reviewAdd(review);
     }
 
     @Override

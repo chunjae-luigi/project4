@@ -25,4 +25,7 @@ public interface ReservationMapper {
 
     @Update("UPDATE reservation SET status=#{status}")
     public void reservationUpdateStatus(Reservation reservation);
+
+    @Select("SELECT * FROM reservation WHERE id=#{id}")
+    public List<Reservation> reservationMyList(String id);
 }

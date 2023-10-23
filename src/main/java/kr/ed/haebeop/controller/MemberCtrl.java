@@ -2,10 +2,7 @@ package kr.ed.haebeop.controller;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import kr.ed.haebeop.domain.*;
-import kr.ed.haebeop.service.FilesService;
-import kr.ed.haebeop.service.MemberMgnService;
-import kr.ed.haebeop.service.MemberService;
-import kr.ed.haebeop.service.PaymentService;
+import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.util.NaverLogin;
 import kr.ed.haebeop.util.Page;
 import kr.ed.haebeop.util.PayListmem;
@@ -42,6 +39,9 @@ public class MemberCtrl {
     private MemberMgnService memberMgnService;
 
     @Autowired
+    private LectureService lectureService;
+
+    @Autowired
     HttpSession session;
 
     @Autowired
@@ -52,6 +52,15 @@ public class MemberCtrl {
 
     @Autowired
     private PaymentService paymentService;
+
+    @Autowired
+    private ReviewService reviewService;
+
+    @Autowired
+    private CurriService curriService;
+
+    @Autowired
+    private SubjectService subjectService;
 
     @GetMapping("term.do")
     public String term(Model model) throws Exception {
@@ -244,14 +253,10 @@ public class MemberCtrl {
             if(uploadFiles != null) {
 
                 ServletContext application = request.getSession().getServletContext();
-                String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
+                String realPath = application.getRealPath("/resources/upload/member");                                        // 운영 서버
                 //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
-                Date date = new Date();
-                String dateFolder = sdf.format(date);
-
-                File uploadPath = new File(realPath, dateFolder);
+                File uploadPath = new File(realPath);
                 if(!uploadPath.exists()) {uploadPath.mkdirs();}
 
                 for(MultipartFile multipartFile : uploadFiles) {
@@ -263,7 +268,7 @@ public class MemberCtrl {
 
                     FileDTO fileDTO = new FileDTO();
                     fileDTO.setPar(member.getMno());
-                    fileDTO.setSaveFolder(dateFolder);
+                    fileDTO.setSaveFolder("member");
 
                     String fileType = multipartFile.getContentType();
                     String[] fileTypeArr = fileType.split("/");
@@ -331,7 +336,7 @@ public class MemberCtrl {
         return "redirect:/";
 
     }
-    
+
     //멤버 payList
     @GetMapping("/paylistMem.do")
     public String paymentMem(HttpServletRequest request, Model model) throws Exception {
@@ -364,5 +369,35 @@ public class MemberCtrl {
 
     }
 
+
+    //회원의 강의 상세보기
+    @GetMapping("myLecture.do")
+    public String myLecture(HttpServletRequest request, Model model) throws Exception{
+        int lno = Integer.parseInt(request.getParameter("lno"));
+
+        Lecture lecture = lectureService.lectureGet(lno);
+        Member teacher = memberService.memberGet(lecture.getTeacherId());
+        Subject subject = subjectService.subjectGet(lecture.getSno());
+        List<Review> reviewList = reviewService.reviewList(lno);
+        List<Curri> curriList = curriService.curriList(lno);
+
+        model.addAttribute("reviewList", reviewList);
+        model.addAttribute("subject", subject);
+        model.addAttribute("curriList", curriList);
+        model.addAttribute("lecture", lecture);
+
+        return "/member/myLecture";
+
+    }
+
+    @GetMapping("/mylectList.do")
+    public String myPage(HttpServletRequest request, Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+        List<LectlistVO> mylectList = lectureService.mylectList(id);
+        model.addAttribute("mylectList", mylectList);
+        System.out.println(mylectList.toString());
+
+        return "/member/myLectList";
+    }
 
 }

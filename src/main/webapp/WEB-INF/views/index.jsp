@@ -41,7 +41,6 @@
                             <h4 class="card-title">${lec.title}</h4>
                             <p class="card-text">
                                 ${lec.subTitle}<br/>
-                                ${lec.content}
                             </p>
                         </div>
                         <div class="card-footer bg-transparent py-4 px-5">
@@ -69,7 +68,7 @@
                 </div>
             </div>
                 </c:forEach>
-            <c:if test="${empty reviewList}">
+            <c:if test="${empty lectureList}">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card border-0 bg-light shadow-sm pb-2">
@@ -100,7 +99,6 @@
                                 <div class="col-6 py-1">미정</div>
                             </div>
                         </div>
-                        <a href="${path}/lecture/get.do?lno=${lec.lno}" class="btn btn-primary px-4 mx-auto mb-4">추가하기</a>
                     </div>
                 </div>
             </div>
@@ -121,7 +119,7 @@
                 <c:forEach var="teacher" items="${teacherList }" varStatus="status">
                     <div class="col-md-6 col-lg-3 text-center team">
                         <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-                            <img class="img-fluid w-100" src="${path }/resources/image/main/team-${status.count }.jpg" alt="${teacher.nm }의 이미지" />
+                            <img class="img-fluid w-100" src="${path }/resources/upload/member/${teacher.fileNm }" alt="${teacher.nm }의 이미지" />
                             <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
                                 <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="tel:${teacher.tel }"><i class="fas fa-phone-alt"></i></a>
                                 <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="email:${teacher.email }" ><i class="fas fa-envelope"></i></a>
@@ -155,7 +153,6 @@
                         <p class="d-inline pl-4 mb-0" style="font-size:1.25rem;">${rev.memId}</p>
                     </div>
                 </div>
-
             </div>
             </c:forEach>
             <c:if test="${empty reviewList}">
@@ -174,6 +171,9 @@
             </c:if>
         </div>
     </div>
+
+
+
     <c:if test="${ sid != null }" >
         <div class="outer-container">
             <img src="${path}/resources/image/main/movingca_remove.png" alt="움직이는 이미지" id="moving-image">

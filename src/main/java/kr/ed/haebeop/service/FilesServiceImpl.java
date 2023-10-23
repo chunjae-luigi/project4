@@ -24,6 +24,11 @@ public class FilesServiceImpl implements FilesService{
     }
 
     @Override
+    public FileDTO fileByParForThumbnail(int par) throws Exception {
+        return filesMapper.fileByParForThumbnail(par);
+    }
+
+    @Override
     public FileDTO fileByParForGrade(int par) throws Exception {
         return filesMapper.fileByParForGrade(par);
     }
