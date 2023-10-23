@@ -68,14 +68,19 @@ public class LectureCtrl {
     //회원의 강의 상세보기
     @GetMapping("/get.do")
     public String lectureUpdate(HttpServletRequest request, Model model) throws Exception{
+        String sid = (String) session.getAttribute("sid");
         int lno = Integer.parseInt(request.getParameter("lno"));
-
+        LectlistVO lectlistVO = new LectlistVO();
+        lectlistVO.setId(sid);
+        lectlistVO.setLno(lno);
+        int check = lectureService.check(lectlistVO);
         Lecture lecture = lectureService.lectureGet(lno);
         Member teacher = memberService.memberGet(lecture.getTeacherId());
         Subject subject = subjectService.subjectGet(lecture.getSno());
         List<Review> reviewList = reviewService.reviewList(lno);
         List<Curri> curriList = curriService.curriList(lno);
 
+        model.addAttribute("check", check);
         model.addAttribute("teacher", teacher);
         model.addAttribute("reviewList", reviewList);
         model.addAttribute("subject", subject);

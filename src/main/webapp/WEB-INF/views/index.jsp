@@ -32,13 +32,13 @@
                 <p class="section-title px-5"><span class="px-2">AN UPCOMING LECTURE</span></p>
                 <h1 class="mb-4">마지막 기회를 놓치지 마세요.</h1>
             </div>
-            <c:forEach var="lec" items="${lectureList}">
             <div class="row">
+                <c:forEach var="lec" items="${lectureList}">
                 <div class="col-lg-4">
                     <div class="card border-0 bg-light shadow-sm pb-2">
                         <img class="card-img-top mb-2" src="${path }/resources/image/main/class-1.jpg" alt="강의1 이미지" />
                         <div class="card-body text-center">
-                            <h4 class="card-title">${lec.title}</h4>
+                            <h4 class="card-title">${lec.lect_tit}</h4>
                             <p class="card-text">
                                 ${lec.subTitle}<br/>
                             </p>
@@ -66,8 +66,8 @@
                         <a href="${path}/lecture/get.do?lno=${lec.lno}" class="btn btn-primary px-4 mx-auto mb-4">신청하기</a>
                     </div>
                 </div>
-            </div>
                 </c:forEach>
+            </div>
             <c:if test="${empty lectureList}">
             <div class="row">
                 <div class="col-lg-4">
@@ -141,8 +141,8 @@
                 </p>
                 <h1 class="mb-4">최고의 리뷰를 확인하세요.</h1>
             </div>
-            <c:forEach var="rev" items="${reviewList}">
             <div class="owl-carousel testimonial-carousel">
+                <c:forEach var="rev" items="${reviewList}">
                 <div class="testimonial-item px-3">
                     <div class="bg-light shadow-sm rounded mb-4 p-4">
                         <h3 class="fas fa-quote-left text-primary mr-3"></h3>
@@ -153,10 +153,10 @@
                         <p class="d-inline pl-4 mb-0" style="font-size:1.25rem;">${rev.memId}</p>
                     </div>
                 </div>
+                </c:forEach>
             </div>
-            </c:forEach>
-            <c:if test="${empty reviewList}">
                 <div class="owl-carousel testimonial-carousel">
+                    <c:if test="${empty reviewList}">
                     <div class="testimonial-item px-3">
                         <div class="bg-light shadow-sm rounded mb-4 p-4">
                             <h3 class="fas fa-quote-left text-primary mr-3"></h3>
@@ -167,8 +167,8 @@
                             <p class="d-inline pl-4 mb-0" style="font-size:1.25rem;">미정</p>
                         </div>
                     </div>
+                    </c:if>
                 </div>
-            </c:if>
         </div>
     </div>
 

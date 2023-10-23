@@ -30,4 +30,6 @@ public interface LectureMapper {
     public List<LectlistVO> mylectList(String id);
 
     public List<LectureVO> lectureList_main();
+
+    public int check(LectlistVO lectlistVO);
 }

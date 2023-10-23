@@ -82,7 +82,7 @@
                         <div class="custom-block-info">
                             <h5>${lecture.sub_tit }</h5>
                             <h1><a href="${path }/lecture/get.do?lno=${lecture.lno }">${lecture.lect_tit }</a></h1>
-                            <h4>${lecture.teacherId } 선생님</h4>
+                            <h4>${lecture.teacherNm } 선생님</h4>
                             <h5>${lecture.subTitle }</h5><br>
                             <div>
                                 <p style="font-size: 16px;">수강인원 : ${lecture.studentCnt }명 </p>

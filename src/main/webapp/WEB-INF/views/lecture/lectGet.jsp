@@ -25,7 +25,7 @@
                 <h3 style="color: var(--main-color);">${subject.title } </h3>
                 <h1 class="display-5 fw-bolder text-white mb-2">${lecture.title }</h1>
                 <h3 class="lead text-white-50 mb-4">${lecture.subTitle }</h3>
-                <h3 class="lead text-white-50 mb-4">${lecture.teacherId } 선생님</h3>
+                <h3 class="lead text-white-50 mb-4">${lecture.teacherNm } 선생님</h3>
                 <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
                 <a class="btn btn-warning btn-lg px-4" href="#lect_review" >수강생 후기</a>
             </div>
@@ -41,11 +41,10 @@
             <!-- 내부탭 -->
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a href="${path }/lecture/get.do?lno=${lecture.lno }#tab-content" class="nav-link active" id="tab-content" data-bs-toggle="tab" data-bs-target="#tab-content" role="tab" aria-selected="true">강의내용</a>
-                    <a href="${path }/lecture/get.do?lno=${lecture.lno }#tab-curri" class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" role="tab" aria-selected="true">커리큘럼</a>
-                    <a href="${path }/lecture/get.do?lno=${lecture.lno }#tab-review" class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" role="tab" aria-selected="true">수강후기</a>
-                    <%--<button class="nav-link" id="tab-qna" data-bs-toggle="tab" data-bs-target="#tab-qna" type="button" role="tab" aria-selected="false">질문하기</button>--%>
-                    <a href="${path }/lecture/board/list.do?lno=${lecture.lno }" class="nav-link" id="tab-notice" data-bs-toggle="tab" data-bs-target="#tab-notice" role="tab" aria-selected="true">공지사항</a>
+                    <button class="nav-link active" id="tab-content" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" role="tab" aria-selected="true">강의내용</button>
+                    <button class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" type="button" role="tab" aria-selected="false">커리큘럼</button>
+                    <button class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" type="button" role="tab" aria-selected="false">수강후기</button>
+                    <button class="nav-link" id="tab-qna" data-bs-toggle="tab" data-bs-target="#tab-qna" type="button" role="tab"  aria-selected="false">질문하기</button>
                 </div>
             </nav>
             <!-- 강의 내용 -->
@@ -76,6 +75,8 @@
                 <h2> 수강후기 </h2>
                 <div class="card bg-light">
                     <div class="card-body">
+
+                        <c:if test="${not empty sid && 0 != check}">
                         <!-- 수강후기 입력칸-->
                         <form action="${path }/review/add.do" method="post" class="mb-4">
                             <input type="hidden" name="id" id="id"  value="${sid}">
@@ -110,10 +111,12 @@
                                 });
                             </script>
                             <div class="review_con">
-                            <textarea name="content" id="content" class="form-control" rows="3" required placeholder="수강생만 댓글입력창 뜨게하기!"></textarea>
+                            <textarea name="content" id="content" class="form-control" rows="3" required placeholder="강의에 대한 평가를 빨간 하트로 표현해보세요!"></textarea>
                             <span><input type="submit" class="btn btn-warning" value="등록"></span>
                             </div>
                         </form>
+                        </c:if>
+
 
                         <!-- 수강후기 리스트 -->
                         <div>
@@ -121,7 +124,7 @@
                         <c:forEach var="review" items="${reviewList }">
                         <div class="d-flex">
                             <div class="review_mem">
-                                <p>${member.id }</p>
+                                <p style="margin: 0 auto;">${review.memId}</p>
                             </div>
                                 <div class="riview_list">
                                     <div class="star-rating">
@@ -166,7 +169,6 @@
                 <div class="card-body">
                     <div class="input-group">
                         <ul>
-                            <li><span>지식 공유자 :</span> 000</li>
                             <li>난이도 : 입문</li>
                             <li>1개의 코딩 연습</li>
                             <li>수강기한 : 무제한</li>
@@ -209,32 +211,28 @@
     });
 </script>
 <script>
+    // tab click 하면 지정 구역으로 이동
     document.addEventListener('DOMContentLoaded', function() {
-        const tabContent = document.getElementById('tab-content');
-        const tabCurri = document.getElementById('tab-curri');
-        const tabReview = document.getElementById('tab-review');
-        const tabNotice = document.getElementById('tab-notice');
-
-        const lectCon = document.getElementById('lect_con');
-        const lectList = document.getElementById('lect_list');
-        const lectReview = document.getElementById('lect_review');
-        const tabNotice = document.getElementById('lect_review');
-
-        tabContent.addEventListener('click', function(event) {
-            event.preventDefault();
-            const scrollPosition = lectCon.offsetTop - 50;
+        const lectureTab = document.getElementById('tab-content');
+        const lectureContent = document.getElementById('lect_con');
+        lectureTab.addEventListener('click', function() {
+            const scrollPosition = lectureContent.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
-
-        tabCurri.addEventListener('click', function(event) {
-            event.preventDefault();
-            const scrollPosition = lectList.offsetTop - 50;
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const lectureTab = document.getElementById('tab-curri');
+        const lectureContent = document.getElementById('lect_list');
+        lectureTab.addEventListener('click', function() {
+            const scrollPosition = lectureContent.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
-
-        tabReview.addEventListener('click', function(event) {
-            event.preventDefault();
-            const scrollPosition = lectReview.offsetTop - 50;
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const lectureTab = document.getElementById('tab-review');
+        const lectureContent = document.getElementById('lect_review');
+        lectureTab.addEventListener('click', function() {
+            const scrollPosition = lectureContent.offsetTop - 50;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
     });
