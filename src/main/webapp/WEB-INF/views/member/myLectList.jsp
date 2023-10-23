@@ -81,41 +81,33 @@
                         </div>
                         <ul class="my-2" style="width:100%;">
                             <li><a href="${path }/user/myPage.do" class="active px-4 py-2">나의 정보</a></li>
-                            <li><a href="${path }/user/myLectList.do" class="px-4 py-2">나의 강의실</a></li>
-                            <li><a href="${path }/user/myPay.do" class="px-4 py-2">나의 결제정보</a></li>
+                            <li><a href="${path }/user/mylectList.do" class="px-4 py-2">나의 강의실</a></li>
+                            <li><a href="${path }/user/paylistMem.do" class="px-4 py-2">나의 결제정보</a></li>
+                            <li><a href="${path }/academy/myReservation" class="px-4 py-2">나의 예약정보</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-10 p-2">
                     <div class="d-flex flex-column align-items-center justify-content-center right_side">
                         <h5 class="my-4" style="font-size:2.5em;font-weight:600;">나의 강의 목록</h5>
-
-
-
-
-
                         <div class="container" id="mylect">
-                        <c:forEach items="${mylectlist }" var="lecture" varStatus="status">
+                        <c:forEach items="${mylectList }" var="lecture" varStatus="status">
                             <div class="col-lg-4 col-12 mb-4">
                                 <div class="custom-block custom-block-full">
                                     <div class="custom-block-image-wrap">
-                                        <a href="detail-page.html">
+                                        <a href="${path}/user/myLecture.do?lno=${lecture.lno}">
+                                                ${lecture.thumbnail }
                                             <img src=${path}/resources/image/lecture/thumnail(8).png class="custom-block-image img-fluid">
                                         </a>
                                     </div>
 
                                     <div class="custom-block-info">
                                         <h3 class="mb-2">
-                                            <a href="${path}/user/myLecture.do">${lecture.title }</a>
+                                            <a href="${path}/user/myLecture.do?lno=${lecture.lno}">
+                                                ${lecture.title }
+                                            </a>
                                         </h3>
-                                        <p> ${lecture.lno } 강의번호</p>
                                         <p> ${lecture.teacherNm } 선생님</p>
-                                        <p> ${lecture.teacherNm } 선생님</p>
-                                            <p> ${payment.payno } </p>
-
-                                            <p>수강상태(완강ㄹ여부)
-                                            </p>
-
                                         <a href="${path}/lecture/get.do?lno=${lecture.lno}#lect_review" class="btn btn-primary px-4 mr-2">후기작성</a>
                                         <a href="" class="btn btn-success px-4">질문하기</a>
                                     </div>
@@ -123,11 +115,6 @@
                             </div>
                         </c:forEach>
                         </div>
-
-
-
-
-
 
 
 

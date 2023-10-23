@@ -25,9 +25,11 @@ public interface LectureService {
 
     public int lectureviewCount(Page page) throws Exception;
 
-    public List<Lecture> lectureList_main() throws Exception;
+    public List<LectureVO> lectureList_main() throws Exception;
 
-    public List<LectlistVO> mylectList(int lno) throws Exception;
+    public List<LectlistVO> mylectList(String id) throws Exception;
+
+    public int check(LectlistVO lectlistVO) throws Exception;
 
 }
 

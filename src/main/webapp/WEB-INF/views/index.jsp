@@ -16,7 +16,7 @@
         <div class="row align-items-center px-3">
             <div class="col-lg-12 text-center py-5">
                 <h4 class="text-white mb-4 mt-5 mt-lg-0">에듀 강의 교육 센터</h4>
-                <h1 class="display-4 font-weight-bold text-white">새로운 학습 관련 홈페이지</h1>
+                <h1 class="display-4 font-weight-bold text-white">스마트 해법</h1>
                 <p class="text-white mb-4">
                     지금 당신이 찾는 '그 강의' <br/>
                     해법에 다 있다 !  <br/>
@@ -38,10 +38,9 @@
                     <div class="card border-0 bg-light shadow-sm pb-2">
                         <img class="card-img-top mb-2" src="${path }/resources/image/main/class-1.jpg" alt="강의1 이미지" />
                         <div class="card-body text-center">
-                            <h4 class="card-title">${lec.title}</h4>
+                            <h4 class="card-title">${lec.lect_tit}</h4>
                             <p class="card-text">
                                 ${lec.subTitle}<br/>
-                                ${lec.content}
                             </p>
                         </div>
                         <div class="card-footer bg-transparent py-4 px-5">
@@ -64,25 +63,46 @@
                                 <div class="col-6 py-1">${lec.cost}</div>
                             </div>
                         </div>
-                        <a href="${path}/lecture/get.do" class="btn btn-primary px-4 mx-auto mb-4">신청하기</a>
+                        <a href="${path}/lecture/get.do?lno=${lec.lno}" class="btn btn-primary px-4 mx-auto mb-4">신청하기</a>
                     </div>
                 </div>
-                <c:if test="${empty reviewList}">
+                </c:forEach>
+            </div>
+            <c:if test="${empty lectureList}">
+            <div class="row">
                 <div class="col-lg-4">
                     <div class="card border-0 bg-light shadow-sm pb-2">
-                        <img class="card-img-top mb-2" src="${path }/resources/image/main/class-2.jpg" alt="강의2 이미지" />
+                        <img class="card-img-top mb-2" src="${path }/resources/image/main/class-1.jpg" alt="강의1 이미지" />
                         <div class="card-body text-center">
                             <h4 class="card-title">강의 추가필요</h4>
                             <p class="card-text">
-                                강의가 없습니다. <br/>
-                                강의를 추가해주세요
+                                미정
                             </p>
+                        </div>
+                        <div class="card-footer bg-transparent py-4 px-5">
+                            <div class="row border-bottom">
+                                <div class="col-6 py-1 text-right border-right">
+                                    <strong>교육 인원</strong>
+                                </div>
+                                <div class="col-6 py-1">미정</div>
+                            </div>
+                            <div class="row border-bottom">
+                                <div class="col-6 py-1 text-right border-right">
+                                    <strong>교육 강사</strong>
+                                </div>
+                                <div class="col-6 py-1">미정</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 py-1 text-right border-right">
+                                    <strong>교육 가격</strong>
+                                </div>
+                                <div class="col-6 py-1">미정</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </c:if>
-                </c:forEach>
             </div>
+            </c:if>
         </div>
     </div>
 
@@ -99,7 +119,7 @@
                 <c:forEach var="teacher" items="${teacherList }" varStatus="status">
                     <div class="col-md-6 col-lg-3 text-center team">
                         <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-                            <img class="img-fluid w-100" src="${path }/resources/image/main/team-${status.count }.jpg" alt="${teacher.nm }의 이미지" />
+                            <img class="img-fluid w-100" src="${path }/resources/upload/member/${teacher.fileNm }" alt="${teacher.nm }의 이미지" />
                             <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
                                 <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="tel:${teacher.tel }"><i class="fas fa-phone-alt"></i></a>
                                 <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="email:${teacher.email }" ><i class="fas fa-envelope"></i></a>
@@ -133,22 +153,27 @@
                         <p class="d-inline pl-4 mb-0" style="font-size:1.25rem;">${rev.memId}</p>
                     </div>
                 </div>
-                <c:if test="${empty reviewList}">
+                </c:forEach>
+            </div>
+                <div class="owl-carousel testimonial-carousel">
+                    <c:if test="${empty reviewList}">
                     <div class="testimonial-item px-3">
                         <div class="bg-light shadow-sm rounded mb-4 p-4">
                             <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-                            최고의 리뷰를 남겨주세요.
+                                리뷰가 없습니다. 리뷰를 등록해주세요
                         </div>
                         <div class="d-flex align-items-center pl-4">
                             <h5 class="d-inline mb-0">작성자</h5>
                             <p class="d-inline pl-4 mb-0" style="font-size:1.25rem;">미정</p>
                         </div>
                     </div>
-                </c:if>
-                </c:forEach>
-            </div>
+                    </c:if>
+                </div>
         </div>
     </div>
+
+
+
     <c:if test="${ sid != null }" >
         <div class="outer-container">
             <img src="${path}/resources/image/main/movingca_remove.png" alt="움직이는 이미지" id="moving-image">

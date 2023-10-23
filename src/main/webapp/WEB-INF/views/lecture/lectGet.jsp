@@ -25,7 +25,7 @@
                 <h3 style="color: var(--main-color);">${subject.title } </h3>
                 <h1 class="display-5 fw-bolder text-white mb-2">${lecture.title }</h1>
                 <h3 class="lead text-white-50 mb-4">${lecture.subTitle }</h3>
-                <h3 class="lead text-white-50 mb-4">${lecture.teacherId } 선생님</h3>
+                <h3 class="lead text-white-50 mb-4">${lecture.teacherNm } 선생님</h3>
                 <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
                 <a class="btn btn-warning btn-lg px-4" href="#lect_review" >수강생 후기</a>
             </div>
@@ -75,13 +75,15 @@
                 <h2> 수강후기 </h2>
                 <div class="card bg-light">
                     <div class="card-body">
+
+                        <c:if test="${not empty sid && 0 != check}">
                         <!-- 수강후기 입력칸-->
                         <form action="${path }/review/add.do" method="post" class="mb-4">
                             <input type="hidden" name="id" id="id"  value="${sid}">
                             <input type="hidden" name="lno" id="lno" value="${lecture.lno}">
                             <%-- 별점 테스트 중입니다 --%>
                             <div class="star-rating">
-                                <label for="star">별점:</label>
+                                <label for="star"></label>
                                 <div class="star-icons">
                                     <!-- 이 부분에 원하는 아이콘 또는 글꼴 아이콘을 넣을 수 있습니다 -->
                                     <span class="star-icon click-star" data-star="1"></span>
@@ -109,10 +111,12 @@
                                 });
                             </script>
                             <div class="review_con">
-                            <textarea name="content" id="content" class="form-control" rows="3" required placeholder="수강생만 댓글입력창 뜨게하기!"></textarea>
+                            <textarea name="content" id="content" class="form-control" rows="3" required placeholder="강의에 대한 평가를 빨간 하트로 표현해보세요!"></textarea>
                             <span><input type="submit" class="btn btn-warning" value="등록"></span>
                             </div>
                         </form>
+                        </c:if>
+
 
                         <!-- 수강후기 리스트 -->
                         <div>
@@ -120,7 +124,7 @@
                         <c:forEach var="review" items="${reviewList }">
                         <div class="d-flex">
                             <div class="review_mem">
-                                <p>${member.id }</p>
+                                <p style="margin: 0 auto;">${review.memId}</p>
                             </div>
                                 <div class="riview_list">
                                     <div class="star-rating">
@@ -159,13 +163,12 @@
         <div class="col-lg-4" id="lect_tab">
             <div class="card mb-4">
                 <div class="card-header">
-                    <h2>${lecture.cost }원</h2>
+                    <h2><fmt:formatNumber value="${lecture.cost }" pattern="#,###" />원</h2>
                     <a href="${path}/payment/payinsert.do?lno=${lecture.lno }" class="btn btn-primary" id="button-search" >바로 수강신청 하기</a>
                 </div>
                 <div class="card-body">
                     <div class="input-group">
                         <ul>
-                            <li><span>지식 공유자 :</span> 000</li>
                             <li>난이도 : 입문</li>
                             <li>1개의 코딩 연습</li>
                             <li>수강기한 : 무제한</li>

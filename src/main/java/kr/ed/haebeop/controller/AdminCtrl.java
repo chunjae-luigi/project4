@@ -136,7 +136,6 @@ public class AdminCtrl {
         model.addAttribute("boardMgnList", boardMgnList);
 
 
-
         return "/admin/boardTypeList";
     }
 
@@ -213,7 +212,7 @@ public class AdminCtrl {
     }
 
     @GetMapping("/lectList.do")
-    public String lectureList(HttpServletRequest request, Model model) throws Exception{
+    public String lectureviewList(HttpServletRequest request, Model model) throws Exception{
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -221,7 +220,7 @@ public class AdminCtrl {
         Page page = new Page();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
-        int total = lectureService.lectureCount(page);
+        int total = lectureService.lectureviewCount(page);
 
         page.makeBlock(curPage, total);
         page.makeLastPageNum(total);
@@ -232,9 +231,11 @@ public class AdminCtrl {
         model.addAttribute("page", page);
         model.addAttribute("curPage", curPage);
 
-        List<Lecture> lectureList = lectureService.lectureList(page);
-        model.addAttribute("lectureList", lectureList);
-
+        List<LectureVO> lectureviewList = lectureService.lectureviewList(page);
+        model.addAttribute("lectureviewList", lectureviewList);
+        for(LectureVO ldd : lectureviewList) {
+            System.out.println(ldd.toString());
+        }
         return "/admin/lectList";
     }
 
@@ -249,7 +250,7 @@ public class AdminCtrl {
 
         ServletContext application = request.getSession().getServletContext();
         //String realPath = application.getRealPath("/resources/upload");       // 운영 서버
-        String realPath = "C:\\Users\\user\\Documents\\seulbee\\uploadtest";     // 개발 서버, 이건 임시
+        String realPath = "D:\\seulbee\\uploadtest";     // 개발 서버
 
         Lecture lecture = new Lecture();
         lecture.setTitle(request.getParameter("title"));
@@ -394,6 +395,7 @@ public class AdminCtrl {
         model.addAttribute("lecture", lecture);
         return "/admin/lectUpdate";
     }
+
     @PostMapping("lectUpdate.do")
     public String lectureUpdatepro(HttpServletRequest request, Model model) throws Exception{
 
@@ -401,7 +403,7 @@ public class AdminCtrl {
         ServletContext application = request.getSession().getServletContext();
 
         //String realPath = application.getRealPath("/resources/upload");                   //운영 서버
-        String realPath = "C:\\Users\\user\\Documents\\seulbee\\uploadtest";   //개발 서버
+        String realPath = "D:\\seulbee\\uploadtest";   //개발 서버
 
         Lecture lecture = new Lecture();
         lecture.setLno(lno);

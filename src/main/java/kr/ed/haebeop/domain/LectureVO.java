@@ -13,7 +13,7 @@ public class LectureVO {
     private String lect_tit;
     private String subTitle;
     private int studentCnt;
-    private String teacherId;
+    private String teacherNm;
     private String thumbnail;
     private int cost;
     private int sno;

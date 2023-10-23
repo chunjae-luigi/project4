@@ -1,18 +1,13 @@
 package kr.ed.haebeop.controller;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.ed.haebeop.domain.ChatDTO;
 import org.springframework.stereotype.Controller;
 
-import javax.servlet.http.HttpSession;
 import javax.websocket.*;
-import javax.websocket.RemoteEndpoint.Basic;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

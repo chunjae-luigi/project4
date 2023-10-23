@@ -82,11 +82,13 @@
                         <div class="custom-block-info">
                             <h5>${lecture.sub_tit }</h5>
                             <h1><a href="${path }/lecture/get.do?lno=${lecture.lno }">${lecture.lect_tit }</a></h1>
-                            <h4>${lecture.teacherId } 선생님</h4>
+                            <h4>${lecture.teacherNm } 선생님</h4>
                             <h5>${lecture.subTitle }</h5><br>
                             <div>
                                 <p style="font-size: 16px;">수강인원 : ${lecture.studentCnt }명 </p>
-                                <p style="font-size: 20px; color: #5a6268; font-weight: bold"> ${lecture.cost }원</p>
+                                <p style="font-size: 20px; color: #5a6268; font-weight: bold"><fmt:formatNumber value="${lecture.cost }" pattern="#,###" />원</p>
+
+
                             </div>
                         </div>
                     </div>
@@ -99,7 +101,6 @@
                     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height:20vh;">
                         <h5 class="font-weight-bold">새로운 강의를 기대해주세요!</h5>
                     </div>
-
                 </c:if>
             </div>
 

@@ -36,16 +36,10 @@ public class MemberCtrl {
     private MemberService memberService;
 
     @Autowired
-    private LectureService lectureService;
-
-    @Autowired
-    private SubjectService subjectService;
-
-    @Autowired
-    private CurriService curriService;
-
-    @Autowired
     private MemberMgnService memberMgnService;
+
+    @Autowired
+    private LectureService lectureService;
 
     @Autowired
     HttpSession session;
@@ -58,6 +52,15 @@ public class MemberCtrl {
 
     @Autowired
     private PaymentService paymentService;
+
+    @Autowired
+    private ReviewService reviewService;
+
+    @Autowired
+    private CurriService curriService;
+
+    @Autowired
+    private SubjectService subjectService;
 
     @GetMapping("term.do")
     public String term(Model model) throws Exception {
@@ -250,14 +253,10 @@ public class MemberCtrl {
             if(uploadFiles != null) {
 
                 ServletContext application = request.getSession().getServletContext();
-                String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
+                String realPath = application.getRealPath("/resources/upload/member");                                        // 운영 서버
                 //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
-                Date date = new Date();
-                String dateFolder = sdf.format(date);
-
-                File uploadPath = new File(realPath, dateFolder);
+                File uploadPath = new File(realPath);
                 if(!uploadPath.exists()) {uploadPath.mkdirs();}
 
                 for(MultipartFile multipartFile : uploadFiles) {
@@ -269,7 +268,7 @@ public class MemberCtrl {
 
                     FileDTO fileDTO = new FileDTO();
                     fileDTO.setPar(member.getMno());
-                    fileDTO.setSaveFolder(dateFolder);
+                    fileDTO.setSaveFolder("member");
 
                     String fileType = multipartFile.getContentType();
                     String[] fileTypeArr = fileType.split("/");
@@ -288,75 +287,6 @@ public class MemberCtrl {
 
         return "redirect:/user/myPage.do";
     }
-
-
-    //회원이 보는 강의 리스트
-//    @GetMapping("mylectList.do")
-//    public String mylectList(HttpServletRequest request, Model model) throws Exception{
-//        String sid = (String) session.getAttribute("sid");
-//
-//        String type = request.getParameter("type");
-//        String keyword = request.getParameter("keyword");
-//        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
-//
-//        Page page = new Page();
-//        page.setSearchType(type);
-//        page.setSearchKeyword(keyword);
-//        int total = lectureService.lectureviewCount(page);
-//
-//        page.makeBlock(curPage, total);
-//        page.makeLastPageNum(total);
-//        page.makePostStart(curPage, total);
-//
-//        model.addAttribute("type", type);
-//        model.addAttribute("keyword", keyword);
-//        model.addAttribute("page", page);
-//        model.addAttribute("curPage", curPage);
-//
-//        List<LectlistVO> mylectList = lectureService.mylectList(page);
-//        model.addAttribute("mylectList", mylectList);
-//
-//        return "/member/myLectList";
-//    }
-
-    //회원의 강의 상세보기
-    @GetMapping("myLecture.do")
-    public String lectureUpdate(HttpServletRequest request, Model model) throws Exception{
-        int lno = Integer.parseInt(request.getParameter("lno"));
-
-        Lecture lecture = lectureService.lectureGet(lno);
-        Member teacher = memberService.memberGet(lecture.getTeacherId());
-        Subject subject = subjectService.subjectGet(lecture.getSno());
-        List<Curri> curriList = curriService.curriList(lno);
-
-        model.addAttribute("teacher", teacher);
-        model.addAttribute("subject", subject);
-        model.addAttribute("curriList", curriList);
-        model.addAttribute("lecture", lecture);
-        model.addAttribute("lno", lno);
-
-        return "/member/myLecture";
-
-    }
-
-    @GetMapping("/mylectlist.do")
-    public String myPage(HttpServletRequest request, Model model) throws Exception {
-
-        String id = (String) session.getAttribute("sid");
-        int lno = Integer.parseInt(request.getParameter("lno"));
-
-        List<Payment> paymentList = paymentService.paymentList_Member(id);
-        List<LectlistVO> mylectList = lectureService.mylectList(lno);
-        Member member = memberService.memberGet(id);
-        Lecture lecture = lectureService.lectureGet(lno);
-
-        model.addAttribute("paymentList", paymentList);
-        model.addAttribute("mylectList", mylectList);
-
-        return "/member/myPage";
-    }
-
-
 
 
     @GetMapping("/memberMgnAccept.do")
@@ -407,7 +337,7 @@ public class MemberCtrl {
         return "redirect:/";
 
     }
-    
+
     //멤버 payList
     @GetMapping("/paylistMem.do")
     public String paymentMem(HttpServletRequest request, Model model) throws Exception {
@@ -440,5 +370,35 @@ public class MemberCtrl {
 
     }
 
+
+    //회원의 강의 상세보기
+    @GetMapping("myLecture.do")
+    public String myLecture(HttpServletRequest request, Model model) throws Exception{
+        int lno = Integer.parseInt(request.getParameter("lno"));
+
+        Lecture lecture = lectureService.lectureGet(lno);
+        Member teacher = memberService.memberGet(lecture.getTeacherId());
+        Subject subject = subjectService.subjectGet(lecture.getSno());
+        List<Review> reviewList = reviewService.reviewList(lno);
+        List<Curri> curriList = curriService.curriList(lno);
+
+        model.addAttribute("reviewList", reviewList);
+        model.addAttribute("subject", subject);
+        model.addAttribute("curriList", curriList);
+        model.addAttribute("lecture", lecture);
+
+        return "/member/myLecture";
+
+    }
+
+    @GetMapping("/mylectList.do")
+    public String myPage(HttpServletRequest request, Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+        List<LectlistVO> mylectList = lectureService.mylectList(id);
+        model.addAttribute("mylectList", mylectList);
+        System.out.println(mylectList.toString());
+
+        return "/member/myLectList";
+    }
 
 }

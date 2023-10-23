@@ -1,10 +1,6 @@
 package kr.ed.haebeop.controller;
 
-import kr.ed.haebeop.domain.BoardMgn;
-import kr.ed.haebeop.domain.FileDTO;
-import kr.ed.haebeop.domain.Lecture;
-import kr.ed.haebeop.domain.Member;
-import kr.ed.haebeop.domain.Review;
+import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,14 +39,16 @@ public class HomeCtrl {
         List<Review> reviewList = reviewService.reviewList_main();
         model.addAttribute("reviewList", reviewList);
 
-        List<Lecture> lectureList = lectureService.lectureList_main();
+        List<LectureVO> lectureList = lectureService.lectureList_main();
         model.addAttribute("lectureList", lectureList);
 
         List<Member> teacherList = memberService.getTeacherMain();
         for (Member member : teacherList) {
-            FileDTO fileDTO = filesService.fileByParForGrade(member.getMno());
-            member.setFileNm(fileDTO.getSaveNm());
-            member.setSaveFolder(fileDTO.getSaveFolder());
+            FileDTO fileDTO = filesService.fileByParForThumbnail(member.getMno());
+            if(fileDTO != null && fileDTO.getFileType().equals("image")) {
+                member.setFileNm(fileDTO.getSaveNm());
+                member.setSaveFolder(fileDTO.getSaveFolder());
+            }
         }
         model.addAttribute("teacherList", teacherList);
 
@@ -72,4 +70,18 @@ public class HomeCtrl {
         return "/main";
     }
 
+    @RequestMapping(value = "/intro")
+    public String intro(Model model) {
+        return "/company/intro";
+    }
+
+    @RequestMapping(value = "/map")
+    public String map(Model model) {
+        return "/company/map";
+    }
+
+    @RequestMapping(value = "/policy")
+    public String policy(Model model) {
+        return "/company/policy";
+    }
 }
