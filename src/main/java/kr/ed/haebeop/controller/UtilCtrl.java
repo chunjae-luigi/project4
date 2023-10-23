@@ -42,6 +42,8 @@ public class UtilCtrl {
         String saveFile = files.getSaveNm();
         File file = new File(saveFolder, saveFile);
 
+        System.out.println(saveFolder);
+
         response.setContentType("apllication/download; charset=UTF-8");
         response.setContentLength((int) file.length());
 
