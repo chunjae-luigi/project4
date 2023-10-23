@@ -50,7 +50,7 @@
                     </c:forEach>
                 </div>
             </nav>
-            <jsp:include page="../board/boardGetForm.jsp" />
+            <jsp:include page="../board/boardAddForm.jsp" />
         </div>
         <!-- 우측 탭-->
         <div class="col-lg-4" id="lect_tab">

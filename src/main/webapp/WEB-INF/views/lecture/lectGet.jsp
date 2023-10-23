@@ -41,13 +41,12 @@
             <!-- 내부탭 -->
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a href="${path }/lecture/get.do?lno=${lecture.lno }" class="nav-link active" id="tab-content" data-bs-toggle="tab" data-bs-target="#tab-content" role="tab" aria-selected="true">강의내용</a>
-                    <a href="${path }/lecture/get.do?lno=${lecture.lno }" class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" role="tab" aria-selected="true">커리큘럼</a>
-                    <a href="${path }/lecture/get.do?lno=${lecture.lno }" class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" role="tab" aria-selected="true">수강후기</a>
-                    <%--<button class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" type="button" role="tab" aria-selected="false">커리큘럼</button>
-                    <button class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" type="button" role="tab" aria-selected="false">수강후기</button>--%>
-                    <%--<button class="nav-link" id="tab-qna" data-bs-toggle="tab" data-bs-target="#tab-qna" type="button" role="tab" aria-selected="false">질문하기</button>--%>
-                    <a href="${path }/lecture/boardList.do?lno=${lecture.lno }" class="nav-link">공지사항</a>
+                    <button class="nav-link active" id="tab-content" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" role="tab" aria-selected="true">강의내용</button>
+                    <button class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" type="button" role="tab" aria-selected="false">커리큘럼</button>
+                    <button class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" type="button" role="tab" aria-selected="false">수강후기</button>
+                    <c:forEach var="boardMgn" items="${boardMgnList }">
+                        <a href="${path }/lecture/boardList.do?no=${boardMgn.bmNo }&lno=${lecture.lno }" class="nav-link">${boardMgn.boardNm }</a>
+                    </c:forEach>
                 </div>
             </nav>
             <!-- 강의 내용 -->
@@ -187,8 +186,6 @@
     </div>
 </div>
 
-
-
 <jsp:include page="../layout/footer.jsp" />
 
 <%--<!-- Bootstrap core JS-->--%>
@@ -216,6 +213,7 @@
     });
 </script>
 <script>
+
     // tab click 하면 지정 구역으로 이동
     document.addEventListener('DOMContentLoaded', function() {
         const lectureTab = document.getElementById('tab-content');

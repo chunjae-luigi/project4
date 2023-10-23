@@ -105,22 +105,20 @@
         </c:if>
 
         <div class="btn-group d-block text-right mt-5 board_btn">
-            <a href="${path }/board/list.do?no=${board.bmNo }" class="btn btn-primary px-4">목록</a>
+            <a href="${path }${pathUrl }" class="btn btn-primary px-4">목록</a>
             <c:if test="${board.boardType == 0 && (addCheck == true || (sid ne null && sid eq 'admin')) }">
-                <a href="${path }/board/update.do?bno=${board.bno }" class="btn btn-danger px-4">수정</a>
+                <a href="${path }${pathUpdateUrl }" class="btn btn-danger px-4">수정</a>
                 <a href="${path }/board/delete.do?bno=${board.bno }" class="btn btn-primary px-4">삭제</a>
             </c:if>
             <c:if test="${board.boardType == 1 && addCheck == true }">
                 <a href="${path }/board/delete.do?bno=${board.bno }" class="btn btn-danger px-4">삭제</a>
                 <c:if test="${!board.answerYn }">
-                    <a href="${path }/board/update.do?bno=${board.bno }" class="btn btn-primary px-4" id="updateBtn">수정</a>
+                    <a href="${path }${pathUpdateUrl }" class="btn btn-primary px-4" id="updateBtn">수정</a>
                 </c:if>
             </c:if>
         </div>
     </div>
 </div>
-
-<jsp:include page="../layout/footer.jsp" />
 <c:if test="${!empty msg }">
     <script>
         $(function() {
