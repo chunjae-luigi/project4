@@ -53,7 +53,7 @@ public class PaymentCtrl {
         model.addAttribute("lecture", lecture);
 
         return "/payment/paymentInsert";
-}
+    }
     @PostMapping("payinsert.do")
     public String insertpaypro(@ModelAttribute Payment payment, @ModelAttribute Member member, Model model )throws Exception{
         paymentService.insertpayment(payment);
@@ -61,7 +61,7 @@ public class PaymentCtrl {
         return "redirect:/user/paylistMem.do";
     }
 
-//    회원 페이지
+    //    회원 페이지
     @GetMapping("/paylistMember.do")
     public String paymentList(HttpServletRequest request, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
