@@ -12,5 +12,5 @@ public class LectlistVO {
         private String title;
         private String teacherId;
         private String thumbnail;
-        private int pno;
+        private String id;
 }

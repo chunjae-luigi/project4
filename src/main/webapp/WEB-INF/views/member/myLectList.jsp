@@ -81,8 +81,8 @@
                         </div>
                         <ul class="my-2" style="width:100%;">
                             <li><a href="${path }/user/myPage.do" class="active px-4 py-2">나의 정보</a></li>
-                            <li><a href="${path }/user/myLectList.do" class="px-4 py-2">나의 강의실</a></li>
-                            <li><a href="${path }/user/myPay.do" class="px-4 py-2">나의 결제정보</a></li>
+                            <li><a href="${path }/user/mylectList.do" class="px-4 py-2">나의 강의실</a></li>
+                            <li><a href="${path }/user/paylistMem.do" class="px-4 py-2">나의 결제정보</a></li>
                         </ul>
                     </div>
                 </div>
@@ -95,23 +95,23 @@
 
 
                         <div class="container" id="mylect">
-                        <c:forEach items="${mylectlist }" var="lecture" varStatus="status">
+                        <c:forEach items="${mylectList }" var="lecture" varStatus="status">
                             <div class="col-lg-4 col-12 mb-4">
                                 <div class="custom-block custom-block-full">
                                     <div class="custom-block-image-wrap">
-                                        <a href="detail-page.html">
+                                        <a href="${path}/user/myLecture.do?lno=${lecture.lno}">
                                             <img src=${path}/resources/image/lecture/thumnail(8).png class="custom-block-image img-fluid">
                                         </a>
                                     </div>
 
                                     <div class="custom-block-info">
                                         <h3 class="mb-2">
-                                            <a href="${path}/user/myLecture.do">${lecture.title }</a>
+                                            <a href="${path}/user/myLecture.do?lno=${lecture.lno}">${lecture.title }</a>
                                         </h3>
                                         <p> ${lecture.lno } 강의번호</p>
-                                        <p> ${lecture.teacherNm } 선생님</p>
-                                        <p> ${lecture.teacherNm } 선생님</p>
-                                            <p> ${payment.payno } </p>
+                                        <p> ${lecture.teacherId } 선생님</p>
+                                            <p> ${lecture.id } </p>
+                                        <p> ${lecture.thumbnail } </p>
 
                                             <p>수강상태(완강ㄹ여부)
                                             </p>
@@ -123,11 +123,6 @@
                             </div>
                         </c:forEach>
                         </div>
-
-
-
-
-
 
 
 

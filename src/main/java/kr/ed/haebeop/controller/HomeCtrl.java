@@ -46,13 +46,13 @@ public class HomeCtrl {
         List<Lecture> lectureList = lectureService.lectureList_main();
         model.addAttribute("lectureList", lectureList);
 
-        List<Member> teacherList = memberService.getTeacherMain();
-        for (Member member : teacherList) {
-            FileDTO fileDTO = filesService.fileByParForGrade(member.getMno());
-            member.setFileNm(fileDTO.getSaveNm());
-            member.setSaveFolder(fileDTO.getSaveFolder());
-        }
-        model.addAttribute("teacherList", teacherList);
+//        List<Member> teacherList = memberService.getTeacherMain();
+//        for (Member member : teacherList) {
+//            FileDTO fileDTO = filesService.fileByParForGrade(member.getMno());
+//            member.setFileNm(fileDTO.getSaveNm());
+//            member.setSaveFolder(fileDTO.getSaveFolder());
+//        }
+//        model.addAttribute("teacherList", teacherList);
 
         return "/index";
     }

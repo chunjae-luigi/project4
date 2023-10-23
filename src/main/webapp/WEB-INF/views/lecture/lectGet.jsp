@@ -81,7 +81,7 @@
                             <input type="hidden" name="lno" id="lno" value="${lecture.lno}">
                             <%-- 별점 테스트 중입니다 --%>
                             <div class="star-rating">
-                                <label for="star">별점:</label>
+                                <label for="star"></label>
                                 <div class="star-icons">
                                     <!-- 이 부분에 원하는 아이콘 또는 글꼴 아이콘을 넣을 수 있습니다 -->
                                     <span class="star-icon click-star" data-star="1"></span>

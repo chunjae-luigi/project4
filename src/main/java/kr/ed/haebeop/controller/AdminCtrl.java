@@ -386,13 +386,14 @@ public class AdminCtrl {
         return "/admin/lectGet";
     }
 
-    @GetMapping("lectUpdate.do")     /
+    @GetMapping("lectUpdate.do")
     public String lectureUpdate(HttpServletRequest request, Model model) throws Exception{
         int lno = Integer.parseInt(request.getParameter("lno"));
         Lecture lecture = lectureService.lectureGet(lno);
         model.addAttribute("lecture", lecture);
         return "/admin/lectUpdate";
     }
+
     @PostMapping("lectUpdate.do")
     public String lectureUpdatepro(HttpServletRequest request, Model model) throws Exception{
 

@@ -58,6 +58,9 @@ public class LectureCtrl {
 
         List<LectureVO> lectureviewList = lectureService.lectureviewList(page);
         model.addAttribute("lectureviewList", lectureviewList);
+        for(LectureVO ldd : lectureviewList) {
+            System.out.println(ldd.toString());
+        }
 
         return "/lecture/lectList";
     }
