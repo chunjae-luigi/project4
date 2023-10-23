@@ -63,7 +63,7 @@ public class LectureCtrl {
     }
 
     //회원의 강의 상세보기
-    @GetMapping("get.do")
+    @GetMapping("/get.do")
     public String lectureUpdate(HttpServletRequest request, Model model) throws Exception{
         int lno = Integer.parseInt(request.getParameter("lno"));
 

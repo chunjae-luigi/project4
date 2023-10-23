@@ -157,7 +157,12 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <h2>${lecture.cost }원</h2>
+                    <c:if test="${sid != null}">
                     <a href="${path}/payment/payinsert.do?lno=${lecture.lno }" class="btn btn-primary" id="button-search" >바로 수강신청 하기</a>
+                    </c:if>
+                    <c:if test="${sid == null}">
+                        <button type="button" onclick= "alert()" class="btn btn-primary" id="button-search" >바로 수강신청 하기</button>
+                    </c:if>
                 </div>
                 <div class="card-body">
                     <div class="input-group">
@@ -230,6 +235,11 @@
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
     });
+
+    function alert(){
+        alert("로그인이 필요합니다.")
+    }
+
 </script>
 <!-- 동영상 열 때 크기 지정 -->
 <%-- 동영상 경로는 임시로 해놓은거라 최종 때 수정해야함 //비--%>
