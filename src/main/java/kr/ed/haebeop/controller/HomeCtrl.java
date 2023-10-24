@@ -70,4 +70,18 @@ public class HomeCtrl {
         return "/main";
     }
 
+    @RequestMapping(value = "/intro")
+    public String intro(Model model) {
+        return "/company/intro";
+    }
+
+    @RequestMapping(value = "/map")
+    public String map(Model model) {
+        return "/company/map";
+    }
+
+    @RequestMapping(value = "/policy")
+    public String policy(Model model) {
+        return "/company/policy";
+    }
 }

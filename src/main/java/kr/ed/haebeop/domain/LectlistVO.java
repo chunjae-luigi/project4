@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class LectlistVO {
         private int lno;
         private String title;
-        private String teacherId;
+        private String teacherNm;
         private String thumbnail;
         private String id;
 }

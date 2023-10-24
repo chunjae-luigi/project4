@@ -211,8 +211,8 @@ public class AdminCtrl {
         return "redirect:/admin/boardMgnConf.do";
     }
 
-    @GetMapping("/lectList.do")         //비
-    public String lectureList(HttpServletRequest request, Model model) throws Exception{
+    @GetMapping("/lectList.do")
+    public String lectureviewList(HttpServletRequest request, Model model) throws Exception{
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -220,7 +220,7 @@ public class AdminCtrl {
         Page page = new Page();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
-        int total = lectureService.lectureCount(page);
+        int total = lectureService.lectureviewCount(page);
 
         page.makeBlock(curPage, total);
         page.makeLastPageNum(total);
@@ -231,18 +231,20 @@ public class AdminCtrl {
         model.addAttribute("page", page);
         model.addAttribute("curPage", curPage);
 
-        List<Lecture> lectureList = lectureService.lectureList(page);
-        model.addAttribute("lectureList", lectureList);
-
+        List<LectureVO> lectureviewList = lectureService.lectureviewList(page);
+        model.addAttribute("lectureviewList", lectureviewList);
+        for(LectureVO ldd : lectureviewList) {
+            System.out.println(ldd.toString());
+        }
         return "/admin/lectList";
     }
 
-    @GetMapping("/lectAdd.do")   //비
+    @GetMapping("/lectAdd.do")
     public String lectureAdd(Model model) throws Exception {
         return "/admin/lectAdd";
     }
 
-    @PostMapping("lectAdd.do")   //비
+    @PostMapping("lectAdd.do")
     public String lectureInsertpro(HttpServletRequest request, Model model, MultipartFile thumbnail, MultipartFile lvideo, MultipartFile bthumbnail) throws Exception{
         String msg = "";
 
@@ -368,7 +370,7 @@ public class AdminCtrl {
         return "/admin/findLecture";
     }
 
-    @GetMapping("lectGet.do")      //비
+    @GetMapping("lectGet.do")
     public String lectureGet(HttpServletRequest request, Model model) throws Exception{
         int lno = Integer.parseInt(request.getParameter("lno"));
 
