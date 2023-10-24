@@ -66,6 +66,6 @@ public class ReviewCtrl {
         reviewService.reviewDelete(rno);
         model.addAttribute("lno", lno);
 
-        return "/lecture/lectGet";
+        return "redirect:/lecture/lectGet.do?lno=" + lno;
     }
 }
