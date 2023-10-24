@@ -35,7 +35,6 @@ public class ReviewCtrl {
 
     @PostMapping("add.do")
     public String reviewInsert(HttpServletRequest request, RedirectAttributes rttr, Model model) throws Exception {
-    public String reviewInsert(HttpServletRequest request, RedirectAttributes rttr, Model model) throws Exception {
         Review review = new Review();
 
         String word = request.getParameter("content");
