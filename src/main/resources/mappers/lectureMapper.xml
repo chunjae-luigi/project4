@@ -29,6 +29,10 @@
         select * from lectview
         ]]>
         <where>
+            <if  test="sno != 0">sno = #{sno}</if>
+            <if  test="(sno != 0) and (searchType != null)">
+                and
+            </if>
             <if test="searchType != null">
                 <choose>
                     <when test="searchType == 'lect_tit'.toString()">
@@ -104,13 +108,17 @@
         select count(*) from lectureview
         ]]>
         <where>
+            <if  test="sno != 0">sno = #{sno}</if>
+            <if  test="(sno != 0) and (searchType != null)">
+                and
+            </if>
             <if test="searchType != null">
                 <choose>
                     <when test="searchType == 'lect_tit'.toString()">
                         lect_tit LIKE concat('%', #{searchKeyword}, '%')
                     </when>
-                    <when test="searchType == 'teacherId'.toString()">
-                        teacherId LIKE concat('%', #{searchKeyword}, '%')
+                    <when test="searchType == 'teacherNm'.toString()">
+                        teacherNm LIKE concat('%', #{searchKeyword}, '%')
                     </when>
                 </choose>
             </if>
