@@ -191,7 +191,7 @@
         .outer-container {
             position: absolute;
             top: 25%;
-            left: -5%;
+            left: -6%;
             /* transform: translate(-50%, -50%); */
         }
 
@@ -224,7 +224,7 @@
                 direction = 0; // 정지
                 setTimeout(() => {
                     direction = -1; // 왼쪽으로 이동
-                }, 3000); // 5초 후에 방향 전환
+                }, 3000); // 3초 후에 방향 전환
             } else if (currentPosition <= 0 && direction === -1) {
                 direction = 0; // 정지
                 setTimeout(() => {
