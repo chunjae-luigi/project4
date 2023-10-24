@@ -93,42 +93,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="floating-label d-block">강의 유형</label>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="lectureType0" name="lectureType" class="custom-control-input" onchange="changeType(this)"<c:if test="${lecture.lectureType == 0 }"> checked</c:if>>
-                                        <label class="custom-control-label" for="lectureType0">온라인</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="lectureType1" name="lectureType" class="custom-control-input" onchange="changeType(this)"<c:if test="${lecture.lectureType == 1 }"> checked</c:if>>
-                                        <label class="custom-control-label" for="lectureType1">오프라인</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="row forOffline">
                             <div class="col">
                                 <div class="form-group">
                                     <label class="floating-label d-block" for="studentCnt">강의 인원수</label>
-                                    <input type="number" class="form-control wid-150 d-inline-block" name="studentCnt" id="studentCnt" value="${lecture.studentCnt }" aria-describedby="인원수 입력" min="0" max="999"><p class="ml-2 d-inline-block">명</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row forOffline">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="floating-label d-block">강의 일정</label>
-                                    <input type="date" class="form-control mr-1 wid-150 d-inline-block" name="startDate" id="startDate" value="${lecture.startDate }"> ~ <input type="date" class="form-control ml-1 wid-150 d-inline-block" name="endDate" id="endDate" value="${lecture.endDate }">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row forOffline">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="floating-label" for="daily">강의 하루 일정</label>
-                                    <input type="text" class="form-control" placeholder="ex) 08:00 - 10:00" name="daily" id="daily" value="${lecture.daily }">
+                                    <input type="number" class="form-control wid-150 d-inline-block" name="studentCnt" id="studentCnt" value="${lecture.studentCnt }" ><p class="ml-2 d-inline-block">명</p>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +107,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label class="floating-label d-block" for="teacherId">강의 강사</label>
-                                    <input type="text" class="form-control d-inline-block" name="teacherNm" id="teacherNm" readonly style="width:calc(100% - 170px)" value="${lecture.teacherId }">
+                                    <input type="text" class="form-control d-inline-block" name="teacherNm" id="teacherNm" readonly style="width:calc(100% - 170px)" value="${lecture.teacherNm }">
                                     <input type="hidden" name="teacherId" id="teacherId">
                                     <button type="button" class="form-control ml-2 wid-150 d-inline-block" onclick="findTeacher()">찾기</button>
                                 </div>
@@ -147,7 +117,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label class="floating-label" for="bookname">강의 교재</label>
-                                    <input type="text" class="form-control" name="bookname" id="bookname" value="${lecture.bookname }" placeholder="교재명을 입력해주세요." aria-describedby="강의 소제목 도움" required>
+                                    <input type="text" class="form-control" name="bookname" id="bookname" value="${lecture.bookname }" >
                                 </div>
                             </div>
                         </div>

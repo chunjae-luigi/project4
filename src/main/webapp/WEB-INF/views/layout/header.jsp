@@ -15,7 +15,16 @@
 
 
             <div class="navbar-nav font-weight-bold mx-auto py-0">
+                <div class="nav-item dropdown board_drop_menu">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">해법</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="${path }/intro" class="dropdown-item">해법소개</a>
+                        <a href="${path }/map" class="dropdown-item">오시는길</a>
+                    </div>
+
+                </div>
                 <a href="${path }/lecture/list.do" class="nav-item nav-link">온라인강의</a>
+                <a href="${path }/academy/calendar" class="nav-item nav-link">방문 상담예약</a>
                 <div class="nav-item dropdown board_drop_menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu rounded-0 m-0" id="boardMenuArea"></div>
