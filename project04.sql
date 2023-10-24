@@ -152,7 +152,7 @@ CREATE VIEW lectview AS (SELECT
                              lecture.lectureType,
                              lecture.title AS lect_tit,
                              lecture.subTitle AS subTitle,
-                             lecture.teacherId AS teacherId,
+                             lecture.teacherNm AS teacherNm,
                              lecture.studentCnt AS studentCnt,
                              lecture.thumbnail AS thumbnail,
                              lecture.cost AS cost,
@@ -164,7 +164,7 @@ CREATE VIEW lectview AS (SELECT
 CREATE VIEW mylect AS (SELECT
                            l.lno AS lno,
                            l.title AS title,
-                           l.teacherId AS teacherId,
+                           l.teacherNm AS teacherNm,
                            l.thumbnail AS thumbnail,
                            p.id AS id
                       FROM lecture l, payment p
