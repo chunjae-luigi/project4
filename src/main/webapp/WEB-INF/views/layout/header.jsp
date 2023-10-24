@@ -29,6 +29,8 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu rounded-0 m-0" id="boardMenuArea"></div>
                 </div>
+                <a href="${path }/game" class="nav-item nav-link"><i class="fas fa-gamepad" style="color: #000000;"></i></a>
+
             </div>
 
             <c:if test="${sid != null}">

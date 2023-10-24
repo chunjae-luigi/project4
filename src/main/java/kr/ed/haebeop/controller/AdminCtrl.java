@@ -2,6 +2,7 @@ package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.*;
+import kr.ed.haebeop.util.LecturePage;
 import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -219,7 +220,7 @@ public class AdminCtrl {
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
-        Page page = new Page();
+        LecturePage page = new LecturePage();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
         int total = lectureService.lectureviewCount(page);
@@ -251,8 +252,7 @@ public class AdminCtrl {
         String msg = "";
 
         ServletContext application = request.getSession().getServletContext();
-        //String realPath = application.getRealPath("/resources/upload");       // 운영 서버
-        String realPath = "D:\\seulbee\\uploadtest";     // 개발 서버
+        String realPath = application.getRealPath("/resources/upload");       // 운영 서버
 
         Lecture lecture = new Lecture();
         lecture.setTitle(request.getParameter("title"));

@@ -19,14 +19,14 @@
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
-                <img src="${path }/resources/image/lecture/thumnail(1).png">
+                <img src="${path }/resources/upload/${lecture.thumnail }" />
             </div>
             <div class="col-lg-6">
                 <h3 style="color: var(--main-color);">${subject.title } </h3>
                 <h1 class="display-5 fw-bolder text-white mb-2">${lecture.title }</h1>
                 <h3 class="lead text-white-50 mb-4">${lecture.subTitle }</h3>
                 <h3 class="lead text-white-50 mb-4">${lecture.teacherNm } 선생님</h3>
-                <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
+                <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/upload/${lecture.lvideo }" target="_blank" >강의 맛보기</a>
                 <a class="btn btn-warning btn-lg px-4" href="#lect_review" >수강생 후기</a>
             </div>
         </div>
@@ -60,7 +60,8 @@
 
                         <!-- 교재 추가 경로 변경 해야함 //비 -->
                         <div>강의 교재 </div>
-                        <div><img src="${path}/resources/image/lecture/booksample.jpg" width="300px"></div>
+                        <div>
+                            <img src="${path }/resources/upload/${lecture.bthumnail }" width="300px />
                 </section>
             </article>
             <!-- 목차 -->
@@ -238,12 +239,5 @@
         });
     });
 </script>
-<!-- 동영상 열 때 크기 지정 -->
-<%-- 동영상 경로는 임시로 해놓은거라 최종 때 수정해야함 //비--%>
-<%-- <script>
-    document.getElementById('vvv').addEventListener('click', function() {
-        window.open('${path }/resources/image/common/videosample.mp4', 'Video Window', 'width=720, height=540');
-    });
-</script>--%>
 </body>
 </html>
