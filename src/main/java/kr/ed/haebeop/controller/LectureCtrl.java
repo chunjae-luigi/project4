@@ -95,13 +95,10 @@ public class LectureCtrl {
         List<Review> reviewList = reviewService.reviewList(lno);
         List<Curri> curriList = curriService.curriList(lno);
 
-<<<<<<< HEAD
         model.addAttribute("check", check);
-=======
         List<BoardMgn> boardMgnList = boardMgnService.getSubBoardMgn(lno);
         model.addAttribute("boardMgnList", boardMgnList);
 
->>>>>>> 63dfb0ef58b5fd722d3d4d83047d7480acc0acba
         model.addAttribute("teacher", teacher);
         model.addAttribute("reviewList", reviewList);
         model.addAttribute("subject", subject);
