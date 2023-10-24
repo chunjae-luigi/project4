@@ -222,13 +222,13 @@
                     <br>
                 <div class="row">
                     <div class="col-2"><label for="addr1" class="form-label">기본 주소</label></div>
-                    <div class="col-4"><input type="text" name="addr1" id="addr1" class="form-control" value="${mem.addr1}" readonly /></div>
+                    <div class="col-4"><input type="text" name="addr1" id="addr1" class="form-control" value="${mem.addr1}"  /></div>
                     <div class="col-2"><label for="addr2" class="form-label">상세 주소</label></div>
-                    <div class="col-4"><input type="text" name="addr2" id="addr2" class="form-control" value="${mem.addr2}" readonly /></div>
+                    <div class="col-4"><input type="text" name="addr2" id="addr2" class="form-control" value="${mem.addr2}"  /></div>
                 </div>
                 <div class="row">
                     <div class="col-2"><label for="postcode" class="form-label">우편 번호</label></div>
-                    <div class="col-4"><input type="text" name="postcode" id="postcode" value="${mem.postcode}" readonly class="form-control"></div>
+                    <div class="col-4"><input type="text" name="postcode" id="postcode" value="${mem.postcode}"  class="form-control"></div>
                     <div class="col-2"></div>
                     <div class="col-4"><button type="button" id="post_btn" onclick="findAddr()" class="btn btn-primary">우편번호 검색</button></div>
                 </div>
@@ -255,12 +255,12 @@
                 </div>
                 <div class="row">
                     <div class="col-2" id="labels1" >
-                        <label for="pnum" class="form-label" >결제 번호</label></div>
+                        <label for="pnum" class="form-label" >카드 번호</label></div>
                     <div class="col-2" id="labels2" style="display: none">
                         <label class="form-label" >계좌 번호</label></div>
 
                     <div class="col-6" id="labels3">
-                        <input type="text" class="form-control" id="pnum" name="pnum" value="" required></div>
+                        <input type="text" class="form-control" id="pnum" name="pnum" value="" required placeholder=" - 제외"></div>
                     <div class="col-6" id="labels4" style="display: none; color: black;">
                         <label class="form-label" >061702 - 04 - 152352</label></div>
 
@@ -350,6 +350,7 @@
             $("#pmethod").change(function(){
                 var th = $(this).val();
                 if(th==="신용카드"){
+                    $("#pcom").val("");
                     for(var i=0;i<cardArr1.length;i++) {
                         $("#pcom").append("<option value='" + cardArr1[i] + "'>" + cardArr1[i] + "</option>");
                     }
@@ -359,6 +360,7 @@
                     $("#labels4").css("display", "none");
                     $("#pnum").val("");
                 } else if(th==="체크카드"){
+                    $("#pcom").val("");
                     for(var i=0;i<cardArr2.length;i++) {
                         $("#pcom").append("<option value='"+cardArr2[i]+"'>"+cardArr2[i]+"</option>");
                     }
@@ -368,6 +370,7 @@
                     $("#labels4").css("display", "none");
                     $("#pnum").val("");
                 } else if(th==="계좌이체"){
+                    $("#pcom").val("");
                     for (var i = 0; i < bankArr.length; i++) {
                         $("#pcom").append("<option value='" + bankArr[i] + "'>" + bankArr[i] + "</option>");
                     }

@@ -52,8 +52,9 @@
 <link rel="stylesheet" href="${path }/resources/css/common.css">
 <link rel="stylesheet" href="${path }/resources/css/all.css">
 <link rel="stylesheet" href="${path }/resources/css/style.css">
-
+<link rel="stylesheet" href="${path }/resources/css/ft.css">
 <script src="${path }/resources/js/jquery-3.7.1.min.js"></script>
+
 
 <!--
 <script>

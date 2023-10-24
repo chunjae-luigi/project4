@@ -9,6 +9,7 @@
     <jsp:include page="../layout/adminHead.jsp" />
     <link rel="stylesheet" href="${path }/resources/css/admin.css" />
     <link rel="stylesheet" href="${path }/resources/css/owl.carousel.css" />
+    <link rel="stylesheet" href="${path }/resources/cleditor/jquery.cleditor.css">
 </head>
 <body>
 <jsp:include page="../layout/adminHeader.jsp" />
@@ -33,9 +34,8 @@
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
 
-        <form action="${path }/admin/lectUpdate.do" name="frm1" method="post" onsubmit="return checkVal(this)">
-            <input type="hidden" name="lno" value="${lecture.lno }" />
-            <div class="row">
+    <form action="${path }/admin/lectUpdate.do" name="frm1" method="post" onsubmit="return checkVal(this)">
+        <input type="hidden" name="lno" value="${lecture.lno }" />
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
@@ -64,21 +64,6 @@
 
                             <div class="col">
                                 <div class="form-group">
-                                    <label class="floating-label d-block">게시판 뎁스</label>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="depth0" name="depth" class="custom-control-input" value="1" onchange="changeType(this)"<c:if test="${boardMgn.depth == 1 }"> checked</c:if>>
-                                        <label class="custom-control-label" for="depth0">메인</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="depth1" name="depth" class="custom-control-input" value="2" onchange="changeType(this)"<c:if test="${boardMgn.depth == 2 }"> checked</c:if>>
-                                        <label class="custom-control-label" for="depth1">서브</label>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col">
-                                <div class="form-group">
                                     <label class="floating-label d-block">해당 과목</label>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="sno1" name="sno" class="custom-control-input" value="1" onchange="changeType(this)"<c:if test="${subject.sno == 1 }"> checked</c:if>>
@@ -90,7 +75,7 @@
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="sno3" name="sno" class="custom-control-input" value="3" onchange="changeType(this)"<c:if test="${subject.sno == 3 }"> checked</c:if>>
-                                        <label class="custom-control-label" for="sno3">영어</label>
+                                        <label class="custom-control-label" for="sno3">기타</label>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +84,12 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label class="floating-label" for="content">내용</label>
-                                    <textarea name="content" id="content" class="form-control" rows="8" cols="100" maxlength="1400" value="${lecture.content }" required></textarea>
+                                    <textarea name="content" id="content" class="form-control" rows="8" cols="100" maxlength="1400" >${lecture.content }</textarea>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#content").cleditor();
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -143,10 +133,6 @@
                             </div>
                         </div>
 
-
-
-                    <%-- 슨생님 찾는 칸이다 슬비슬비슬비슬비슬비슬비슬비슬비슬비슬비 --%>
-
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -157,35 +143,6 @@
                                 </div>
                             </div>
                         </div>
-                        <%--              슨생님 찾는 칸이다 슬비슬비슬비슬비슬비슬비슬비슬비슬비슬비 --%>
-
-
-
-
-                        <!-- <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="floating-label d-block">강의 썸네일 업로드(10MB 이하)</label>
-                                    <input type="file" class="form-control uploadThumbnail" name="thumbnail" id="thumbnail" multiple required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="floating-label d-block">강의 영상 업로드(10MB 이하)</label>
-                                    <input type="file" class="form-control uploadThumbnail" name="lvideo" id="lvideo" multiple required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="floating-label d-block">교재 이미지 업로드(10MB 이하)</label>
-                                    <input type="file" class="form-control uploadThumbnail" name="bthumbnail" id="bthumbnail" multiple required>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -202,22 +159,6 @@
                                 </div>
                             </div>
                         </div>
-
-<%--                                <div class="row">--%>
-<%--                                    <div class="col">--%>
-<%--                                        <div class="form-group">--%>
-<%--                                            <label class="floating-label d-block">사용 설정</label>--%>
-<%--                                            <div class="custom-control custom-radio custom-control-inline">--%>
-<%--                                                <input type="radio" id="useYn1" name="useYn" class="custom-control-input" value="true" checked>--%>
-<%--                                                <label class="custom-control-label" for="useYn1">사용</label>--%>
-<%--                                            </div>--%>
-<%--                                            <div class="custom-control custom-radio custom-control-inline">--%>
-<%--                                                <input type="radio" id="useYn2" name="useYn" class="custom-control-input" value="false">--%>
-<%--                                                <label class="custom-control-label" for="useYn2">사용안함</label>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
                     </div>
                 </div>
             </div>
@@ -232,5 +173,34 @@
     </div>
 </div>
 <jsp:include page="../layout/adminFooter.jsp" />
+<script type="text/javascript" src="${path }/resources/cleditor/jquery.cleditor.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#content").cleditor();
+    });
+
+    function changeType(obj){
+        let type = $(obj).val();
+        if(type == 0) {
+            $("#studentCnt").val(999);
+            $(".forOffline").hide();
+            $('input[type="date"]').val(new Date().toISOString().substring(0, 10));
+        } else {
+            $("#studentCnt").val(0);
+            $(".forOffline").show();
+            $('input[type="date"]').val("");
+        }
+    }
+    function findPro() {
+        let popupOption = "width=650px, height=550px, top=150px, left=300px, scrollbar=yes";
+        let popupUrl = "${path }/admin/findPro.do";
+        window.open(popupUrl, 'child', popupOption);
+    }
+    function findTeacher() {
+        let popupOption = "width=650px, height=550px, top=150px, left=300px, scrollbar=yes";
+        let popupUrl = "${path }/admin/findTeacher.do";
+        window.open(popupUrl, 'child', popupOption);
+    }
+</script>
 </body>
 </html>

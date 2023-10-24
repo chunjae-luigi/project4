@@ -173,22 +173,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-<%--                                <div class="row">--%>
-<%--                                    <div class="col">--%>
-<%--                                        <div class="form-group">--%>
-<%--                                            <label class="floating-label d-block">사용 설정</label>--%>
-<%--                                            <div class="custom-control custom-radio custom-control-inline">--%>
-<%--                                                <input type="radio" id="useYn1" name="useYn" class="custom-control-input" value="true" checked>--%>
-<%--                                                <label class="custom-control-label" for="useYn1">사용</label>--%>
-<%--                                            </div>--%>
-<%--                                            <div class="custom-control custom-radio custom-control-inline">--%>
-<%--                                                <input type="radio" id="useYn2" name="useYn" class="custom-control-input" value="false">--%>
-<%--                                                <label class="custom-control-label" for="useYn2">사용안함</label>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
                             </div>
                         </div>
                     </div>

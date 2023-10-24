@@ -29,5 +29,7 @@ public interface LectureService {
 
     public List<LectlistVO> mylectList(String id) throws Exception;
 
+    public int check(LectlistVO lectlistVO) throws Exception;
+
 }
 

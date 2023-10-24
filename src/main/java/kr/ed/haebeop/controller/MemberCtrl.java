@@ -288,6 +288,7 @@ public class MemberCtrl {
         return "redirect:/user/myPage.do";
     }
 
+
     @GetMapping("/memberMgnAccept.do")
     public String memberUpgradeAccept(HttpServletRequest request, Model model) throws Exception {
         String urlPath = request.getHeader("referer");
