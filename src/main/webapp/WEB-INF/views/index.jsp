@@ -155,7 +155,8 @@
                 </div>
                 </c:forEach>
             </div>
-                <div class="owl-carousel testimonial-carousel">
+            <div class="owl-carousel testimonial-carousel">
+                <c:if test="${empty reviewList}">
                     <div class="testimonial-item px-3">
                         <div class="bg-light shadow-sm rounded mb-4 p-4">
                             <h3 class="fas fa-quote-left text-primary mr-3"></h3>
