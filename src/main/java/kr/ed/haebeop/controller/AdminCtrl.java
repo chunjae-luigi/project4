@@ -2,6 +2,7 @@ package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.*;
+import kr.ed.haebeop.util.LecturePage;
 import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -112,7 +113,9 @@ public class AdminCtrl {
         for(MemberMgnVO member : memberMgnList) {
             Member mem = memberService.memberGet(member.getAuthor());
             FileDTO fileDTO = filesService.fileByParForGrade(mem.getMno());
-            member.setFno(fileDTO.getFno());
+            if(fileDTO != null) {
+                member.setFno(fileDTO.getFno());
+            }
         }
         model.addAttribute("memberMgnList", memberMgnList);
 
@@ -217,7 +220,7 @@ public class AdminCtrl {
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
-        Page page = new Page();
+        LecturePage page = new LecturePage();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
         int total = lectureService.lectureviewCount(page);
@@ -249,8 +252,7 @@ public class AdminCtrl {
         String msg = "";
 
         ServletContext application = request.getSession().getServletContext();
-        //String realPath = application.getRealPath("/resources/upload");       // 운영 서버
-        String realPath = "D:\\seulbee\\uploadtest";     // 개발 서버
+        String realPath = application.getRealPath("/resources/upload");       // 운영 서버
 
         Lecture lecture = new Lecture();
         lecture.setTitle(request.getParameter("title"));
@@ -290,32 +292,6 @@ public class AdminCtrl {
 
         lectureService.lectureAdd(lecture);
         return "redirect:/admin/lectList.do";
-    }
-
-    @GetMapping("/findPro.do")
-    public String findPro(HttpServletRequest request, Model model) throws Exception {
-        String type = request.getParameter("type");
-        String keyword = request.getParameter("keyword");
-        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
-
-        Page page = new Page();
-        page.setSearchType(type);
-        page.setSearchKeyword(keyword);
-        int total = 0;
-
-        page.makeBlock(curPage, total);
-        page.makeLastPageNum(total);
-        page.makePostStart(curPage, total);
-
-        model.addAttribute("type", type);
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("page", page);
-        model.addAttribute("curPage", curPage);
-
-        List<Product> proList = new ArrayList<>();
-        model.addAttribute("proList", proList);
-
-        return "/admin/findPro";
     }
 
     @GetMapping("/findTeacher.do")
@@ -410,12 +386,9 @@ public class AdminCtrl {
         lecture.setTitle(request.getParameter("title"));
         lecture.setSubTitle(request.getParameter("subTitle"));
         lecture.setContent(request.getParameter("content"));
-        lecture.setTeacherId(request.getParameter("teacherId"));
-        lecture.setLectureType(Integer.parseInt(request.getParameter("lectureType")));
-        lecture.setStudentCnt(Integer.parseInt(request.getParameter("studentCnt")));
+        lecture.setTeacherId(request.getParameter("teacherNm"));
         lecture.setCost(Integer.parseInt(request.getParameter("cost")));
         lecture.setBookname(request.getParameter("bookname"));
-        lecture.setBthumbnail(request.getParameter("bthumnail"));
         lecture.setSno(Integer.parseInt(request.getParameter("sno")));
 
         lectureService.lectureUpdate(lecture);

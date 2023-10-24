@@ -1,6 +1,6 @@
 
 .container-fluid.bg-index {
-    background-image: url("/resources/image/sub/banner01.jpg") ;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-image: url("../../resources/image/sub/banner02.png") !important;
+    background-size: cover!important;
+    background-position-y: center;
 }

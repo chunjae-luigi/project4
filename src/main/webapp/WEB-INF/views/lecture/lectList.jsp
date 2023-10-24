@@ -79,7 +79,7 @@
                                 <div class="img-box">
                                     <!-- 썸네일 - 누르면 상세페이지 이동 -->
                                     <a href="${path }/lecture/get.do?lno=${lecture.lno }">
-                                        <img src="${path }/resources/image/lecture/thumnail(1).png">
+                                        <img src="${path }/resources/upload/${lecture.thumnail }" />
                                     </a>
                                 </div>
                             </div>
@@ -91,7 +91,6 @@
                                     <h5>${lecture.subTitle }</h5><br>
                                     <div>
                                         <p style="font-size: 20px; color: #5A6268; font-weight: bold"><fmt:formatNumber value="${lecture.cost }" pattern="#,###" />원</p>
-                                        <p style="font-size: 20px; color: #5a6268; font-weight: bold"> ${lecture.cost }원</p>
                                     </div>
                                 </div>
                             </div>

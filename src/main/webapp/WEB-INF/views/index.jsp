@@ -9,19 +9,19 @@
     <jsp:include page="./layout/head.jsp" />
     <link rel="stylesheet" href="${path }/resources/css/main.css">
     <link rel="stylesheet" href="${path }/resources/css/owl.carousel.css" />
+    <link rel="stylesheet" href="${path }/resources/css/index.css" />
 </head>
 <body>
     <jsp:include page="./layout/header.jsp" />
-    <div class="container-fluid bg-primary px-0 px-md-5 mb-5">
+    <div class="container-fluid bg-index px-0 px-md-5 mb-5">
         <div class="row align-items-center px-3">
             <div class="col-lg-12 text-center py-5">
                 <h4 class="text-white mb-4 mt-5 mt-lg-0">에듀 강의 교육 센터</h4>
                 <h1 class="display-4 font-weight-bold text-white">스마트 해법</h1>
-                <p class="text-white mb-4">
-                    지금 당신이 찾는 '그 강의' <br/>
-                    해법에 다 있다 !  <br/>
-                </p>
-                <a href="${path}/lecture/list.do" class="btn btn-secondary mt-1 py-3 px-5">강의 배우기</a>
+                <h3 class="text-white mb-4">
+                    지금 당신이 찾는 '그 강의' 해법에 다 있다 !
+                </h3>
+                <a href="${path}/lecture/list.do" class="btn btn-primary mt-1 py-3 px-5">강의 보러가기</a>
             </div>
         </div>
     </div>
@@ -155,8 +155,8 @@
                 </div>
                 </c:forEach>
             </div>
-                <div class="owl-carousel testimonial-carousel">
-                    <c:if test="${empty reviewList}">
+            <div class="owl-carousel testimonial-carousel">
+                <c:if test="${empty reviewList}">
                     <div class="testimonial-item px-3">
                         <div class="bg-light shadow-sm rounded mb-4 p-4">
                             <h3 class="fas fa-quote-left text-primary mr-3"></h3>
@@ -192,7 +192,7 @@
         .outer-container {
             position: absolute;
             top: 25%;
-            left: -5%;
+            left: -6%;
             /* transform: translate(-50%, -50%); */
         }
 
@@ -225,7 +225,7 @@
                 direction = 0; // 정지
                 setTimeout(() => {
                     direction = -1; // 왼쪽으로 이동
-                }, 3000); // 5초 후에 방향 전환
+                }, 3000); // 3초 후에 방향 전환
             } else if (currentPosition <= 0 && direction === -1) {
                 direction = 0; // 정지
                 setTimeout(() => {

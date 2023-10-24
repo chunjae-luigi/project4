@@ -26,7 +26,12 @@
                         </a>
                     </li>
                     <li class="quick03">
-                        <a href="${path }/user/lesson">
+                        <a href="${path }/chat/home">
+                            <p>채팅</p>
+                        </a>
+                    </li>
+                    <li class="quick04">
+                        <a href="${path }/user/mylectList.do">
                             <p>나의 강의실</p>
                         </a>
                     </li>
@@ -40,7 +45,7 @@
                         </a>
                     </li>
                     <li class="quick02">
-                        <a href="${path }/user/lesson">
+                        <a href="${path }/user/mylectList.do">
                             <p>나의 강의실</p>
                         </a>
                     </li>
