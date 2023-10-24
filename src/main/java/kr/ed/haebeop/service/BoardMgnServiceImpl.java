@@ -35,7 +35,7 @@ public class BoardMgnServiceImpl implements BoardMgnService {
     }
 
     @Override
-    public BoardMgn getSubBoardMgn(int par) throws Exception {
+    public List<BoardMgn> getSubBoardMgn(int par) throws Exception {
         return boardMgnMapper.getSubBoardMgn(par);
     }
 

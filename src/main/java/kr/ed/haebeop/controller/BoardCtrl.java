@@ -119,6 +119,8 @@ public class BoardCtrl {
     public String boardAddPro(HttpServletRequest request, Board board, Model model, RedirectAttributes rttr, List<MultipartFile> uploadFiles) throws Exception {
         String author = (String) session.getAttribute("sid");
         int bmNo = Integer.parseInt(request.getParameter("no"));
+        
+        BoardMgn boardMgn = boardMgnService.getBoardMgn(bmNo);
 
         String word = board.getTitle();
         String word2 = board.getContent();
