@@ -55,32 +55,25 @@
                         <div class="card-header">
                             <h5>강의 내역</h5>
                         </div>
-                        <c:if test="${!empty lectureList }">
+                        <c:if test="${!empty lectureviewList }">
                             <div class="card-body table-border-style">
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
                                         <tr>
                                             <th class="text-center">NO</th>
-                                            <th class="text-center">타입</th>
                                             <th class="text-center">과목</th>
                                             <th class="text-center">강의명</th>
                                             <th class="text-center">강사명</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${lectureList }" var="lecture" varStatus="status">
+                                        <c:forEach items="${lectureviewList }" var="lecture" varStatus="status">
                                             <tr>
                                                 <td class="text-center">${status.count }</td>
-                                                <td class="text-center">
-                                                    <c:choose>
-                                                        <c:when test="${lecture.lectureType == 0}">온라인</c:when>
-                                                        <c:otherwise>오프라인</c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                                <td class="text-center">${subject.title }</td>
-                                                <td class="text-center"><a href="${path }/admin/lectGet.do?lno=${lecture.lno }">${lecture.title }</a></td>
-                                                <td class="text-center">${lecture.teacherId }</td>
+                                                <td class="text-center">${lecture.sub_tit }</td>
+                                                <td class="text-center"><a href="${path }/admin/lectGet.do?lno=${lecture.lno }">${lecture.lect_tit }</a></td>
+                                                <td class="text-center">${lecture.teacherNm }</td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -108,7 +101,7 @@
                                 </nav>
                             </div>
                         </c:if>
-                        <c:if test="${empty lectureList }">
+                        <c:if test="${empty lectureviewList }">
                             <p class="f-18 f-w-600 text-center mt-3">강의를 등록해주세요!</p>
                         </c:if>
                     </div>

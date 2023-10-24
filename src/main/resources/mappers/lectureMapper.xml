@@ -34,8 +34,8 @@
                     <when test="searchType == 'lect_tit'.toString()">
                         lect_tit LIKE concat('%', #{searchKeyword}, '%')
                     </when>
-                    <when test="searchType == 'teacherId'.toString()">
-                        teacherId LIKE concat('%', #{searchKeyword}, '%')
+                    <when test="searchType == 'teacherNm'.toString()">
+                        teacherNm LIKE concat('%', #{searchKeyword}, '%')
                     </when>
                 </choose>
             </if>
@@ -48,6 +48,10 @@
     <!-- 결제 강의 리스트 -->
     <select id="mylectList" resultType="kr.ed.haebeop.domain.LectlistVO">
         select * from mylect where id = #{id};
+    </select>
+
+    <select id="check" resultType="integer">
+        select count(*) from mylect where id = #{id} and lno=#{lno}
     </select>
 
     <!-- 강의 메인페이지 노출-->
