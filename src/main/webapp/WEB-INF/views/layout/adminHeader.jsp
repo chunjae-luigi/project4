@@ -53,10 +53,10 @@
                     <label>예약 관리</label>
                 </li>
                 <li class="nav-item">
-                    <a href="${path }/academy/reservationList" class="nav-link "><span class="pcoded-micon"><i class="feather icon-calendar"></i></span><span class="pcoded-mtext">예약 목록</span></a>
+                    <a href="${path }/academy/adminReservationList" class="nav-link "><span class="pcoded-micon"><i class="feather icon-calendar"></i></span><span class="pcoded-mtext">예약 목록</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="${path }/academy/reservationSetting" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">예약 설정</span></a>
+                    <a href="${path }/academy/adminReservationSetting" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">예약 설정</span></a>
                 </li>
             </ul>
         </div>

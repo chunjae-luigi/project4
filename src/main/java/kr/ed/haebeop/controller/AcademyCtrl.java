@@ -162,7 +162,7 @@ public class AcademyCtrl {
         return "/layout/alert";
     }
 
-    @GetMapping("reservationList")
+    @GetMapping("adminReservationList")
     public String reservationList(HttpServletRequest request, Model model){
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
         int bmNo = request.getParameter("no") != null ? Integer.parseInt(request.getParameter("no")) : 1;
@@ -182,7 +182,7 @@ public class AcademyCtrl {
         return "/admin/academy/reservationList";
     }
 
-    @GetMapping("reservationGet")
+    @GetMapping("adminReservationGet")
     public String reservationGet(HttpServletRequest request, Model model){
         int rno = Integer.parseInt(request.getParameter("rno"));
         Reservation reservation = reservationService.reservationGet(rno);
@@ -192,8 +192,8 @@ public class AcademyCtrl {
         return "/admin/academy/reservationGet";
     }
 
-    @PostMapping("reservationUpdate")
-    public String reservationUpdate(HttpServletRequest request, Model model){
+    @PostMapping("adminReservationUpdate")
+    public String adminReservationUpdate(HttpServletRequest request, Model model){
         int rno = Integer.parseInt(request.getParameter("rno"));
         String status = request.getParameter("status");
 
@@ -205,8 +205,8 @@ public class AcademyCtrl {
         return "redirect: reservationList";
     }
 
-    @GetMapping("reservationSetting")
-    public String reservationSetting(HttpServletRequest request, Model model) throws IOException {
+    @GetMapping("adminReservationSetting")
+    public String adminReservationSetting(HttpServletRequest request, Model model) throws IOException {
         ServletContext application = request.getSession().getServletContext();
 
         Map<String, String> business = SettingConfig.businessSetting(application);
@@ -233,8 +233,8 @@ public class AcademyCtrl {
         return "/admin/academy/reservationSetting";
     }
 
-    @PostMapping("reservationSettingUpdate")
-    public String reservationSettingUpdate(HttpServletRequest request, Model model) throws IOException {
+    @PostMapping("adminReservationSettingUpdate")
+    public String adminReservationSettingUpdate(HttpServletRequest request, Model model) throws IOException {
         ServletContext application = request.getSession().getServletContext();
 
         String[] weekday = new String[]{"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "holiday"};
@@ -261,7 +261,7 @@ public class AcademyCtrl {
             SettingConfig.editProperty(key, value, application);
         }
 
-        return "redirect: reservationSetting";
+        return "redirect: adminReservationSetting";
     }
 
     @GetMapping("myReservation")
