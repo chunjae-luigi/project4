@@ -90,7 +90,7 @@
                             </div>
                         </c:if>
                         <c:if test="${empty reservationList }">
-                            <p class="f-18 f-w-600 text-center mt-3">등록된 강의가 없습니다.</p>
+                            <p class="f-18 f-w-600 text-center mt-3">예약 목록이 없습니다.</p>
                         </c:if>
                     </div>
                 </div>
