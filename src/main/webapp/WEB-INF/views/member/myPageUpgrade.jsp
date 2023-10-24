@@ -58,14 +58,14 @@
                                         <tr>
                                             <th class="text-center">사진 등록하기</th>
                                             <td>
-                                                <input type="file" class="form-control uploadFiles" name="uploadFiles" multiple required>
+                                                <input type="file" class="form-control uploadFiles" name="uploadFiles" accept="image/*" multiple required>
                                             </td>
                                         </tr>
                                         </c:if>
                                         <tr>
                                             <th class="text-center">관련 서류 등록하기</th>
                                             <td>
-                                                <input type="file" class="form-control uploadFiles" name="uploadFiles" multiple required>
+                                                <input type="file" class="form-control uploadFiles" name="uploadFiles" accept="application/pdf" multiple required>
                                             </td>
                                         </tr>
                                         </tbody>

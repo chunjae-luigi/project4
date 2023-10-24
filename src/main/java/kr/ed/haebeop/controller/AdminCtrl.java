@@ -112,7 +112,9 @@ public class AdminCtrl {
         for(MemberMgnVO member : memberMgnList) {
             Member mem = memberService.memberGet(member.getAuthor());
             FileDTO fileDTO = filesService.fileByParForGrade(mem.getMno());
-            member.setFno(fileDTO.getFno());
+            if(fileDTO != null) {
+                member.setFno(fileDTO.getFno());
+            }
         }
         model.addAttribute("memberMgnList", memberMgnList);
 
@@ -290,32 +292,6 @@ public class AdminCtrl {
 
         lectureService.lectureAdd(lecture);
         return "redirect:/admin/lectList.do";
-    }
-
-    @GetMapping("/findPro.do")
-    public String findPro(HttpServletRequest request, Model model) throws Exception {
-        String type = request.getParameter("type");
-        String keyword = request.getParameter("keyword");
-        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
-
-        Page page = new Page();
-        page.setSearchType(type);
-        page.setSearchKeyword(keyword);
-        int total = 0;
-
-        page.makeBlock(curPage, total);
-        page.makeLastPageNum(total);
-        page.makePostStart(curPage, total);
-
-        model.addAttribute("type", type);
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("page", page);
-        model.addAttribute("curPage", curPage);
-
-        List<Product> proList = new ArrayList<>();
-        model.addAttribute("proList", proList);
-
-        return "/admin/findPro";
     }
 
     @GetMapping("/findTeacher.do")
