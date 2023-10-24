@@ -155,19 +155,20 @@
                 </div>
                 </c:forEach>
             </div>
-                <div class="owl-carousel testimonial-carousel">
+            <div class="owl-carousel testimonial-carousel">
+                <c:if test="${empty reviewList}">
                     <div class="testimonial-item px-3">
                         <div class="bg-light shadow-sm rounded mb-4 p-4">
                             <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-                                리뷰가 없습니다. 리뷰를 등록해주세요
+                            리뷰가 없습니다. 리뷰를 등록해주세요
                         </div>
                         <div class="d-flex align-items-center pl-4">
                             <h5 class="d-inline mb-0">작성자</h5>
                             <p class="d-inline pl-4 mb-0" style="font-size:1.25rem;">미정</p>
                         </div>
                     </div>
-                    </c:if>
-                </div>
+                </c:if>
+            </div>
         </div>
     </div>
 
