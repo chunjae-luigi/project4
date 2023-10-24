@@ -175,7 +175,6 @@
                             <input type="hidden" name="pno" id="pno" value="${lecture.lno}">
                         </td>
                         <td class="can2"  >${lecture.teacherNm}
-                            <input type="hidden" name="tecid" id="tecid" value="${lecture.teacherId}">
                             <input type="hidden" name="tecnm" id="tecnm" value="${lecture.teacherNm}">
                             <input type="hidden" name="booknm" id="booknm" value="${lecture.bookname}">
                         </td>

@@ -3,6 +3,7 @@ package kr.ed.haebeop.controller;
 import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.util.BoardPage;
+import kr.ed.haebeop.util.LecturePage;
 import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,13 +54,16 @@ public class LectureCtrl {
     //회원이 보는 강의 리스트
     @GetMapping("/list.do")
     public String lectureviewList(HttpServletRequest request, Model model) throws Exception{
+        int sno = request.getParameter("sno") != null ? Integer.parseInt(request.getParameter("sno")) : 0;
+
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
-        Page page = new Page();
+        LecturePage page = new LecturePage();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
+        page.setSno(sno);
         int total = lectureService.lectureviewCount(page);
 
         page.makeBlock(curPage, total);
@@ -70,12 +74,10 @@ public class LectureCtrl {
         model.addAttribute("keyword", keyword);
         model.addAttribute("page", page);
         model.addAttribute("curPage", curPage);
+        model.addAttribute("sno", sno);
 
         List<LectureVO> lectureviewList = lectureService.lectureviewList(page);
         model.addAttribute("lectureviewList", lectureviewList);
-        for(LectureVO ldd : lectureviewList) {
-            System.out.println(ldd.toString());
-        }
 
         return "/lecture/lectList";
     }
