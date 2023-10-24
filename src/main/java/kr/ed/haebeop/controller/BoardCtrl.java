@@ -76,7 +76,11 @@ public class BoardCtrl {
         model.addAttribute("curPage", curPage);
         List<BoardVO> boardList = boardService.boardList(page);
 
+        String pathGetUrl = "";
         for(BoardVO boardVO : boardList) {
+
+            pathGetUrl = "/board/get.do?bno=" + boardVO.getBno();
+            boardVO.setPathGetUrl(pathGetUrl);
             String authorNm = boardVO.getNm();
             if(!authorNm.equals("관리자")) {
                 String nm = authorNm.substring(0, 1);
