@@ -30,7 +30,7 @@
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="${path }/admin/"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="${path}/academy/reservationList" onclick="return false;">예약 설정</a></li>
+                                <li class="breadcrumb-item"><a href="${path}/academy/adminReservationList" onclick="return false;">예약 설정</a></li>
                             </ul>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="card-body table-border-style">
                             <div class="table-responsive">
-                                <form action="${path}/academy/reservationSettingUpdate" method="post">
+                                <form action="${path}/academy/adminReservationSettingUpdate" method="post">
                                     <h5>영업일 설정</h5>
                                     <table class="table table-striped">
                                         <tbody>

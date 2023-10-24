@@ -57,7 +57,7 @@
                                         <c:forEach items="${reservationList }" var="reservation" varStatus="status">
                                             <tr>
                                                 <td class="text-center">${status.count }</td>
-                                                <td class="text-center"><a href="${path }/academy/reservationGet?rno=${reservation.rno}">${reservation.name }</a></td>
+                                                <td class="text-center"><a href="${path }/academy/adminReservationGet?rno=${reservation.rno}">${reservation.name }</a></td>
                                                 <td class="text-center">${reservation.tel}</td>
                                                 <td class="text-center">${reservation.rdate}</td>
                                                 <td class="text-center">${reservation.rtime}</td>
@@ -70,27 +70,27 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">
                                         <c:if test="${curPage > page.pageCount }">
-                                            <li class="page-item"><a class="page-link" href="${path }/academy/reservationList?page=${page.blockStartNum - 1 }" aria-label="Previous"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+                                            <li class="page-item"><a class="page-link" href="${path }/academy/adminReservationList?page=${page.blockStartNum - 1 }" aria-label="Previous"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
                                         </c:if>
                                         <c:forEach var="i" begin="${page.blockStartNum }" end="${page.blockLastNum }">
                                             <c:choose>
                                                 <c:when test="${i == curPage }">
-                                                    <li class="page-item active"><a class="page-link" href="${path }/academy/reservationList?page=${i }">1</a></li>
+                                                    <li class="page-item active"><a class="page-link" href="${path }/academy/adminReservationList?page=${i }">1</a></li>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <li class="page-item"><a class="page-link" href="${path }/academy/reservationList?page=${i }">1</a></li>
+                                                    <li class="page-item"><a class="page-link" href="${path }/academy/adminReservationList?page=${i }">1</a></li>
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:forEach>
                                         <c:if test="${page.blockLastNum < page.totalPageCount }">
-                                            <li class="page-item"><a class="page-link" href="${path }/academy/reservationList?page=${page.blockLastNum + 1 }" aria-label="Next"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+                                            <li class="page-item"><a class="page-link" href="${path }/academy/adminReservationList?page=${page.blockLastNum + 1 }" aria-label="Next"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
                                         </c:if>
                                     </ul>
                                 </nav>
                             </div>
                         </c:if>
                         <c:if test="${empty reservationList }">
-                            <p class="f-18 f-w-600 text-center mt-3">등록된 강의가 없습니다.</p>
+                            <p class="f-18 f-w-600 text-center mt-3">예약 목록이 없습니다.</p>
                         </c:if>
                     </div>
                 </div>

@@ -2,7 +2,9 @@ package kr.ed.haebeop.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.ed.haebeop.service.*;
+import kr.ed.haebeop.util.AdminInterceptor;
 import kr.ed.haebeop.util.NaverLogin;
+import kr.ed.haebeop.util.UserInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +12,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = "kr.ed.haebeop")
 public class ApplicationConfig {
+
+
+
     // Chat
     @Bean
     public ObjectMapper mapper() { return new ObjectMapper(); }
