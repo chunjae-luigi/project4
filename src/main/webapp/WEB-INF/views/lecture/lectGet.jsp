@@ -19,7 +19,7 @@
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
-                <img src="${path }/resources/upload/${lecture.thumnail }" />
+                <img src="${path }/resources/upload/${lecture.thumbnail }" />
             </div>
             <div class="col-lg-6">
                 <h3 style="color: var(--main-color);">${subject.title } </h3>
@@ -61,7 +61,7 @@
                         <!-- 교재 추가 경로 변경 해야함 //비 -->
                         <div>강의 교재 </div>
                         <div>
-                            <img src="${path }/resources/upload/${lecture.bthumnail }" width="300px />
+                            <img src="${path }/resources/upload/${lecture.bthumbnail }" width="300px />
                 </section>
             </article>
             <!-- 목차 -->

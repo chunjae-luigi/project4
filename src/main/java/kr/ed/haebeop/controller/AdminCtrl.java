@@ -252,16 +252,18 @@ public class AdminCtrl {
         String msg = "";
 
         ServletContext application = request.getSession().getServletContext();
-        String realPath = application.getRealPath("/resources/upload");       // 운영 서버
+        //String realPath = application.getRealPath("/resources/upload");       // 운영 서버
+        String realPath = "D:\\seulbee\\uploadtest";     // 개발 서버
 
         Lecture lecture = new Lecture();
         lecture.setTitle(request.getParameter("title"));
         lecture.setSubTitle(request.getParameter("subTitle"));
         lecture.setContent(request.getParameter("content"));
+        lecture.setBthumbnail(request.getParameter("thumbnail"));
         lecture.setTeacherId(request.getParameter("teacherId"));
         lecture.setTeacherId(request.getParameter("teacherNm"));
         lecture.setBookname(request.getParameter("bookname"));
-        lecture.setBthumbnail(request.getParameter("bthumnail"));
+        lecture.setBthumbnail(request.getParameter("bthumbnail"));
         lecture.setLectureType(Integer.parseInt(request.getParameter("lectureType")));
         lecture.setStudentCnt(Integer.parseInt(request.getParameter("studentCnt")));
         lecture.setCost(Integer.parseInt(request.getParameter("cost")));

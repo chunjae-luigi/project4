@@ -19,7 +19,7 @@
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
-                <img src="${path }/resources/upload/${lecture.thumnail }" />
+                <img src="${path }/resources/upload/${lecture.thumbnail }" />
             </div>
             <div class="col-lg-6">
                 <h3 style="color: var(--main-color);">${subject.title } </h3>

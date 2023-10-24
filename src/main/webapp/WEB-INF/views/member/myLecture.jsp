@@ -89,7 +89,7 @@
     <div class="row">
         <div class="col-lg-8 main-content">
             <h1>My learning</h1>
-            <video id="myVideo" src="${path }/resources/upload/${lecture.lvideo }" controls poster="${path }/resources/upload/${lecture.thumnail }" style="width: 1200px; height: 780px;"></video>
+            <video id="myVideo" src="${path }/resources/upload/${lecture.lvideo }" controls poster="${path }/resources/upload/${lecture.thumbnail }" style="width: 1200px; height: 780px;"></video>
             <!-- Page content-->
             <div>
                 <div>
