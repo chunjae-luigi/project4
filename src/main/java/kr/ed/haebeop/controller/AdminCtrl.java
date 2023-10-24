@@ -410,12 +410,9 @@ public class AdminCtrl {
         lecture.setTitle(request.getParameter("title"));
         lecture.setSubTitle(request.getParameter("subTitle"));
         lecture.setContent(request.getParameter("content"));
-        lecture.setTeacherId(request.getParameter("teacherId"));
-        lecture.setLectureType(Integer.parseInt(request.getParameter("lectureType")));
-        lecture.setStudentCnt(Integer.parseInt(request.getParameter("studentCnt")));
+        lecture.setTeacherId(request.getParameter("teacherNm"));
         lecture.setCost(Integer.parseInt(request.getParameter("cost")));
         lecture.setBookname(request.getParameter("bookname"));
-        lecture.setBthumbnail(request.getParameter("bthumnail"));
         lecture.setSno(Integer.parseInt(request.getParameter("sno")));
 
         lectureService.lectureUpdate(lecture);
