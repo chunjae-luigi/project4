@@ -74,7 +74,7 @@
     </select>
 
     <insert id="insertpayment">
-        INSERT INTO payment VALUES (DEFAULT, #{id}, #{pno}, #{plec}, #{tecid}, #{tecnm}, #{booknm}, #{pmethod}, #{pcom}, #{pnum}, #{price}, DEFAULT, DEFAULT, DEFAULT)
+        INSERT INTO payment VALUES (DEFAULT, #{id}, #{pno}, #{plec}, #{tecnm}, #{booknm}, #{pmethod}, #{pcom}, #{pnum}, #{price}, DEFAULT, DEFAULT, DEFAULT)
     </insert>
 
     <delete id="deletepayment">
