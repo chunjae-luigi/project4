@@ -192,7 +192,7 @@
         .outer-container {
             position: absolute;
             top: 25%;
-            left: -5%;
+            left: -6%;
             /* transform: translate(-50%, -50%); */
         }
 
