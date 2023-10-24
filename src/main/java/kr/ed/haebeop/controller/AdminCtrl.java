@@ -149,7 +149,7 @@ public class AdminCtrl {
         BoardMgn boardMgn = boardMgnService.getBoardMgn(bmNo);
         model.addAttribute("boardMgn", boardMgn);
 
-        return "/admin/boardTypeGet";
+            return "/admin/boardTypeGet";
     }
 
     @GetMapping("/boardMgnAdd.do")
