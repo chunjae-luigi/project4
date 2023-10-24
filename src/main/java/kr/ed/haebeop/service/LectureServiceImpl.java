@@ -65,4 +65,9 @@ public class LectureServiceImpl implements LectureService{
     public List<LectlistVO> mylectList(String id) throws Exception {
         return lectureMapper.mylectList(id);
     }
+
+    @Override
+    public int check(LectlistVO lectlistVO) throws Exception {
+        return lectureMapper.check(lectlistVO);
+    }
 }

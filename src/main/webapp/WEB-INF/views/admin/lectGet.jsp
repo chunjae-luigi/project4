@@ -53,12 +53,10 @@
         </div>
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
-        <div >
+        <div>
             <div class="col-xl-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h3>${lecture.title }</h3>
-                    </div>
+                    <div class="card-header"><h3>${lecture.title }</h3></div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-5 col-12 pe-lg-5">
@@ -111,7 +109,7 @@
                                     </p>
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">강의 가격 </strong>
-                                        <span>${lecture.cost }</span>
+                                        <span><fmt:formatNumber value="${lecture.cost }" pattern="#,###" />원</span>
                                     </p>
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">후기 관리 </strong>
@@ -121,7 +119,6 @@
                                 </div>
                             </div>
                         </div>
-
                             <!-- 커리큘럼 영역 -->
                         <div class="curriculum">
                             <div>
@@ -144,7 +141,6 @@
                                     </c:forEach>
                                 </ul>
                             </div>
-
                             <c:if test="${empty curriList }">
                                 <tr>
                                     <td colspan="4">목차를 등록해주세요.</td>
@@ -152,21 +148,16 @@
                             </c:if>
                         </div>
                         <!-- 커리큘럼 영역 끝 -->
-
-
-
-
-
+                        <div class="row justify-content-md-end">
+                            <div class="col-md-2 text-right">
+                                <a href="${path }/admin/lectUpdate.do?lno=${lecture.lno }" class="btn btn-success d-inline-block ml-2">수정</a>
+                                <a href="${path }/admin/lectDelete.do?lno=${lecture.lno }" class="btn btn-primary d-inline-block">삭제</a>
+                            </div>
+                        </div>
                     </div>
                     </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row justify-content-md-end">
-            <div class="col-md-2 text-right">
-                <a href="${path }/admin/lectUpdate.do?no=${lecture.lno }" class="btn btn-success d-inline-block ml-2">수정</a>
-                <a href="${path }/admin/lectDelete.do?no=${lecture.lno }" class="btn btn-primary d-inline-block">삭제</a>
             </div>
         </div>
         <!-- [ Main Content ] end -->

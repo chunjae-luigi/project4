@@ -9,7 +9,7 @@
         select * from review where lno = #{lno} order by regdate desc
     </select>
     <insert id="reviewAdd">
-        insert into review values (default, #{lno}, #{memId}, #{content}, #{star}, default)
+        insert into review values (default, #{lno}, #{memId}, #{content}, #{star}, default) where memId = #{memId};
     </insert>
     <delete id="reviewDelete">
         delete from review where rno=#{rno}
