@@ -24,7 +24,7 @@
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="${path }/admin/"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="${path}/academy/reservationList" onclick="return false;">예약 목록</a></li>
+                                <li class="breadcrumb-item"><a href="${path}/academy/adminReservationList" onclick="return false;">예약 목록</a></li>
                                 <li class="breadcrumb-item"><a href="#" onclick="return false;">예약 내역</a></li>
                             </ul>
                         </div>
@@ -67,7 +67,7 @@
                                     <tr>
                                         <th class="text-center">예약 상태</th>
                                         <td class="text-center ${reservation.status}">
-                                            <form name="frm1" id="frm1" action="${path}/academy/reservationUpdate" method="post">
+                                            <form name="frm1" id="frm1" action="${path}/academy/adminReservationUpdate" method="post">
                                                 <input type="hidden" name="rno" value="${reservation.rno}">
                                                 <div class="d-flex" style="justify-content: space-around; align-items: center;">
                                                     <div class="form-check">

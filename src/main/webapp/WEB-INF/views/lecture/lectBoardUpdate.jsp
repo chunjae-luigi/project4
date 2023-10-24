@@ -37,7 +37,7 @@
 <!-- Page content-->
 <div class="container mt-5">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-9">
             <!-- 내부탭 -->
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -50,10 +50,12 @@
                     </c:forEach>
                 </div>
             </nav>
-            <jsp:include page="../board/boardUpdateForm.jsp" />
+            <div class="my-5">
+                <jsp:include page="../board/boardUpdateForm.jsp" />
+            </div>
         </div>
         <!-- 우측 탭-->
-        <div class="col-lg-4" id="lect_tab">
+        <div class="col-lg-3" id="lect_tab">
             <div class="card mb-4">
                 <div class="card-header">
                     <h2>${lecture.cost }원</h2>

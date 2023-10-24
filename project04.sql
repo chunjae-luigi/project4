@@ -20,7 +20,7 @@ CREATE TABLE member(
 	grade INT DEFAULT 2										-- 회원 등급 [ 0 : 관리자, 1 : 선생님, 2 : 일반사용자]
 );
 
-INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, 1, 10000, 0, DEFAULT, 0);
+INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
 
 
 CREATE TABLE memberMgn(
@@ -152,7 +152,7 @@ CREATE VIEW lectview AS (SELECT
                              lecture.lectureType,
                              lecture.title AS lect_tit,
                              lecture.subTitle AS subTitle,
-                             lecture.teacherId AS teacherId,
+                             lecture.teacherNm AS teacherNm,
                              lecture.studentCnt AS studentCnt,
                              lecture.thumbnail AS thumbnail,
                              lecture.cost AS cost,
@@ -164,7 +164,7 @@ CREATE VIEW lectview AS (SELECT
 CREATE VIEW mylect AS (SELECT
                            l.lno AS lno,
                            l.title AS title,
-                           l.teacherId AS teacherId,
+                           l.teacherNm AS teacherNm,
                            l.thumbnail AS thumbnail,
                            p.id AS id
                       FROM lecture l, payment p
