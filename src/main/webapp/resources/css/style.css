@@ -9908,6 +9908,9 @@ a.text-dark:hover, a.text-dark:focus {
 .quickMenu li.quick03 {
   background-image:url("../image/main/quickIcon03.png");
 }
+.quickMenu li.quick04 {
+   background-image:url("../image/main/quickIcon04.png");
+ }
 .quick_btn {
   background-color: white;
   border-top: #8a8a8a solid 0.1px;
