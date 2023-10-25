@@ -48,11 +48,23 @@ public class PaymentCtrl {
         String id = (String) session.getAttribute("sid");
         Member mem = memberService.memberGet(id);
         Lecture lecture = lectureService.lectureGet(lno);
+        int pass = paymentService.paymentList_Member(id, lno);
 
-        model.addAttribute("mem", mem);
-        model.addAttribute("lecture", lecture);
+        if(0 < pass){
 
-        return "/payment/paymentInsert";
+            model.addAttribute("msg", "이미 결제한 강의입니다.");
+            model.addAttribute("url", "/lecture/get.do?lno="+ lno);
+            return "/layout/alert";
+        }else if(id == null){
+            model.addAttribute("msg", "로그인이 필요합니다.");
+            model.addAttribute("url", "/lecture/get.do?lno="+ lno);
+            return "/layout/alert";
+        }else{
+            model.addAttribute("mem", mem);
+            model.addAttribute("lecture", lecture);
+
+            return "/payment/paymentInsert";
+        }
     }
     @PostMapping("payinsert.do")
     public String insertpaypro(@ModelAttribute Payment payment, @ModelAttribute Member member, Model model )throws Exception{
@@ -61,18 +73,5 @@ public class PaymentCtrl {
         return "redirect:/user/paylistMem.do";
     }
 
-    //    회원 페이지
-    @GetMapping("/paylistMember.do")
-    public String paymentList(HttpServletRequest request, Model model) throws Exception {
-        String id = (String) session.getAttribute("sid");
-
-        List<Payment> paymentList = paymentService.paymentList_Member(id);
-        Member member = memberService.memberGet(id);
-
-        model.addAttribute("paymentList", paymentList);
-        model.addAttribute("mem", member);
-        return "/user/paymentList";
-
-    }
 
 }
