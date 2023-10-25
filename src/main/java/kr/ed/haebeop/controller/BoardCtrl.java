@@ -123,29 +123,26 @@ public class BoardCtrl {
     public String boardAddPro(HttpServletRequest request, Board board, Model model, RedirectAttributes rttr, List<MultipartFile> uploadFiles) throws Exception {
         String author = (String) session.getAttribute("sid");
         int bmNo = Integer.parseInt(request.getParameter("no"));
-        
         BoardMgn boardMgn = boardMgnService.getBoardMgn(bmNo);
 
-        String word = board.getTitle();
-        String word2 = board.getContent();
-
         BadWordFiltering filter = new BadWordFiltering();
-        Boolean pass = filter.check(word);
-        Boolean pass2 = filter.check(word2);
+        String title = board.getTitle();
+        String content = board.getContent();
+
+        Boolean pass = filter.check(title);
+        Boolean pass2 = filter.check(content);
 
         if(pass) {
-            word = "♡♡";
-            board.setTitle(word);
-            board.setContent(word2);
+                model.addAttribute("msg", "욕설은 등록할 수 없습니다.");
+                model.addAttribute("url", "/board/list.do");
+                return "/layout/alert";
         } else if(pass2){
-            word2 = "♡♡";
-            board.setTitle(word);
-            board.setContent(word2);
-        }else{
-            board.setTitle(word);
-            board.setContent(word2);
-        }
-
+                model.addAttribute("msg", "욕설은 등록할 수 없습니다.");
+                model.addAttribute("url", "/board/list.do");
+                return "/layout/alert";
+        }else {
+            board.setTitle(title);
+            board.setContent(content);
             board.setAuthor(author);
             board.setBmNo(bmNo);
 
@@ -193,7 +190,8 @@ public class BoardCtrl {
 
             }
 
-        return "redirect:/board/list.do?no=" + bmNo;
+            return "redirect:/board/list.do?no=" + bmNo;
+        }
     }
 
 
@@ -303,35 +301,34 @@ public class BoardCtrl {
     public String boardUpdatePro(HttpServletRequest request, List<MultipartFile> uploadFiles, RedirectAttributes rttr, Model model) throws Exception {
         String sid = session.getAttribute("sid") != null ? (String) session.getAttribute("sid") : "";
         int bno = Integer.parseInt(request.getParameter("bno"));
+
+        BadWordFiltering filter = new BadWordFiltering();
         String title = request.getParameter("title");
         String content = request.getParameter("content");
 
-        Board board = new Board();
-
-        BadWordFiltering filter = new BadWordFiltering();
         Boolean pass = filter.check(title);
         Boolean pass2 = filter.check(content);
 
         if(pass) {
-            title = "♡♡";
-            board.setTitle(title);
-            board.setContent(content);
+            model.addAttribute("msg", "욕설은 등록할 수 없습니다.");
+            model.addAttribute("url", "/board/list.do");
+            return "/layout/alert";
         } else if(pass2){
-            content = "♡♡";
-            board.setTitle(title);
-            board.setContent(content);
-        }else{
-            board.setTitle(title);
-            board.setContent(content);
-        }
-             board.setBno(bno);
+            model.addAttribute("msg", "욕설은 등록할 수 없습니다.");
+            model.addAttribute("url", "/board/list.do");
+            return "/layout/alert";
+        }else {
 
+            Board board = new Board();
+
+            board.setTitle(title);
+            board.setContent(content);
+            board.setBno(bno);
 
             boardService.boardUpdate(board);
 
 
-
-            if(uploadFiles != null) {
+            if (uploadFiles != null) {
                 ServletContext application = request.getSession().getServletContext();
                 String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
                 //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
@@ -370,11 +367,8 @@ public class BoardCtrl {
                     filesService.filesInsert(fileDTO);                                  // DB 등록
                 }
             }
-
-
-
-
-        return "redirect:/board/get.do?bno=" + bno;
+            return "redirect:/board/get.do?bno=" + bno;
+        }
     }
 
     @GetMapping("/delete.do")
@@ -415,7 +409,7 @@ public class BoardCtrl {
 
         BadWordFiltering filter = new BadWordFiltering();
         Boolean pass = filter.check(content);
-        String msg = "";
+
         if(pass) {
             content = "♡♡";
             comment.setContent(content);
@@ -459,7 +453,7 @@ public class BoardCtrl {
 
         BadWordFiltering filter = new BadWordFiltering();
         Boolean pass = filter.check(answer);
-        String msg = "";
+
 
         if (pass) {
             answer = "♡♡";
