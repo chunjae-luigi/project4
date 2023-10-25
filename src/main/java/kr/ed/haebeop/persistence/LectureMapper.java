@@ -13,7 +13,7 @@ public interface LectureMapper {
 
     public List<Lecture> lectureList(Page page);
 
-    public List<LectureVO> lectureviewList(Page page);
+    public List<LectureVO> lectviewList(Page page);
 
     public Lecture lectureGet(int lno);
 
@@ -25,7 +25,7 @@ public interface LectureMapper {
 
     public int lectureCount(Page page);
 
-    public int lectureviewCount(Page page);
+    public int lectviewCount(Page page);
 
     public List<LectlistVO> mylectList(String id);
 

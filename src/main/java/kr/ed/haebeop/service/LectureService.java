@@ -11,7 +11,7 @@ import java.util.List;
 public interface LectureService {
     public List<Lecture> lectureList(Page page) throws Exception;
 
-    public List<LectureVO> lectureviewList(Page page) throws Exception;
+    public List<LectureVO> lectviewList(Page page) throws Exception;
 
     public Lecture lectureGet(int lno) throws Exception;
 
@@ -23,7 +23,7 @@ public interface LectureService {
 
     public int lectureCount(Page page) throws Exception;
 
-    public int lectureviewCount(Page page) throws Exception;
+    public int lectviewCount(Page page) throws Exception;
 
     public List<LectureVO> lectureList_main() throws Exception;
 
