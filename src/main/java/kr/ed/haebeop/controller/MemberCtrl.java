@@ -62,6 +62,9 @@ public class MemberCtrl {
     @Autowired
     private SubjectService subjectService;
 
+    @Autowired
+    private BoardMgnService boardMgnService;
+
     @GetMapping("term.do")
     public String term(Model model) throws Exception {
         return "/member/joinTerm";
@@ -387,6 +390,9 @@ public class MemberCtrl {
         Subject subject = subjectService.subjectGet(lecture.getSno());
         List<Review> reviewList = reviewService.reviewList(lno);
         List<Curri> curriList = curriService.curriList(lno);
+
+        List<BoardMgn> boardMgnList = boardMgnService.getSubBoardMgn(lno);
+        model.addAttribute("boardMgnList", boardMgnList);
 
         model.addAttribute("reviewList", reviewList);
         model.addAttribute("subject", subject);

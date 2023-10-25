@@ -89,18 +89,22 @@
     <div class="row">
         <div class="col-lg-8 main-content">
             <h1>My learning</h1>
-            <video id="myVideo" src="${path }/resources/upload/${lecture.lvideo }" controls poster="${path }/resources/upload/${lecture.thumbnail }" style="width: 1200px; height: 780px;"></video>
+            <div style="text-align:center;">
+                <video id="myVideo" src="${path }/resources/upload/${lecture.lvideo }" controls poster="${path }/resources/upload/${lecture.thumbnail }" style="width: 1200px; height: 780px;"></video>
+            </div>
             <!-- Page content-->
             <div>
                 <div>
                     <div>
                     <!-- 탭 -->
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="tab-content" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" role="tab" aria-selected="true">강의내용</button>
-                                <button class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" type="button" role="tab" aria-selected="false">수강후기</button>
-                            </div>
-                        </nav>
+                    <ul class="nav nav-tabs mt-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#lect_con">강의내용</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#lect_review">수강후기</a>
+                        </li>
+                    </ul>
                     <!-- 강의 내용 -->
                     <article id="lect_con">
                         <header class="mb-4">
@@ -218,8 +222,11 @@
                             </c:forEach>
                         </ul>
                     </div>
-                    <button class="btn btn-primary" id="button-search" type="button">질문게시판</button>
-                    <div>질문게시판을 통해 담당 강사에게 강의 내용에 대한 질문을 할 수 있습니다!</div><br>
+
+                    <c:forEach var="boardMgn" items="${boardMgnList }">
+                        <a href="${path }/lecture/boardList.do?no=${boardMgn.bmNo }&lno=${lecture.lno }" class="btn btn-primary mt-1">${boardMgn.boardNm }</a><br>
+                        <c:if test="${fn:contains(boardMgn.boardNm, '질문')}"><div>${boardMgn.boardNm }을 통해 담당 강사에게 강의 내용에 대한 질문을 할 수 있습니다!</div><br></c:if>
+                    </c:forEach>
 
                     <p><a href="${path }/user/mypageLectList.do">나의강의실 이동</a></p>
                     <p><a href="${path}/">메인으로 이동</a></p>
@@ -234,9 +241,9 @@
 
 <script>
     // tab click 하면 지정 구역으로 이동
-    document.addEventListener('DOMContentLoaded', function() {
-        const lectureTab = document.getElementById('nav-home-tab');
-        const lectureContent = document.getElementById('tab-content');
+    /*document.addEventListener('DOMContentLoaded', function() {
+        const lectureTab = document.getElementById('tab-content');
+        const lectureContent = document.getElementById('lect_con');
         lectureTab.addEventListener('click', function() {
             const scrollPosition = lectureContent.offsetTop - 100;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
@@ -244,13 +251,13 @@
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-        const lectureTab = document.getElementById('nav-contact-tab');
-        const lectureReview = document.getElementById('tab-review');
+        const lectureTab = document.getElementById('tab-review');
+        const lectureReview = document.getElementById('lect_review');
         lectureTab.addEventListener('click', function() {
             const scrollPosition = lectureReview.offsetTop - 100;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
-    });
+    });*/
 </script>
 
 
