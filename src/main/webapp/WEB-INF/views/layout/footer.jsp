@@ -35,7 +35,6 @@
                             <p>나의 강의실</p>
                         </a>
                     </li>
-
                 </ul>
         </c:if>
         <c:if test="${sid ne 'admin'}">

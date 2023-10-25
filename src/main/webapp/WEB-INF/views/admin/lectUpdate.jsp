@@ -98,14 +98,13 @@
                                 <div class="form-group">
                                     <label class="floating-label d-block">강의 유형</label>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="lectureType0" name="lectureType" class="custom-control-input" onchange="changeType(this)"<c:if test="${lecture.lectureType == 0 }"> checked</c:if>>
+                                        <input type="radio" id="lectureType0" name="lectureType" class="custom-control-input" value="0"  onchange="changeType(this)"<c:if test="${lecture.lectureType == 0 }"> checked</c:if>>
                                         <label class="custom-control-label" for="lectureType0">온라인</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="lectureType1" name="lectureType" class="custom-control-input" onchange="changeType(this)"<c:if test="${lecture.lectureType == 1 }"> checked</c:if>>
+                                        <input type="radio" id="lectureType1" name="lectureType" class="custom-control-input" value="1" onchange="changeType(this)"<c:if test="${lecture.lectureType == 1 }"> checked</c:if>>
                                         <label class="custom-control-label" for="lectureType1">오프라인</label>
                                     </div>
-                                    <textarea name="content" id="content" class="form-control" rows="8" cols="100" maxlength="1400" >${lecture.content }</textarea>
                                     <script>
                                         $(document).ready(function() {
                                             $("#content").cleditor();
@@ -123,7 +122,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -131,6 +129,30 @@
                                     <input type="text" class="form-control d-inline-block" name="teacherNm" id="teacherNm" readonly style="width:calc(100% - 170px)" value="${lecture.teacherNm }">
                                     <input type="hidden" name="teacherId" id="teacherId">
                                     <button type="button" class="form-control ml-2 wid-150 d-inline-block" onclick="findTeacher()">찾기</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="floating-label d-block">강의 썸네일 업로드(10MB 이하)</label>
+                                    <input type="file" class="form-control uploadThumbnail" name="thumbnail" id="thumbnail" multiple>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="floating-label d-block">강의 영상 업로드(10MB 이하)</label>
+                                    <input type="file" class="form-control uploadThumbnail" name="lvideo" id="lvideo" multiple>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="floating-label d-block">교재 이미지 업로드(10MB 이하)</label>
+                                    <input type="file" class="form-control uploadThumbnail" name="bthumbnail" id="bthumbnail" multiple>
                                 </div>
                             </div>
                         </div>

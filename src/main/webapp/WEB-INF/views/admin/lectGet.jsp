@@ -63,8 +63,8 @@
                                 <div class="contact-info">
                                     <p style="font-size:20px; color:grey;"> ${lecture.subTitle }</p>
                                     <div class="border-bottom pb-3 mb-5">
-                                        <img src="${path}/resources/image/lecture/thumnail(6).png" width="400" height="225"><br>
-                                        <div><a class="btn btn-primary btn-lg px-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의영상</a></div>
+                                        <img src="${path }/resources/upload/${lecture.thumbnail }" width="400" height="225"><br>
+                                        <div><a class="btn btn-primary btn-lg px-3" id="vvv" href="${path }/resources/upload/${lecture.lvideo }" target="_blank" >강의영상</a></div>
                                     </div>
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">해당 과목 </strong>
@@ -105,7 +105,7 @@
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">강의 교재 </strong>
                                         <span>${lecture.bookname }</span>
-                                        <img src="${path}/resources/image/lecture/booksample.jpg" width="200px">
+                                        <img src="${path }/resources/upload/${lecture.bthumbnail }" width="200px">
                                     </p>
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">강의 가격 </strong>

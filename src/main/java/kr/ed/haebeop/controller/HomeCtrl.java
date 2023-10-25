@@ -84,4 +84,9 @@ public class HomeCtrl {
     public String policy(Model model) {
         return "/company/policy";
     }
+
+    @RequestMapping(value = "/game")
+    public String game(Model model) {
+        return "/game";
+    }
 }

@@ -19,14 +19,14 @@
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
-                <img src="${path }/resources/image/lecture/thumnail(1).png">
+                <img src="${path }/resources/upload/${lecture.thumbnail }" />
             </div>
             <div class="col-lg-6">
                 <h3 style="color: var(--main-color);">${subject.title } </h3>
                 <h1 class="display-5 fw-bolder text-white mb-2">${lecture.title }</h1>
                 <h3 class="lead text-white-50 mb-4">${lecture.subTitle }</h3>
                 <h3 class="lead text-white-50 mb-4">${lecture.teacherNm } 선생님</h3>
-                <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
+                <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/upload/${lecture.lvideo }" target="_blank" >강의 맛보기</a>
                 <a class="btn btn-warning btn-lg px-4" href="#lect_review" >수강생 후기</a>
             </div>
         </div>
@@ -60,7 +60,8 @@
 
                         <!-- 교재 추가 경로 변경 해야함 //비 -->
                         <div>강의 교재 </div>
-                        <div><img src="${path}/resources/image/lecture/booksample.jpg" width="300px"></div>
+                        <div>
+                            <img src="${path }/resources/upload/${lecture.bthumbnail }" width="300px />
                 </section>
             </article>
             <!-- 목차 -->
@@ -78,46 +79,6 @@
                 <div class="card bg-light">
                     <div class="card-body">
 
-                        <c:if test="${not empty sid && 0 != check}">
-                        <!-- 수강후기 입력칸-->
-                        <form action="${path }/review/add.do" method="post" class="mb-4">
-                            <input type="hidden" name="id" id="id"  value="${sid}">
-                            <input type="hidden" name="lno" id="lno" value="${lecture.lno}">
-                            <%-- 별점 테스트 중입니다 --%>
-                            <div class="star-rating">
-                                <label for="star"></label>
-                                <div class="star-icons">
-                                    <!-- 이 부분에 원하는 아이콘 또는 글꼴 아이콘을 넣을 수 있습니다 -->
-                                    <span class="star-icon click-star" data-star="1"></span>
-                                    <span class="star-icon click-star" data-star="2"></span>
-                                    <span class="star-icon click-star" data-star="3"></span>
-                                    <span class="star-icon click-star" data-star="4"></span>
-                                    <span class="star-icon click-star" data-star="5"></span>
-                                </div>
-                                <input type="hidden" name="star" id="star" value="5">
-                            </div>
-                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                            <script>
-                                $(document).ready(function () {
-                                    // 별 아이콘 클릭 시
-                                    $('.click-star').click(function () {
-                                        const selectedStar = $(this).data('star');
-                                        $('#star').val(selectedStar); // 'star' 입력란 값을 업데이트
-                                        // 선택한 별 이하의 별 아이콘을 색칠
-                                        $('.click-star').removeClass('filled');
-                                        $(this).prevAll().addBack().addClass('filled');
-                                    });
-                                    // 초기 별점 설정
-                                    const initialStar = $('#star').val();
-                                    $('.click-star').slice(0, initialStar).addClass('filled');
-                                });
-                            </script>
-                            <div class="review_con">
-                            <textarea name="content" id="content" class="form-control" rows="3" required placeholder="강의에 대한 평가를 빨간 하트로 표현해보세요!"></textarea>
-                            <span><input type="submit" class="btn btn-warning" value="등록"></span>
-                            </div>
-                        </form>
-                        </c:if>
 
 
                         <!-- 수강후기 리스트 -->
@@ -238,12 +199,5 @@
         });
     });
 </script>
-<!-- 동영상 열 때 크기 지정 -->
-<%-- 동영상 경로는 임시로 해놓은거라 최종 때 수정해야함 //비--%>
-<%-- <script>
-    document.getElementById('vvv').addEventListener('click', function() {
-        window.open('${path }/resources/image/common/videosample.mp4', 'Video Window', 'width=720, height=540');
-    });
-</script>--%>
 </body>
 </html>

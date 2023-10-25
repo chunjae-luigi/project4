@@ -89,7 +89,7 @@
     <div class="row">
         <div class="col-lg-8 main-content">
             <h1>My learning</h1>
-            <video id="myVideo" src="${path}/resources/image/lecture/lectvideo01.mp4" controls poster="${path}/resources/image/lecture/thumnail(4).png" style="width: 1200px; height: 780px;"></video>
+            <video id="myVideo" src="${path }/resources/upload/${lecture.lvideo }" controls poster="${path }/resources/upload/${lecture.thumbnail }" style="width: 1200px; height: 780px;"></video>
             <!-- Page content-->
             <div>
                 <div>
@@ -225,7 +225,8 @@
                         </ul>
                     </div>
                     <button class="btn btn-primary" id="button-search" type="button">질문게시판</button>
-                    <div>질문게시판을 통해 담당 강사에게 강의 내용에 대한 질문을 할 수 있습니다!</div>
+                    <div>질문게시판을 통해 담당 강사에게 강의 내용에 대한 질문을 할 수 있습니다!</div><br>
+                    <p><a href="${path}/">메인으로 이동</a></p>
                 </div>
 
             </div>

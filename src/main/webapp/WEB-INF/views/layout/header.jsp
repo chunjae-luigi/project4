@@ -6,7 +6,7 @@
 
 <div class="container-fluid bg-light position-relative shadow">
     <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
-        <a href="${path }/" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px"><i class="flaticon-043-teddy-bear"></i><span class="text-primary">
+        <a href="${path }/" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px"><span class="text-primary">
             <img src="${path}/resources/image/common/logo_main.png" alt="해법로고">
         </span></a>
 
@@ -29,6 +29,8 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
                     <div class="dropdown-menu rounded-0 m-0" id="boardMenuArea"></div>
                 </div>
+                <a href="${path }/game" class="nav-item nav-link"><i class="fas fa-gamepad" style="color: #000000;"></i></a>
+
             </div>
 
             <c:if test="${sid != null}">

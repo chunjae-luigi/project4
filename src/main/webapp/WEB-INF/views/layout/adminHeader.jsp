@@ -17,12 +17,6 @@
         <div class="navbar-content scroll-div " >
             <ul class="nav pcoded-inner-navbar ">
                 <li class="nav-item pcoded-menu-caption">
-                    <label>기본 관리</label>
-                </li>
-                <li class="nav-item">
-                    <a href="${path }/admin/" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">대시보드</span></a>
-                </li>
-                <li class="nav-item pcoded-menu-caption">
                     <label>회원 관리</label>
                 </li>
                 <li class="nav-item">
