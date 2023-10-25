@@ -12,39 +12,34 @@
 - 부팀원 [김이호](https://github.com/leeho7029)
 
 ## 💻기술 스택
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
-<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
-<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
-<img src="https://img.shields.io/badge/mariaDB-003545?style=for-the-badge&logo=mariaDB&logoColor=white"> 
-<img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"> 
-<img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black"> 
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> 
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> 
-<img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> 
-<img src="https://img.shields.io/badge/spring-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> 
-<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/mariaDB-003545?style=for-the-badge&logo=mariaDB&logoColor=white"> <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"> <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black"> <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
 
 
 ---
 ## 📝프로젝트 설계
 
+### UCD
+![UCD](/README/pro04_UCD.png)
 
-### 개념적 설계(UCD)
-
-### 논리적 설계(기능적 ERD)
-
+### 개념적 설계(ERD)
+![ERD](/README/pro04_logic.png)
 
 ### 물리적 설계(ERD 다이어그램)
-
+![ERD](/README/pro04_database.png)
 
 ### 클래스 다이어그램
-
+![Class class](/README/project4_class_board.png)
+![Class chat](/README/project4_class_chat.png)
+![Class lecture](/README/project4_class_lecture.png)
+![Class member](/README/project4_class_member.png)
+![Class reservation](/README/project4_class_reservation.png)
 
 
 ### 시퀀스 다이어그램
-
-
-
+![Sequence board](/README/pro04_sequence_board.png)
+![Sequence chat](/README/pro04_sequence_chat.png)
+![Sequence join login](/README/pro04_sequence_joinlogin.png)
+![Sequence reservation lecture](/README/pro04_sequence_reservationLecture.png)
 
 ---
 
