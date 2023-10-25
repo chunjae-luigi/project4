@@ -37,7 +37,7 @@
 <!-- Page content-->
 <div class="container mt-5">
     <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-12">
             <!-- 내부탭 -->
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
