@@ -14,6 +14,7 @@ public class LectureVO {
     private String subTitle;
     private int studentCnt;
     private String teacherNm;
+    private String teacherId;
     private String thumbnail;
     private int cost;
     private int sno;

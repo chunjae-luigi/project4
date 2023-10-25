@@ -51,6 +51,7 @@
     border-radius: 15px;
     padding: 25px;
     background: #FFF;
+    width: 100%;
 }
 /* 리스트 컨텐츠 */
 .border-01 {
@@ -100,11 +101,13 @@
 }
 
 .lect-frame .lect_info {
+    width: 500px;
     vertical-align:middle;
 }
 
 .lect-frame .img-box-wrap {
-    width: calc(60% - 35px);
+    width: 400px;
+    height: 225px;
     vertical-align: middle;
     vertical-align:middle;
     margin-right:30px;
@@ -113,6 +116,7 @@
     display: flex !important;
     margin: 30px !important;
     line-height: 30px !important;
+    width: 100%;
 }
 
 

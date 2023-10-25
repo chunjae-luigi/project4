@@ -13,12 +13,6 @@
     <link rel="stylesheet" href="${path }/resources/css/sub.css">
     <link rel="stylesheet" href="${path }/resources/css/lecture.css">
 
-    <style>
-        .lect-frame {
-
-        }
-
-    </style>
 </head>
 <body>
 
@@ -72,14 +66,21 @@
             </div>
 
             <div class="container" style="margin:0 auto !important;">
-                <c:forEach items="${lectureviewList }" var="lecture" varStatus="status">
+                <c:forEach items="${lectviewList }" var="lecture" varStatus="status">
                     <div class="lect-frame">
                         <div class="border-00">
                             <div class="d-inline-block img-box-wrap">
                                 <div class="img-box">
                                     <!-- 썸네일 - 누르면 상세페이지 이동 -->
-                                    <a href="${path }/lecture/get.do?lno=${lecture.lno }">
+                                    <c:choose>
+                                        <c:when test="${!empty thumbnail}">
                                         <img src="${path }/resources/upload/${lecture.thumbnail }" />
+                                        </c:when>
+                                        <c:otherwise>
+                                        <img src="${path }/resources/image/main/class-1.jpg" />
+                                        </c:otherwise>
+                                    </c:choose>
+
                                     </a>
                                 </div>
                             </div>
@@ -99,7 +100,7 @@
                 </c:forEach>
 
 
-                <c:if test="${empty lectureviewList }">
+                <c:if test="${empty lectviewList }">
                     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height:20vh;">
                         <h5 class="font-weight-bold">새로운 강의를 기대해주세요!</h5>
                     </div>

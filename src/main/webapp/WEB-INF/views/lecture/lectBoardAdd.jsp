@@ -54,27 +54,6 @@
                 <jsp:include page="../board/boardAddForm.jsp" />
             </div>
         </div>
-        <!-- 우측 탭-->
-        <div class="col-lg-3" id="lect_tab">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h2>${lecture.cost }원</h2>
-                    <a href="${path}/payment/payinsert.do?lno=${lecture.lno }" class="btn btn-primary" id="button-search" >바로 수강신청 하기</a>
-                </div>
-                <div class="card-body">
-                    <div class="input-group">
-                        <ul>
-                            <li><span>지식 공유자 :</span> 000</li>
-                            <li>난이도 : 입문</li>
-                            <li>1개의 코딩 연습</li>
-                            <li>수강기한 : 무제한</li>
-                            <li>수료증 : 발급</li>
-                        </ul>
-                        <div>지식공유자 답변이 제공되는 강의입니다</div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

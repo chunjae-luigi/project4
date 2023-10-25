@@ -137,12 +137,12 @@
                             <li>수강기한 : 무제한</li>
                             <li>수료증 : 발급</li>
                         </ul>
-                        <div>지식공유자 답변이 제공되는 강의입니다</div>
-                    </div>
+                    <div>지식공유자 답변이 제공되는 강의입니다</div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <jsp:include page="../layout/footer.jsp" />

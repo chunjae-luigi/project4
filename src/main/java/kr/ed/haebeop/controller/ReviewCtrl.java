@@ -37,15 +37,15 @@ public class ReviewCtrl {
     public String reviewInsert(HttpServletRequest request, RedirectAttributes rttr, Model model) throws Exception {
         Review review = new Review();
 
-        String word = request.getParameter("content");
+        String content = request.getParameter("content");
         BadWordFiltering filter = new BadWordFiltering();
-        Boolean pass = filter.check(word);
+        Boolean pass = filter.check(content);
 
             if(pass) {
-                word = "♡♡";
-                review.setContent(word);
+                content = "♡♡";
+                review.setContent(content);
             }else {
-                review.setContent(word);
+                review.setContent(content);
             }
                 review.setMemId(request.getParameter("id"));
 
