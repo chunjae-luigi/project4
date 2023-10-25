@@ -221,7 +221,7 @@ public class AdminCtrl {
     }
 
     @GetMapping("/lectList.do")
-    public String lectureviewList(HttpServletRequest request, Model model) throws Exception{
+    public String lectviewList(HttpServletRequest request, Model model) throws Exception{
         String type = request.getParameter("type");
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -229,7 +229,7 @@ public class AdminCtrl {
         LecturePage page = new LecturePage();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
-        int total = lectureService.lectureviewCount(page);
+        int total = lectureService.lectviewCount(page);
 
         page.makeBlock(curPage, total);
         page.makeLastPageNum(total);
@@ -240,9 +240,9 @@ public class AdminCtrl {
         model.addAttribute("page", page);
         model.addAttribute("curPage", curPage);
 
-        List<LectureVO> lectureviewList = lectureService.lectureviewList(page);
-        model.addAttribute("lectureviewList", lectureviewList);
-        for(LectureVO ldd : lectureviewList) {
+        List<LectureVO> lectviewList = lectureService.lectviewList(page);
+        model.addAttribute("lectviewList", lectviewList);
+        for(LectureVO ldd : lectviewList) {
             System.out.println(ldd.toString());
         }
         return "/admin/lectList";

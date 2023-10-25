@@ -107,8 +107,8 @@
                                             </a>
                                         </h3>
                                         <p> ${lecture.teacherNm } 선생님</p>
-                                        <a href="${path}/lecture/get.do?lno=${lecture.lno}#lect_review" class="btn btn-primary px-4 mr-2">후기작성</a>
-                                        <a href="" class="btn btn-success px-4">질문하기</a>
+                                        <a href="${path}/member/get.do?lno=${lecture.lno}#lect_review" class="btn btn-primary px-4 mr-2">후기작성</a>
+                                        <%-- 나연링크추가예정 <a href="" class="btn btn-success px-4">질문하기</a> --%>
                                     </div>
                                 </div>
                             </div>

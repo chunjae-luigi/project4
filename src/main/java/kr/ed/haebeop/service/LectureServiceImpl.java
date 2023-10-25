@@ -22,8 +22,8 @@ public class LectureServiceImpl implements LectureService{
     }
 
     @Override
-    public List<LectureVO> lectureviewList(Page page) throws Exception {
-        return lectureMapper.lectureviewList(page);
+    public List<LectureVO> lectviewList(Page page) throws Exception {
+        return lectureMapper.lectviewList(page);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class LectureServiceImpl implements LectureService{
     }
 
     @Override
-    public int lectureviewCount(Page page) throws Exception {
+    public int lectviewCount(Page page) throws Exception {
         return lectureMapper.lectureCount(page);
     }
 
