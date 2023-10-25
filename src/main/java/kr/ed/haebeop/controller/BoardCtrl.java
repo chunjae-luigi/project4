@@ -262,6 +262,12 @@ public class BoardCtrl {
         }
         model.addAttribute("commentList", commentList);
 
+        String pathUrl = "/board/list.do?no=" + board.getBmNo();
+        model.addAttribute("pathUrl", pathUrl);
+
+        String pathUpdateUrl = "/board/update.do?bno=" + bno;
+        model.addAttribute("pathUpdateUrl", pathUpdateUrl);
+
         return "/board/boardGet";
     }
 
@@ -286,6 +292,9 @@ public class BoardCtrl {
 
         List<FileDTO> fileList = filesService.fileListByPar(fileDTO);
         model.addAttribute("fileList", fileList);
+
+        String pathUrl = "/board/list.do?no=" + board.getBmNo();
+        model.addAttribute("pathUrl", pathUrl);
 
         return "/board/boardUpdate";
     }
