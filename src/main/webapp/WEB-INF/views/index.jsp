@@ -36,12 +36,14 @@
                 <c:forEach var="lec" items="${lectureList}">
                 <div class="col-lg-4">
                     <div class="card border-0 bg-light shadow-sm pb-2">
-
-
-                        <img class="card-img-top mb-2" src="${path }/resources/upload/${lecture.thumbnail }" alt="강의썸네일" />
-                        <img class="card-img-top mb-2" src="${path }/resources/image/main/class-1.jpg" alt="샘플썸네일" />
-
-
+                        <c:choose>
+                            <c:when test="${!empty thumbnail}">
+                                <img class="card-img-top mb-2" src="${path }/resources/upload/${lecture.thumbnail }" alt="강의썸네일" />
+                            </c:when>
+                            <c:otherwise>
+                                <img class="card-img-top mb-2" src="${path }/resources/image/lecture/dummy.png" alt="샘플썸네일"/>
+                            </c:otherwise>
+                        </c:choose>
                         <div class="card-body text-center">
                             <h4 class="card-title">${lec.lect_tit}</h4>
                             <p class="card-text">
@@ -51,9 +53,9 @@
                         <div class="card-footer bg-transparent py-4 px-5">
                             <div class="row border-bottom">
                                 <div class="col-6 py-1 text-right border-right">
-                                    <strong>교육 인원</strong>
+                                    <strong>교육 과목</strong>
                                 </div>
-                                <div class="col-6 py-1">${lec.studentCnt}</div>
+                                <div class="col-6 py-1">${lec.sub_tit}</div>
                             </div>
                             <div class="row border-bottom">
                                 <div class="col-6 py-1 text-right border-right">
@@ -77,7 +79,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card border-0 bg-light shadow-sm pb-2">
-                        <img class="card-img-top mb-2" src="${path }/resources/image/main/class-1.jpg" alt="강의1 이미지" />
+                        <img class="card-img-top mb-2" src="${path }/resources/image/lecture/dummy.png" alt="샘플썸네일"/>
                         <div class="card-body text-center">
                             <h4 class="card-title">강의 추가필요</h4>
                             <p class="card-text">
@@ -87,7 +89,7 @@
                         <div class="card-footer bg-transparent py-4 px-5">
                             <div class="row border-bottom">
                                 <div class="col-6 py-1 text-right border-right">
-                                    <strong>교육 인원</strong>
+                                    <strong>교육 과목</strong>
                                 </div>
                                 <div class="col-6 py-1">미정</div>
                             </div>
@@ -124,7 +126,14 @@
                 <c:forEach var="teacher" items="${teacherList }" varStatus="status">
                     <div class="col-md-6 col-lg-3 text-center team">
                         <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-                            <img class="img-fluid w-100" src="${path }/resources/upload/member/${teacher.fileNm }" alt="${teacher.nm }의 이미지" />
+                            <c:choose>
+                                <c:when test="${!empty thumbnail}">
+                                    <img class="img-fluid w-100" src="${path }/resources/upload/member/${teacher.fileNm }" alt="${teacher.nm }의 이미지" />
+                                </c:when>
+                                <c:otherwise>
+                                    <img class="img-fluid w-100" src="${path }/resources/image/lecture/teacher1.png" alt="강사 이미지" />
+                                </c:otherwise>
+                            </c:choose>
                             <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
                                 <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="tel:${teacher.tel }"><i class="fas fa-phone-alt"></i></a>
                                 <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="email:${teacher.email }" ><i class="fas fa-envelope"></i></a>
