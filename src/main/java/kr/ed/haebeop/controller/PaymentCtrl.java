@@ -70,7 +70,7 @@ public class PaymentCtrl {
     public String insertpaypro(@ModelAttribute Payment payment, @ModelAttribute Member member, Model model )throws Exception{
         paymentService.insertpayment(payment);
         memberService.firepoint(member);
-        return "redirect:/user/paylistMem.do";
+        return "redirect:/user/mypagePaylistMem.do";
     }
 
 

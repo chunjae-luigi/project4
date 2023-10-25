@@ -21,6 +21,8 @@ CREATE TABLE member(
 );
 
 INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
+INSERT INTO MEMBER VALUES(DEFAULT, 'kim1', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '김일일', 'kim1@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 2);
+
 
 
 CREATE TABLE memberMgn(

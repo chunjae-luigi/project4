@@ -264,7 +264,7 @@ public class AcademyCtrl {
         return "redirect: adminReservationSetting";
     }
 
-    @GetMapping("myReservation")
+    @GetMapping("mypageReservation.do")
     public String myReservation(Model model){
         String id = (String) session.getAttribute("sid");
 

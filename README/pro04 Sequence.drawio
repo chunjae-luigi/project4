@@ -2639,7 +2639,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="RY7oaWxRQlHjlerwgm_5-313" value="/user/paylistMem.do" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=10;" parent="1" source="RY7oaWxRQlHjlerwgm_5-260" target="RY7oaWxRQlHjlerwgm_5-255" edge="1">
+        <mxCell id="RY7oaWxRQlHjlerwgm_5-313" value="/user/mypagePaylistMem.do" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=10;" parent="1" source="RY7oaWxRQlHjlerwgm_5-260" target="RY7oaWxRQlHjlerwgm_5-255" edge="1">
           <mxGeometry x="0.0023" relative="1" as="geometry">
             <mxPoint x="351.5" y="3330" as="sourcePoint" />
             <mxPoint x="233.5" y="3330" as="targetPoint" />
