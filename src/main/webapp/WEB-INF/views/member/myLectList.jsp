@@ -96,7 +96,14 @@
                                 <div class="custom-block custom-block-full">
                                     <div class="custom-block-image-wrap">
                                         <a href="${path}/user/myLecture.do?lno=${lecture.lno}">
-                                            <img src="${path }/resources/upload/${lecture.thumbnail }" class="custom-block-image img-fluid">
+                                            <c:choose>
+                                                <c:when test="${!empty thumbnail}">
+                                                    <img src="${path }/resources/upload/${lecture.thumbnail }" width="300px">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <img src="${path }/resources/image/lecture/dummy.png" width="300px">
+                                                </c:otherwise>
+                                            </c:choose>
                                         </a>
                                     </div>
 
@@ -107,8 +114,6 @@
                                             </a>
                                         </h3>
                                         <p> ${lecture.teacherNm } 선생님</p>
-                                        <a href="${path}/member/get.do?lno=${lecture.lno}#lect_review" class="btn btn-primary px-4 mr-2">후기작성</a>
-                                        <%-- 나연링크추가예정 <a href="" class="btn btn-success px-4">질문하기</a> --%>
                                     </div>
                                 </div>
                             </div>

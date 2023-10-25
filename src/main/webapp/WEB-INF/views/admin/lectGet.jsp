@@ -104,8 +104,15 @@
 
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">강의 교재 </strong>
-                                        <span>${lecture.bookname }</span>
-                                        <img src="${path }/resources/upload/${lecture.bthumbnail }" width="200px">
+                                        <span>${lecture.bookname }</span><br>
+                                        <c:choose>
+                                            <c:when test="${!empty bthumbnail}">
+                                                <img src="${path }/resources/upload/${lecture.bthumbnail }" width="200px">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="${path }/resources/image/lecture/booksample.jpg" width="200px">
+                                            </c:otherwise>
+                                        </c:choose>
                                     </p>
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">강의 가격 </strong>
