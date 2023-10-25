@@ -79,46 +79,6 @@
                 <div class="card bg-light">
                     <div class="card-body">
 
-                        <c:if test="${not empty sid && 0 != check}">
-                        <!-- 수강후기 입력칸-->
-                        <form action="${path }/review/add.do" method="post" class="mb-4">
-                            <input type="hidden" name="id" id="id"  value="${sid}">
-                            <input type="hidden" name="lno" id="lno" value="${lecture.lno}">
-                            <%-- 별점 테스트 중입니다 --%>
-                            <div class="star-rating">
-                                <label for="star"></label>
-                                <div class="star-icons">
-                                    <!-- 이 부분에 원하는 아이콘 또는 글꼴 아이콘을 넣을 수 있습니다 -->
-                                    <span class="star-icon click-star" data-star="1"></span>
-                                    <span class="star-icon click-star" data-star="2"></span>
-                                    <span class="star-icon click-star" data-star="3"></span>
-                                    <span class="star-icon click-star" data-star="4"></span>
-                                    <span class="star-icon click-star" data-star="5"></span>
-                                </div>
-                                <input type="hidden" name="star" id="star" value="5">
-                            </div>
-                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                            <script>
-                                $(document).ready(function () {
-                                    // 별 아이콘 클릭 시
-                                    $('.click-star').click(function () {
-                                        const selectedStar = $(this).data('star');
-                                        $('#star').val(selectedStar); // 'star' 입력란 값을 업데이트
-                                        // 선택한 별 이하의 별 아이콘을 색칠
-                                        $('.click-star').removeClass('filled');
-                                        $(this).prevAll().addBack().addClass('filled');
-                                    });
-                                    // 초기 별점 설정
-                                    const initialStar = $('#star').val();
-                                    $('.click-star').slice(0, initialStar).addClass('filled');
-                                });
-                            </script>
-                            <div class="review_con">
-                            <textarea name="content" id="content" class="form-control" rows="3" required placeholder="강의에 대한 평가를 빨간 하트로 표현해보세요!"></textarea>
-                            <span><input type="submit" class="btn btn-warning" value="등록"></span>
-                            </div>
-                        </form>
-                        </c:if>
 
 
                         <!-- 수강후기 리스트 -->

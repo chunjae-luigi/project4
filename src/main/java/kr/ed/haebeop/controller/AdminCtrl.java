@@ -252,8 +252,7 @@ public class AdminCtrl {
         String msg = "";
 
         ServletContext application = request.getSession().getServletContext();
-        //String realPath = application.getRealPath("/resources/upload");       // 운영 서버
-        String realPath = "D:\\seulbee\\uploadtest";     // 개발 서버
+        String realPath = application.getRealPath("/resources/upload");       // 운영 서버
 
         Lecture lecture = new Lecture();
         lecture.setTitle(request.getParameter("title"));
@@ -376,13 +375,14 @@ public class AdminCtrl {
 
     @PostMapping("lectUpdate.do")
     public String lectureUpdatepro(HttpServletRequest request, Model model, MultipartFile thumbnail, MultipartFile lvideo, MultipartFile bthumbnail) throws Exception{
-        String msg = "";
+
+        int lno = Integer.parseInt(request.getParameter("lno"));
 
         ServletContext application = request.getSession().getServletContext();
-        //String realPath = application.getRealPath("/resources/upload");       // 운영 서버
-        String realPath = "D:\\seulbee\\uploadtest";     // 개발 서버
+        String realPath = application.getRealPath("/resources/upload");       // 운영 서버
 
         Lecture lecture = new Lecture();
+        lecture.setLno(lno);
         lecture.setTitle(request.getParameter("title"));
         lecture.setSubTitle(request.getParameter("subTitle"));
         lecture.setContent(request.getParameter("content"));
@@ -395,6 +395,8 @@ public class AdminCtrl {
         lecture.setStudentCnt(Integer.parseInt(request.getParameter("studentCnt")));
         lecture.setCost(Integer.parseInt(request.getParameter("cost")));
         lecture.setSno(Integer.parseInt(request.getParameter("sno")));
+
+
 
         if(thumbnail != null) {
             String originalThumbnailname = thumbnail.getOriginalFilename();

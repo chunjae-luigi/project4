@@ -98,14 +98,13 @@
                                 <div class="form-group">
                                     <label class="floating-label d-block">강의 유형</label>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="lectureType0" name="lectureType" class="custom-control-input" onchange="changeType(this)"<c:if test="${lecture.lectureType == 0 }"> checked</c:if>>
+                                        <input type="radio" id="lectureType0" name="lectureType" class="custom-control-input" value="0"  onchange="changeType(this)"<c:if test="${lecture.lectureType == 0 }"> checked</c:if>>
                                         <label class="custom-control-label" for="lectureType0">온라인</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="lectureType1" name="lectureType" class="custom-control-input" onchange="changeType(this)"<c:if test="${lecture.lectureType == 1 }"> checked</c:if>>
+                                        <input type="radio" id="lectureType1" name="lectureType" class="custom-control-input" value="1" onchange="changeType(this)"<c:if test="${lecture.lectureType == 1 }"> checked</c:if>>
                                         <label class="custom-control-label" for="lectureType1">오프라인</label>
                                     </div>
-                                    <textarea name="content" id="content" class="form-control" rows="8" cols="100" maxlength="1400" >${lecture.content }</textarea>
                                     <script>
                                         $(document).ready(function() {
                                             $("#content").cleditor();

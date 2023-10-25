@@ -3,12 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>HEABEOP::게임</title>
   <jsp:include page="./layout/head.jsp" />
-  <link rel="stylesheet" href="${path }/resources/css/sub.css">
   <style>
     body {
       padding-top: 100px;
@@ -25,7 +25,10 @@
   </style>
 </head>
 <body>
-<h2>수강생 여러분, 잠시 쉬어가세요!</h3><br>
+<a href="${path }/" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px"><span class="text-primary">
+            <img src="${path}/resources/image/common/logo_main.png" alt="해법로고">
+        </span></a>
+  <h2>수강생 여러분, 잠시 쉬어가세요!</h2><br>
   <h1>SHOOTING GAME</h1>
   <h3>move : → ↑ ← ↓  &nbsp;&nbsp;|&nbsp;&nbsp;  attack : spacebar</h3>
 
@@ -34,7 +37,7 @@
   <div id="score">Score: 0</div>
   <div id="timer">게임 시간 : 1분</div> <!-- 타이머 추가 -->
   <a href="${path}/">메인으로 이동</a>
-
+</body>
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
@@ -56,9 +59,9 @@
       y: canvas.height / 2,
       width: 64,
       height: 64,
-      speed: 8, // 이동 속도 조정
-      acceleration: 1.5, // 가속도 추가
-      maxSpeed: 10, // 최대 이동 속도 설정
+      speed: 30, // 이동 속도 조정
+      acceleration: 10, // 가속도 추가
+      maxSpeed: 40, // 최대 이동 속도 설정
     };
 
     const bullets = [];
@@ -179,13 +182,13 @@
         y: Math.floor(Math.random() * (canvas.height - 50)),
         width: 50,
         height: 50,
-        speed: 4,
+        speed: 6,
       };
       enemies.push(enemy);
 
       // 30초가 지나면 enemy를 더 자주 생성
       if (gameDuration < 30) {
-        setTimeout(spawnEnemy, 1000); // 1초마다 enemy 생성
+        setTimeout(spawnEnemy, 500); // 0.5초마다 enemy 생성
       } else {
         setTimeout(spawnEnemy, 2000); // 2초마다 enemy 생성
       }
@@ -224,7 +227,7 @@
             y: player.y + player.height / 7,
             width: 50,
             height: 50,
-            speed: 10 ,
+            speed: 8 ,
           });
           break;
       }

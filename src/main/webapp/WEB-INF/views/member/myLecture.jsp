@@ -225,7 +225,8 @@
                         </ul>
                     </div>
                     <button class="btn btn-primary" id="button-search" type="button">질문게시판</button>
-                    <div>질문게시판을 통해 담당 강사에게 강의 내용에 대한 질문을 할 수 있습니다!</div>
+                    <div>질문게시판을 통해 담당 강사에게 강의 내용에 대한 질문을 할 수 있습니다!</div><br>
+                    <p><a href="${path}/">메인으로 이동</a></p>
                 </div>
 
             </div>
