@@ -17,7 +17,7 @@ public class UserInterceptor implements HandlerInterceptor {
 
         boolean flag = false;
 
-        if(uri.contains("insert")||uri.contains("delete")||uri.contains("update")||uri.contains("chat")){
+        if(uri.contains("insert")||uri.contains("delete")||uri.contains("update")||uri.contains("chat")||uri.contains("mypage")){
             if(sid==null){
                 flag = true;
             }

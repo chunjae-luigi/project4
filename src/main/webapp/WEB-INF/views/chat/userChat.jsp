@@ -119,7 +119,10 @@
 
     let createRoom = function(){
         let roomName = $("#roomName").val();
-        if(roomName==="") {return false;}
+        if(roomName==="") {
+            alert("채팅방 이름이 비어있습니다.");
+            return false;
+        }
 
         $.ajax({
             type: "POST",
@@ -239,6 +242,7 @@
         let name = $("#chatRoomName").text();
 
         if(msg===""){
+            alert("메시지 입력칸이 비어있습니다.");
             return false;
         } else {
             send(makeChat("TALK", name, username, msg));
