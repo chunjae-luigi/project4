@@ -184,7 +184,6 @@
             <img src="${path}/resources/image/main/movingca_remove.png" alt="움직이는 이미지" id="moving-image">
         </div>
         <img src="${path}/resources/image/main/pikachu.png" alt="피카츄"  class="ant" >
-        <script src="ant.js"></script>
     </c:if>
     <jsp:include page="./layout/footer.jsp" />
     <script src="${path }/resources/js/owl.carousel.min.js"></script>
