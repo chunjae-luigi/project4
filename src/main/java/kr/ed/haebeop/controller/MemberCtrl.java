@@ -105,16 +105,22 @@ public class MemberCtrl {
         boolean pass = memberService.loginPro(id, pw);
         if (pass) {
             session.setAttribute("sid", id);
-            return "redirect:/";
+            model.addAttribute("msg", "로그인 되었습니다.");
+            model.addAttribute("url", "/");
+            return "/layout/alert";
         } else {
-            return "redirect:/user/login.do?msg=fail";
+            model.addAttribute("msg", "로그인 정보가 맞지 않습니다.");
+            model.addAttribute("url", "/user/login.do?msg=fail");
+            return "/layout/alert";
         }
     }
 
     @GetMapping("/logout.do")
     public String logout(Model model) throws Exception {
         session.invalidate();
-        return "redirect:/";
+        model.addAttribute("msg", "로그아웃 되었습니다.");
+        model.addAttribute("url", "/");
+        return "/layout/alert";
     }
 
     @GetMapping("/fire")
