@@ -6,7 +6,7 @@
 
 <div class="container-fluid bg-light position-relative shadow">
     <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
-        <a href="${path }/" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px"><i class="flaticon-043-teddy-bear"></i><span class="text-primary">
+        <a href="${path }/" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px"><span class="text-primary">
             <img src="${path}/resources/image/common/logo_main.png" alt="해법로고">
         </span></a>
 
