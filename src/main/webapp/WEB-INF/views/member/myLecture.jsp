@@ -98,9 +98,7 @@
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <button class="nav-link active" id="tab-content" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" role="tab" aria-selected="true">강의내용</button>
-                                <button class="nav-link" id="tab-curri" data-bs-toggle="tab" data-bs-target="#tab-curri" type="button" role="tab" aria-selected="false">커리큘럼</button>
                                 <button class="nav-link" id="tab-review" data-bs-toggle="tab" data-bs-target="#tab-review" type="button" role="tab" aria-selected="false">수강후기</button>
-                                <button class="nav-link" id="tab-qna" data-bs-toggle="tab" data-bs-target="#tab-qna" type="button" role="tab"  aria-selected="false">질문하기</button>
                             </div>
                         </nav>
                     <!-- 강의 내용 -->
@@ -203,7 +201,7 @@
             </div>
         </div>
         <!-- 우측 탭-->
-        <div class="col-lg-4" id="lect_tab">
+        <div class="col-lg-4 mypageLayout" id="lect_tab">
             <div class="card mb-4">
                 <div class="card-header">
                     <h2>커리큘럼</h2>
@@ -238,16 +236,7 @@
     // tab click 하면 지정 구역으로 이동
     document.addEventListener('DOMContentLoaded', function() {
         const lectureTab = document.getElementById('nav-home-tab');
-        const lectureContent = document.getElementById('lect_con');
-        lectureTab.addEventListener('click', function() {
-            const scrollPosition = lectureContent.offsetTop - 100;
-            window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const lectureTab = document.getElementById('nav-profile-tab');
-        const lectureContent = document.getElementById('lect_list');
+        const lectureContent = document.getElementById('tab-content');
         lectureTab.addEventListener('click', function() {
             const scrollPosition = lectureContent.offsetTop - 100;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
@@ -256,9 +245,9 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         const lectureTab = document.getElementById('nav-contact-tab');
-        const lectureContent = document.getElementById('lect_review');
+        const lectureReview = document.getElementById('tab-review');
         lectureTab.addEventListener('click', function() {
-            const scrollPosition = lectureContent.offsetTop - 100;
+            const scrollPosition = lectureReview.offsetTop - 100;
             window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
         });
     });
