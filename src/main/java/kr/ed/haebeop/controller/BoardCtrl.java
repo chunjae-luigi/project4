@@ -123,7 +123,7 @@ public class BoardCtrl {
     public String boardAddPro(HttpServletRequest request, Board board, Model model, RedirectAttributes rttr, List<MultipartFile> uploadFiles) throws Exception {
         String author = (String) session.getAttribute("sid");
         int bmNo = Integer.parseInt(request.getParameter("no"));
-        
+
         BoardMgn boardMgn = boardMgnService.getBoardMgn(bmNo);
 
         String word = board.getTitle();
@@ -150,7 +150,6 @@ public class BoardCtrl {
         board.setBmNo(bmNo);
 
         int bno = boardService.boardInsert(board);
-
 
         if (uploadFiles != null) {
             ServletContext application = request.getSession().getServletContext();
