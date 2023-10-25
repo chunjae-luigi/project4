@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ed.haebeop.persistence.PaymentMapper">
 
-    <select id="paymentList_Member" resultType="kr.ed.haebeop.domain.Payment">
-        SELECT * FROM payment where id=#{id}
+    <select id="paymentList_Member" resultType="integer">
+        SELECT count(*) FROM payment where id=#{id} and pno=#{pno}
     </select>
 
     <select id="paymentList_Lecture" resultType="kr.ed.haebeop.domain.Payment">
