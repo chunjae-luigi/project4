@@ -105,6 +105,12 @@ public class BoardCtrl {
 
         model.addAttribute("addCheck", addCheck);
 
+        String pathUrl = "/board/list.do";
+        model.addAttribute("pathUrl", pathUrl);
+
+        String pathPageUrl = "/board/list.do?no=" + bmNo;
+        model.addAttribute("pathPageUrl", pathPageUrl);
+
         return "/board/boardList";
     }
 
@@ -132,15 +138,16 @@ public class BoardCtrl {
         Boolean pass = filter.check(title);
         Boolean pass2 = filter.check(content);
 
-        if(pass) {
-                model.addAttribute("msg", "욕설은 등록할 수 없습니다.");
-                model.addAttribute("url", "/board/list.do");
-                return "/layout/alert";
-        } else if(pass2){
-                model.addAttribute("msg", "욕설은 등록할 수 없습니다.");
-                model.addAttribute("url", "/board/list.do");
-                return "/layout/alert";
-        }else {
+        if(pass || pass2) {
+            model.addAttribute("msg", "욕설은 등록할 수 없습니다.");
+            if(boardMgn.getDepth() != 1) {
+                model.addAttribute("url", "/lecture/boardList.do?no=" + bmNo);
+                model.addAttribute("url2", "lno=" + boardMgn.getPar());
+            } else {
+                model.addAttribute("url", "/board/list.do?no=" + bmNo);
+            }
+            return "/layout/alert";
+        } else {
             board.setTitle(title);
             board.setContent(content);
             board.setAuthor(author);
@@ -190,7 +197,12 @@ public class BoardCtrl {
 
             }
 
-            return "redirect:/board/list.do?no=" + bmNo;
+            if(boardMgn.getDepth() != 1) {
+                return "redirect:/lecture/boardList.do?no=" + bmNo + "&lno=" + boardMgn.getPar();
+            } else {
+                return "redirect:/board/list.do?no=" + bmNo;
+            }
+
         }
     }
 
@@ -309,15 +321,20 @@ public class BoardCtrl {
         Boolean pass = filter.check(title);
         Boolean pass2 = filter.check(content);
 
-        if(pass) {
+        BoardVO boardVO = boardService.boardGetInfo(bno);
+        BoardMgn boardMgn = boardMgnService.getBoardMgn(boardVO.getBmNo());
+
+        if(pass || pass2) {
             model.addAttribute("msg", "욕설은 등록할 수 없습니다.");
-            model.addAttribute("url", "/board/list.do");
+
+            if(boardMgn.getDepth() != 1) {
+                model.addAttribute("url", "/lecture/boardGet.do?bno=" + bno);
+            } else {
+                model.addAttribute("url", "/board/get.do?bno=" + bno);
+            }
+
             return "/layout/alert";
-        } else if(pass2){
-            model.addAttribute("msg", "욕설은 등록할 수 없습니다.");
-            model.addAttribute("url", "/board/list.do");
-            return "/layout/alert";
-        }else {
+        } else {
 
             Board board = new Board();
 
@@ -326,7 +343,6 @@ public class BoardCtrl {
             board.setBno(bno);
 
             boardService.boardUpdate(board);
-
 
             if (uploadFiles != null) {
                 ServletContext application = request.getSession().getServletContext();
@@ -367,7 +383,12 @@ public class BoardCtrl {
                     filesService.filesInsert(fileDTO);                                  // DB 등록
                 }
             }
-            return "redirect:/board/get.do?bno=" + bno;
+
+            if(boardMgn.getDepth() != 1) {
+                return "redirect:/lecture/boardGet.do?bno=" + bno;
+            } else {
+                return "redirect:/board/get.do?bno=" + bno;
+            }
         }
     }
 
@@ -377,9 +398,10 @@ public class BoardCtrl {
         int bno = Integer.parseInt(request.getParameter("bno"));
 
         BoardVO boardVO = boardService.boardGet(true, bno, sid);
-
+        int bmNo = boardVO.getBmNo();
+        BoardMgn boardMgn = boardMgnService.getBoardMgn(bmNo);
         if(sid.equals(boardVO.getAuthor()) || sid.equals("admin")) {
-            int bmNo = boardVO.getBmNo();
+
             FileDTO fileDTO = new FileDTO();
             fileDTO.setPar(bno);
             fileDTO.setToUse(toUseFileByBoard);
@@ -391,13 +413,21 @@ public class BoardCtrl {
                     filesService.filesDeleteAll(bno);
                 }
             }
-
             commentService.commentDeleteAll(bno);
             boardService.boardDelete(bno);
-            return "redirect:/board/list.do?no=" + bmNo;
+
+            if(boardMgn.getDepth() != 1) {
+                return "redirect:/lecture/boardList.do?no=" + bmNo + "&lno=" + boardMgn.getPar();
+            } else {
+                return "redirect:/board/list.do?no=" + bmNo;
+            }
         } else {
             rttr.addFlashAttribute("msg", "fail");
-            return "redirect:/board/get.do?bno=" + bno;
+            if(boardMgn.getDepth() != 1) {
+                return "redirect:/lecture/boardGet.do?bno=" + bno;
+            } else {
+                return "redirect:/board/get.do?bno=" + bno;
+            }
         }
     }
 
@@ -421,16 +451,16 @@ public class BoardCtrl {
 
         CommentVO commentVO = commentService.commentInsert(comment);
 
-            String originNm = commentVO.getNm();
-            if (!originNm.equals("관리자")) {
-                String nm = originNm.substring(0, 1);
-                for (int i = 0; i < originNm.length() - 2; i++) {
-                    nm += "*";
-                }
-                nm += originNm.substring(originNm.length() - 1);
-                commentVO.setNm(nm);
+        String originNm = commentVO.getNm();
+        if (!originNm.equals("관리자")) {
+            String nm = originNm.substring(0, 1);
+            for (int i = 0; i < originNm.length() - 2; i++) {
+                nm += "*";
             }
-            return commentVO;
+            nm += originNm.substring(originNm.length() - 1);
+            commentVO.setNm(nm);
+        }
+        return commentVO;
     }
 
     @PostMapping("commentRemove.do")
@@ -454,7 +484,6 @@ public class BoardCtrl {
         BadWordFiltering filter = new BadWordFiltering();
         Boolean pass = filter.check(answer);
 
-
         if (pass) {
             answer = "♡♡";
             board.setAnswer(answer);
@@ -464,7 +493,6 @@ public class BoardCtrl {
 
         board.setBno(bno);
         boardService.qnaUpdate(board);
-
 
         return answer;
 
