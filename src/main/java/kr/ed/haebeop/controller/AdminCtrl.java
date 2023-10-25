@@ -4,6 +4,8 @@ import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.util.LecturePage;
 import kr.ed.haebeop.util.Page;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
+@Slf4j
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminCtrl {
 
@@ -59,9 +63,11 @@ public class AdminCtrl {
     @Autowired
     private PaymentService paymentService;
 
+    private final ChatService chatService;
+
     @GetMapping("/")
     public String home(Model model) throws Exception {
-        return "/admin/home";
+        return "redirect:/admin/memberConf.do";
     }
 
     @GetMapping("/memberConf.do")
