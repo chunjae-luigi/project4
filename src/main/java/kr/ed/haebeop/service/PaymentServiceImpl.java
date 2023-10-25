@@ -17,7 +17,10 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     public int paymentList_Member (String id, int pno) throws Exception {
-        return paymentMapper.paymentList_Member(id, pno);
+        Payment pay = new Payment();
+        pay.setId(id);
+        pay.setPno(pno);
+        return paymentMapper.paymentList_Member(pay);
     }
 
     @Override

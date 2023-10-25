@@ -179,7 +179,6 @@ CREATE TABLE payment(
     id VARCHAR(20) NOT NULL,                        -- 회원 아이디
     pno int default 0,                              -- 강의 공유번호
     plec VARCHAR(100) NOT NULL,                     -- 강의 이름
-    tecid VARCHAR(100) NOT NULL,                    -- 선생님 아이디
     tecnm VARCHAR(100) NOT NULL,                    -- 선생님 이름
     booknm VARCHAR(100),                            -- 책 교재명
     pmethod VARCHAR(10),                            -- 결제 방법 - [1:신용카드 | 2:체크카드 | 3:계좌이체]
