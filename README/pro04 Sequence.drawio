@@ -2408,7 +2408,7 @@
         <mxCell id="RY7oaWxRQlHjlerwgm_5-287" value="Lecture, Payment Sequence" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="11.5" y="3000" width="670" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="RY7oaWxRQlHjlerwgm_5-288" value="lectureviewList(page)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=10;" parent="1" source="RY7oaWxRQlHjlerwgm_5-257" target="RY7oaWxRQlHjlerwgm_5-269" edge="1">
+        <mxCell id="RY7oaWxRQlHjlerwgm_5-288" value="lectviewList(page)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=10;" parent="1" source="RY7oaWxRQlHjlerwgm_5-257" target="RY7oaWxRQlHjlerwgm_5-269" edge="1">
           <mxGeometry x="-0.0026" width="80" relative="1" as="geometry">
             <mxPoint x="408.5" y="3360" as="sourcePoint" />
             <mxPoint x="563" y="3380" as="targetPoint" />
@@ -2428,7 +2428,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="RY7oaWxRQlHjlerwgm_5-290" value="lectureviewList(page)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=10;" parent="1" source="RY7oaWxRQlHjlerwgm_5-269" target="RY7oaWxRQlHjlerwgm_5-275" edge="1">
+        <mxCell id="RY7oaWxRQlHjlerwgm_5-290" value="lectviewList(page)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=10;" parent="1" source="RY7oaWxRQlHjlerwgm_5-269" target="RY7oaWxRQlHjlerwgm_5-275" edge="1">
           <mxGeometry width="80" relative="1" as="geometry">
             <mxPoint x="553.5" y="3140" as="sourcePoint" />
             <mxPoint x="663.5" y="3140" as="targetPoint" />
@@ -2437,7 +2437,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="RY7oaWxRQlHjlerwgm_5-291" value="lectureviewList(page)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=10;" parent="1" source="RY7oaWxRQlHjlerwgm_5-275" target="RY7oaWxRQlHjlerwgm_5-281" edge="1">
+        <mxCell id="RY7oaWxRQlHjlerwgm_5-291" value="lectviewList(page)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;fontSize=10;" parent="1" source="RY7oaWxRQlHjlerwgm_5-275" target="RY7oaWxRQlHjlerwgm_5-281" edge="1">
           <mxGeometry x="-0.0004" width="80" relative="1" as="geometry">
             <mxPoint x="678.5" y="3110" as="sourcePoint" />
             <mxPoint x="758.5" y="3120" as="targetPoint" />

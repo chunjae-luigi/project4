@@ -72,7 +72,7 @@
             </div>
 
             <div class="container" style="margin:0 auto !important;">
-                <c:forEach items="${lectureviewList }" var="lecture" varStatus="status">
+                <c:forEach items="${lectviewList }" var="lecture" varStatus="status">
                     <div class="lect-frame">
                         <div class="border-00">
                             <div class="d-inline-block img-box-wrap">
@@ -99,7 +99,7 @@
                 </c:forEach>
 
 
-                <c:if test="${empty lectureviewList }">
+                <c:if test="${empty lectviewList }">
                     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height:20vh;">
                         <h5 class="font-weight-bold">새로운 강의를 기대해주세요!</h5>
                     </div>

@@ -53,7 +53,7 @@ public class LectureCtrl {
 
     //회원이 보는 강의 리스트
     @GetMapping("/list.do")
-    public String lectureviewList(HttpServletRequest request, Model model) throws Exception{
+    public String lectviewList(HttpServletRequest request, Model model) throws Exception{
         int sno = request.getParameter("sno") != null ? Integer.parseInt(request.getParameter("sno")) : 0;
 
         String type = request.getParameter("type");
@@ -64,7 +64,7 @@ public class LectureCtrl {
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
         page.setSno(sno);
-        int total = lectureService.lectureviewCount(page);
+        int total = lectureService.lectviewCount(page);
 
         page.makeBlock(curPage, total);
         page.makeLastPageNum(total);
@@ -76,8 +76,8 @@ public class LectureCtrl {
         model.addAttribute("curPage", curPage);
         model.addAttribute("sno", sno);
 
-        List<LectureVO> lectureviewList = lectureService.lectureviewList(page);
-        model.addAttribute("lectureviewList", lectureviewList);
+        List<LectureVO> lectviewList = lectureService.lectviewList(page);
+        model.addAttribute("lectviewList", lectviewList);
 
         return "/lecture/lectList";
     }

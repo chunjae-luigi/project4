@@ -55,7 +55,7 @@
                         <div class="card-header">
                             <h5>강의 내역</h5>
                         </div>
-                        <c:if test="${!empty lectureviewList }">
+                        <c:if test="${!empty lectviewList }">
                             <div class="card-body table-border-style">
                                 <div class="table-responsive">
                                     <table class="table table-striped">
@@ -68,7 +68,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${lectureviewList }" var="lecture" varStatus="status">
+                                        <c:forEach items="${lectviewList }" var="lecture" varStatus="status">
                                             <tr>
                                                 <td class="text-center">${status.count }</td>
                                                 <td class="text-center">${lecture.sub_tit }</td>
@@ -101,7 +101,7 @@
                                 </nav>
                             </div>
                         </c:if>
-                        <c:if test="${empty lectureviewList }">
+                        <c:if test="${empty lectviewList }">
                             <p class="f-18 f-w-600 text-center mt-3">강의를 등록해주세요!</p>
                         </c:if>
                     </div>
