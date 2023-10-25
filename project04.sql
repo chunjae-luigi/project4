@@ -173,7 +173,7 @@ CREATE VIEW mylect AS (SELECT
                       FROM lecture l, payment p
                       WHERE l.lno = p.pno);
 
-SELECT * FROM mylect WHERE id = 'seulbee0224';
+-- SELECT * FROM mylect WHERE id = 'seulbee0224';
 -- ============================ 슬비끝  ===================================
 
 CREATE TABLE payment(

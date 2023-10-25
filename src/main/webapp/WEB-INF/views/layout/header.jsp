@@ -15,7 +15,7 @@
 
 
             <div class="navbar-nav font-weight-bold mx-auto py-0">
-                <div class="nav-item dropdown board_drop_menu">
+                <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">해법</a>
                     <div class="dropdown-menu rounded-0 m-0">
                         <a href="${path }/intro" class="dropdown-item">해법소개</a>
