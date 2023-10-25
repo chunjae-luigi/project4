@@ -202,7 +202,7 @@ public class AcademyCtrl {
 
         reservationService.reservationUpdateStatus(reservation);
 
-        return "redirect: reservationList";
+        return "redirect: adminReservationList";
     }
 
     @GetMapping("adminReservationSetting")
