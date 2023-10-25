@@ -62,6 +62,9 @@ public class MemberCtrl {
     @Autowired
     private SubjectService subjectService;
 
+    @Autowired
+    private BoardMgnService boardMgnService;
+
     @GetMapping("term.do")
     public String term(Model model) throws Exception {
         return "/member/joinTerm";
@@ -165,7 +168,7 @@ public class MemberCtrl {
         return "redirect:/user/myPage.do";
     }
 
-    @GetMapping("/removeUser.do")
+    @GetMapping("/mypageRemoveUser.do")
     public String memberDeletePost(HttpServletRequest request, Model model) throws Exception {
         String sid = (String) session.getAttribute("sid");
         String id = request.getParameter("id");
@@ -177,7 +180,7 @@ public class MemberCtrl {
         }
     }
 
-    @GetMapping("/changePw.do")
+    @GetMapping("/mypageChangePw.do")
     public String memberUpdatePw(Model model) throws Exception {
         String sid = (String) session.getAttribute("sid");
         Member member = memberService.memberGet(sid);
@@ -185,7 +188,7 @@ public class MemberCtrl {
         return "/member/myPageEditPw";
     }
 
-    @PostMapping("/changePw.do")
+    @PostMapping("/mypageChangePw.do")
     public String memberUpdatePwPro(HttpServletRequest request, Model model, RedirectAttributes rttr) throws Exception {
         String sid = (String) session.getAttribute("sid");
 
@@ -204,14 +207,14 @@ public class MemberCtrl {
                 return "redirect:/user/myPage.do";
             } else {
                 rttr.addFlashAttribute("msg", "fail");
-                return "redirect:/user/changePw.do";
+                return "redirect:/user/mypageChangePw.do";
             }
         } else {
             return "redirect:/user/myPage.do";
         }
     }
 
-    @GetMapping("/changeGrade.do")
+    @GetMapping("/mypageChangeGrade.do")
     public String memberUpgrade(Model model) throws Exception {
         String sid = (String) session.getAttribute("sid");
         Member member = memberService.memberGet(sid);
@@ -228,7 +231,7 @@ public class MemberCtrl {
         return "/member/myPageUpgrade";
     }
 
-    @PostMapping("/changeGrade.do")
+    @PostMapping("/mypageChangeGrade.do")
     public String memberUpgradePro(HttpServletRequest request, List<MultipartFile> uploadFiles) throws Exception {
         String sid = (String) session.getAttribute("sid");
         //String checkTeacher = request.getParameter("checkTeacher") != null ? request.getParameter("checkTeacher") : "'";
@@ -345,7 +348,7 @@ public class MemberCtrl {
     }
 
     //멤버 payList
-    @GetMapping("/paylistMem.do")
+    @GetMapping("/mypagePaylistMem.do")
     public String paymentMem(HttpServletRequest request, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
 
@@ -378,7 +381,7 @@ public class MemberCtrl {
 
 
     //회원의 강의 상세보기
-    @GetMapping("myLecture.do")
+    @GetMapping("mypageLecture.do")
     public String myLecture(HttpServletRequest request, Model model) throws Exception{
         int lno = Integer.parseInt(request.getParameter("lno"));
 
@@ -387,6 +390,9 @@ public class MemberCtrl {
         Subject subject = subjectService.subjectGet(lecture.getSno());
         List<Review> reviewList = reviewService.reviewList(lno);
         List<Curri> curriList = curriService.curriList(lno);
+
+        List<BoardMgn> boardMgnList = boardMgnService.getSubBoardMgn(lno);
+        model.addAttribute("boardMgnList", boardMgnList);
 
         model.addAttribute("reviewList", reviewList);
         model.addAttribute("subject", subject);
@@ -397,7 +403,7 @@ public class MemberCtrl {
 
     }
 
-    @GetMapping("/mylectList.do")
+    @GetMapping("/mypageLectList.do")
     public String myPage(HttpServletRequest request, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
         List<LectlistVO> mylectList = lectureService.mylectList(id);

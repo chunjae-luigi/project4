@@ -22,10 +22,10 @@
                                 <p>마이페이지</p>
                             </div>
                             <ul class="my-2" style="width:100%;">
-                                <li><a href="${path }/user/myPage.do" class="active px-4 py-2">나의 정보</a></li>
-                                <li><a href="${path }/user/mylectList.do" class="px-4 py-2">나의 강의실</a></li>
-                                <li><a href="${path }/user/paylistMem.do" class="px-4 py-2">나의 결제정보</a></li>
-                                <li><a href="${path }/academy/myReservation" class="px-4 py-2">나의 예약정보</a></li>
+                                <li><a href="${path }/user/myPage.do" class="px-4 py-2">나의 정보</a></li>
+                                <li><a href="${path }/user/mypageLectList.do" class="px-4 py-2">나의 강의실</a></li>
+                                <li><a href="${path }/user/mypagePaylistMem.do" class="px-4 py-2">나의 결제정보</a></li>
+                                <li><a href="${path }/academy/mypageReservation.do" class="active px-4 py-2">나의 예약정보</a></li>
                             </ul>
                         </div>
                     </div>

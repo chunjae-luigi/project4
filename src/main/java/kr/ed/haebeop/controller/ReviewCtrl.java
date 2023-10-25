@@ -53,7 +53,7 @@ public class ReviewCtrl {
                 review.setLno(Integer.parseInt(request.getParameter("lno")));
                 reviewService.reviewAdd(review);
 
-                return "redirect:/user/myLecture.do?lno=" + request.getParameter("lno");
+                return "redirect:/user/mypageLecture.do?lno=" + request.getParameter("lno");
         }
 
 

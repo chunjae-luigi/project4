@@ -4,6 +4,10 @@
 <%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
+<style>
+    .quickMenu ul {margin-bottom: 0;}
+</style>
+
 <!-- quickMenu -->
 <c:if test="${sid != null}">
 <div class="quickMenu">
@@ -26,12 +30,12 @@
                         </a>
                     </li>
                     <li class="quick03">
-                        <a href="${path }/chat/home">
+                        <a href="${path }/chat/userChat">
                             <p>채팅</p>
                         </a>
                     </li>
                     <li class="quick04">
-                        <a href="${path }/user/mylectList.do">
+                        <a href="${path }/user/mypageLectList.do">
                             <p>나의 강의실</p>
                         </a>
                     </li>
@@ -45,7 +49,7 @@
                         </a>
                     </li>
                     <li class="quick02">
-                        <a href="${path }/user/mylectList.do">
+                        <a href="${path }/user/mypageLectList.do">
                             <p>나의 강의실</p>
                         </a>
                     </li>
@@ -72,7 +76,6 @@
                     <a href="${path }/intro">회사소개</a>
                     <a href="${path }/map">오시는길</a>
                     <a href="${path }/policy">이용약관</a>
-                    <a href="#">개인정보처리방침</a>
                 </div>
                 <dl>
                     <dt>(주)해법 </dt>
