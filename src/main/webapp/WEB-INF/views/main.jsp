@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,17 +103,17 @@
 </head>
 <body>
 <div class="main" >
-    <img src="../../resources/image/mainbanner.png" alt="매인배너">
+    <img src="${path}/resources/image/main/mainbanner.png" alt="매인배너">
 </div>
 <div class="all">
-    <img src="../../resources/image/hh.jpg" alt="배경">
+    <img src="${path}/resources/image/main/mainback.png" alt="배경">
 </div>
 <div class="container">
     <div class="sort n1"  aria-hidden="true" tabindex="0">
         <a href="https://github.com/chunjae-luigi/project1" class="hover_wr" tabindex="-1">
             <div class="hover_inner">
                 <div class="img_box">
-                    <img src="../../resources/image/main/pc_sec02_img01.png" alt="사진">
+                    <img src="${path}/resources/image/main/pc_sec02_img01.png" alt="사진">
                 </div>
                 <div class="txt_wr">
                     <p class="tit ko">Project 1</p>
@@ -121,7 +125,7 @@
         <a href="https://github.com/chunjae-luigi/project2" class="hover_wr" tabindex="-1">
             <div class="hover_inner">
                 <div class="img_box">
-                    <img src="../../resources/image/main/pc_sec02_img02.png" alt="사진">
+                    <img src="${path}/resources/image/main/pc_sec02_img02.png" alt="사진">
                 </div>
                 <div class="txt_wr">
                     <p class="tit ko">Project 2</p>
@@ -133,7 +137,7 @@
         <a href="http://10.41.1.198:8080/team43/" class="hover_wr" tabindex="-1">
             <div class="hover_inner">
                 <div class="img_box">
-                    <img src="../../resources/image/main/pc_sec02_img03.png" alt="사진">
+                    <img src="${path}/resources/image/main/pc_sec02_img03.png" alt="사진">
                 </div>
                 <div class="txt_wr">
                     <p class="tit ko">Project 3</p>
@@ -145,7 +149,7 @@
         <a href="http://10.41.1.198:8080/team44/" class="hover_wr" tabindex="-1">
             <div class="hover_inner">
                 <div class="img_box">
-                    <img src="../../resources/image/main/pc_sec02_img04.png" alt="사진">
+                    <img src="${path}/resources/image/main/pc_sec02_img04.png" alt="사진">
                 </div>
                 <div class="txt_wr">
                     <p class="tit ko">Project 4</p>
@@ -156,7 +160,7 @@
     <div class="sort n5" aria-hidden="true" tabindex="-1">
         <div class="hover_inner">
             <div class="img_box">
-                <img src="../../resources/image/main/pc_sec02_img05.png" alt="사진">
+                <img src="${path}/resources/image/main/pc_sec02_img05.png" alt="사진">
             </div>
             <div class="txt_wr">
                 <p class="tit ko">To be <br>Continued</p>
@@ -172,28 +176,28 @@
         <div class="hover_inner">
             <div class="img_cover">
 
-                <img src="../../resources/image/main/white.png" alt="사진">
+                <img src="${path}/resources/image/main/white.png" alt="사진">
             </div>
         </div>
     </div>
     <div class="sugar m2"  data-num="n2" aria-hidden="true" tabindex="-1">
         <div class="hover_inner">
             <div class="img_cover">
-                <img src="../../resources/image/main/white.png" alt="사진">
+                <img src="${path}/resources/image/main/white.png" alt="사진">
             </div>
         </div>
     </div>
     <div class="sugar m3" data-num="n3" aria-hidden="true" tabindex="-1">
         <div class="hover_inner">
             <div class="img_cover">
-                <img src="../../resources/image/main/white.png" alt="사진">
+                <img src="${path}/resources/image/main/white.png" alt="사진">
             </div>
         </div>
     </div>
     <div class="sugar m4" data-num="n4" aria-hidden="true" tabindex="-1">
         <div class="hover_inner">
             <div class="img_cover">
-                <img src="../../resources/image/main/white.png" alt="사진">
+                <img src="${path}/resources/image/main/white.png" alt="사진">
             </div>
         </div>
     </div>
@@ -201,7 +205,7 @@
         <a href="https://namu.wiki/w/To%20Be%20Continued" class="hover_wr" tabindex="-1">
             <div class="hover_inner">
                 <div class="img_cover">
-                    <img src="../../resources/image/main/white.png" alt="사진">
+                    <img src="${path}/resources/image/main/white.png" alt="사진">
                 </div>
             </div>
         </a>
