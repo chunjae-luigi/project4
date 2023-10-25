@@ -23,8 +23,6 @@ CREATE TABLE member(
 INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
 INSERT INTO MEMBER VALUES(DEFAULT, 'kim1', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '김일일', 'kim1@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 2);
 
-
-
 CREATE TABLE memberMgn(
 	mmNo INT AUTO_INCREMENT PRIMARY KEY,				-- 회원 등급 요청 번호 : 자동 발생
 	author VARCHAR(20) NOT NULL,							-- 회원 아이디
@@ -82,12 +80,6 @@ CREATE TABLE files(
 	uploadDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,	-- 파일 업로드 일자
 	toUse VARCHAR(100) NOT NULL										-- 사용 테이블
 );
--- 여기까지는 완료
-
--- ========================= 슬비시작(내가 헷갈려서 썼어 지워도돼ㅠ_ㅠ) ================================
--- 강의, 과목, 목차, 수강후기, 수강
-
-USE team44;
 
 CREATE TABLE lecture(
 	lno INT AUTO_INCREMENT PRIMARY KEY,			-- 강의 번호 : 자동증가
@@ -111,15 +103,10 @@ CREATE TABLE lecture(
 
 insert into lecture(lno, title, subTitle, content, lectureType, studentCnt, teacherId, teacherNm, sno, cost) value(default, '강의 제목 1번', '강의 소제목 1번', '강의 내용 1번', 0, 20, 'qeee', '선생님 이름', 1, 50000);
 
-SELECT * FROM lecture;
-
-
 CREATE TABLE subject(
    sno INT PRIMARY KEY AUTO_INCREMENT,	-- 과목번호
    title VARCHAR(200) NOT NULL			-- 과목명
 );
-
-SELECT * FROM member;
 
 INSERT INTO subject VALUES (1, "영어");
 INSERT INTO subject VALUES (2, "수학");
@@ -163,18 +150,6 @@ CREATE VIEW lectview AS (SELECT
                              subject.title AS sub_tit
                         FROM lecture INNER JOIN subject
                                                 ON lecture.sno = subject.sno);
--- 유저 나의 강의실
-CREATE VIEW mylect AS (SELECT
-                           l.lno AS lno,
-                           l.title AS title,
-                           l.teacherNm AS teacherNm,
-                           l.thumbnail AS thumbnail,
-                           p.id AS id
-                      FROM lecture l, payment p
-                      WHERE l.lno = p.pno);
-
-SELECT * FROM mylect WHERE id = 'seulbee0224';
--- ============================ 슬비끝  ===================================
 
 CREATE TABLE payment(
     payno INT AUTO_INCREMENT PRIMARY KEY,		    -- 결제 번호 : 자동증가
@@ -191,7 +166,16 @@ CREATE TABLE payment(
     status INT DEFAULT 0,                           -- 배송상태 - [0:결제완료 | 1:결제완료 | 2:결제취소]
     resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP()   -- 결제 등록일
 );
--- ============================ 교진끝  ===================================
+
+-- 유저 나의 강의실
+CREATE VIEW mylect AS (SELECT
+                           l.lno AS lno,
+                           l.title AS title,
+                           l.teacherNm AS teacherNm,
+                           l.thumbnail AS thumbnail,
+                           p.id AS id
+                      FROM lecture l, payment p
+                      WHERE l.lno = p.pno);
 
 CREATE TABLE reservation(
     rno INT AUTO_INCREMENT PRIMARY KEY,

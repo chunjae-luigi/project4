@@ -72,7 +72,6 @@
                     <a href="${path }/intro">회사소개</a>
                     <a href="${path }/map">오시는길</a>
                     <a href="${path }/policy">이용약관</a>
-                    <a href="#">개인정보처리방침</a>
                 </div>
                 <dl>
                     <dt>(주)해법 </dt>
