@@ -182,6 +182,9 @@ public class LectureCtrl {
         String pathUrl = "/lecture/boardList.do";
         model.addAttribute("pathUrl", pathUrl);
 
+        String pathPageUrl = "/lecture/boardList.do?no=" + bmNo + "&lno=" + lno;
+        model.addAttribute("pathPageUrl", pathPageUrl);
+
         return "/lecture/lectBoardList";
     }
 

@@ -105,6 +105,12 @@ public class BoardCtrl {
 
         model.addAttribute("addCheck", addCheck);
 
+        String pathUrl = "/board/list.do";
+        model.addAttribute("pathUrl", pathUrl);
+
+        String pathPageUrl = "/board/list.do?no=" + bmNo;
+        model.addAttribute("pathPageUrl", pathPageUrl);
+
         return "/board/boardList";
     }
 
@@ -123,79 +129,80 @@ public class BoardCtrl {
     public String boardAddPro(HttpServletRequest request, Board board, Model model, RedirectAttributes rttr, List<MultipartFile> uploadFiles) throws Exception {
         String author = (String) session.getAttribute("sid");
         int bmNo = Integer.parseInt(request.getParameter("no"));
-
         BoardMgn boardMgn = boardMgnService.getBoardMgn(bmNo);
 
-        String word = board.getTitle();
-        String word2 = board.getContent();
-
         BadWordFiltering filter = new BadWordFiltering();
-        Boolean pass = filter.check(word);
-        Boolean pass2 = filter.check(word2);
+        String title = board.getTitle();
+        String content = board.getContent();
 
-        if(pass) {
-            word = "♡♡";
-            board.setTitle(word);
-            board.setContent(word2);
-        } else if(pass2){
-            word2 = "♡♡";
-            board.setTitle(word);
-            board.setContent(word2);
-        }else{
-            board.setTitle(word);
-            board.setContent(word2);
-        }
+        Boolean pass = filter.check(title);
+        Boolean pass2 = filter.check(content);
 
-        board.setAuthor(author);
-        board.setBmNo(bmNo);
-
-        int bno = boardService.boardInsert(board);
-
-        if (uploadFiles != null) {
-            ServletContext application = request.getSession().getServletContext();
-            String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
-            //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
-            Date date = new Date();
-            String dateFolder = sdf.format(date);
-
-            File uploadPath = new File(realPath, dateFolder);
-            if (!uploadPath.exists()) {
-                uploadPath.mkdirs();
+        if(pass || pass2) {
+            model.addAttribute("msg", "욕설은 등록할 수 없습니다.");
+            if(boardMgn.getDepth() != 1) {
+                model.addAttribute("url", "/lecture/boardList.do?no=" + bmNo);
+                model.addAttribute("url2", "lno=" + boardMgn.getPar());
+            } else {
+                model.addAttribute("url", "/board/list.do?no=" + bmNo);
             }
+            return "/layout/alert";
+        } else {
+            board.setTitle(title);
+            board.setContent(content);
+            board.setAuthor(author);
+            board.setBmNo(bmNo);
 
-            for (MultipartFile multipartFile : uploadFiles) {
-                if (multipartFile.isEmpty()) {
-                    continue;
+            int bno = boardService.boardInsert(board);
+
+
+            if (uploadFiles != null) {
+                ServletContext application = request.getSession().getServletContext();
+                String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
+                //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
+                Date date = new Date();
+                String dateFolder = sdf.format(date);
+
+                File uploadPath = new File(realPath, dateFolder);
+                if (!uploadPath.exists()) {
+                    uploadPath.mkdirs();
                 }
 
-                String originalFilename = multipartFile.getOriginalFilename();
-                UUID uuid = UUID.randomUUID();
-                String uploadFilename = uuid.toString() + "_" + originalFilename;
+                for (MultipartFile multipartFile : uploadFiles) {
+                    if (multipartFile.isEmpty()) {
+                        continue;
+                    }
 
-                FileDTO fileDTO = new FileDTO();
-                fileDTO.setPar(bno);
-                fileDTO.setSaveFolder(dateFolder);
+                    String originalFilename = multipartFile.getOriginalFilename();
+                    UUID uuid = UUID.randomUUID();
+                    String uploadFilename = uuid.toString() + "_" + originalFilename;
 
-                String fileType = multipartFile.getContentType();
-                String[] fileTypeArr = fileType.split("/");
-                fileDTO.setFileType(fileTypeArr[0]);
+                    FileDTO fileDTO = new FileDTO();
+                    fileDTO.setPar(bno);
+                    fileDTO.setSaveFolder(dateFolder);
 
-                fileDTO.setOriginNm(originalFilename);
-                fileDTO.setSaveNm(uploadFilename);
-                fileDTO.setToUse("board");
+                    String fileType = multipartFile.getContentType();
+                    String[] fileTypeArr = fileType.split("/");
+                    fileDTO.setFileType(fileTypeArr[0]);
 
-                multipartFile.transferTo(new File(uploadPath, uploadFilename));     // 서버에 파일 업로드 수행
-                filesService.filesInsert(fileDTO);                                  // DB 등록
+                    fileDTO.setOriginNm(originalFilename);
+                    fileDTO.setSaveNm(uploadFilename);
+                    fileDTO.setToUse("board");
+
+                    multipartFile.transferTo(new File(uploadPath, uploadFilename));     // 서버에 파일 업로드 수행
+                    filesService.filesInsert(fileDTO);                                  // DB 등록
+                }
+
             }
 
-        }
+            if(boardMgn.getDepth() != 1) {
+                return "redirect:/lecture/boardList.do?no=" + bmNo + "&lno=" + boardMgn.getPar();
+            } else {
+                return "redirect:/board/list.do?no=" + bmNo;
+            }
 
-        if(boardMgn.getDepth() != 1) {
-            return "redirect:/lecture/boardList.do?no=" + bmNo + "&lno=" + boardMgn.getPar();
-        } else {
-            return "redirect:/board/list.do?no=" + bmNo;
         }
     }
 
@@ -306,77 +313,82 @@ public class BoardCtrl {
     public String boardUpdatePro(HttpServletRequest request, List<MultipartFile> uploadFiles, RedirectAttributes rttr, Model model) throws Exception {
         String sid = session.getAttribute("sid") != null ? (String) session.getAttribute("sid") : "";
         int bno = Integer.parseInt(request.getParameter("bno"));
+
+        BadWordFiltering filter = new BadWordFiltering();
         String title = request.getParameter("title");
         String content = request.getParameter("content");
 
-        Board board = new Board();
-
-        BadWordFiltering filter = new BadWordFiltering();
         Boolean pass = filter.check(title);
         Boolean pass2 = filter.check(content);
-
-        if(pass) {
-            title = "♡♡";
-            board.setTitle(title);
-            board.setContent(content);
-        } else if(pass2){
-            content = "♡♡";
-            board.setTitle(title);
-            board.setContent(content);
-        }else{
-            board.setTitle(title);
-            board.setContent(content);
-        }
-        board.setBno(bno);
-        boardService.boardUpdate(board);
-
-        if(uploadFiles != null) {
-            ServletContext application = request.getSession().getServletContext();
-            String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
-            //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
-            Date date = new Date();
-            String dateFolder = sdf.format(date);
-
-            File uploadPath = new File(realPath, dateFolder);
-            if (!uploadPath.exists()) {
-                uploadPath.mkdirs();
-            }
-
-            for (MultipartFile multipartFile : uploadFiles) {
-                if (multipartFile.isEmpty()) {
-                    continue;
-                }
-
-                String originalFilename = multipartFile.getOriginalFilename();
-                UUID uuid = UUID.randomUUID();
-                String uploadFilename = uuid.toString() + "_" + originalFilename;
-
-                FileDTO fileDTO = new FileDTO();
-                fileDTO.setPar(bno);
-                fileDTO.setSaveFolder(dateFolder);
-
-                String fileType = multipartFile.getContentType();
-                String[] fileTypeArr = fileType.split("/");
-                fileDTO.setFileType(fileTypeArr[0]);
-
-                fileDTO.setOriginNm(originalFilename);
-                fileDTO.setSaveNm(uploadFilename);
-                fileDTO.setToUse("board");
-
-                multipartFile.transferTo(new File(uploadPath, uploadFilename));     // 서버에 파일 업로드 수행
-                filesService.filesInsert(fileDTO);                                  // DB 등록
-            }
-        }
 
         BoardVO boardVO = boardService.boardGetInfo(bno);
         BoardMgn boardMgn = boardMgnService.getBoardMgn(boardVO.getBmNo());
 
-        if(boardMgn.getDepth() != 1) {
-            return "redirect:/lecture/boardGet.do?bno=" + bno;
+        if(pass || pass2) {
+            model.addAttribute("msg", "욕설은 등록할 수 없습니다.");
+
+            if(boardMgn.getDepth() != 1) {
+                model.addAttribute("url", "/lecture/boardGet.do?bno=" + bno);
+            } else {
+                model.addAttribute("url", "/board/get.do?bno=" + bno);
+            }
+
+            return "/layout/alert";
         } else {
-            return "redirect:/board/get.do?bno=" + bno;
+
+            Board board = new Board();
+
+            board.setTitle(title);
+            board.setContent(content);
+            board.setBno(bno);
+
+            boardService.boardUpdate(board);
+
+            if (uploadFiles != null) {
+                ServletContext application = request.getSession().getServletContext();
+                String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
+                //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
+                Date date = new Date();
+                String dateFolder = sdf.format(date);
+
+                File uploadPath = new File(realPath, dateFolder);
+                if (!uploadPath.exists()) {
+                    uploadPath.mkdirs();
+                }
+
+                for (MultipartFile multipartFile : uploadFiles) {
+                    if (multipartFile.isEmpty()) {
+                        continue;
+                    }
+
+                    String originalFilename = multipartFile.getOriginalFilename();
+                    UUID uuid = UUID.randomUUID();
+                    String uploadFilename = uuid.toString() + "_" + originalFilename;
+
+                    FileDTO fileDTO = new FileDTO();
+                    fileDTO.setPar(bno);
+                    fileDTO.setSaveFolder(dateFolder);
+
+                    String fileType = multipartFile.getContentType();
+                    String[] fileTypeArr = fileType.split("/");
+                    fileDTO.setFileType(fileTypeArr[0]);
+
+                    fileDTO.setOriginNm(originalFilename);
+                    fileDTO.setSaveNm(uploadFilename);
+                    fileDTO.setToUse("board");
+
+                    multipartFile.transferTo(new File(uploadPath, uploadFilename));     // 서버에 파일 업로드 수행
+                    filesService.filesInsert(fileDTO);                                  // DB 등록
+                }
+            }
+
+            if(boardMgn.getDepth() != 1) {
+                return "redirect:/lecture/boardGet.do?bno=" + bno;
+            } else {
+                return "redirect:/board/get.do?bno=" + bno;
+            }
         }
     }
 
@@ -386,10 +398,10 @@ public class BoardCtrl {
         int bno = Integer.parseInt(request.getParameter("bno"));
 
         BoardVO boardVO = boardService.boardGet(true, bno, sid);
-        BoardMgn boardMgn = boardMgnService.getBoardMgn(boardVO.getBmNo());
-
+        int bmNo = boardVO.getBmNo();
+        BoardMgn boardMgn = boardMgnService.getBoardMgn(bmNo);
         if(sid.equals(boardVO.getAuthor()) || sid.equals("admin")) {
-            int bmNo = boardVO.getBmNo();
+
             FileDTO fileDTO = new FileDTO();
             fileDTO.setPar(bno);
             fileDTO.setToUse(toUseFileByBoard);
@@ -401,7 +413,6 @@ public class BoardCtrl {
                     filesService.filesDeleteAll(bno);
                 }
             }
-
             commentService.commentDeleteAll(bno);
             boardService.boardDelete(bno);
 
@@ -412,7 +423,6 @@ public class BoardCtrl {
             }
         } else {
             rttr.addFlashAttribute("msg", "fail");
-
             if(boardMgn.getDepth() != 1) {
                 return "redirect:/lecture/boardGet.do?bno=" + bno;
             } else {
@@ -429,7 +439,7 @@ public class BoardCtrl {
 
         BadWordFiltering filter = new BadWordFiltering();
         Boolean pass = filter.check(content);
-        String msg = "";
+
         if(pass) {
             content = "♡♡";
             comment.setContent(content);
@@ -441,16 +451,16 @@ public class BoardCtrl {
 
         CommentVO commentVO = commentService.commentInsert(comment);
 
-            String originNm = commentVO.getNm();
-            if (!originNm.equals("관리자")) {
-                String nm = originNm.substring(0, 1);
-                for (int i = 0; i < originNm.length() - 2; i++) {
-                    nm += "*";
-                }
-                nm += originNm.substring(originNm.length() - 1);
-                commentVO.setNm(nm);
+        String originNm = commentVO.getNm();
+        if (!originNm.equals("관리자")) {
+            String nm = originNm.substring(0, 1);
+            for (int i = 0; i < originNm.length() - 2; i++) {
+                nm += "*";
             }
-            return commentVO;
+            nm += originNm.substring(originNm.length() - 1);
+            commentVO.setNm(nm);
+        }
+        return commentVO;
     }
 
     @PostMapping("commentRemove.do")
@@ -473,7 +483,6 @@ public class BoardCtrl {
 
         BadWordFiltering filter = new BadWordFiltering();
         Boolean pass = filter.check(answer);
-        String msg = "";
 
         if (pass) {
             answer = "♡♡";
@@ -484,7 +493,6 @@ public class BoardCtrl {
 
         board.setBno(bno);
         boardService.qnaUpdate(board);
-
 
         return answer;
 
