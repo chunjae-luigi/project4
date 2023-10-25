@@ -123,7 +123,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -131,6 +130,30 @@
                                     <input type="text" class="form-control d-inline-block" name="teacherNm" id="teacherNm" readonly style="width:calc(100% - 170px)" value="${lecture.teacherNm }">
                                     <input type="hidden" name="teacherId" id="teacherId">
                                     <button type="button" class="form-control ml-2 wid-150 d-inline-block" onclick="findTeacher()">찾기</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="floating-label d-block">강의 썸네일 업로드(10MB 이하)</label>
+                                    <input type="file" class="form-control uploadThumbnail" name="thumbnail" id="thumbnail" multiple>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="floating-label d-block">강의 영상 업로드(10MB 이하)</label>
+                                    <input type="file" class="form-control uploadThumbnail" name="lvideo" id="lvideo" multiple>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="floating-label d-block">교재 이미지 업로드(10MB 이하)</label>
+                                    <input type="file" class="form-control uploadThumbnail" name="bthumbnail" id="bthumbnail" multiple>
                                 </div>
                             </div>
                         </div>

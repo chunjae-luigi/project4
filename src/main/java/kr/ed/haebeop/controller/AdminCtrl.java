@@ -375,23 +375,48 @@ public class AdminCtrl {
     }
 
     @PostMapping("lectUpdate.do")
-    public String lectureUpdatepro(HttpServletRequest request, Model model) throws Exception{
+    public String lectureUpdatepro(HttpServletRequest request, Model model, MultipartFile thumbnail, MultipartFile lvideo, MultipartFile bthumbnail) throws Exception{
+        String msg = "";
 
-        int lno = Integer.parseInt(request.getParameter("lno"));
         ServletContext application = request.getSession().getServletContext();
-
-        //String realPath = application.getRealPath("/resources/upload");                   //운영 서버
-        String realPath = "D:\\seulbee\\uploadtest";   //개발 서버
+        //String realPath = application.getRealPath("/resources/upload");       // 운영 서버
+        String realPath = "D:\\seulbee\\uploadtest";     // 개발 서버
 
         Lecture lecture = new Lecture();
-        lecture.setLno(lno);
         lecture.setTitle(request.getParameter("title"));
         lecture.setSubTitle(request.getParameter("subTitle"));
         lecture.setContent(request.getParameter("content"));
+        lecture.setBthumbnail(request.getParameter("thumbnail"));
+        lecture.setTeacherId(request.getParameter("teacherId"));
         lecture.setTeacherId(request.getParameter("teacherNm"));
-        lecture.setCost(Integer.parseInt(request.getParameter("cost")));
         lecture.setBookname(request.getParameter("bookname"));
+        lecture.setBthumbnail(request.getParameter("bthumbnail"));
+        lecture.setLectureType(Integer.parseInt(request.getParameter("lectureType")));
+        lecture.setStudentCnt(Integer.parseInt(request.getParameter("studentCnt")));
+        lecture.setCost(Integer.parseInt(request.getParameter("cost")));
         lecture.setSno(Integer.parseInt(request.getParameter("sno")));
+
+        if(thumbnail != null) {
+            String originalThumbnailname = thumbnail.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            String uploadThumbnailname = uuid.toString() + "_" + originalThumbnailname;
+            thumbnail.transferTo(new File(realPath, uploadThumbnailname));     //파일 등록
+            lecture.setThumbnail(uploadThumbnailname);
+        }
+        if(lvideo != null) {
+            String originalFilename = lvideo.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            String uploadFilename = uuid.toString() + "_" + originalFilename;
+            lvideo.transferTo(new File(realPath, uploadFilename));     //파일 등록
+            lecture.setLvideo(uploadFilename);
+        }
+        if(bthumbnail != null) {
+            String originalFilename = bthumbnail.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            String uploadFilename = uuid.toString() + "_" + originalFilename;
+            bthumbnail.transferTo(new File(realPath, uploadFilename));     //파일 등록
+            lecture.setBthumbnail(uploadFilename);
+        }
 
         lectureService.lectureUpdate(lecture);
         return "redirect:/admin/lectList.do";
