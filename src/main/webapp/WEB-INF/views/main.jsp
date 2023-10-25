@@ -1,6 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,117 +6,224 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>시작페이지</title>
     <style>
+
         * {
-            background-color:cornsilk;
-            overflow: hidden;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
         }
 
-
-        h1{
-            position: absolute;
-            top:5%;
-            text-align: center;
-            left: 38%;
-        }
-        p{
-            position: absolute;
-            top:11%;
-            text-align: center;
-            left: 42%;
-        }
-
-        #container {
-            overflow: hidden;
-            display: block;
+        body{
             margin: 0;
             padding: 0;
             height: auto;
-            width: 100%;
-        }
-
-        .item {
-            border: none;
-            font-weight: bolder;
-            font-size: 30px;
-            position: absolute;
+            width: 1000px;
             overflow: hidden;
         }
 
-        #left {
+        .all{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 600px;
             position: absolute;
-            height: 55%;
-            width: 50%;
-            float: left;
+            overflow: hidden;
+            left: 0;
+            top: 0;
+        }
+
+
+        .container{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            justify-content: space-between;
+            position: absolute;
+            overflow: hidden;
             left: 0;
             bottom: 0;
-            background-size: cover;
-            background-color: #8aefdb;
-
         }
 
-        #left:hover {
-            transform: scale(1.1);
-            transition-duration: 1.5s;
-        }
-
-        #right {
+        .container2{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            justify-content: space-between;
             position: absolute;
-            height: 55%;
-            width: 50%;
-            float: right;
-            right: 0;
-            bottom: 0;
+            overflow: hidden;
+            left: 0;
+            bottom: -5%;
+        }
+
+        .sort {
+            height: 450px;
+            width: 20%;
+            border: 0.1px solid #d1d1e0;
             background-size: cover;
-            background-color: #f9e8a0;
+        }
+        .sugar {
+            height: 450px;
+            width: 20%;
+            background-size: cover;
+            border: 0.01px solid #d1d1e0;
+            z-index: 10;
         }
 
-        #right:hover {
-            transform: scale(1.1);
-            transition-duration: 1.5s;
-        }
-
-        #search-container {
+        .txt_wr {
+            z-index: 100;
+            margin-left: 11%;
+            width: 20%;
+            bottom: 10%;
             position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            text-decoration: none;
+            font-size: 30px;
+            font-weight: bold;
+            color:cornflowerblue;
+        }
+        .main{
+            position: absolute;
+            left: 15%;
+            top: 5%;
+            z-index: 100;
         }
 
-        #search-box {
-            margin-left: 10px;
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            width: 400px;
-            font-size: 18px;
-        }
-        #search-button {
-            background-color: #0074b7;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            margin-left: 10px;
-            cursor: pointer;
-        }
+
 
     </style>
 </head>
 <body>
-    <h1>성장하는 모두를 위한 곳</h1>
-    <p>천재교육에 오신 걸 환영합니다.</p>
-
-    <div id="search-container">
-        <img src="해법수학" alt="해법수학">
-        <input type="text" id="search-box" placeholder="검색어를 입력하세요">
-        <button id="search-button">검색</button>
+<div class="main" >
+    <img src="../../resources/image/mainbanner.png" alt="매인배너">
+</div>
+<div class="all">
+    <img src="../../resources/image/hh.jpg" alt="배경">
+</div>
+<div class="container">
+    <div class="sort n1"  aria-hidden="true" tabindex="0">
+        <a href="https://github.com/chunjae-luigi/project1" class="hover_wr" tabindex="-1">
+            <div class="hover_inner">
+                <div class="img_box">
+                    <img src="../../resources/image/main/pc_sec02_img01.png" alt="사진">
+                </div>
+                <div class="txt_wr">
+                    <p class="tit ko">Project 1</p>
+                </div>
+            </div>
+        </a>
     </div>
-
-
-    <div id="container" class="container">
-        <a href="${path}/main" class="item" id="left" ></a>
-        <a href="http://google.com" class="item" id="right" ></a>
+    <div class="sort n2"  aria-hidden="true" tabindex="-1">
+        <a href="https://github.com/chunjae-luigi/project2" class="hover_wr" tabindex="-1">
+            <div class="hover_inner">
+                <div class="img_box">
+                    <img src="../../resources/image/main/pc_sec02_img02.png" alt="사진">
+                </div>
+                <div class="txt_wr">
+                    <p class="tit ko">Project 2</p>
+                </div>
+            </div>
+        </a>
     </div>
+    <div class="sort n3"  aria-hidden="true" tabindex="-1">
+        <a href="http://10.41.1.198:8080/team43/" class="hover_wr" tabindex="-1">
+            <div class="hover_inner">
+                <div class="img_box">
+                    <img src="../../resources/image/main/pc_sec02_img03.png" alt="사진">
+                </div>
+                <div class="txt_wr">
+                    <p class="tit ko">Project 3</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="sort n4"  aria-hidden="true" tabindex="-1">
+        <a href="http://10.41.1.198:8080/team44/" class="hover_wr" tabindex="-1">
+            <div class="hover_inner">
+                <div class="img_box">
+                    <img src="../../resources/image/main/pc_sec02_img04.png" alt="사진">
+                </div>
+                <div class="txt_wr">
+                    <p class="tit ko">Project 4</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="sort n5" aria-hidden="true" tabindex="-1">
+        <div class="hover_inner">
+            <div class="img_box">
+                <img src="../../resources/image/main/pc_sec02_img05.png" alt="사진">
+            </div>
+            <div class="txt_wr">
+                <p class="tit ko">To be <br>Continued</p>
+            </div>
+        </div>
+        </a>
+    </div>
+</div>
+
+
+<div class="container2">
+    <div class="sugar m1"  data-num="n1" aria-hidden="true" tabindex="0">
+        <div class="hover_inner">
+            <div class="img_cover">
+
+                <img src="../../resources/image/main/white.png" alt="사진">
+            </div>
+        </div>
+    </div>
+    <div class="sugar m2"  data-num="n2" aria-hidden="true" tabindex="-1">
+        <div class="hover_inner">
+            <div class="img_cover">
+                <img src="../../resources/image/main/white.png" alt="사진">
+            </div>
+        </div>
+    </div>
+    <div class="sugar m3" data-num="n3" aria-hidden="true" tabindex="-1">
+        <div class="hover_inner">
+            <div class="img_cover">
+                <img src="../../resources/image/main/white.png" alt="사진">
+            </div>
+        </div>
+    </div>
+    <div class="sugar m4" data-num="n4" aria-hidden="true" tabindex="-1">
+        <div class="hover_inner">
+            <div class="img_cover">
+                <img src="../../resources/image/main/white.png" alt="사진">
+            </div>
+        </div>
+    </div>
+    <div class="sugar m5" data-num="n5" aria-hidden="true" tabindex="-1">
+        <a href="https://namu.wiki/w/To%20Be%20Continued" class="hover_wr" tabindex="-1">
+            <div class="hover_inner">
+                <div class="img_cover">
+                    <img src="../../resources/image/main/white.png" alt="사진">
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 </body>
+
 </html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+    $(document).ready(function(){
+        $(".container2").mouseover(function(){
+            $(".m1").css({"transform": "translateY(700px)", "transition-duration":"1.2s"});
+            $(".m2").css({"transform": "translateY(700px)", "transition-duration":"1.2s", "transition-delay":"0.2s"});
+            $(".m3").css({"transform": "translateY(700px)", "transition-duration":"1.2s", "transition-delay":"0.4s"});
+            $(".m4").css({"transform": "translateY(700px)", "transition-duration":"1.2s", "transition-delay":"0.6s"});
+            $(".m5").css({"transform": "translateY(700px)", "transition-duration":"1.2s", "transition-delay":"0.8s"});
+            $(".txt_wr").css("color", "aliceblue");
+
+        })
+        // let classNm = "." + $(".sugar").data("num") + " .txt_wr";
+    })
+</script>
