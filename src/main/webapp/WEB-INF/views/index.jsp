@@ -36,7 +36,12 @@
                 <c:forEach var="lec" items="${lectureList}">
                 <div class="col-lg-4">
                     <div class="card border-0 bg-light shadow-sm pb-2">
-                        <img class="card-img-top mb-2" src="${path }/resources/image/main/class-1.jpg" alt="강의1 이미지" />
+
+
+                        <img class="card-img-top mb-2" src="${path }/resources/upload/${lecture.thumbnail }" alt="강의썸네일" />
+                        <img class="card-img-top mb-2" src="${path }/resources/image/main/class-1.jpg" alt="샘플썸네일" />
+
+
                         <div class="card-body text-center">
                             <h4 class="card-title">${lec.lect_tit}</h4>
                             <p class="card-text">
@@ -179,7 +184,6 @@
             <img src="${path}/resources/image/main/movingca_remove.png" alt="움직이는 이미지" id="moving-image">
         </div>
         <img src="${path}/resources/image/main/pikachu.png" alt="피카츄"  class="ant" >
-        <script src="ant.js"></script>
     </c:if>
     <jsp:include page="./layout/footer.jsp" />
     <script src="${path }/resources/js/owl.carousel.min.js"></script>
