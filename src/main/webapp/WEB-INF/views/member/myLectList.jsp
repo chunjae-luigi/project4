@@ -96,7 +96,7 @@
                                 <div class="custom-block custom-block-full">
                                     <div class="custom-block-image-wrap">
                                         <a href="${path}/user/myLecture.do?lno=${lecture.lno}">
-                                            <img src="${path }/resources/upload/${lecture.thumnail }" class="custom-block-image img-fluid">
+                                            <img src="${path }/resources/upload/${lecture.thumbnail }" class="custom-block-image img-fluid">
                                         </a>
                                     </div>
 
@@ -114,9 +114,6 @@
                             </div>
                         </c:forEach>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
