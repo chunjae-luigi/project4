@@ -34,7 +34,7 @@
             <!-- [ Main Content ] start -->
             <div class="row justify-content-md-end mb-3">
                 <div class="col-md-3 searchArea">
-                    <form action="${path }/admin/lectureConf.do" method="get" class="field has-addons has-addons-right">
+                    <form action="${path }/admin/lectList.do" method="get" class="field has-addons has-addons-right">
                         <div class="input-group">
                             <div class="input-group-append">
                                 <select id="inputState" name="type" class="form-control">

@@ -4,6 +4,8 @@ import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.util.LecturePage;
 import kr.ed.haebeop.util.Page;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
+@Slf4j
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminCtrl {
 
@@ -59,9 +63,11 @@ public class AdminCtrl {
     @Autowired
     private PaymentService paymentService;
 
+    private final ChatService chatService;
+
     @GetMapping("/")
     public String home(Model model) throws Exception {
-        return "/admin/home";
+        return "redirect:/admin/memberConf.do";
     }
 
     @GetMapping("/memberConf.do")
@@ -258,10 +264,11 @@ public class AdminCtrl {
         lecture.setTitle(request.getParameter("title"));
         lecture.setSubTitle(request.getParameter("subTitle"));
         lecture.setContent(request.getParameter("content"));
+        lecture.setBthumbnail(request.getParameter("thumbnail"));
         lecture.setTeacherId(request.getParameter("teacherId"));
         lecture.setTeacherId(request.getParameter("teacherNm"));
         lecture.setBookname(request.getParameter("bookname"));
-        lecture.setBthumbnail(request.getParameter("bthumnail"));
+        lecture.setBthumbnail(request.getParameter("bthumbnail"));
         lecture.setLectureType(Integer.parseInt(request.getParameter("lectureType")));
         lecture.setStudentCnt(Integer.parseInt(request.getParameter("studentCnt")));
         lecture.setCost(Integer.parseInt(request.getParameter("cost")));
@@ -373,23 +380,51 @@ public class AdminCtrl {
     }
 
     @PostMapping("lectUpdate.do")
-    public String lectureUpdatepro(HttpServletRequest request, Model model) throws Exception{
+    public String lectureUpdatepro(HttpServletRequest request, Model model, MultipartFile thumbnail, MultipartFile lvideo, MultipartFile bthumbnail) throws Exception{
 
         int lno = Integer.parseInt(request.getParameter("lno"));
-        ServletContext application = request.getSession().getServletContext();
 
-        //String realPath = application.getRealPath("/resources/upload");                   //운영 서버
-        String realPath = "D:\\seulbee\\uploadtest";   //개발 서버
+        ServletContext application = request.getSession().getServletContext();
+        String realPath = application.getRealPath("/resources/upload");       // 운영 서버
 
         Lecture lecture = new Lecture();
         lecture.setLno(lno);
         lecture.setTitle(request.getParameter("title"));
         lecture.setSubTitle(request.getParameter("subTitle"));
         lecture.setContent(request.getParameter("content"));
+        lecture.setBthumbnail(request.getParameter("thumbnail"));
+        lecture.setTeacherId(request.getParameter("teacherId"));
         lecture.setTeacherId(request.getParameter("teacherNm"));
-        lecture.setCost(Integer.parseInt(request.getParameter("cost")));
         lecture.setBookname(request.getParameter("bookname"));
+        lecture.setBthumbnail(request.getParameter("bthumbnail"));
+        lecture.setLectureType(Integer.parseInt(request.getParameter("lectureType")));
+        lecture.setStudentCnt(Integer.parseInt(request.getParameter("studentCnt")));
+        lecture.setCost(Integer.parseInt(request.getParameter("cost")));
         lecture.setSno(Integer.parseInt(request.getParameter("sno")));
+
+
+
+        if(thumbnail != null) {
+            String originalThumbnailname = thumbnail.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            String uploadThumbnailname = uuid.toString() + "_" + originalThumbnailname;
+            thumbnail.transferTo(new File(realPath, uploadThumbnailname));     //파일 등록
+            lecture.setThumbnail(uploadThumbnailname);
+        }
+        if(lvideo != null) {
+            String originalFilename = lvideo.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            String uploadFilename = uuid.toString() + "_" + originalFilename;
+            lvideo.transferTo(new File(realPath, uploadFilename));     //파일 등록
+            lecture.setLvideo(uploadFilename);
+        }
+        if(bthumbnail != null) {
+            String originalFilename = bthumbnail.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            String uploadFilename = uuid.toString() + "_" + originalFilename;
+            bthumbnail.transferTo(new File(realPath, uploadFilename));     //파일 등록
+            lecture.setBthumbnail(uploadFilename);
+        }
 
         lectureService.lectureUpdate(lecture);
         return "redirect:/admin/lectList.do";

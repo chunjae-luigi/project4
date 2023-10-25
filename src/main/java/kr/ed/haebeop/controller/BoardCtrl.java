@@ -76,7 +76,11 @@ public class BoardCtrl {
         model.addAttribute("curPage", curPage);
         List<BoardVO> boardList = boardService.boardList(page);
 
+        String pathGetUrl = "";
         for(BoardVO boardVO : boardList) {
+
+            pathGetUrl = "/board/get.do?bno=" + boardVO.getBno();
+            boardVO.setPathGetUrl(pathGetUrl);
             String authorNm = boardVO.getNm();
             if(!authorNm.equals("관리자")) {
                 String nm = authorNm.substring(0, 1);
@@ -258,6 +262,12 @@ public class BoardCtrl {
         }
         model.addAttribute("commentList", commentList);
 
+        String pathUrl = "/board/list.do?no=" + board.getBmNo();
+        model.addAttribute("pathUrl", pathUrl);
+
+        String pathUpdateUrl = "/board/update.do?bno=" + bno;
+        model.addAttribute("pathUpdateUrl", pathUpdateUrl);
+
         return "/board/boardGet";
     }
 
@@ -282,6 +292,9 @@ public class BoardCtrl {
 
         List<FileDTO> fileList = filesService.fileListByPar(fileDTO);
         model.addAttribute("fileList", fileList);
+
+        String pathUrl = "/board/list.do?no=" + board.getBmNo();
+        model.addAttribute("pathUrl", pathUrl);
 
         return "/board/boardUpdate";
     }

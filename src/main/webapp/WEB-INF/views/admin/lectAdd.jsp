@@ -137,7 +137,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">강의 썸네일 업로드(10MB 이하)</label>
-                                            <input type="file" class="form-control uploadThumbnail" name="thumbnail" id="thumbnail" multiple required>
+                                            <input type="file" class="form-control uploadThumbnail" name="thumbnail" id="thumbnail" multiple>
                                         </div>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">강의 영상 업로드(10MB 이하)</label>
-                                            <input type="file" class="form-control uploadThumbnail" name="lvideo" id="lvideo" multiple required>
+                                            <input type="file" class="form-control uploadThumbnail" name="lvideo" id="lvideo" multiple>
                                         </div>
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="floating-label d-block">교재 이미지 업로드(10MB 이하)</label>
-                                            <input type="file" class="form-control uploadThumbnail" name="bthumbnail" id="bthumbnail" multiple required>
+                                            <input type="file" class="form-control uploadThumbnail" name="bthumbnail" id="bthumbnail" multiple>
                                         </div>
                                     </div>
                                 </div>
