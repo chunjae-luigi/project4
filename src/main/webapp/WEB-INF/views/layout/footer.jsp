@@ -50,7 +50,7 @@
                         </a>
                     </li>
                     <li class="quick03">
-                        <a href="${path }/chat/home">
+                        <a href="${path }/chat/userChat">
                             <p>채팅</p>
                         </a>
                     </li>

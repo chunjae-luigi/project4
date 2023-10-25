@@ -14,10 +14,10 @@
 <body>
 <script>
     var msg = "<c:out value = '${msg}' />";
-    var url = "<c:out value = '${alertPath}${url}' />";
+    var url2 = "";
+    <c:if test="${not empty url2 }">url2 = "&${url2}";</c:if>
     alert(msg);
-    location.href = url;
-
+    location.href = "${alertPath}${url}"+url2;
 </script>
 </body>
 </html>

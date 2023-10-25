@@ -182,6 +182,9 @@ public class LectureCtrl {
         String pathUrl = "/lecture/boardList.do";
         model.addAttribute("pathUrl", pathUrl);
 
+        String pathPageUrl = "/lecture/boardList.do?no=" + bmNo + "&lno=" + lno;
+        model.addAttribute("pathPageUrl", pathPageUrl);
+
         return "/lecture/lectBoardList";
     }
 
@@ -205,6 +208,9 @@ public class LectureCtrl {
         model.addAttribute("boardMgn", boardMgn);
 
         model.addAttribute("bmNo", bmNo);
+
+        String pathUrl = "/lecture/boardList.do?no=" + bmNo + "&lno=" + lecture.getLno();
+        model.addAttribute("pathUrl", pathUrl);
 
         return "/lecture/lectBoardAdd";
     }
@@ -332,7 +338,7 @@ public class LectureCtrl {
         List<FileDTO> fileList = filesService.fileListByPar(fileDTO);
         model.addAttribute("fileList", fileList);
 
-        String pathUrl = "/lecture/boardList.do?no=" + board.getBmNo() + "&lno=" + lecture.getLno();
+        String pathUrl = "/lecture/boardGet.do?bno=" + bno;
         model.addAttribute("pathUrl", pathUrl);
 
         model.addAttribute("bmNo", board.getBmNo());

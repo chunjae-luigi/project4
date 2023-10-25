@@ -152,6 +152,7 @@ CREATE VIEW lectview AS (SELECT
                              lecture.lectureType,
                              lecture.title AS lect_tit,
                              lecture.subTitle AS subTitle,
+                             lecture.teacherId AS teacherId,
                              lecture.teacherNm AS teacherNm,
                              lecture.studentCnt AS studentCnt,
                              lecture.thumbnail AS thumbnail,
@@ -159,7 +160,7 @@ CREATE VIEW lectview AS (SELECT
                              subject.sno AS sno,
                              subject.title AS sub_tit
                         FROM lecture INNER JOIN subject
-                                                ON lecture.lno = subject.sno);
+                                                ON lecture.sno = subject.sno);
 -- 유저 나의 강의실
 CREATE VIEW mylect AS (SELECT
                            l.lno AS lno,

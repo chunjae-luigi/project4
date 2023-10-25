@@ -21,8 +21,6 @@
         ORDER BY lno ASC LIMIT #{postStart}, #{postCount}
         ]]>
     </select>
-
-
     <!-- 유저 강의 리스트 -->
     <select id="lectviewList" resultType="kr.ed.haebeop.domain.LectureVO">
         <![CDATA[
@@ -48,41 +46,33 @@
         ORDER BY lno ASC LIMIT #{postStart}, #{postCount}
         ]]>
     </select>
-
     <!-- 결제 강의 리스트 -->
     <select id="mylectList" resultType="kr.ed.haebeop.domain.LectlistVO">
         select * from mylect where id = #{id};
     </select>
-
     <select id="check" resultType="integer">
         select count(*) from mylect where id = #{id} and lno=#{lno}
     </select>
-
     <!-- 강의 메인페이지 노출-->
     <select id="lectureList_main" resultType="kr.ed.haebeop.domain.LectureVO">
         select * from lectview ORDER BY lno desc limit 3
     </select>
-
     <!-- 강의 상세보기 -->
     <select id="lectureGet" resultType="kr.ed.haebeop.domain.Lecture">
         select * from lecture where lno=#{lno}
     </select>
-
     <!-- 강의 입력 -->
     <insert id="lectureAdd">
         insert into lecture values (default, #{title}, #{subTitle}, #{content}, #{lectureType}, #{studentCnt}, default, default, default, #{teacherId}, #{teacherNm}, #{thumbnail}, #{lvideo}, #{sno}, #{cost}, #{bookname}, #{bthumbnail})
     </insert>
-
     <!-- 강의 수정 -->
     <update id="lectureUpdate">
         update lecture set title=#{title}, subTitle=#{subTitle}, content=#{content}, lectureType=#{lectureType}, studentCnt=#{studentCnt}, teacherId=#{teacherId}, teacherNm=#{teacherId}, sno=#{sno}, cost=#{cost} where lno=#{lno}
     </update>
-
     <!-- 강의 삭제 -->
     <delete id="lectureDelete">
         delete from lecture where lno=#{lno}
     </delete>
-
     <!-- 페이징 처리를 위한 카운트 -->
     <select id="lectureCount" resultType="integer">
         <![CDATA[
@@ -105,7 +95,6 @@
             </if>
         </where>
     </select>
-
     <!-- 페이징 처리를 위한 카운트 -->
     <select id="lectviewCount" resultType="integer">
         <![CDATA[
