@@ -206,6 +206,9 @@ public class LectureCtrl {
 
         model.addAttribute("bmNo", bmNo);
 
+        String pathUrl = "/lecture/boardList.do?no=" + bmNo + "&lno=" + lecture.getLno();
+        model.addAttribute("pathUrl", pathUrl);
+
         return "/lecture/lectBoardAdd";
     }
 
