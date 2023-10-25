@@ -335,7 +335,7 @@ public class LectureCtrl {
         List<FileDTO> fileList = filesService.fileListByPar(fileDTO);
         model.addAttribute("fileList", fileList);
 
-        String pathUrl = "/lecture/boardList.do?no=" + board.getBmNo() + "&lno=" + lecture.getLno();
+        String pathUrl = "/lecture/boardGet.do?bno=" + bno;
         model.addAttribute("pathUrl", pathUrl);
 
         model.addAttribute("bmNo", board.getBmNo());

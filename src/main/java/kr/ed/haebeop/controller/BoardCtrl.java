@@ -146,54 +146,58 @@ public class BoardCtrl {
             board.setContent(word2);
         }
 
-            board.setAuthor(author);
-            board.setBmNo(bmNo);
+        board.setAuthor(author);
+        board.setBmNo(bmNo);
 
-            int bno = boardService.boardInsert(board);
+        int bno = boardService.boardInsert(board);
 
 
-            if (uploadFiles != null) {
-                ServletContext application = request.getSession().getServletContext();
-                String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
-                //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
+        if (uploadFiles != null) {
+            ServletContext application = request.getSession().getServletContext();
+            String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
+            //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
-                Date date = new Date();
-                String dateFolder = sdf.format(date);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
+            Date date = new Date();
+            String dateFolder = sdf.format(date);
 
-                File uploadPath = new File(realPath, dateFolder);
-                if (!uploadPath.exists()) {
-                    uploadPath.mkdirs();
-                }
-
-                for (MultipartFile multipartFile : uploadFiles) {
-                    if (multipartFile.isEmpty()) {
-                        continue;
-                    }
-
-                    String originalFilename = multipartFile.getOriginalFilename();
-                    UUID uuid = UUID.randomUUID();
-                    String uploadFilename = uuid.toString() + "_" + originalFilename;
-
-                    FileDTO fileDTO = new FileDTO();
-                    fileDTO.setPar(bno);
-                    fileDTO.setSaveFolder(dateFolder);
-
-                    String fileType = multipartFile.getContentType();
-                    String[] fileTypeArr = fileType.split("/");
-                    fileDTO.setFileType(fileTypeArr[0]);
-
-                    fileDTO.setOriginNm(originalFilename);
-                    fileDTO.setSaveNm(uploadFilename);
-                    fileDTO.setToUse("board");
-
-                    multipartFile.transferTo(new File(uploadPath, uploadFilename));     // 서버에 파일 업로드 수행
-                    filesService.filesInsert(fileDTO);                                  // DB 등록
-                }
-
+            File uploadPath = new File(realPath, dateFolder);
+            if (!uploadPath.exists()) {
+                uploadPath.mkdirs();
             }
 
-        return "redirect:/board/list.do?no=" + bmNo;
+            for (MultipartFile multipartFile : uploadFiles) {
+                if (multipartFile.isEmpty()) {
+                    continue;
+                }
+
+                String originalFilename = multipartFile.getOriginalFilename();
+                UUID uuid = UUID.randomUUID();
+                String uploadFilename = uuid.toString() + "_" + originalFilename;
+
+                FileDTO fileDTO = new FileDTO();
+                fileDTO.setPar(bno);
+                fileDTO.setSaveFolder(dateFolder);
+
+                String fileType = multipartFile.getContentType();
+                String[] fileTypeArr = fileType.split("/");
+                fileDTO.setFileType(fileTypeArr[0]);
+
+                fileDTO.setOriginNm(originalFilename);
+                fileDTO.setSaveNm(uploadFilename);
+                fileDTO.setToUse("board");
+
+                multipartFile.transferTo(new File(uploadPath, uploadFilename));     // 서버에 파일 업로드 수행
+                filesService.filesInsert(fileDTO);                                  // DB 등록
+            }
+
+        }
+
+        if(boardMgn.getDepth() != 1) {
+            return "redirect:/lecture/boardList.do?no=" + bmNo + "&lno=" + boardMgn.getPar();
+        } else {
+            return "redirect:/board/list.do?no=" + bmNo;
+        }
     }
 
 
@@ -324,57 +328,57 @@ public class BoardCtrl {
             board.setTitle(title);
             board.setContent(content);
         }
-             board.setBno(bno);
+        board.setBno(bno);
+        boardService.boardUpdate(board);
 
+        if(uploadFiles != null) {
+            ServletContext application = request.getSession().getServletContext();
+            String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
+            //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
 
-            boardService.boardUpdate(board);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
+            Date date = new Date();
+            String dateFolder = sdf.format(date);
 
-
-
-            if(uploadFiles != null) {
-                ServletContext application = request.getSession().getServletContext();
-                String realPath = application.getRealPath("/resources/upload");                                        // 운영 서버
-                //String realPath = "D:\\project\\team\\project4\\team44\\src\\main\\webapp\\resources\\upload";	      // 개발 서버
-
-                SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
-                Date date = new Date();
-                String dateFolder = sdf.format(date);
-
-                File uploadPath = new File(realPath, dateFolder);
-                if (!uploadPath.exists()) {
-                    uploadPath.mkdirs();
-                }
-
-                for (MultipartFile multipartFile : uploadFiles) {
-                    if (multipartFile.isEmpty()) {
-                        continue;
-                    }
-
-                    String originalFilename = multipartFile.getOriginalFilename();
-                    UUID uuid = UUID.randomUUID();
-                    String uploadFilename = uuid.toString() + "_" + originalFilename;
-
-                    FileDTO fileDTO = new FileDTO();
-                    fileDTO.setPar(bno);
-                    fileDTO.setSaveFolder(dateFolder);
-
-                    String fileType = multipartFile.getContentType();
-                    String[] fileTypeArr = fileType.split("/");
-                    fileDTO.setFileType(fileTypeArr[0]);
-
-                    fileDTO.setOriginNm(originalFilename);
-                    fileDTO.setSaveNm(uploadFilename);
-                    fileDTO.setToUse("board");
-
-                    multipartFile.transferTo(new File(uploadPath, uploadFilename));     // 서버에 파일 업로드 수행
-                    filesService.filesInsert(fileDTO);                                  // DB 등록
-                }
+            File uploadPath = new File(realPath, dateFolder);
+            if (!uploadPath.exists()) {
+                uploadPath.mkdirs();
             }
 
+            for (MultipartFile multipartFile : uploadFiles) {
+                if (multipartFile.isEmpty()) {
+                    continue;
+                }
 
+                String originalFilename = multipartFile.getOriginalFilename();
+                UUID uuid = UUID.randomUUID();
+                String uploadFilename = uuid.toString() + "_" + originalFilename;
 
+                FileDTO fileDTO = new FileDTO();
+                fileDTO.setPar(bno);
+                fileDTO.setSaveFolder(dateFolder);
 
-        return "redirect:/board/get.do?bno=" + bno;
+                String fileType = multipartFile.getContentType();
+                String[] fileTypeArr = fileType.split("/");
+                fileDTO.setFileType(fileTypeArr[0]);
+
+                fileDTO.setOriginNm(originalFilename);
+                fileDTO.setSaveNm(uploadFilename);
+                fileDTO.setToUse("board");
+
+                multipartFile.transferTo(new File(uploadPath, uploadFilename));     // 서버에 파일 업로드 수행
+                filesService.filesInsert(fileDTO);                                  // DB 등록
+            }
+        }
+
+        BoardVO boardVO = boardService.boardGetInfo(bno);
+        BoardMgn boardMgn = boardMgnService.getBoardMgn(boardVO.getBmNo());
+
+        if(boardMgn.getDepth() != 1) {
+            return "redirect:/lecture/boardGet.do?bno=" + bno;
+        } else {
+            return "redirect:/board/get.do?bno=" + bno;
+        }
     }
 
     @GetMapping("/delete.do")
@@ -383,6 +387,7 @@ public class BoardCtrl {
         int bno = Integer.parseInt(request.getParameter("bno"));
 
         BoardVO boardVO = boardService.boardGet(true, bno, sid);
+        BoardMgn boardMgn = boardMgnService.getBoardMgn(boardVO.getBmNo());
 
         if(sid.equals(boardVO.getAuthor()) || sid.equals("admin")) {
             int bmNo = boardVO.getBmNo();
@@ -400,10 +405,20 @@ public class BoardCtrl {
 
             commentService.commentDeleteAll(bno);
             boardService.boardDelete(bno);
-            return "redirect:/board/list.do?no=" + bmNo;
+
+            if(boardMgn.getDepth() != 1) {
+                return "redirect:/lecture/boardList.do?no=" + bmNo + "&lno=" + boardMgn.getPar();
+            } else {
+                return "redirect:/board/list.do?no=" + bmNo;
+            }
         } else {
             rttr.addFlashAttribute("msg", "fail");
-            return "redirect:/board/get.do?bno=" + bno;
+
+            if(boardMgn.getDepth() != 1) {
+                return "redirect:/lecture/boardGet.do?bno=" + bno;
+            } else {
+                return "redirect:/board/get.do?bno=" + bno;
+            }
         }
     }
 
