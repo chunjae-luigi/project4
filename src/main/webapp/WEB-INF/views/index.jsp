@@ -37,8 +37,8 @@
                 <div class="col-lg-4">
                     <div class="card border-0 bg-light shadow-sm pb-2">
                         <c:choose>
-                            <c:when test="${!empty thumbnail}">
-                                <img class="card-img-top mb-2" src="${path }/resources/upload/${lecture.thumbnail }" alt="강의썸네일" />
+                            <c:when test="${!empty lec.thumbnail}">
+                                <img class="card-img-top mb-2" src="${path }/resources/upload/lecture/${lec.thumbnail }" alt="강의썸네일" />
                             </c:when>
                             <c:otherwise>
                                 <img class="card-img-top mb-2" src="${path }/resources/image/lecture/dummy.png" alt="샘플썸네일"/>
@@ -127,7 +127,7 @@
                     <div class="col-md-6 col-lg-3 text-center team">
                         <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
                             <c:choose>
-                                <c:when test="${!empty thumbnail}">
+                                <c:when test="${!empty teacher.fileNm }">
                                     <img class="img-fluid w-100" src="${path }/resources/upload/member/${teacher.fileNm }" alt="${teacher.nm }의 이미지" />
                                 </c:when>
                                 <c:otherwise>

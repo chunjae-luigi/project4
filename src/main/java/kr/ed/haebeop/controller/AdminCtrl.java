@@ -258,7 +258,7 @@ public class AdminCtrl {
         String msg = "";
 
         ServletContext application = request.getSession().getServletContext();
-        String realPath = application.getRealPath("/resources/upload");       // 운영 서버
+        String realPath = application.getRealPath("/resources/upload/lecture");       // 운영 서버
 
         Lecture lecture = new Lecture();
         lecture.setTitle(request.getParameter("title"));
@@ -333,7 +333,7 @@ public class AdminCtrl {
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
-        Page page = new Page();
+        LecturePage page = new LecturePage();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
         int total = lectureService.lectureCount(page);

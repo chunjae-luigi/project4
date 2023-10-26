@@ -383,10 +383,11 @@ public class MemberCtrl {
     //회원의 강의 상세보기
     @GetMapping("mypageLecture.do")
     public String myLecture(HttpServletRequest request, Model model) throws Exception{
+        String id = (String) session.getAttribute("sid");
         int lno = Integer.parseInt(request.getParameter("lno"));
 
         Lecture lecture = lectureService.lectureGet(lno);
-        Member teacher = memberService.memberGet(lecture.getTeacherId());
+        Member member = memberService.memberGet(id);
         Subject subject = subjectService.subjectGet(lecture.getSno());
         List<Review> reviewList = reviewService.reviewList(lno);
         List<Curri> curriList = curriService.curriList(lno);
@@ -395,6 +396,7 @@ public class MemberCtrl {
         model.addAttribute("boardMgnList", boardMgnList);
 
         model.addAttribute("reviewList", reviewList);
+        model.addAttribute("member", member);
         model.addAttribute("subject", subject);
         model.addAttribute("curriList", curriList);
         model.addAttribute("lecture", lecture);

@@ -67,7 +67,7 @@
     </insert>
     <!-- 강의 수정 -->
     <update id="lectureUpdate">
-        update lecture set title=#{title}, subTitle=#{subTitle}, content=#{content}, lectureType=#{lectureType}, studentCnt=#{studentCnt}, teacherId=#{teacherId}, teacherNm=#{teacherId}, sno=#{sno}, cost=#{cost} where lno=#{lno}
+        update lecture set title=#{title}, subTitle=#{subTitle}, content=#{content}, lectureType=#{lectureType}, studentCnt=#{studentCnt}, teacherId=#{teacherId}, teacherNm=#{teacherNm}, sno=#{sno}, cost=#{cost} where lno=#{lno}
     </update>
     <!-- 강의 삭제 -->
     <delete id="lectureDelete">

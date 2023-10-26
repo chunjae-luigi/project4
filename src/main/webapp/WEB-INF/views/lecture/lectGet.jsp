@@ -20,8 +20,8 @@
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
                 <c:choose>
-                    <c:when test="${!empty thumbnail}">
-                        <img src="${path }/resources/upload/${lecture.thumbnail }" />
+                    <c:when test="${!empty lecture.thumbnail}">
+                        <img src="${path }/resources/upload/lecture/${lecture.thumbnail }" />
                     </c:when>
                     <c:otherwise>
                         <img src="${path }/resources/image/lecture/dummy.png" />
@@ -35,7 +35,7 @@
                 <h3 class="lead text-white-50 mb-4">${lecture.teacherNm } 선생님</h3>
                 <c:choose>
                     <c:when test="${!empty lvideo}">
-                        <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/upload/${lecture.lvideo }" target="_blank" >강의 맛보기</a>
+                        <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/upload/lecture/${lecture.lvideo }" target="_blank" >강의 맛보기</a>
                     </c:when>
                     <c:otherwise>
                         <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
@@ -74,8 +74,8 @@
                     <div>강의 교재 </div>
                         <div>
                             <c:choose>
-                                <c:when test="${!empty bthumbnail}">
-                                    <img src="${path }/resources/upload/${lecture.bthumbnail }" width="300px">
+                                <c:when test="${!empty lecture.bthumbnail}">
+                                    <img src="${path }/resources/upload/lecture/${lecture.bthumbnail }" width="300px">
                                 </c:when>
                                 <c:otherwise>
                                     <img src="${path }/resources/image/lecture/booksample.jpg" width="300px">
