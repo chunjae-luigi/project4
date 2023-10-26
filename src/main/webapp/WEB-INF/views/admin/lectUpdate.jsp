@@ -66,15 +66,15 @@
                                 <div class="form-group">
                                     <label class="floating-label d-block">해당 과목</label>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="sno1" name="sno" class="custom-control-input" value="1" onchange="changeType(this)"<c:if test="${subject.sno == 1 }"> checked</c:if>>
+                                        <input type="radio" id="sno1" name="sno" class="custom-control-input" value="1"<c:if test="${lecture.sno == 1 }"> checked</c:if>>
                                         <label class="custom-control-label" for="sno1">수학</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="sno2" name="sno" class="custom-control-input" value="2" onchange="changeType(this)"<c:if test="${subject.sno == 2 }"> checked</c:if>>
+                                        <input type="radio" id="sno2" name="sno" class="custom-control-input" value="2"<c:if test="${lecture.sno == 2 }"> checked</c:if>>
                                         <label class="custom-control-label" for="sno2">영어</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="sno3" name="sno" class="custom-control-input" value="3" onchange="changeType(this)"<c:if test="${subject.sno == 3 }"> checked</c:if>>
+                                        <input type="radio" id="sno3" name="sno" class="custom-control-input" value="3"<c:if test="${lecture.sno == 3 }"> checked</c:if>>
                                         <label class="custom-control-label" for="sno3">기타</label>
                                     </div>
                                 </div>
@@ -127,32 +127,47 @@
                                 <div class="form-group">
                                     <label class="floating-label d-block" for="teacherId">강의 강사</label>
                                     <input type="text" class="form-control d-inline-block" name="teacherNm" id="teacherNm" readonly style="width:calc(100% - 170px)" value="${lecture.teacherNm }">
-                                    <input type="hidden" name="teacherId" id="teacherId">
+                                    <input type="hidden" name="teacherId" id="teacherId" value="${lecture.teacherId }">
                                     <button type="button" class="form-control ml-2 wid-150 d-inline-block" onclick="findTeacher()">찾기</button>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="form-group">
+                                <div class="form-group forthumbnail">
                                     <label class="floating-label d-block">강의 썸네일 업로드(10MB 이하)</label>
-                                    <input type="file" class="form-control uploadThumbnail" name="thumbnail" id="thumbnail" multiple>
+                                    <c:if test="${empty lecture.thumbnail || lecture.thumbnail eq ''}">
+                                        <input type="file" class="form-control uploadThumbnail" name="thumbnail" id="thumbnail" multiple>
+                                    </c:if>
+                                    <c:if test="${lecture.thumbnail ne ''}">
+                                        <img src="${path }/resources/upload/lecture/${lecture.thumbnail }" width="200px">
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="form-group">
+                                <div class="form-group forlvideo">
                                     <label class="floating-label d-block">강의 영상 업로드(10MB 이하)</label>
-                                    <input type="file" class="form-control uploadThumbnail" name="lvideo" id="lvideo" multiple>
+                                    <c:if test="${empty lecture.lvideo || lecture.lvideo eq ''}">
+                                        <input type="file" class="form-control uploadThumbnail" name="lvideo" id="lvideo" multiple>
+                                    </c:if>
+                                    <c:if test="${lecture.lvideo ne ''}">
+                                        <img src="${path }/resources/upload/lecture/${lecture.thumbnail }" width="200px">
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="form-group">
+                                <div class="form-group forbthumbnail">
                                     <label class="floating-label d-block">교재 이미지 업로드(10MB 이하)</label>
-                                    <input type="file" class="form-control uploadThumbnail" name="bthumbnail" id="bthumbnail" multiple>
+                                    <c:if test="${empty lecture.bthumbnail || lecture.bthumbnail eq ''}">
+                                        <input type="file" class="form-control uploadThumbnail" name="bthumbnail" id="bthumbnail" multiple>
+                                    </c:if>
+                                    <c:if test="${lecture.bthumbnail ne ''}">
+                                        <img src="${path }/resources/upload/lecture/${lecture.bthumbnail }" width="200px">
+                                    </c:if>
                                 </div>
                             </div>
                         </div>

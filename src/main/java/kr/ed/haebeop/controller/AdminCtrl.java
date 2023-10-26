@@ -258,7 +258,7 @@ public class AdminCtrl {
         String msg = "";
 
         ServletContext application = request.getSession().getServletContext();
-        String realPath = application.getRealPath("/resources/upload");       // 운영 서버
+        String realPath = application.getRealPath("/resources/upload/lecture");       // 운영 서버
 
         Lecture lecture = new Lecture();
         lecture.setTitle(request.getParameter("title"));

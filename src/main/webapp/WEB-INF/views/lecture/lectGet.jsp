@@ -35,7 +35,7 @@
                 <h3 class="lead text-white-50 mb-4">${lecture.teacherNm } 선생님</h3>
                 <c:choose>
                     <c:when test="${!empty lvideo}">
-                        <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/upload/${lecture.lvideo }" target="_blank" >강의 맛보기</a>
+                        <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/upload/lecture/${lecture.lvideo }" target="_blank" >강의 맛보기</a>
                     </c:when>
                     <c:otherwise>
                         <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>

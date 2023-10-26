@@ -24,6 +24,7 @@
         .d-flex > .d-inline {
             font-size: 16px;
             color: #0f6674;
+            width:10%;
         }
         .curri-list {
             width: 30%;
@@ -59,14 +60,14 @@
                     <div class="card-header"><h3>${lecture.title }</h3></div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-5 col-12 pe-lg-5">
+                            <div class="col-lg-12 col-12 pe-lg-12">
                                 <div class="contact-info">
                                     <p style="font-size:20px; color:grey;"> ${lecture.subTitle }</p>
                                     <div class="border-bottom pb-3 mb-5">
                                         <c:choose>
                                             <c:when test="${!empty lvideo}">
-                                                <img src="${path }/resources/upload/${lecture.thumbnail }" width="400" height="225"><br>
-                                                <div><a class="btn btn-primary btn-lg px-3" href="${path }/resources/upload/${lecture.lvideo }" target="_blank" >강의영상</a></div>
+                                                <img src="${path }/resources/upload/lecture/${lecture.thumbnail }" width="400" height="225"><br>
+                                                <div><a class="btn btn-primary btn-lg px-3" href="${path }/resources/upload/lecture/${lecture.lvideo }" target="_blank" >강의영상</a></div>
                                             </c:when>
                                             <c:otherwise>
                                                 <img src="${path }/resources/image/lecture/dummy.png" width="400" height="225"><br>
@@ -114,8 +115,8 @@
                                         <strong class="d-inline me-4">강의 교재 </strong>
                                         <span>${lecture.bookname }</span><br>
                                         <c:choose>
-                                            <c:when test="${!empty bthumbnail}">
-                                                <img src="${path }/resources/upload/${lecture.bthumbnail }" width="200px">
+                                            <c:when test="${!empty lecture.bthumbnail}">
+                                                <img src="${path }/resources/upload/lecture/${lecture.bthumbnail }" width="200px">
                                             </c:when>
                                             <c:otherwise>
                                                 <img src="${path }/resources/image/lecture/booksample.jpg" width="200px">
