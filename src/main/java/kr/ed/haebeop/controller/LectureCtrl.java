@@ -120,6 +120,7 @@ public class LectureCtrl {
 
         Lecture lecture = lectureService.lectureGet(lno);
         Subject subject = subjectService.subjectGet(lecture.getSno());
+        Member member = memberService.memberGet(sid);
 
         model.addAttribute("subject", subject);
         model.addAttribute("lecture", lecture);
@@ -173,7 +174,25 @@ public class LectureCtrl {
 
         // 권한 관련 - 등록
         boolean addCheck = false;
-        if(sid != null && (boardMgn.getAboutAuth() >= memberService.memberGet(sid).getGrade() || sid.equals("admin"))) {
+
+        int cnt = 0;
+        if(member != null){
+            if(member.getGrade() == 1) {
+                LectureVO teacher = new LectureVO();
+                teacher.setTeacherId(sid);
+                teacher.setLno(lno);
+                cnt = lectureService.mylectListTeacher(teacher);
+            }
+
+            if(member.getGrade() == 2) {
+                LectlistVO student = new LectlistVO();
+                student.setId(sid);
+                student.setLno(lno);
+                cnt = lectureService.check(student);
+            }
+        }
+
+        if(sid != null && ((boardMgn.getAboutAuth() >= memberService.memberGet(sid).getGrade() && cnt == 1) || sid.equals("admin"))) {
             addCheck = true;
         }
 
@@ -245,6 +264,7 @@ public class LectureCtrl {
 
         Lecture lecture = lectureService.lectureGet(boardMgn.getPar());
         Subject subject = subjectService.subjectGet(lecture.getSno());
+        Member member = memberService.memberGet(sid);
 
         model.addAttribute("subject", subject);
         model.addAttribute("lecture", lecture);
@@ -299,6 +319,19 @@ public class LectureCtrl {
         model.addAttribute("boardMgnList", boardMgnList);
 
         model.addAttribute("bmNo", board.getBmNo());
+
+        int cnt = 0;
+        if(member != null) {
+            if(member.getGrade() == 1) {
+                LectureVO teacher = new LectureVO();
+                teacher.setTeacherId(sid);
+                teacher.setLno(lecture.getLno());
+                cnt = lectureService.mylectListTeacher(teacher);
+            }
+        }
+
+        model.addAttribute("cnt", cnt);
+        model.addAttribute("boardMgn", boardMgn);
 
         return "/lecture/lectBoardGet";
     }

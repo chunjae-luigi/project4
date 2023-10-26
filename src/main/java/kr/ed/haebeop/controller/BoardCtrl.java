@@ -278,6 +278,9 @@ public class BoardCtrl {
         String pathUpdateUrl = "/board/update.do?bno=" + bno;
         model.addAttribute("pathUpdateUrl", pathUpdateUrl);
 
+        BoardMgn boardMgn = boardMgnService.getBoardMgn(board.getBmNo());
+        model.addAttribute("boardMgn", boardMgn);
+
         return "/board/boardGet";
     }
 
