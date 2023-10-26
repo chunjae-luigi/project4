@@ -28,6 +28,7 @@ public interface LectureMapper {
     public int lectviewCount(Page page);
 
     public List<LectlistVO> mylectList(String id);
+    public int mylectListTeacher(LectureVO lectureVO);
 
     public List<LectureVO> lectureList_main();
 

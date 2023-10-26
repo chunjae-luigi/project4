@@ -50,6 +50,10 @@
     <select id="mylectList" resultType="kr.ed.haebeop.domain.LectlistVO">
         select * from mylect where id = #{id};
     </select>
+    <!-- 해당 선생님이 담당하는 강의 찾기 -->
+    <select id="mylectListTeacher" resultType="integer">
+        select count(*) from lectview where teacherId = #{teacherId} and lno = #{lno};
+    </select>
     <select id="check" resultType="integer">
         select count(*) from mylect where id = #{id} and lno=#{lno}
     </select>

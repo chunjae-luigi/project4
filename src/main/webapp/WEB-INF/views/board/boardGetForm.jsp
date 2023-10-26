@@ -40,7 +40,7 @@
         <c:if test="${board.boardType == 1 }">
             <div class="mb-5 pt-3 px-4 comment_area">
                 <c:if test="${!board.answerYn }">
-                    <c:if test="${sid eq 'admin' }">
+                    <c:if test="${sid eq 'admin' || (boardMgn.depth == 2 && cnt > 0) }">
                         <div class="mb-3 qna_form">
                             <div class="control-group d-inline-block comment_input">
                                 <input type="hidden" name="bno" id="bno" value="${board.bno }"/>
@@ -128,7 +128,7 @@
 </c:if>
 <script>
 
-    <c:if test="${board.boardType == 1 && sid eq 'admin' }">
+    <c:if test="${board.boardType == 1 && (sid eq 'admin' || (boardMgn.depth == 2 && cnt > 0)) }">
     function answerAdd() {
         let bno = parseInt($("#bno").val());
         let answer = $("#answer").val();
@@ -139,10 +139,7 @@
             type:"post",
             data:params,
             success : function(result) {
-                $(".qna_form").remove();
-                $("#updateBtn").remove();
-                $(".qna_answer").html("<p><span class='pr-3'>[답변내용]</span>" + result + "</p>");
-                $(".board_btn").append("<a href='${path }/board/delete.do?bno=${board.bno }' class='btn btn-danger px-4'>삭제</a>");
+                location.reload();
             },
         });
     }

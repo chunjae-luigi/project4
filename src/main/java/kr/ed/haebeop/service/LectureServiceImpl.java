@@ -67,6 +67,11 @@ public class LectureServiceImpl implements LectureService{
     }
 
     @Override
+    public int mylectListTeacher(LectureVO lectureVO) {
+        return lectureMapper.mylectListTeacher(lectureVO);
+    }
+
+    @Override
     public int check(LectlistVO lectlistVO) throws Exception {
         return lectureMapper.check(lectlistVO);
     }

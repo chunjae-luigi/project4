@@ -72,7 +72,7 @@
                             <div class="d-inline-block lectviewwrap">
                                 <div class="img-box">
                                     <!-- 썸네일 - 누르면 상세페이지 이동 -->
-                                    <a href="${path }/lecture/get.do">
+                                    <a href="${path }/lecture/get.do?lno=${lecture.lno }">
                                     <c:choose>
                                         <c:when test="${!empty lecture.thumbnail}">
                                            <img src="${path }/resources/upload/lecture/${lecture.thumbnail }" />

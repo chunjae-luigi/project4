@@ -28,6 +28,7 @@ public interface LectureService {
     public List<LectureVO> lectureList_main() throws Exception;
 
     public List<LectlistVO> mylectList(String id) throws Exception;
+    public int mylectListTeacher(LectureVO lectureVO);
 
     public int check(LectlistVO lectlistVO) throws Exception;
 
