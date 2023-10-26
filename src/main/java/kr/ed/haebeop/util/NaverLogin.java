@@ -20,7 +20,9 @@ public class NaverLogin {
     //네아로 설정의 콜백 주소와 같아야 한다.
     // (가급적 같은 프로젝트(war파일)상에 지정하자 그래야 헷갈리지 않고 편하다.)
     //최종페이지는 리다이렉트로 해결하면 된다.
-    private final static String REDIRECT_URI = "http://localhost:8081/team44_war/user/naver/login";
+    // private final static String REDIRECT_URI = "http://localhost:8081/team44_war/user/naver/login";
+    private final static String REDIRECT_URI = "http://10.41.1.198:8080/team44/user/naver/login";
+
     /* 프로필 조회 API URL */
     private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
 

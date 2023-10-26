@@ -52,12 +52,16 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
         mappings.setProperty("kr.ed.haebeop.exception.SecurityException", "/common/error/securityError");
         mappings.setProperty("kr.ed.haebeop.exception.BusinessException", "/common/error/businessError");
         mappings.setProperty("kr.ed.haebeop.exception.AjaxException", "/common/error/ajaxError");
+        mappings.setProperty("kr.ed.haebeop.exception.NotFoundException", "/common/error/notFoundError");
+
+
         smer.setExceptionMappings(mappings);
         Properties statusCodes = new Properties();
         statusCodes.setProperty("/common/error/databaseError", "500");
         statusCodes.setProperty("/common/error/securityError", "403");
         statusCodes.setProperty("/common/error/businessError", "200");
         statusCodes.setProperty("/common/error/ajaxError", "200");
+        statusCodes.setProperty("/common/error/notFoundError", "404");
         smer.setStatusCodes(statusCodes);
         return smer;
     }*/

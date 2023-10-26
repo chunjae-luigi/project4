@@ -47,4 +47,4 @@
 
 
 ## 🎥 시연 영상
-
+![Preview](/README/smarthaebeop.gif)
