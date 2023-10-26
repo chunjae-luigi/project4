@@ -184,7 +184,7 @@
         $("#chatRoomName").text(roomName);
         $("#chatRoom").css("visibility", "visible");
 
-        ws = new WebSocket("ws://localhost:8081/team44_war/usersocket?name="+roomName);
+        ws = new WebSocket("ws://10.41.1.198:8080/team44/usersocket?name="+roomName);
 
         ws.onopen = function(e){ // 연결 시 실행
             var str = username + "님이 입장하셨습니다.";

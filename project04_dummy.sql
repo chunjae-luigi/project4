@@ -1,12 +1,12 @@
 
 -- 회원 더미 (순서 중요)
-INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
-INSERT INTO MEMBER VALUES(DEFAULT, 'teacher1', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '최상민', 'teacher1@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
-INSERT INTO MEMBER VALUES(DEFAULT, 'teacher2', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '김기태', 'teacher2@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
-INSERT INTO MEMBER VALUES(DEFAULT, 'teacher3', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '박너욘', 'teacher3@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
-INSERT INTO MEMBER VALUES(DEFAULT, 'teacher4', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '헤이호', 'teacher4@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
-INSERT INTO MEMBER VALUES(DEFAULT, 'teacher5', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '황교진', 'teacher5@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
-INSERT INTO MEMBER VALUES(DEFAULT, 'teacher6', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '이슬비', 'teacher6@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO member VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
+INSERT INTO member VALUES(DEFAULT, 'teacher1', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '최상민', 'teacher1@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO member VALUES(DEFAULT, 'teacher2', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '김기태', 'teacher2@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO member VALUES(DEFAULT, 'teacher3', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '박너욘', 'teacher3@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO member VALUES(DEFAULT, 'teacher4', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '헤이호', 'teacher4@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO member VALUES(DEFAULT, 'teacher5', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '황교진', 'teacher5@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO member VALUES(DEFAULT, 'teacher6', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '이슬비', 'teacher6@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
 
 -- 회원 승인 더미
 INSERT INTO memberMgn VALUES
