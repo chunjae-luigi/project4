@@ -40,7 +40,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
         return new Filter[] { characterEncodingFilter };
     }
 
-    /*@Bean
+    @Bean
     public SimpleMappingExceptionResolver getExceptionResolver() {
         SimpleMappingExceptionResolver smer = new SimpleMappingExceptionResolver();
         smer.setDefaultErrorView("/common/error/error");
@@ -60,6 +60,6 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
         statusCodes.setProperty("/common/error/ajaxError", "200");
         smer.setStatusCodes(statusCodes);
         return smer;
-    }*/
+    }
 
 }

@@ -25,7 +25,7 @@
                             <form name="frm1" id="frm1" action="${path }/user/joinPro.do" method="post" onsubmit="return joinCheck(this)">
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" name="id" id="id" placeholder="영문소문자 및 숫자를 혼용하여 아이디 입력" class="form-control" <%--pattern="^[a-z0-9]{8,16}"--%> maxlength="16" autofocus required />
+                                    <input type="text" name="id" id="id" placeholder="영문, 숫자 혼용. 8자이상" class="form-control" <%--pattern="^[a-z0-9]{8,16}"--%> maxlength="16" autofocus required />
                                     <label class="form-label blind" for="id">아이디</label>
                                     <input type="button" class="btn check_btn" value="아이디 중복 확인" onclick="idCheck()">
                                     <input type="hidden" name="idCk" id="idCk" value="no">
