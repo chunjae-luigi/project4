@@ -333,7 +333,7 @@ public class AdminCtrl {
         String keyword = request.getParameter("keyword");
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
-        Page page = new Page();
+        LecturePage page = new LecturePage();
         page.setSearchType(type);
         page.setSearchKeyword(keyword);
         int total = lectureService.lectureCount(page);

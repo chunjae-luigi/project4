@@ -158,14 +158,15 @@
         </a>
     </div>
     <div class="sort n5" aria-hidden="true" tabindex="-1">
-        <div class="hover_inner">
-            <div class="img_box">
-                <img src="${path}/resources/image/main/pc_sec02_img05.png" alt="사진">
+        <a href="https://namu.wiki/w/To%20Be%20Continued" class="hover_wr" tabindex="-1">
+            <div class="hover_inner">
+                <div class="img_box">
+                    <img src="${path}/resources/image/main/pc_sec02_img05.png" alt="사진">
+                </div>
+                <div class="txt_wr">
+                    <p class="tit ko">To be <br>Continued</p>
+                </div>
             </div>
-            <div class="txt_wr">
-                <p class="tit ko">To be <br>Continued</p>
-            </div>
-        </div>
         </a>
     </div>
 </div>
@@ -202,13 +203,11 @@
         </div>
     </div>
     <div class="sugar m5" data-num="n5" aria-hidden="true" tabindex="-1">
-        <a href="https://namu.wiki/w/To%20Be%20Continued" class="hover_wr" tabindex="-1">
-            <div class="hover_inner">
-                <div class="img_cover">
-                    <img src="${path}/resources/image/main/white.png" alt="사진">
-                </div>
+        <div class="hover_inner">
+            <div class="img_cover">
+                <img src="${path}/resources/image/main/white.png" alt="사진">
             </div>
-        </a>
+        </div>
     </div>
 </div>
 </body>

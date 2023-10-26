@@ -1,12 +1,37 @@
--- ※필독!!!!!!※
--- teacher1, teacher2로 선생님 만들기
--- 강의 더미데이터 넣은 후, 관리자 수정 페이지에서 추가 데이터 삽입해야함.
--- 썸네일, 영상, 도서이미지를 수정페이지에서 선택하여 수정 완료하면 더미데이터 입력 완료.
--- resources/image/lecture에 썸네일, 영상, 도서이미지 있음.
--- 강의썸네일은 [lect01] 형태로 번호 매겨놓음. 나머진 자유선택.
 
+-- 회원 더미 (순서 중요)
+INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
+INSERT INTO MEMBER VALUES(DEFAULT, 'teacher1', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '최상민', 'teacher1@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO MEMBER VALUES(DEFAULT, 'teacher2', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '김기태', 'teacher2@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO MEMBER VALUES(DEFAULT, 'teacher3', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '박너욘', 'teacher3@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO MEMBER VALUES(DEFAULT, 'teacher4', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '헤이호', 'teacher4@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO MEMBER VALUES(DEFAULT, 'teacher5', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '황교진', 'teacher5@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO MEMBER VALUES(DEFAULT, 'teacher6', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '이슬비', 'teacher6@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
 
--- 강의(꼭!!! 하나씩 등록하기)
+-- 회원 승인 더미
+INSERT INTO memberMgn VALUES
+(DEFAULT, 'teacher1', TRUE, 3, ''),
+(DEFAULT, 'teacher2', TRUE, 3, ''),
+(DEFAULT, 'teacher3', TRUE, 3, ''),
+(DEFAULT, 'teacher4', TRUE, 3, ''),
+(DEFAULT, 'teacher5', TRUE, 3, ''),
+(DEFAULT, 'teacher6', TRUE, 3, '');
+
+-- 선생님 이미지 더미
+INSERT INTO files VALUES
+(DEFAULT, 2, 'member', 'teacher01.png', 'bfa6a486-1542-44a0-9bb4-243293852f2a_teacher01.png', 'image', DEFAULT, 'member'),
+(DEFAULT, 3, 'member', 'teacher02.png', 'bfa6a486-1542-44a0-9bb4-243293852f2a_teacher02.png', 'image', DEFAULT, 'member'),
+(DEFAULT, 4, 'member', 'teacher03.png', 'bfa6a486-1542-44a0-9bb4-243293852f2a_teacher03.png', 'image', DEFAULT, 'member'),
+(DEFAULT, 5, 'member', 'teacher04.png', 'bfa6a486-1542-44a0-9bb4-243293852f2a_teacher04.png', 'image', DEFAULT, 'member'),
+(DEFAULT, 6, 'member', 'teacher05.png', 'bfa6a486-1542-44a0-9bb4-243293852f2a_teacher05.png', 'image', DEFAULT, 'member'),
+(DEFAULT, 7, 'member', 'teacher06.png', 'bfa6a486-1542-44a0-9bb4-243293852f2a_teacher06.png', 'image', DEFAULT, 'member');
+
+-- 과목 더미
+INSERT INTO subject VALUES (1, '영어');
+INSERT INTO subject VALUES (2, '수학');
+INSERT INTO subject VALUES (3, '기타');
+
+-- 강의 더미
 INSERT INTO lecture VALUES
 (DEFAULT, '깃허브 마스터 클래스' , '깃허브 A-Z까지, 마스터로 협업 고수되기' ,
 '"깃과 버전 관리 마스터클래스"는 현대 소프트웨어 개발 분야에서 핵심적인 역할을 하는 깃(Git)과 버전 관리 시스템에 대한 깊고 포괄적인 학습 경험을 제공하는 고급 강의입니다. 이 강의는 소프트웨어 개발자, 소프트웨어 엔지니어, 프로젝트 관리자, 웹 개발자, 데이터 과학자, 그리고 모든 프로그래밍 관련 분야에서 활동하는 전문가와 학생을 대상으로 합니다.<br><br>
@@ -25,7 +50,7 @@ INSERT INTO lecture VALUES
 <br><br>학습 목표:<br>이 강의를 통해 학생들은 깃과 버전 관리 시스템을 전문적으로 다룰 수 있는 능력을 키우게 됩니다. 또한, 깃허브를 활용하여 프로젝트 협업, 지속적 통합 및 배포, 보안 설정, 그리고 확장 기능 개발을 실제로 구현하는 방법을 배우게 됩니다.
 <br><br>강의 형식:<br>강의는 비디오 강의, 실습 과제, 토론 및 질문 세션, 그리고 실제 프로젝트 적용을 통해 학생들이 실무에서 적용 가능한 능력을 배우도록 설계되었습니다. "깃과 버전 관리 마스터클래스"는 현대 소프트웨어 개발 분야에서 반드시 알아야 하는 핵심 기술을 제공하며, 학생들은 개발 역량을 향상시키고 프로젝트 관리 능력을 혁신적으로 향상시킬 수 있는 기회를 제공합니다.
 <br><br>',
-0, 200, 0, 0, 0, 'teacher1', '최상민', '', '', 3, 35000, '깃허브 마스터', '' );
+0, 200, 0, 0, 0, 'teacher1', '최상민', 'lect01.png', 'lectvideo01.mp4', 3, 35000, '깃허브 마스터', 'book01.jpg' );
 
 INSERT INTO lecture VALUES
 (DEFAULT, '김기태의 코딩콘서트' , 'HTML, CSS, JavaScript 기초' ,
@@ -34,7 +59,7 @@ INSERT INTO lecture VALUES
 또한, 강의는 백엔드 프로그래밍과 데이터베이스 관리에도 초점을 맞춥니다. 학생들은 서버 측 로직을 작성하고 데이터베이스를 효과적으로 활용하는 방법을 익힙니다. RESTful API 설계 및 서버 개발을 통해 학생들은 동적인 웹 애플리케이션을 구축하는 방법을 배우며, 이는 현대 웹 애플리케이션의 필수 구성 요소입니다.<br><br>
 이 강의는 이론뿐만 아니라 실습 중심으로 진행되어 학생들이 직접 웹 애플리케이션을 개발하고 배포하는 경험을 쌓을 수 있습니다. 프로젝트 기반 학습을 통해 학생들은 문제 해결 능력을 향상시키고 협업 기술을 개선할 수 있습니다.<br><br>
 웹 개발은 현재와 미래에 걸쳐 중요한 역할을 합니다. 강의를 통해 학생들은 웹 개발자로서의 경력을 시작하거나 이미 존재하는 기술을 확장하는 데 필요한 기반을 갖추게 됩니다. 이러한 기술은 현대의 디지털 시대에서 매우 가치 있으며, 다양한 분야에서 새로운 기회를 창출할 수 있는 역량을 제공합니다.<br><br>',
-0, 100, 0, 0, 0, 'teacher1', '김기태', '', '', 3, 24000, '노베이스 웹개발 시작하기','' );
+0, 100, 0, 0, 0, 'teacher2', '김기태', 'lect02.png', 'lectvideo02.mp4', 3, 24000, '노베이스 웹개발 시작하기','book04.jpg' );
 
 INSERT INTO lecture VALUES
 (DEFAULT, 'CSS 정복하기' , '개발자의 숨겨진 감각을 일깨우자!' ,
@@ -50,7 +75,7 @@ CSS 레이아웃: 레이아웃 설계와 Flexbox, Grid를 활용한 웹페이지
 자유로운 창의력 향상:<br>CSS는 창의력을 펼치는 데 큰 역할을 합니다. 여러분은 웹페이지 디자인에서 자유로워질 수 있으며, 고유하고 맞춤형 디자인을 구현할 수 있습니다. 자신만의 스타일을 개발하고 웹페이지에 독특한 개성을 부여하세요.<br><br>
 커리어 기회:<br>CSS 스킬은 현업 웹 개발자나 디자이너로서의 경력에 큰 도움이 됩니다. 이 강의를 통해 취업 기회를 늘리고 더 많은 프로젝트에 참여할 수 있으며, 현업에서 웹 개발 및 디자인 분야에서 더 높은 신뢰와 역량을 얻을 수 있습니다.<br><br>
 이 CSS 강의를 통해 여러분은 웹의 시각적 요소를 완벽하게 다룰 수 있는 능력을 키우고, 미래의 웹 개발 및 디자인 프로젝트에서 성공을 이룰 준비가 될 것입니다. 무엇을 기다리고 계신가요? 지금 시작해보세요!<br><br>',
-0, 300, 0, 0, 0, 'teacher1', '박너욘', '', '', 3, 21000, '초보자도 할 수 있는 CSS 배우기', '' );
+0, 300, 0, 0, 0, 'teacher3', '박너욘', 'lect03.png', 'lectvideo03.mp4', 3, 21000, '초보자도 할 수 있는 CSS 배우기', 'book03.jpg' );
 
 INSERT INTO lecture VALUES
 (DEFAULT, '자바 프로그래밍 마스터클래스' , '자바를 잡을 수 있는 단 한번의 기회!' ,
@@ -68,7 +93,7 @@ INSERT INTO lecture VALUES
 수강 대상:<br>이 강의는 자바 프로그래밍을 처음 배우려는 초보자부터, 이미 자바를 사용하고 있는 개발자들에게 모든 수준의 학생들을 대상으로 합니다. 이론과 실무 경험을 통해 자바 개발 능력을 향상시키고 싶은 모든 이에게 적합합니다.
 <br><br>학습 목표:<br>"자바 프로그래밍 마스터클래스"를 통해 학생들은 자바 프로그래밍 언어와 생태계에 대한 깊은 이해를 얻으며, 뛰어난 개발자로 성장하는데 필요한 기술과 지식을 습득합니다. 학생들은 다양한 프로젝트를 수행하고, 효과적인 자바 코드를 작성하는 방법을 마스터합니다.
 <br><br>강의 형식:<br>강의는 이론 강의, 실습 과제, 토론 및 질문 세션, 그리고 실제 프로젝트를 통해 학생들이 자바 프로그래밍을 깊이 이해하고 응용할 수 있도록 구성되었습니다. 또한, 학생들은 강사와 동료들과 협업하며 실무적인 프로젝트 경험을 쌓을 기회를 갖게 됩니다. "자바 프로그래밍 마스터클래스"를 통해 학생들은 현대 소프트웨어 개발 분야에서 뛰어난 자바 개발자로 성장하는데 필요한 도구와 기술을 확보할 것입니다.<br><br>',
-0, 300, 0, 0, 0, 'teacher1', '헤이호', '', '', 3, 21000, '자바의 정석', '' );
+0, 300, 0, 0, 0, 'teacher4', '헤이호', 'lect04.png', 'lectvideo01.mp4', 3, 21000, '자바의 정석', 'booksample.jpg' );
 
 INSERT INTO lecture VALUES
 (DEFAULT, '중등 영어 마스터', '기초부터 탄탄한 영어교육',
@@ -91,8 +116,7 @@ INSERT INTO lecture VALUES
 문화 이해: 영어권 국가들의 문화와 역사에 대한 이해를 통해 다양한 문화에 대한 개방적인 시각을 갖추게 됩니다.<br><br>
 실생활 대화: 다양한 상황에서의 대화 능력을 향상시키며, 현실에서 영어를 자신있게 사용할 수 있게 됩니다.<br><br>
 강의 형식:<br>"중학교 영어 강의"는 다양한 학습 활동을 통해 학생들의 영어 실력을 향상시킵니다. 이론 강의, 실습 문제, 그룹 토론 및 질문 세션, 프로젝트 및 발표, 그리고 영어 영상 및 오디오 자료를 활용한 학습이 포함됩니다. 학생들은 수업을 통해 영어를 능숙하게 사용하며, 교실 내외에서 언어 실력을 증진시킬 수 있는 기회를 갖게 됩니다. "중학교 영어 강의"를 통해 학생들은 영어를 자신있게 사용하며, 미래의 학업 및 진로에 대비할 수 있는 강력한 언어 능력을 키우게 될 것입니다.<br><br>',
-0, 200, 0, 0, 0, 'teacher2', '황교진', '', '', 1, 19000, '영어의 정석', '' );
-
+0, 200, 0, 0, 0, 'teacher5', '황교진', 'lect05.png', 'lectvideo02.mp4', 1, 19000, '영어의 정석', 'book02.jpg' );
 
 INSERT INTO lecture VALUES
 (DEFAULT, '초등 재미있는 영어' , '재미로 시작하는 초등 영어 공부' ,
@@ -113,14 +137,9 @@ INSERT INTO lecture VALUES
 실생활 대화: 다양한 상황에서의 대화 능력을 향상시키며, 현실에서 영어를 자신있게 사용할 수 있게 됩니다.<br><br><br>
 강의 형식:<br>초등학교 영어 강의는 다양한 학습 활동을 통해 진행됩니다. 이론 강의, 실습 문제, 그룹 토론 및 질문 세션, 프로젝트 및 발표, 그리고 영어 영상 및 오디오 자료를 활용한 학습이 포함됩니다. 학생들은 수업을 통해 영어를 능숙하게 사용하며, 교실 내외에서 언어 실력을 증진시킬 수 있는 기회를 갖게 됩니다.<br><br>
 "초등학교 영어 강의"를 통해 학생들은 영어를 자신있게 사용하며, 미래의 학업 및 진로에 대비할 수 있는 강력한 언어 능력을 키우게 될 것입니다.<br><br>',
-0, 300, 0, 0, 0, 'teacher2', '이슬비', '', '', 1, 16500, '우리아이 영어 재미키우기', '' );
+0, 300, 0, 0, 0, 'teacher6', '이슬비', 'lect6.png', 'lectvideo03.mp4', 1, 16500, '우리아이 영어 재미키우기', 'book04.jpg' );
 
-select * from lectview;
-SELECT * FROM lecture;
-SELECT * FROM curri;
-
-
--- 커리큘럼(한 번에 등록가능)
+-- 커리큘럼 더미
 INSERT INTO curri VALUES
 (DEFAULT, 1, '1. 깃과 버전 관리 개요'),
 (DEFAULT, 1, '2. 깃 저장소 생성 및 관리'),
@@ -189,7 +208,7 @@ INSERT INTO curri VALUES
 (DEFAULT, 6, '10. 초등학교 영어 프로젝트 완성');
 
 
--- 리뷰(한 번에 등록하기)
+-- 리뷰 더미
 INSERT INTO review VALUES
 (DEFAULT, 1, 'heyho', '하나부터 열까지 이렇게 섬세하게 알려주는 사람은 상민쌤밖에 없을거에요ㅠㅠ 무료로 제공해주신 자료 보면서 혼자 실습도 해봤어요. 덕분에 깃허브 마스터 됐습니다!!', 5, DEFAULT),
 (DEFAULT, 1, 'park95', '완전 강추, 주변에도 추천함', 5, DEFAULT),

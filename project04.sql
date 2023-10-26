@@ -20,9 +20,6 @@ CREATE TABLE member(
 	grade INT DEFAULT 2										-- 회원 등급 [ 0 : 관리자, 1 : 선생님, 2 : 일반사용자]
 );
 
-INSERT INTO MEMBER VALUES(DEFAULT, 'admin', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '관리자', 'admin@haebeop.ed.kr', '010-2121-2121', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 0);
-INSERT INTO MEMBER VALUES(DEFAULT, 'kim1', '$2a$10$oS1.3wpbnpIanIW4RoXxSOea/vGIijBMpLUBxZqurQqNjjMiJHgGa', '김일일', 'kim1@haebeop.ed.kr', '010-1111-1111', '', '', '', DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, 2);
-
 CREATE TABLE memberMgn(
 	mmNo INT AUTO_INCREMENT PRIMARY KEY,				-- 회원 등급 요청 번호 : 자동 발생
 	author VARCHAR(20) NOT NULL,							-- 회원 아이디
@@ -85,7 +82,7 @@ CREATE TABLE lecture(
 	lno INT AUTO_INCREMENT PRIMARY KEY,			-- 강의 번호 : 자동증가
 	title VARCHAR(150) NOT NULL,					-- 강의 제목
 	subTitle VARCHAR(500) NOT NULL,				-- 강의 소제목
-	content VARCHAR(2000) NOT NULL,				-- 강의 내용
+	content VARCHAR(4000) NOT NULL,				-- 강의 내용
 	lectureType INT NOT NULL,						-- 강의 타입 [ 온라인 : 0, 오프라인 : 1 ]
 	studentCnt INT NOT NULL, 						-- 강의 수강 인원
 	startDate TIMESTAMP,								-- 강의 시작 기간 - 오프라인 사용
@@ -101,16 +98,10 @@ CREATE TABLE lecture(
        bthumbnail VARCHAR(100)    					-- 교재 썸네일
 );
 
-insert into lecture(lno, title, subTitle, content, lectureType, studentCnt, teacherId, teacherNm, sno, cost) value(default, '강의 제목 1번', '강의 소제목 1번', '강의 내용 1번', 0, 20, 'qeee', '선생님 이름', 1, 50000);
-
 CREATE TABLE subject(
    sno INT PRIMARY KEY AUTO_INCREMENT,	-- 과목번호
    title VARCHAR(200) NOT NULL			-- 과목명
 );
-
-INSERT INTO subject VALUES (1, "영어");
-INSERT INTO subject VALUES (2, "수학");
-INSERT INTO subject VALUES (3, "기타");
 
 CREATE TABLE curri(
 	cno INT PRIMARY KEY AUTO_INCREMENT,	-- 목차번호

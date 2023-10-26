@@ -74,8 +74,8 @@
                                     <!-- 썸네일 - 누르면 상세페이지 이동 -->
                                     <a href="${path }/lecture/get.do">
                                     <c:choose>
-                                        <c:when test="${!empty thumbnail}">
-                                           <img src="${path }/resources/upload/${lecture.thumbnail }" />
+                                        <c:when test="${!empty lecture.thumbnail}">
+                                           <img src="${path }/resources/upload/lecture/${lecture.thumbnail }" />
                                         </c:when>
                                         <c:otherwise>
                                             <img src="${path }/resources/image/lecture/dummy.png" />
