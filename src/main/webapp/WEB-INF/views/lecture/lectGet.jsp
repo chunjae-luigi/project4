@@ -19,14 +19,28 @@
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
-                <img src="${path }/resources/upload/${lecture.thumbnail }" />
+                <c:choose>
+                    <c:when test="${!empty thumbnail}">
+                        <img src="${path }/resources/upload/${lecture.thumbnail }" />
+                    </c:when>
+                    <c:otherwise>
+                        <img src="${path }/resources/image/lecture/dummy.png" />
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="col-lg-6">
                 <h3 style="color: var(--main-color);">${subject.title } </h3>
                 <h1 class="display-5 fw-bolder text-white mb-2">${lecture.title }</h1>
                 <h3 class="lead text-white-50 mb-4">${lecture.subTitle }</h3>
                 <h3 class="lead text-white-50 mb-4">${lecture.teacherNm } 선생님</h3>
-                <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/upload/${lecture.lvideo }" target="_blank" >강의 맛보기</a>
+                <c:choose>
+                    <c:when test="${!empty lvideo}">
+                        <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/upload/${lecture.lvideo }" target="_blank" >강의 맛보기</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="btn btn-danger btn-lg px-4 me-sm-3" id="vvv" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의 맛보기</a>
+                    </c:otherwise>
+                </c:choose>
                 <a class="btn btn-warning btn-lg px-4" href="#lect_review" >수강생 후기</a>
             </div>
         </div>
@@ -57,11 +71,17 @@
                 </header>
                 <section class="mb-5">
                     ${lecture.content }
-
-                        <!-- 교재 추가 경로 변경 해야함 //비 -->
-                        <div>강의 교재 </div>
+                    <div>강의 교재 </div>
                         <div>
-                            <img src="${path }/resources/upload/${lecture.bthumbnail }" width="300px />
+                            <c:choose>
+                                <c:when test="${!empty bthumbnail}">
+                                    <img src="${path }/resources/upload/${lecture.bthumbnail }" width="300px">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="${path }/resources/image/lecture/booksample.jpg" width="300px">
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
                 </section>
             </article>
             <!-- 목차 -->
@@ -78,12 +98,8 @@
                 <h2> 수강후기 </h2>
                 <div class="card bg-light">
                     <div class="card-body">
-
-
-
                         <!-- 수강후기 리스트 -->
                         <div>
-
                         <c:forEach var="review" items="${reviewList }">
                         <div class="d-flex">
                             <div class="review_mem">
@@ -95,7 +111,6 @@
                                         <c:forEach begin="1" end="${review.star}" var="i">
                                             <span class="star-icon filled"></span>
                                         </c:forEach>
-
                                         <c:forEach begin="${review.star + 1}" end="5" var="i">
                                             <span class="star-icon"></span>
                                         </c:forEach>

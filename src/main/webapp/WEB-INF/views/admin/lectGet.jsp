@@ -63,8 +63,16 @@
                                 <div class="contact-info">
                                     <p style="font-size:20px; color:grey;"> ${lecture.subTitle }</p>
                                     <div class="border-bottom pb-3 mb-5">
-                                        <img src="${path }/resources/upload/${lecture.thumbnail }" width="400" height="225"><br>
-                                        <div><a class="btn btn-primary btn-lg px-3" id="vvv" href="${path }/resources/upload/${lecture.lvideo }" target="_blank" >강의영상</a></div>
+                                        <c:choose>
+                                            <c:when test="${!empty lvideo}">
+                                                <img src="${path }/resources/upload/${lecture.thumbnail }" width="400" height="225"><br>
+                                                <div><a class="btn btn-primary btn-lg px-3" href="${path }/resources/upload/${lecture.lvideo }" target="_blank" >강의영상</a></div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="${path }/resources/image/lecture/dummy.png" width="400" height="225"><br>
+                                                <div><a class="btn btn-primary btn-lg px-3" href="${path }/resources/image/lecture/lectvideo01.mp4" target="_blank" >강의영상</a></div>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">해당 과목 </strong>
@@ -104,8 +112,15 @@
 
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">강의 교재 </strong>
-                                        <span>${lecture.bookname }</span>
-                                        <img src="${path }/resources/upload/${lecture.bthumbnail }" width="200px">
+                                        <span>${lecture.bookname }</span><br>
+                                        <c:choose>
+                                            <c:when test="${!empty bthumbnail}">
+                                                <img src="${path }/resources/upload/${lecture.bthumbnail }" width="200px">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="${path }/resources/image/lecture/booksample.jpg" width="200px">
+                                            </c:otherwise>
+                                        </c:choose>
                                     </p>
                                     <p class="d-flex border-bottom pb-3 mb-4">
                                         <strong class="d-inline me-4">강의 가격 </strong>

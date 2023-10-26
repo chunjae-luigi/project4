@@ -69,18 +69,18 @@
                 <c:forEach items="${lectviewList }" var="lecture" varStatus="status">
                     <div class="lect-frame">
                         <div class="border-00">
-                            <div class="d-inline-block img-box-wrap">
+                            <div class="d-inline-block lectviewwrap">
                                 <div class="img-box">
                                     <!-- 썸네일 - 누르면 상세페이지 이동 -->
+                                    <a href="${path }/lecture/get.do">
                                     <c:choose>
                                         <c:when test="${!empty thumbnail}">
-                                        <img src="${path }/resources/upload/${lecture.thumbnail }" />
+                                           <img src="${path }/resources/upload/${lecture.thumbnail }" />
                                         </c:when>
                                         <c:otherwise>
-                                        <img src="${path }/resources/image/main/class-1.jpg" />
+                                            <img src="${path }/resources/image/lecture/dummy.png" />
                                         </c:otherwise>
                                     </c:choose>
-
                                     </a>
                                 </div>
                             </div>

@@ -45,6 +45,6 @@ public class ServletContext implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(adminInterceptor());
-        // registry.addInterceptor(userInterceptor());
+        registry.addInterceptor(userInterceptor());
     }
 }
