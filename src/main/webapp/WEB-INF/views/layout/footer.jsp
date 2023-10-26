@@ -70,7 +70,7 @@
 
     <div id="footer">
         <div class="footer_in">
-            <div><img src="${path}/resources/image/common/logo_ft.png" onclick="self.location.href='/'" style="cursor:pointer"></div>
+            <div><img src="${path}/resources/image/common/logo_ft.png" style="cursor:pointer"></div>
             <div class="footerIn_txt">
                 <div>
                     <a href="${path }/intro">회사소개</a>
